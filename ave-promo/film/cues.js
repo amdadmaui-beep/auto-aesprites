@@ -1,24 +1,24 @@
-// Shared timeline: read by index.html (picture) and audio.py (sound). Seconds.
+// AVE promo V2 — shared timeline (picture + sound). Seconds.
 window.CUES = {
-  dur: 18.0, fps: 60, bpm: 120,
-  S1: 0.0, S2: 1.5, S3: 3.5, S4: 5.5, S5: 8.0, S6: 11.5, S7: 13.0, S8: 15.75,
-  // 1 · mascot intro
-  catIn: 0.04, land: 0.70, tailFlick: 0.84, blink1: 1.00, glance: 1.16, micro: 1.20,
-  // 2 · hook
-  got: 1.50, worth: 2.55, watching: 2.85, tilt: 2.90, hookOut: 3.40,
-  // 3 · service cards
-  card1: 3.50, card2: 4.20, card3: 4.90,
-  // 4 · raw -> AVE edit
-  phoneIn: 5.50, line1: 5.62, tap: 6.00, frame: 6.04, subs: 6.52, hiword: 6.86,
-  motion: 7.02, wave: 7.22, visual: 7.42, line2: 7.28, aveEdit: 7.74,
-  // 5 · dashboard pipeline
-  dashIn: 8.00, scrub: 8.14, clipSel: 8.60, chipFly: 8.74, capsIn: 9.22,
-  motionOn: 9.88, soundOn: 10.16, tagImpact: 10.26, tagClick: 10.40, tagWhoosh: 10.54,
-  visualOn: 10.58, readyIn: 10.80, plat1: 10.96, plat2: 11.08, plat3: 11.20, ready: 11.32,
+  dur: 32.0, fps: 60, bpm: 120,
+  S1: 0.0, S2: 4.0, S3: 7.6, S4: 11.7, S5: 16.6, S6: 20.8, S7: 25.3, S8: 29.3,
+  // 1 · hook
+  catLand: 0.30, micro: 0.04, got: 0.30, worth: 1.15, watching: 1.36, earFlick1: 0.62, blink1: 1.92,
+  hook1Out: 1.98, make: 2.15, looks: 2.76, itHit: 3.25, hookOut: 3.62,
+  // 2 · who we work with
+  card1: 4.30, card2: 5.15, card3: 6.00, cardsOut: 7.45,
+  // 3 · raw long-form / clip selection
+  footage: 7.85, scrub: 8.30, moments: 9.45, select: 10.69, lift: 11.05,
+  // 4 · the AVE edit (raw -> edit)
+  rawIn: 11.70, pacing: 12.62, tap: 12.92, frame: 13.0, captions: 13.38, motion: 13.98, visuals: 14.32,
+  and: 15.75, sound: 15.99, aveEdit: 16.02,
+  // 5 · why it matters
+  pullBack: 16.6, posted: 18.55, watched: 19.78,
   // 6 · range
-  p1: 11.50, p1punch: 11.72, p2: 12.00, p2switch: 12.24, p3: 12.50, p3click: 12.76,
-  // 7 · brand statement
-  youCreate: 13.10, weMake: 14.49, hit: 15.25,
+  comedy: 20.8, kbPunch: 21.48, podcast: 21.9, motionIn: 22.85, kfDrag: 23.38, motionPlay: 23.45,
+  waveOn: 23.95, publish: 24.75, oneStudio: 24.1, motionOut: 25.12,
+  // 7 · brand payoff
+  youCreate: 25.75, drop: 27.45, weMake: 27.94, hit: 28.75,
   // 8 · end card
-  endIn: 15.75, cta: 16.22, wave1: 16.30, blinkEnd: 17.40
+  endIn: 29.3, tagline: 29.65, cta: 30.35, wave1: 30.55
 };

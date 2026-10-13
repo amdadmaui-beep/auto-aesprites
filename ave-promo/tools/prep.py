@@ -9,7 +9,7 @@ names=['cat_lookup','cat_present','cat_focus_front','cat_focus_side','cat_curiou
 # source image + crop origin + bbox (in crop coords) for each cutout
 bboxes={'cat_neutral':(1071,586,3550,3645),'cat_calm':(454,400,3824,3841),
  'cat_lookup':(147,26,911,1068),'cat_present':(0,19,935,1059),'cat_focus_front':(102,44,886,1053),'cat_focus_side':(0,34,973,1064),
- 'cat_curious':(102,0,937,1103),'cat_confident':(131,0,815,1106),'cat_wave':(0,0,894,1106)}
+ 'cat_curious':(102,0,937,1103),'cat_confident':(131,0,815,1106),'cat_wave':(0,0,894,1106),'cat_impressed':(10,0,939,1117)}
 def src_for(n):
     if n=='cat_neutral': return neutral,(0,0)
     if n=='cat_calm': return calm,(0,0)
@@ -125,12 +125,13 @@ def paw_cap(im):
                 new[y,x,:3]=np.clip(c[:3]*shade,0,255); new[y,x,3]=int(255*al*(c[3]/255))
     return Image.fromarray(new,'RGBA'), ext
 info={}
-for n in ['cat_neutral','cat_calm','cat_present','cat_focus_front','cat_confident','cat_wave','cat_curious','cat_impressed','cat_lookup']:
+for n in (sys.argv[2:] or ['cat_neutral','cat_calm','cat_present','cat_focus_front','cat_confident','cat_wave','cat_curious','cat_impressed','cat_lookup']):
     if not os.path.exists(I+n+'.png'): continue
     im=decontam(n) if n in bboxes else Image.open(I+n+'.png').convert('RGBA')
     off=0
     if n=='cat_present': im,off=paw_cap(im)
     tri=find_triangle(im) if n not in ('cat_present','cat_focus_front') else None
+    if n=='cat_impressed': tri=(196,522,262,582)
     mk=None
     if tri:
         im,mk=bake_mark(im,tri,(28,29,33))
