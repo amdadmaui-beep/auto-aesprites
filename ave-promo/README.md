@@ -1,6 +1,9 @@
-# AVE Studio — mascot promo (18s, 1920×1080, 60fps)
+# AVE Studio — mascot promo
 
-`AVE_Studio_Promo.mp4` is the finished film. Everything here rebuilds it.
+- `AVE_Studio_Promo_V2.mp4` — current cut: 32s, 1920×1080, 60fps, Jane Perry VO, real AVE footage.
+- `AVE_Studio_Promo.mp4` — V1 (18s), kept for reference; its source is in `film/v1/`.
+
+V2 footage frames are not committed: run `tools/extract_clips.sh` to rebuild `film/clips/` from the AVE Studio Showcase Drive folder. Drop the licensed music track at `film/build/music.wav` (48 kHz) and re-run `film/audio.py` — it replaces the placeholder score automatically.
 
 ## Structure
 
