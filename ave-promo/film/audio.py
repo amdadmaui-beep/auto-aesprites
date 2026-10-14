@@ -1,4 +1,4 @@
-# AVE promo V2 — voice, sound design and music, all placed from cues.js.
+# AVE promo V3 — voice, sound design and music, all placed from cues.js.
 # If build/music.wav exists (the supplied track) it replaces the placeholder score.
 import json, re, os, subprocess, sys, wave
 import numpy as np
@@ -111,56 +111,15 @@ def hit(t0, g=.5):
 def swell(t0, t1, g=.18):
     d = t1 - t0; t = tv(d); add(sfx, t0, lp(noise(d), 2400) * (t / d) ** 3 + .3 * np.sin(2 * np.pi * 82.4 * t) * (t / d) ** 2, g)
 
-# ------------------------------------------------------------ placeholder score (Apple-style minimal tech-pop, 120 BPM, F major)
-motif = [(0, 'C5'), (.25, 'D5'), (.5, 'F5'), (1.0, 'D5'), (1.25, 'C5'), (1.5, 'A4'), (1.75, 'C5')]  # 2s phrase
-chords = {0: ['F3', 'A3', 'C4', 'E4'], 2: ['D3', 'F3', 'A3', 'C4'], 4: ['A#2', 'D3', 'F3', 'A3', 'C4'], 6: ['C3', 'E3', 'G3', 'D4']}
-roots = {0: 'F1', 2: 'D2', 4: 'A#1', 6: 'C2'}
-def ch(t): return chords[int(t % 8 // 2 * 2)]
-def rt(t): return roots[int(t % 8 // 2 * 2)]
-def section(t0, t1, kickpat, claps, hats, bassOn, motifG, padG, glitch=False):
-    b = t0
-    while b < t1 - 1e-6:
-        bar = b
-        if padG: pad(bar, min(bar + 2, t1), ch(bar), padG, 1800)
-        if motifG:
-            for dt, n in motif: pluck(bar + dt, n, motifG, -.25 + dt * .25, .26)
-        for k in range(8):
-            s = bar + k * .25
-            if s >= t1: break
-            if k * .25 in kickpat: kick(s, .4)
-            if claps and k in (2, 6): clap(s)
-            if hats: hat(s + (.125 if hats == 1 else 0), .022 if k % 2 else .03, .3)
-            if hats == 2: hat(s + .125, .016, -.2)
-            if glitch and k in (3, 7): tickp(s + .1875, .025, 6000, .4)
-        if bassOn:
-            r = rt(bar); pat = [(0, .22), (.75, .12), (1.0, .2), (1.5, .12), (1.75, .1)]
-            for dt, dd in pat:
-                if bar + dt < t1: bass(bar + dt, dd, r if dt != 1.75 else r[:-1] + str(int(r[-1]) + 1), .14, .3 if dt == 0 else 0)
-        b += 2
+exec(open(os.path.join(ROOT, 'score_v3.py')).read())
 if not os.path.exists(os.path.join(ROOT, 'build', 'music.wav')):
-    section(0.0, 4.0, [0.0], False, 1, False, .075, .035)                 # hook: motif + tight hats
-    for b in (1.0, 3.0): clap(b, .07)
-    section(4.0, 8.0, [0.0, 1.0], True, 1, True, .05, .04, True)          # groove establishes
-    section(8.0, 16.0, [0.0, .5, 1.0, 1.5], True, 2, True, .04, .045, True)  # fuller for the transformation
-    section(16.0, 22.0, [0.0, .5, 1.0, 1.5], True, 1, True, .028, .04)    # space for narration
-    section(22.0, 25.3, [0.0, .5, 1.0, 1.5], True, 2, True, .05, .05, True)  # lift for the range
-    for s in np.arange(24.5, 25.3, .125): hat(s, .02, .1, op=(s % .5 == 0))
-    riser(24.6, 25.3, .08)
-    pad(25.3, 27.45, ['F2', 'C3', 'A3', 'E4'], .045, 700, att=.2, pump=False)  # reduce before "You create."
-    for s in (25.3, 26.3): kick(s, .22)
-    bass(25.3, 1.9, 'F1', .1)
-    swell(28.3, C['hit'], .14)
-    # payoff + resolve
-    pad(C['hit'], 32.0, ['F2', 'C3', 'A3', 'E4', 'G4'], .07, 2600, att=.03, rel=.6, pump=False)
-    bass(C['hit'], 1.2, 'F1', .2, .4)
-    for i, (dt, n) in enumerate([(.5, 'C5'), (.75, 'D5'), (1.0, 'F5'), (1.5, 'D5'), (1.75, 'C5'), (2.0, 'A4'), (2.25, 'C5'), (2.75, 'F5')]):
-        pluck(C['hit'] + dt + .25, n, .05, -.3 + i * .08, .35)
-    for s in np.arange(C['hit'] + .5, 31.2, .5): hat(s, .015, .2)
-    kick(C['hit'] + 1.0, .2); kick(C['hit'] + 2.0, .16)
+    score_v3()
 
 # ------------------------------------------------------------ sound design (every sound has a visible source)
+# 1 · hook
 for k in range(0, 27, 2): tick(C['micro'] + k * .02, .035, -.4)                           # microtype typing
 thump(C['catLand'], .3, 130, 60, .1); cloth(C['catLand'] - .2, .3, .06)                   # landing
+tick(C['catBlink'] + .03, .012, .2); tone(C['notice'], 2349.3, .018, .3, .04)              # blink, notices the type
 mask(C['got'], .07, -.2); mask(C['got'] + .09, .05, -.1); mask(C['worth'], .06)            # mask reveals
 tone(C['watching'], 1318.5, .05, .1, .08); whoosh(C['watching'] - .02, .3, .05, 1500, 7000, .4, -.1, .3)
 tick(C['earFlick1'], .025, .3)
@@ -168,41 +127,62 @@ whoosh(C['hook1Out'] - .02, .3, .07, 900, 5000, 0, .3, .7)
 mask(C['make'], .07, -.2); mask(C['make'] + .08, .05)
 whoosh(C['looks'] + .1, .3, .06, 1200, 6000, -.3, .3, .4)                                  # marker swipe
 thump(C['itHit'], .16, 150, 70, .08); tone(C['itHit'], 880, .04)                          # "it." lands
-whoosh(C['hookOut'], .35, .08, 3000, 700, .2, -.3, .4); tone(C['hookOut'] + .2, 1567.98, .035)
-cloth(C['S2'] - .1, .3, .07)                                                               # pose change
+whoosh(C['hookOut'], .35, .08, 3000, 700, .2, -.3, .4)
+whoosh(C['S2'] - .05, .2, .06, 2000, 8000, .2, .5, .5)                                     # blurred dash-in
+# 2 · cards (each one triggered by the paw)
+for T in (C['card1'], C['card2'], C['card3']): cloth(T - .26, .22, .035, .4); click(T - .02, .08, 2900, .3)
 whoosh(C['card1'] - .05, .35, .14, 500, 3500, -.8, -.2, .6); thump(C['card1'] + .3, .1, 180, 90, .05)   # swing in
 slide(C['card2'] - .06, .16, .22, 0); thump(C['card2'] + .2, .14, 140, 70, .06)                          # drops in
 whoosh(C['card3'] - .1, .4, .12, 2500, 600, .4, .2, .7)                                                  # from depth
-whoosh(C['cardsOut'], .5, .14, 300, 3000, .3, -.2, .6)                                     # card -> long-form
-cloth(C['cardsOut'] + .15, .3, .05, -.6)
-scrub(C['scrub'], C['select'] - .05, .06)
+cloth(C['cardTap'] - .14, .2, .05); click(C['cardTap'], .26, 3300, .3); tone(C['cardTap'] + .02, 1760, .04, .1)
+whoosh(C['cardsOut'] - .04, .22, .07, 1500, 7000, .1, .7, .5)                               # cat dashes out
+whoosh(C['cardsOut'] + .05, .5, .14, 300, 3000, .3, -.2, .6); mask(C['cardsOut'] + .1, .08)  # mask expands into the dashboard
+# 3 · clip selection
+thump(C['footage'], .08, 160, 90, .05)
+scrub(C['scrub'], C['found'] - .05, .06)
+tone(C['found'], 1760, .06, -.3, .1); tone(C['found'] + .06, 2637, .035, -.3, .08)          # "found" ping
 click(C['select'], .3, 2600, .2); tone(C['select'] + .02, 1760, .05, .2)
-whoosh(C['lift'], .5, .1, 600, 2500, 0, -.3, .5)
-cloth(C['tap'] - .12, .2, .05); click(C['tap'], .26, 3300, .3)                            # paw tap
+whoosh(C['chipFly'], .4, .09, 900, 6000, -.3, .5, .5); tick(C['chipFly'] + .42, .05, .5)   # chip flies to CAPTIONS
+# 4 · the AVE edit, tile by tile
+whoosh(C['capsFocus'] - .1, .45, .08, 400, 2400, -.2, .2, .5)                              # camera push
 for i in range(3): tick(C['pacing'] + i * .07, .06, -.2 + i * .2)                         # cut marks
-riser(C['frame'], C['captions'] + .05, .06)
+slide(C['frame'] - .05, .1, .2, .1)                                                       # reframe
 for i in range(5): tick(C['captions'] + .1 + i * .07, .05, .1)                            # caption ticks
+whoosh(C['gridBack'], .45, .07, 2400, 500, .1, -.2, .4)                                    # pull back to the grid
 whoosh(C['motion'], .22, .07, 2000, 9000, -.2, .3, .3); tone(C['visuals'], 1046.5, .05, .2)
-pulse(C['sound'], .22); thump(C['sound'], .18, 110, 50, .14)                              # "...and sound."
-chime(C['aveEdit'] + .02, [1046.5, 1318.5, 1568, 2093], .2, .035, .7)
+for i in range(3): tone(C['visuals'] + .15 + i * .08, 1318.5 * 1.122 ** i, .025, .2, .05)   # three rings
+riser(C['exportStart'], C['ready'], .04)
+pulse(C['sound'], .2); thump(C['sound'], .16, 110, 50, .14)                               # "...and sound."
+thump(C['tagImpact'], .2, 140, 55, .1); click(C['tagClick'], .22, 3400, .2); whoosh(C['tagWhoosh'] - .05, .25, .1, 800, 7000, -.4, .4, .5)
+for i, k in enumerate(('plat1', 'plat2', 'plat3')): tone(C[k], 1318.5 * 1.26 ** i, .04, .3, .05); tick(C[k], .04, .3)
+chime(C['ready'] + .02, [1046.5, 1318.5, 1568, 2093], .2, .035, .7)                        # READY ✓
+# 5 · posted → watched
 whoosh(C['pullBack'], .5, .12, 3000, 500, .2, -.2, .3)
 for i in range(5): tick(C['pullBack'] + .15 + abs(i - 2) * .08, .03, -.6 + i * .3)
 tone(C['posted'], 1318.5, .07, 0); tone(C['posted'] + .05, 1975.5, .05, 0)                # posted ✓
-riser(C['watched'] - .6, C['watched'], .07); mask(C['watched'], .08); whoosh(C['watched'] + .12, .35, .07, 1200, 6000, -.3, .3, .4)
+whoosh(C['reduce'], .3, .05, 3000, 400, 0, 0, .3)                                         # everything recedes
+mask(C['watched'], .08); thump(C['watched'], .14, 150, 60, .1); whoosh(C['watched'] + .1, .35, .07, 1200, 6000, -.3, .3, .4)
+# 6 · range
 whoosh(C['comedy'] - .14, .3, .26, 300, 5000, -.8, .8, .55); thump(C['kbPunch'], .2, 160, 60, .08)
 whoosh(C['podcast'] - .14, .3, .24, 300, 5000, .8, -.8, .55)
 whoosh(C['motionIn'] - .14, .3, .24, 300, 5000, -.8, .8, .55)
 cloth(C['motionIn'] + .15, .3, .05, .5)
-cloth(C['kfDrag'] - .1, .25, .05, .4); click(C['kfDrag'], .12, 2400, .4)                 # paw drags keyframe
+for i in range(8): tick(C['motionIn'] + .5 + i * .025, .02, .3)                             # transform handles pop
+cloth(C['kfDrag'] - .3, .3, .05, .4); click(C['kfDrag'], .12, 2400, .4); slide(C['kfDrag'] + .02, .05, .2, .4)   # leans, grabs, drags
 click(C['motionPlay'], .18, 3000, -.2); tone(C['motionPlay'] + .03, 1567.98, .05, -.2)   # motion toggle
-pulse(C['waveOn'], .13)
-click(C['publish'], .28, 2800, .4); thump(C['publish'], .1, 200, 120, .04)              # publish tap
-whoosh(C['motionOut'], .25, .14, 5000, 300, 0, 0, .3)                                    # collapse -> black
+for i in range(4): tick(C['motionPlay'] + .15 + i * .12, .03, -.1)                        # caption words
+click(C['waveOn'], .2, 2200, .4); pulse(C['waveOn'], .13)                                 # paw taps the waveform
+click(C['publish'], .28, 2800, .4); thump(C['publish'], .1, 200, 120, .04)                # publish tap
+whoosh(C['motionOut'], .25, .14, 5000, 300, 0, 0, .3)                                     # collapse -> black
+# 7 · payoff
 thump(C['youCreate'], .07, 70, 50, .3)
-swell(C['hit'] - .45, C['hit'], .14)
+whoosh(C['hit'] - .1, .14, .1, 1000, 9000, -.2, .5, .7)                                   # lime panel slams over the cat
 hit(C['hit'], .36)
-whoosh(C['S8'], .46, .1, 4000, 600, .4, -.3, .4)
-chime(C['S8'] + .2, [1046.5, 1568], .12, .06, .9)                                         # branded end sound
+# 8 · end card: panel flips over the black scene, lands, then the card plays
+whoosh(C['S8'] - .02, .34, .14, 600, 4500, .8, -.4, .6); thump(C['flipDone'], .14, 170, 70, .07)
+mask(C['flipDone'] + .02, .06)
+chime(C['tagline'] + .05, [1046.5, 1568], .1, .06, .9)
+thump(C['catIn'] + .25, .08, 130, 60, .08)
 chime(C['cta'], [1568, 2349.3], .14, .07, .5); click(C['cta'], .07, 2600)
 cloth(C['wave1'], .5, .03)
 
@@ -248,7 +228,7 @@ for i in range(len(act)):
 duck = 1 - .6 * g
 # music arc: lower under narration, lift in gaps; dip before "You create.", drop before the hit
 arc = np.ones(N, np.float32)
-for t0, t1, v in [(25.3, C['drop'], .7), (C['drop'], C['hit'], .25), (29.3, 32.0, .85)]:
+for t0, t1, v in [(25.3, C['drop'], .8), (C['drop'], C['hit'], .6), (29.3, 32.0, .85)]:
     arc[int(t0 * SR):int(t1 * SR)] = v
 arc = np.convolve(arc, np.ones(3000) / 3000, 'same')
 vn = .30 / (np.percentile(np.abs(vox[np.abs(vox).max(1) > 1e-3]).max(1), 99) + 1e-9)
@@ -268,3 +248,9 @@ if '--report' in sys.argv:
     # check voice lines never overlap
     on = np.abs(vox).max(1) > 1e-4
 print('ok')
+if '--report' in sys.argv:
+    wwav(os.path.join(ROOT, 'build', 'stem_music.wav'), .45 * music)
+    m = np.abs(music).max(1); print('music peak', float(m.max()))
+    for a in np.arange(0, 32, .25):
+        i, j = int(a * SR), int((a + .25) * SR); r = 20 * np.log10(np.sqrt(np.mean(music[i:j] ** 2)) + 1e-9)
+        print(f"{a:5.2f} {'#' * max(0, int((r + 50) / 1.5))} {r:5.1f}")
