@@ -184,7 +184,7 @@ mask(C['flipDone'] + .02, .06)
 chime(C['tagline'] + .05, [1046.5, 1568], .1, .06, .9)
 thump(C['catIn'] + .25, .08, 130, 60, .08)
 chime(C['cta'], [1568, 2349.3], .14, .07, .5); click(C['cta'], .07, 2600)
-cloth(C['wave1'], .5, .03)
+thump(C['wave1'], .05, 140, 80, .06)                                       # cat settles
 
 # ------------------------------------------------------------ real clip audio bridges (low, under the voice)
 def readwav(p, ch=1):

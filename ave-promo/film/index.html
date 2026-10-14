@@ -777,7 +777,7 @@ function buildEnd(){
   N8.shade=el('div','L',L);css(N8.shade,{background:'linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 70%)',pointerEvents:'none',zIndex:20});
   N8.edge=el('div','a',L);css(N8.edge,{left:0,top:0,width:'6px',height:'1080px',background:'var(--lime)',zIndex:21});
   N8.c=el('div','L',L);
-  N8.shadow=el('div','shadow',N8.c);N8.cat=new Cat(IMG.cat_wave_f,RIG.wave,{parent:N8.c,res:.8});
+  N8.shadow=el('div','shadow',N8.c);N8.cat=new Cat(IMG.cat_wave_fx,{pad:[.04,.03]},{parent:N8.c,res:.8});   // repaired pose (paw + ear rebuilt), never warped
   N8.logo=el('div','a',N8.c);css(N8.logo,{left:'150px',top:'168px',width:'462px',height:'151px',background:'#0E0E0E',WebkitMaskImage:'url(img/ave_logo.png)',WebkitMaskSize:'100% 100%',maskImage:'url(img/ave_logo.png)',maskSize:'100% 100%'});
   N8.studio=el('div','a',N8.c,'S T U D I O');css(N8.studio,{left:'154px',top:'346px',fontSize:'30px',fontWeight:600,letterSpacing:'.42em'});
   const tg=el('div','a',N8.c);css(tg,{left:'146px',top:'430px',whiteSpace:'nowrap'});
@@ -800,17 +800,16 @@ function updEnd(t){
   const pg=E.outExpo(P(t,C.cta-.12,C.cta+.25));css(N8.pill,{opacity:P(t,C.cta-.12,C.cta-.06),transform:`scaleX(${lerp(.08,1,pg)}) scale(${1+.04*wiggle(t-(C.cta+.25),3,.5)})`});
   const cp=E.outQuint(P(t,C.cta,C.cta+.3));css(N8.ctaT,{opacity:P(t,C.cta+.04,C.cta+.14),transform:`translateY(${(1-cp)*14}px)`,letterSpacing:`${lerp(.12,.01,cp)}em`});
   css(N8.small,{opacity:P(t,C.cta+.12,C.cta+.28),transform:`translateY(${(1-E.outQuint(P(t,C.cta+.12,C.cta+.45)))*12}px)`});
-  // waving cat: rises in, looks at camera, waves, settles; never morphs — it only exists once the panel has covered the black scene
+  // smiling cat: rises in and settles, then just breathes and sways; the pose itself is never animated or warped
   const lf=life(t,14);
-  const ci=spring(t-C.catIn,1.5,.6);const wv=t-C.wave1;const env=P(t,C.wave1,C.wave1+.15)*(1-E.inOutSine(P(t,C.wave1+1.0,C.wave1+1.35)));
-  const ant=-.035*bump(t,C.wave1-.12,.1,.02,.12);
-  N8.cat.draw({paw:.16*Math.sin(wv*2*Math.PI*2.1)*env,head:lf.head+ant+.04*Math.sin(wv*2*Math.PI*1.05)*env,earR:-lf.ear+.2*wiggle(t-(C.wave1+1.4),3,.35),lid:blinkAt(t,[C.catIn+.55,31.35])});
-  const s=.7,X=1220+lf.x,Y=262+(1-ci)*240;N8.cat.place(X,Y,s,{base:[460,1106],sy:breath(t),rot:lf.rot*.5,op:P(t,C.catIn,C.catIn+.08)});
+  const ci=spring(t-C.catIn,1.5,.6);
+  N8.cat.draw({});
+  const s=.7,X=1220+lf.x,Y=262+(1-ci)*240;N8.cat.place(X-90*s,Y-80*s,s,{base:[550,1186],sy:breath(t),rot:lf.rot*.5,op:P(t,C.catIn,C.catIn+.08)});
   css(N8.shadow,{left:(X+460*s-260)+'px',top:(262+1100*s-30)+'px',width:'520px',height:'60px',opacity:P(t,C.catIn+.08,C.catIn+.38)});
 }
 
 async function init(){
-  await Promise.all(['cat_neutral_f','cat_present_f','cat_calm_f','cat_confident_f','cat_wave_f','cat_focus_front_f'].map(loadImg));
+  await Promise.all(['cat_neutral_f','cat_present_f','cat_calm_f','cat_confident_f','cat_wave_fx','cat_focus_front_f'].map(loadImg));
   for(const w of ['500','600','700','800'])await document.fonts.load(`${w} 40px InterD`);await document.fonts.load('italic 40px Serif');await document.fonts.ready;
   buildHook();buildMid();buildDash();buildWhy();buildRange();buildPayoff();buildEnd();buildGrain();
   window.seek=async(t)=>{pending=[];updHook(t);updMid(t);updDash(t);updWhy(t);updRange(t);updPayoff(t);updEnd(t);updGrain(t);await Promise.all(pending);};
