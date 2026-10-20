@@ -3,9 +3,8 @@
 39 SFX cut from five creator promo reels (meme, premium, SaaS/UI, trending, typography packs).
 `sfx-index.json` lists each sound with its file path and length.
 
-The `.wav` files are **not stored in git**: they're third-party sounds and this repo is public.
-Keep them in private storage (the `sfx-library.zip` handed over in chat, or Google Drive)
-and unzip into this folder to use them.
+The `.wav` files are stored in this repo, which is **private**. Keep it private:
+they're third-party sounds. `full/` has the uncut audio of each source reel.
 
 Use in Remotion:
 ```tsx

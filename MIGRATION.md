@@ -1,6 +1,6 @@
 # Moving this setup to a new computer or account
 
-Everything that can live in this repo is here. A few things belong to a claude.ai account
+Everything that can live in this repo is here. The repo is **private**; keep it that way. A few things belong to a claude.ai account
 and have to be set up again on the new account.
 
 ## Saved in this repo (comes along automatically)
@@ -8,7 +8,8 @@ and have to be set up again on the new account.
 | What | Where |
 |---|---|
 | Project context and working preferences for Claude | `CLAUDE.md` |
-| Remotion + motion-studio skills (13 skills) | `.claude/skills/` |
+| All skills: Remotion, motion-studio, agent-reach, hindsight, design, postiz, socialrobot, adaptive-agent, consistent-ui (28 skills) | `.claude/skills/` |
+| Sound effects library (39 SFX + full source audio) | `video/public/sfx/` |
 | Remotion video project, already configured for cloud sessions | `video/` |
 | Cloud auto-setup (installs `video/` packages at session start) | `.claude/settings.json`, `.claude/hooks/session-start.sh` |
 | Aseprite auto-build | `download.py`, `.github/workflows/auto-build.yml` |
@@ -19,7 +20,9 @@ also starts the Aseprite build workflow.
 
 ## Set up again on the new account (claude.ai)
 
-These are tied to an account and can't be carried in a repo. Reinstall them from
+The skill files are already in this repo, so skills work without reinstalling. Plugins that
+connect to an outside service (Postiz, SocialRobot, Browser Use, Playwright, design connectors)
+still need installing and signing in on the account. Reinstall from
 **claude.ai -> Customize** (Plugins / Skills / Connectors). Search by the name shown.
 
 ### Plugins (Anthropic plugin directory)

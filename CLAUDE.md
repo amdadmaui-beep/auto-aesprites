@@ -29,9 +29,15 @@ connectors, then the local setup steps. Check what's already installed before su
 
 ## Skills in this repo
 
-`.claude/skills/` holds project skills that load in any session on this repo:
-the 12 Remotion skills (MIT) and `motion-studio-rules`. See `.claude/skills/README.md`.
-Account-level skills and plugins are listed in `MIGRATION.md`; reinstall them per account.
+`.claude/skills/` holds all the user's skills (28), so they load in any session on this repo.
+See `.claude/skills/README.md` for sources and licenses. The repo is private; keep it private.
+Plugins that need a service sign-in are listed in `MIGRATION.md`.
+
+## Sound effects
+
+`video/public/sfx/` has 39 named SFX in 5 packs, listed in `sfx-index.json`
+(use with `staticFile("sfx/<pack>/<file>.wav")`). They're third-party sounds: avoid the
+Mario/Sonic/Metal Gear ones in monetized work.
 
 ## Working preferences
 
