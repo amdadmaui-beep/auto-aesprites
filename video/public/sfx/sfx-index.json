@@ -1,0 +1,207 @@
+{
+  "meme-sfx": [
+    {
+      "name": "intro-whoosh",
+      "file": "sfx/meme-sfx/01-intro-whoosh.wav",
+      "seconds": 1.23
+    },
+    {
+      "name": "awkward-moment",
+      "file": "sfx/meme-sfx/02-awkward-moment.wav",
+      "seconds": 1.26
+    },
+    {
+      "name": "awkward-pause",
+      "file": "sfx/meme-sfx/03-awkward-pause.wav",
+      "seconds": 1.27
+    },
+    {
+      "name": "bamboo-hit",
+      "file": "sfx/meme-sfx/04-bamboo-hit.wav",
+      "seconds": 0.43
+    },
+    {
+      "name": "breast-twitch",
+      "file": "sfx/meme-sfx/05-breast-twitch.wav",
+      "seconds": 0.75
+    },
+    {
+      "name": "cartoon-run",
+      "file": "sfx/meme-sfx/06-cartoon-run.wav",
+      "seconds": 1.91
+    },
+    {
+      "name": "cartoon-slip",
+      "file": "sfx/meme-sfx/07-cartoon-slip.wav",
+      "seconds": 0.37
+    },
+    {
+      "name": "cartoon-pop",
+      "file": "sfx/meme-sfx/08-cartoon-pop.wav",
+      "seconds": 1.04
+    },
+    {
+      "name": "enemy-spotted",
+      "file": "sfx/meme-sfx/09-enemy-spotted.wav",
+      "seconds": 3.13
+    },
+    {
+      "name": "mario-level-up",
+      "file": "sfx/meme-sfx/10-mario-level-up.wav",
+      "seconds": 1.04
+    },
+    {
+      "name": "metal-gear-alert",
+      "file": "sfx/meme-sfx/11-metal-gear-alert.wav",
+      "seconds": 1.5
+    },
+    {
+      "name": "sonic-coin",
+      "file": "sfx/meme-sfx/12-sonic-coin.wav",
+      "seconds": 0.76
+    }
+  ],
+  "premium-sfx": [
+    {
+      "name": "squeezer",
+      "file": "sfx/premium-sfx/01-squeezer.wav",
+      "seconds": 2.0
+    },
+    {
+      "name": "game-counter",
+      "file": "sfx/premium-sfx/02-game-counter.wav",
+      "seconds": 1.46
+    },
+    {
+      "name": "depth-whoosh-hit",
+      "file": "sfx/premium-sfx/03-depth-whoosh-hit.wav",
+      "seconds": 0.75
+    },
+    {
+      "name": "ui-gear",
+      "file": "sfx/premium-sfx/04-ui-gear.wav",
+      "seconds": 0.67
+    },
+    {
+      "name": "mac-click",
+      "file": "sfx/premium-sfx/05-mac-click.wav",
+      "seconds": 0.33
+    },
+    {
+      "name": "bass-hit",
+      "file": "sfx/premium-sfx/06-bass-hit.wav",
+      "seconds": 1.61
+    }
+  ],
+  "saas-ui-sfx": [
+    {
+      "name": "phone-typing",
+      "file": "sfx/saas-ui-sfx/01-phone-typing.wav",
+      "seconds": 0.76
+    },
+    {
+      "name": "button",
+      "file": "sfx/saas-ui-sfx/02-button.wav",
+      "seconds": 0.34
+    },
+    {
+      "name": "click-07",
+      "file": "sfx/saas-ui-sfx/03-click-07.wav",
+      "seconds": 0.38
+    },
+    {
+      "name": "click-08",
+      "file": "sfx/saas-ui-sfx/04-click-08.wav",
+      "seconds": 0.38
+    },
+    {
+      "name": "click-09-10",
+      "file": "sfx/saas-ui-sfx/05-click-09-10.wav",
+      "seconds": 0.28
+    },
+    {
+      "name": "click-digital-1",
+      "file": "sfx/saas-ui-sfx/06-click-digital-1.wav",
+      "seconds": 0.53
+    },
+    {
+      "name": "click-digital-2",
+      "file": "sfx/saas-ui-sfx/07-click-digital-2.wav",
+      "seconds": 0.41
+    },
+    {
+      "name": "click-digital-3",
+      "file": "sfx/saas-ui-sfx/08-click-digital-3.wav",
+      "seconds": 0.31
+    },
+    {
+      "name": "click-digital-4",
+      "file": "sfx/saas-ui-sfx/09-click-digital-4.wav",
+      "seconds": 0.32
+    },
+    {
+      "name": "zoom-3",
+      "file": "sfx/saas-ui-sfx/10-zoom-3.wav",
+      "seconds": 1.08
+    }
+  ],
+  "trending-sfx": [
+    {
+      "name": "button-1",
+      "file": "sfx/trending-sfx/01-button-1.wav",
+      "seconds": 0.39
+    },
+    {
+      "name": "button-2",
+      "file": "sfx/trending-sfx/02-button-2.wav",
+      "seconds": 0.34
+    },
+    {
+      "name": "button-3",
+      "file": "sfx/trending-sfx/03-button-3.wav",
+      "seconds": 0.32
+    },
+    {
+      "name": "combo",
+      "file": "sfx/trending-sfx/04-combo.wav",
+      "seconds": 1.25
+    },
+    {
+      "name": "sparkle",
+      "file": "sfx/trending-sfx/05-sparkle.wav",
+      "seconds": 1.12
+    },
+    {
+      "name": "deep-whoosh",
+      "file": "sfx/trending-sfx/06-deep-whoosh.wav",
+      "seconds": 0.92
+    }
+  ],
+  "typography-sfx": [
+    {
+      "name": "slide-up",
+      "file": "sfx/typography-sfx/01-slide-up.wav",
+      "seconds": 1.82
+    },
+    {
+      "name": "pop",
+      "file": "sfx/typography-sfx/02-pop.wav",
+      "seconds": 0.57
+    },
+    {
+      "name": "bouncy",
+      "file": "sfx/typography-sfx/03-bouncy.wav",
+      "seconds": 0.54
+    },
+    {
+      "name": "blur-up",
+      "file": "sfx/typography-sfx/04-blur-up.wav",
+      "seconds": 0.4
+    },
+    {
+      "name": "opacity-flicker",
+      "file": "sfx/typography-sfx/05-opacity-flicker.wav",
+      "seconds": 0.95
+    }
+  ]
+}

@@ -8,3 +8,6 @@ out
 
 # The repo root ignores src/ for the Aseprite build; keep this project's source.
 !src/
+
+# SFX audio is third-party; keep it out of this public repo (see public/sfx/README.md).
+public/sfx/**/*.wav
