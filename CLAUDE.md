@@ -7,6 +7,12 @@ This repo has two independent parts:
    The root `.gitignore` ignores `src/`, `build/` and `*.txt` for that build.
 2. **Video work** (`video/`): a Remotion project for making videos in code.
 
+## New device or account
+
+If the user says they're on a new device or account and asks to "set everything up",
+follow `MIGRATION.md`: walk them through reinstalling the listed plugins, skills and
+connectors, then the local setup steps. Check what's already installed before suggesting installs.
+
 ## Video setup
 
 - Remotion lives in `video/`. Install with `npm i` in `video/` (a cloud SessionStart hook does this automatically).
