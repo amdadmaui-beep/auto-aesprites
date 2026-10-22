@@ -6,11 +6,13 @@ import clip1 from "./shotsocial/clip1.json";
 import clip2 from "./shotsocial/clip2.json";
 
 type Caption = { text: string; from: number; to: number };
+type BRoll = { file: string; from: number; to: number; srcFrom: number };
 type ReelData = {
   fps: number;
   durationInFrames: number;
   title: string[];
   splitEnd: number;
+  broll: BRoll[];
   captions: Caption[];
 };
 
@@ -71,6 +73,17 @@ const Reel: React.FC<{ name: string; data: ReelData }> = ({ name, data }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
       <OffthreadVideo src={staticFile(`shotsocial/${name}.mp4`)} />
+      {/* Real-life/influencer B-roll, muted, full screen; the speaker's audio carries on. */}
+      {data.broll.map((b) => (
+        <Sequence key={b.from} from={b.from} durationInFrames={b.to - b.from}>
+          <OffthreadVideo
+            src={staticFile(`shotsocial/broll/${b.file}.mp4`)}
+            trimBefore={b.srcFrom}
+            muted
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </Sequence>
+      ))}
       <Sequence durationInFrames={splitFrames} layout="none">
         <div style={{ position: "absolute", top: 955, left: 0, width: "100%", height: 10, background: YELLOW }} />
       </Sequence>

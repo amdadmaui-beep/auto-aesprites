@@ -7,6 +7,14 @@
   "YOU GAIN WEIGHT 🍰"
  ],
  "splitEnd": 3.2949590000000626,
+ "broll": [
+  {
+   "file": "cake_a",
+   "from": 958,
+   "to": 1009,
+   "srcFrom": 108
+  }
+ ],
  "captions": [
   {
    "text": "My mother was always on a diet.",

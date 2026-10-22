@@ -7,6 +7,8 @@ FPS = 24000 / 1001
 
 LINES = {
     "clip1": {
+        # B-roll: (file, output start s, output end s, source start s). Muted, full screen.
+        "broll": [("poolguy", 31.29, 33.12, 7.6), ("pregnant_a", 34.15, 36.70, 56.5)],
         "title": ["HOW FANTASY", "HELPED HER CLIENTS", "GET PREGNANT 🤯"],
         "lines": [
             ("And I actually found it by mistake", 7),
@@ -42,6 +44,7 @@ LINES = {
         ],
     },
     "clip2": {
+        "broll": [("cake_a", 39.97, None, 4.5)],
         "title": ["WHY THINKING", "ABOUT CAKE MAKES", "YOU GAIN WEIGHT 🍰"],
         "lines": [
             ("My mother was always on a diet.", 7),
@@ -110,6 +113,9 @@ def build(name, scratch, out_dir):
     split_end = sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
     data = {
         "fps": FPS, "durationInFrames": round(total * FPS), "title": spec["title"], "splitEnd": split_end,
+        "broll": [{"file": f, "from": round((split_end if a is None else a) * FPS),
+                   "to": round((total if b is None else b) * FPS), "srcFrom": round(src * FPS)}
+                  for f, a, b, src in spec["broll"]],
         "captions": [{"text": c["text"], "from": round(c["start"] * FPS), "to": round(c["end"] * FPS)} for c in caps],
     }
     json.dump(data, open(f"{out_dir}/{name}.json", "w"), indent=1, ensure_ascii=False)
