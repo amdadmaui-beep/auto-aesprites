@@ -12,7 +12,8 @@
    "file": "cake_a",
    "from": 958,
    "to": 1009,
-   "srcFrom": 108
+   "srcFrom": 108,
+   "posY": 35
   }
  ],
  "captions": [
