@@ -1,12 +1,12 @@
 {
  "fps": 23.976023976023978,
- "durationInFrames": 1009,
+ "durationInFrames": 1020,
  "title": [
   "WHY THINKING",
   "ABOUT CAKE MAKES",
   "YOU GAIN WEIGHT 🍰"
  ],
- "splitEnd": 1.6266250000001037,
+ "splitEnd": 1.7100410000000466,
  "layout": "ref2",
  "hookBottom": {
   "file": "cake_a",
@@ -16,32 +16,32 @@
  "broll": [
   {
    "file": "fridge_a",
-   "from": 39,
-   "to": 67,
+   "from": 41,
+   "to": 69,
    "srcFrom": 1079,
    "posY": 50,
    "zoom": 1
   },
   {
    "file": "yogurt_b",
-   "from": 67,
-   "to": 108,
+   "from": 69,
+   "to": 110,
    "srcFrom": 5,
    "posY": 0,
    "zoom": 1.35
   },
   {
    "file": "milk_a",
-   "from": 108,
-   "to": 132,
+   "from": 110,
+   "to": 134,
    "srcFrom": 350,
    "posY": 50,
    "zoom": 1
   },
   {
    "file": "slimfast_a",
-   "from": 132,
-   "to": 151,
+   "from": 134,
+   "to": 157,
    "srcFrom": 398,
    "posY": 50,
    "zoom": 1
@@ -50,37 +50,47 @@
  "captions": [
   {
    "text": "My mother was always on a diet.",
-   "from": 2,
-   "to": 41
+   "from": 4,
+   "to": 43
   },
   {
    "text": "Everything in our fridge was",
-   "from": 41,
-   "to": 67
+   "from": 43,
+   "to": 69
   },
   {
-   "text": "diet yogurt, diet milk, diet shakes,",
-   "from": 67,
-   "to": 152
+   "text": "diet yogurt,",
+   "from": 69,
+   "to": 98
+  },
+  {
+   "text": "diet milk,",
+   "from": 110,
+   "to": 134
+  },
+  {
+   "text": "diet shakes,",
+   "from": 134,
+   "to": 158
   },
   {
    "text": "so you pretty much",
-   "from": 152,
-   "to": 167
+   "from": 158,
+   "to": 181
   },
   {
    "text": "learn what you live.",
-   "from": 167,
-   "to": 191
+   "from": 181,
+   "to": 205
   },
   {
    "text": "And so I began many, many years",
-   "from": 191,
-   "to": 240
+   "from": 205,
+   "to": 260
   },
   {
    "text": "of dieting.",
-   "from": 240,
+   "from": 260,
    "to": 277
   },
   {
@@ -91,92 +101,92 @@
   {
    "text": "my weight stayed exactly the same.",
    "from": 301,
-   "to": 349
+   "to": 355
   },
   {
    "text": "I just wasted 15 years",
-   "from": 349,
-   "to": 396
+   "from": 355,
+   "to": 402
   },
   {
    "text": "because I didn't understand",
-   "from": 396,
-   "to": 428
+   "from": 402,
+   "to": 434
   },
   {
    "text": "that your psychology is having",
-   "from": 428,
-   "to": 472
+   "from": 434,
+   "to": 479
   },
   {
    "text": "a full-on conversation",
-   "from": 472,
-   "to": 501
+   "from": 479,
+   "to": 508
   },
   {
    "text": "with your biology.",
-   "from": 501,
-   "to": 520
+   "from": 508,
+   "to": 528
   },
   {
    "text": "“I can't eat that or I'll get fat”",
-   "from": 520,
-   "to": 575
+   "from": 528,
+   "to": 583
   },
   {
    "text": "becomes your reality.",
-   "from": 575,
-   "to": 605
+   "from": 583,
+   "to": 613
   },
   {
    "text": "Actually, if you say,",
-   "from": 605,
-   "to": 631
+   "from": 613,
+   "to": 639
   },
   {
    "text": "“I get fat just looking at a cake,”",
-   "from": 631,
-   "to": 698
+   "from": 639,
+   "to": 706
   },
   {
    "text": "do you know that thought",
-   "from": 698,
-   "to": 719
+   "from": 706,
+   "to": 727
   },
   {
    "text": "creates cortisol,",
-   "from": 719,
-   "to": 756
+   "from": 727,
+   "to": 764
   },
   {
    "text": "and cortisol makes you gain weight.",
-   "from": 764,
-   "to": 814
+   "from": 772,
+   "to": 824
   },
   {
    "text": "So it's true that you can say,",
-   "from": 814,
-   "to": 845
+   "from": 824,
+   "to": 855
   },
   {
    "text": "“I can gain weight",
-   "from": 845,
-   "to": 865
+   "from": 855,
+   "to": 875
   },
   {
    "text": "just thinking about cake.”",
-   "from": 865,
-   "to": 892
+   "from": 875,
+   "to": 904
   },
   {
    "text": "Also true that you can be",
-   "from": 892,
-   "to": 954
+   "from": 904,
+   "to": 966
   },
   {
    "text": "a perfect weight while eating cake.",
-   "from": 954,
-   "to": 1009
+   "from": 966,
+   "to": 1020
   }
  ]
 }

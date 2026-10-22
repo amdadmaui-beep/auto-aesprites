@@ -24,8 +24,16 @@ type ReelData = {
 
 const FONT = '"SF Pro Display", "Inter Display", "Inter", sans-serif';
 const YELLOW = "#EEEF14";
-// Subtitle box tops that put the baseline where the references have it.
-const SUB_TOP = { ref1: 778, ref2: 1127 };
+// Subtitle presets measured from each reference (pixels at 1080 wide). Both use
+// SF Pro Display Bold at 52px: text width matches the references within 1.5%.
+// The shadows are soft drop shadows offset downwards, not outlines; each was fitted
+// to how much the reference darkens the background at 4-25px from the letters.
+const SUB = {
+  // VIDEO SAMPLE 1: heavy, wide shadow (about 55% darker at 4px, 13% at 25px).
+  ref1: { top: 772, shadow: "0 8px 30px #000, 0 8px 30px #000, 0 10px 50px #000" },
+  // VIDEO SAMPLE 2: light shadow (about 15% darker at 4px, none at 25px).
+  ref2: { top: 1121, shadow: "0 4px 14px rgba(0,0,0,0.45), 0 6px 28px rgba(0,0,0,0.45)" },
+};
 
 const Title: React.FC<{ lines: string[] }> = ({ lines }) => (
   <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
@@ -84,7 +92,7 @@ const Clip: React.FC<{ file: string; srcFrom: number; posY: number; zoom?: numbe
   />
 );
 
-const Subtitle: React.FC<{ text: string; top: number }> = ({ text, top }) => (
+const Subtitle: React.FC<{ text: string; top: number; shadow: string }> = ({ text, top, shadow }) => (
   <AbsoluteFill>
     <div
       style={{
@@ -94,9 +102,9 @@ const Subtitle: React.FC<{ text: string; top: number }> = ({ text, top }) => (
         textAlign: "center",
         fontFamily: FONT,
         fontWeight: 700,
-        fontSize: 46,
+        fontSize: 52,
         color: "#fff",
-        textShadow: "0 0 3px rgba(0,0,0,0.9), 0 0 9px rgba(0,0,0,0.8), 0 0 18px rgba(0,0,0,0.65)",
+        textShadow: shadow,
         whiteSpace: "nowrap",
       }}
     >
@@ -145,7 +153,7 @@ const Reel: React.FC<{ name: string; data: ReelData }> = ({ name, data }) => {
           const from = Math.max(c.from, splitFrames);
           return (
             <Sequence key={c.from} from={from} durationInFrames={c.to - from} layout="none">
-              <Subtitle text={c.text} top={SUB_TOP[data.layout]} />
+              <Subtitle text={c.text} {...SUB[data.layout]} />
             </Sequence>
           );
         })}

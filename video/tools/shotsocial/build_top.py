@@ -9,28 +9,38 @@ import edit
 S = edit.S
 FPS = edit.FPS
 
-# (output start s, output end s, source) where source is
-#   ("cam", "B" | "C")  or  ("broll", file, source start s, vertical crop 0-1)
+# (source start s, source end s, what) - anchored to the original recording's time,
+# so the top panel stays on the right words when cut points move. None = reel start/end.
+#   what = ("cam", "B" | "C")  or  ("broll", file, source start s, vertical crop 0-1)
 TOP = {
     "clip1": [
-        (0.00, 1.71, ("cam", "B")),
-        (1.71, 3.80, ("broll", "ivf_a", 21.0, 0.45)),
-        (3.80, 4.90, ("cam", "C")),
-        (4.90, 6.88, ("broll", "wedding_a", 52.0, 0.45)),
-        (6.88, 10.14, ("broll", "ivf_b", 12.0, 0.15)),
-        (10.14, 13.60, ("cam", "C")),
-        (13.60, 16.69, ("cam", "B")),
-        (16.69, 20.71, ("cam", "C")),
-        (20.71, 23.19, ("cam", "B")),
-        (23.19, 25.77, ("broll", "ivf_c", 23.9, 0.35)),
-        (25.77, 28.79, ("broll", "ivf_a", 52.0, 0.3)),
-        (28.79, 31.29, ("broll", "pilot_a", 0.5, 0.3)),
-        (31.29, 33.12, ("broll", "poolguy", 7.6, 0.15)),
-        (33.12, 35.57, ("broll", "test_b", 1.5, 0.7)),
-        (35.57, 38.23, ("broll", "pregnant_a", 56.5, 0.65)),
-        (38.23, None, ("broll", "kids_a", 41.8, 0.6)),
+        (None, 364.864, ("cam", "B")),
+        (364.864, 367.74, ("broll", "ivf_a", 21.0, 0.45)),
+        (367.74, 369.055, ("cam", "C")),
+        (369.055, 371.035, ("broll", "wedding_a", 52.0, 0.45)),
+        (371.035, 374.295, ("broll", "ivf_b", 12.0, 0.15)),
+        (374.295, 377.755, ("cam", "C")),
+        (377.755, 389.47, ("cam", "B")),
+        (389.47, 393.499, ("cam", "C")),
+        (393.499, 452.118, ("cam", "B")),
+        (452.118, 454.698, ("broll", "ivf_c", 23.9, 0.35)),
+        (454.698, 457.718, ("broll", "ivf_a", 52.0, 0.3)),
+        (457.718, 460.218, ("broll", "pilot_a", 0.5, 0.3)),
+        (460.218, 468.81, ("broll", "poolguy", 7.6, 0.15)),
+        (468.81, 471.255, ("broll", "test_b", 1.5, 0.7)),
+        (471.255, 474.457, ("broll", "pregnant_a", 56.5, 0.65)),
+        (474.457, None, ("broll", "kids_a", 41.8, 0.6)),
     ],
 }
+
+
+def src_to_out(timeline, t):
+    """Output time of a source time; a time inside a removed gap maps to the next kept shot."""
+    for s in timeline:
+        if t < s["src_out"] - 1e-6:
+            return s["out_in"] + max(0.0, t - s["src_in"])
+    return sum(x["src_out"] - x["src_in"] for x in timeline)
+
 
 # Wide two-shot crop from Cam C (both women, 9:8).
 CAM_C = "crop=2000:1778:980:300,scale=1080:960:flags=lanczos"
@@ -53,8 +63,9 @@ def main(name):
         f0 += n
     faces = {}
     parts = []
-    for i, (a, b, src) in enumerate(TOP[name]):
-        fa, fb = fr(a), (total_frames if b is None else fr(b))
+    for i, (sa, sb, src) in enumerate(TOP[name]):
+        fa = 0 if sa is None else fr(src_to_out(timeline, sa))
+        fb = total_frames if sb is None else fr(src_to_out(timeline, sb))
         pieces = []
         if src[0] == "broll":
             _, f, ss, py = src

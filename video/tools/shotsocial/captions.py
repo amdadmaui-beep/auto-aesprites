@@ -10,14 +10,14 @@ LINES = {
         # VIDEO SAMPLE 1: split screen for the whole reel; the top panel is
         # pre-built by build_top.py (B-roll + podcast cutaways).
         "layout": "ref1",
-        "title_end": 3.80,  # first subtitle ("One of my clients saying,")
+        "title_end": "src:367.74",  # first subtitle ("And then one of my clients saying,")
         "broll": [],
         "title": ["HOW FANTASY", "HELPED HER CLIENTS", "GET PREGNANT 🤯"],
         "lines": [
             ("And I actually found it by mistake", 7),
             ("because I work a lot", 5),
             ("with infertile people.", 3),
-            ("One of my clients saying,", 5),
+            ("And then one of my clients saying,", 7),
             ("“I'm going to call off my wedding", 7),
             ("because my husband's got", 4),
             ("a very low sperm count", 5),
@@ -53,13 +53,15 @@ LINES = {
         "layout": "ref2",
         "hook_bottom": ("cake_a", 0.0, 40),
         # B-roll: (file, output start s, output end s, source start s, vertical crop %, zoom).
-        "broll": [("fridge_a", None, 2.79, 45.0, 50, 1), ("yogurt_b", 2.79, 4.49, 0.2, 0, 1.35),
-                  ("milk_a", 4.49, 5.51, 14.6, 50, 1), ("slimfast_a", 5.51, 6.30, 16.6, 50, 1)],
+        "broll": [("fridge_a", None, "src:1154.482", 45.0, 50, 1), ("yogurt_b", "src:1154.482", "src:1156.182", 0.2, 0, 1.35),
+                  ("milk_a", "src:1156.182", "src:1157.202", 14.6, 50, 1), ("slimfast_a", "src:1157.202", "src:1158.16", 16.6, 50, 1)],
         "title": ["WHY THINKING", "ABOUT CAKE MAKES", "YOU GAIN WEIGHT 🍰"],
         "lines": [
             ("My mother was always on a diet.", 7),
             ("Everything in our fridge was", 5),
-            ("diet yogurt, diet milk, diet shakes,", 6),
+            ("diet yogurt,", 2),
+            ("diet milk,", 2),
+            ("diet shakes,", 2),
             ("so you pretty much", 4),
             ("learn what you live.", 4),
             ("And so I began many, many years", 7),
@@ -92,6 +94,16 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", s.lower().replace("'", "'"))
 
 
+def src_out(timeline, b):
+    """Output seconds; "src:<t>" anchors to a source time (survives moved cuts)."""
+    if not str(b).startswith("src:"):
+        return b
+    t = float(b[4:])
+    for s in timeline:
+        if t < s["src_out"] - 1e-6:
+            return s["out_in"] + max(0.0, t - s["src_in"])
+
+
 def build(name, scratch, out_dir):
     words = json.load(open(f"{scratch}/{name}_outwords.json"))
     timeline = json.load(open(f"{scratch}/build/{name}/timeline.json"))
@@ -120,14 +132,14 @@ def build(name, scratch, out_dir):
     for a, b in zip(caps, caps[1:]):
         a["end"] = b["start"] if b["start"] - a["end"] < 0.6 else a["end"] + 0.3
     caps[-1]["end"] = total
-    split_end = spec.get("title_end") or sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
+    split_end = src_out(timeline, spec["title_end"]) if "title_end" in spec else sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
     data = {
         "fps": FPS, "durationInFrames": round(total * FPS), "title": spec["title"], "splitEnd": split_end,
         "layout": spec["layout"],
         "hookBottom": ({"file": spec["hook_bottom"][0], "srcFrom": round(spec["hook_bottom"][1] * FPS),
                         "posY": spec["hook_bottom"][2]} if "hook_bottom" in spec else None),
-        "broll": [{"file": f, "from": round((split_end if a is None else a) * FPS),
-                   "to": round((total if b is None else b) * FPS), "srcFrom": round(src * FPS), "posY": pos, "zoom": zoom}
+        "broll": [{"file": f, "from": round((split_end if a is None else src_out(timeline, a)) * FPS),
+                   "to": round((total if b is None else src_out(timeline, b)) * FPS), "srcFrom": round(src * FPS), "posY": pos, "zoom": zoom}
                   for f, a, b, src, pos, zoom in spec["broll"]],
         "captions": [{"text": c["text"], "from": round(c["start"] * FPS), "to": round(c["end"] * FPS)} for c in caps],
     }
