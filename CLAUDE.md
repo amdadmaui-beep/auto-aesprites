@@ -47,3 +47,5 @@ Mario/Sonic/Metal Gear ones in monetized work.
 - Fish Audio (AI image/video/voice generation) bills separately: always estimate and get
   approval before generating.
 - Keep explanations short and plain; the user isn't a developer by trade.
+- When something is blocked and you can't do it yourself (a missing file, font, login, network
+  access, a setting), stop and tell the user exactly what to set up and how. Don't guess or fake it.
