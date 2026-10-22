@@ -30,9 +30,9 @@ const YELLOW = "#EEEF14";
 // to how much the reference darkens the background at 4-25px from the letters.
 const SUB = {
   // VIDEO SAMPLE 1: heavy, wide shadow (about 55% darker at 4px, 13% at 25px).
-  ref1: { top: 772, shadow: "0 8px 30px #000, 0 8px 30px #000, 0 10px 50px #000" },
+  ref1: { top: 778, shadow: "0 8px 30px #000, 0 8px 30px #000, 0 10px 50px #000" },
   // VIDEO SAMPLE 2: light shadow (about 15% darker at 4px, none at 25px).
-  ref2: { top: 1121, shadow: "0 4px 14px rgba(0,0,0,0.45), 0 6px 28px rgba(0,0,0,0.45)" },
+  ref2: { top: 1128, shadow: "0 4px 14px rgba(0,0,0,0.45), 0 6px 28px rgba(0,0,0,0.45)" },
 };
 
 const Title: React.FC<{ lines: string[] }> = ({ lines }) => (
