@@ -13,10 +13,10 @@ LINES = {
             ("because I work a lot", 5),
             ("with infertile people.", 3),
             ("One of my clients saying,", 5),
-            ("“I’m going to call off my wedding", 7),
-            ("because my husband’s got", 4),
+            ("“I'm going to call off my wedding", 7),
+            ("because my husband's got", 4),
             ("a very low sperm count", 5),
-            ("and we can’t have children.”", 5),
+            ("and we can't have children.”", 5),
             ("I said, you know,", 4),
             ("every time a man has sex", 6),
             ("with a new person,", 4),
@@ -28,7 +28,7 @@ LINES = {
             ("of sperm he ejaculates.", 4),
             ("And so I found this as a way", 8),
             ("to help my clients", 4),
-            ("who couldn’t conceive", 3),
+            ("who couldn't conceive", 3),
             ("fantasize their husband", 3),
             ("was a pilot or the pool guy", 7),
             ("or anything.", 2),
@@ -36,9 +36,9 @@ LINES = {
             ("“Well, we got pregnant so quickly,", 6),
             ("we gave up IVF.”", 4),
             ("It was just playing that game.", 6),
-            ("But now we’ve got the children,", 6),
-            ("we’re still doing it.", 4),
-            ("It’s still fantastic.", 3),
+            ("But now we've got the children,", 6),
+            ("we're still doing it.", 4),
+            ("It's still fantastic.", 3),
         ],
     },
     "clip2": {
@@ -54,18 +54,18 @@ LINES = {
             ("After years of dieting,", 4),
             ("my weight stayed exactly the same.", 6),
             ("I just wasted 15 years", 5),
-            ("because I didn’t understand", 4),
+            ("because I didn't understand", 4),
             ("that your psychology is having", 4),
             ("a full-on conversation", 4),
             ("with your biology.", 3),
-            ("“I can’t eat that or I’ll get fat”", 8),
+            ("“I can't eat that or I'll get fat”", 8),
             ("becomes your reality.", 3),
             ("Actually, if you say,", 4),
             ("“I get fat just looking at a cake,”", 8),
             ("do you know that thought", 5),
             ("creates cortisol,", 2),
             ("and cortisol makes you gain weight.", 6),
-            ("So it’s true that you can say,", 7),
+            ("So it's true that you can say,", 7),
             ("“I can gain weight", 5),
             ("just thinking about cake.”", 4),
             ("Also true that you can be", 6),
@@ -76,7 +76,7 @@ LINES = {
 
 
 def norm(s):
-    return re.sub(r"[^a-z0-9]", "", s.lower().replace("’", "'"))
+    return re.sub(r"[^a-z0-9]", "", s.lower().replace("'", "'"))
 
 
 def build(name, scratch, out_dir):
