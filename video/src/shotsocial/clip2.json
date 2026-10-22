@@ -23,12 +23,12 @@
    "zoom": 1
   },
   {
-   "file": "yogurt_b",
+   "file": "yog_d",
    "from": 69,
    "to": 110,
-   "srcFrom": 5,
+   "srcFrom": 597,
    "posY": 0,
-   "zoom": 1.35
+   "zoom": 1.3
   },
   {
    "file": "milk_a",
@@ -84,8 +84,13 @@
    "to": 204
   },
   {
-   "text": "And so I began many, many years",
+   "text": "And so I began",
    "from": 204,
+   "to": 228
+  },
+  {
+   "text": "many, many years",
+   "from": 228,
    "to": 259
   },
   {
@@ -99,8 +104,13 @@
    "to": 318
   },
   {
-   "text": "my weight stayed exactly the same.",
+   "text": "my weight stayed",
    "from": 318,
+   "to": 334
+  },
+  {
+   "text": "exactly the same.",
+   "from": 334,
    "to": 378
   },
   {
@@ -134,8 +144,13 @@
    "to": 577
   },
   {
-   "text": "“I can't eat that or I'll get fat”",
+   "text": "“I can't eat that",
    "from": 577,
+   "to": 605
+  },
+  {
+   "text": "or I'll get fat”",
+   "from": 605,
    "to": 634
   },
   {
@@ -149,8 +164,13 @@
    "to": 688
   },
   {
-   "text": "“I get fat just looking at a cake,”",
+   "text": "“I get fat just",
    "from": 688,
+   "to": 726
+  },
+  {
+   "text": "looking at a cake,”",
+   "from": 726,
    "to": 755
   },
   {
@@ -164,13 +184,23 @@
    "to": 813
   },
   {
-   "text": "and cortisol makes you gain weight.",
+   "text": "and cortisol makes",
    "from": 824,
+   "to": 857
+  },
+  {
+   "text": "you gain weight.",
+   "from": 857,
    "to": 873
   },
   {
-   "text": "So it's true that you can say,",
+   "text": "So it's true",
    "from": 873,
+   "to": 885
+  },
+  {
+   "text": "that you can say,",
+   "from": 885,
    "to": 904
   },
   {
@@ -189,8 +219,13 @@
    "to": 1012
   },
   {
-   "text": "a perfect weight while eating cake.",
+   "text": "a perfect weight",
    "from": 1012,
+   "to": 1040
+  },
+  {
+   "text": "while eating cake.",
+   "from": 1040,
    "to": 1068
   }
  ]

@@ -79,8 +79,16 @@ def face(cam, t0, t1):
     return float(np.median(xs)), float(np.median(ys))
 
 
-def crop_for(cam, mode, fx, ey, out_w, out_h, eye_frac):
-    if mode == "wide":
+# Full-screen framing per reel: (wide crop height, punch crop height, eye line).
+# Reel 2 follows VIDEO SAMPLE 2's tighter close-up (face ~56% of frame width,
+# eyes high in frame), kept just loose enough that the host's hat stays in shot.
+FRAMING = {"clip2": (1850, 1525, 0.28)}
+
+
+def crop_for(cam, mode, fx, ey, out_w, out_h, eye_frac, heights=None):
+    if heights and mode in ("wide", "punch"):
+        h = heights[0] if mode == "wide" else heights[1]
+    elif mode == "wide":
         h = 2160
     elif mode == "punch":
         h = 1780
@@ -143,7 +151,7 @@ def main(name):
             inputs = ["-ss", f"{a}", "-t", f"{dur + 0.5}", "-i", f"{RAW}/Cam_A.mp4",
                       "-ss", f"{a}", "-t", f"{dur + 0.5}", "-i", f"{RAW}/Cam_B.mp4"]
         else:
-            vf = f"[0:v]{crop_for(cam, mode, *faces[f'{cam}:{a}:{b}'], 1080, 1920, 0.365)},fps={FPS},trim=end_frame={round(dur * FPS)}[v]"
+            vf = f"[0:v]{crop_for(cam, mode, *faces[f'{cam}:{a}:{b}'], 1080, 1920, FRAMING.get(name, (0, 0, 0.365))[2], FRAMING.get(name))},fps={FPS},trim=end_frame={round(dur * FPS)}[v]"
             inputs = ["-ss", f"{a}", "-t", f"{dur + 0.5}", "-i", f"{RAW}/Cam_{cam}.mp4"]
         subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", vf, "-map", "[v]",
                         "-an", "-c:v", "libx264", "-crf", "14", "-preset", "fast", "-pix_fmt", "yuv420p", out],
