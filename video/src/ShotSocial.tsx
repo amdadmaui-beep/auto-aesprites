@@ -57,7 +57,7 @@ const Subtitle: React.FC<{ text: string }> = ({ text }) => (
         fontWeight: 600,
         fontSize: 46,
         color: "#fff",
-        textShadow: "0 0 6px rgba(0,0,0,0.75), 0 0 16px rgba(0,0,0,0.65), 0 0 28px rgba(0,0,0,0.45)",
+        textShadow: "0 1px 4px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.35)",
         whiteSpace: "nowrap",
       }}
     >
