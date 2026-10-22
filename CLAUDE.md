@@ -49,3 +49,15 @@ Mario/Sonic/Metal Gear ones in monetized work.
 - Fish Audio (AI image/video/voice generation) bills separately: always estimate and get
   approval before generating.
 - Keep explanations short and plain; the user isn't a developer by trade.
+- When something is blocked and you can't do it yourself (a missing file, font, login, network
+  access, a setting), stop and tell the user exactly what to set up and how. Don't guess or fake it.
+
+## Past projects (each on its own branch)
+
+| Project | Branch | What's there |
+|---|---|---|
+| AVE Studio mascot promo (V1–V3) | `claude/practical-faraday-7a7049` | `ave-promo/`: film source, renders, VO; source footage is in the "AVE Studio Showcase" Google Drive folder (`ave-promo/tools/extract_clips.sh`) |
+| Motion graphics showreel (25 s) | `claude/elegant-keller-nekcgv` | `showreel/`: code-driven film, synth score, `reel.mp4` |
+| Shot Social reels | `claude/tender-clarke-32xjjk` | `video/src/ShotSocial.tsx`, `video/tools/shotsocial/` caption/cut tools |
+
+To continue one, check out its branch. Don't merge these into `main` without asking.
