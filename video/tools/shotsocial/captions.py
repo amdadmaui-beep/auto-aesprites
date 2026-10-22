@@ -20,8 +20,8 @@ LINES = {
             ("with infertile people.", 3),
             ("And then one", 3),
             ("of my clients saying,", 4),
-            ("“I'm going to", 3),
-            ("call off my wedding", 4),
+            ("“I'm going to call off", 5),
+            ("my wedding", 2),
             ("because my husband's got", 4),
             ("a very low sperm count", 5),
             ("and we can't have children.”", 5),
@@ -49,8 +49,8 @@ LINES = {
             ("It was just", 3),
             ("playing that game.", 3),
             ("And now we've got", 4),
-            ("the children,", 2),
-            ("we're still doing it.", 4),
+            ("the children, we're", 3),
+            ("still doing it.", 3),
             ("It's still fantastic.", 3),
         ],
     },
@@ -133,7 +133,7 @@ def onsets(path):
     return [i / 100 for i in range(4, n) if loud[i] and not loud[i - 1] and (e[i - 4:i] < -36).all()]
 
 
-def snap_to_onset(t, ons, before=0.35, after=0.2):
+def snap_to_onset(t, ons, before=0.15, after=0.15):
     """Move a subtitle start onto the nearest real speech onset, if there is one close by."""
     near = [o for o in ons if t - before <= o <= t + after]
     return min(near, key=lambda o: abs(o - t)) - 0.02 if near else t
@@ -165,9 +165,12 @@ def build(name, scratch, out_dir):
     # Subtitles appear when the words are actually heard, not when the transcript says.
     ons = onsets(f"{scratch}/build/{name}/audio.wav")
     moved = []
+    prev = None
     for c in caps:
         new = snap_to_onset(c["start"], ons)
-        moved.append(new - c["start"]); c["start"] = new
+        if prev is not None and new < prev + 0.25:  # never collapse onto the line before
+            new = max(c["start"], prev + 0.25)
+        moved.append(new - c["start"]); c["start"] = new; prev = new
     print(name, "subtitle starts snapped to audio onsets:", sum(1 for m in moved if m), "of", len(caps),
           "| mean shift", round(sum(moved) / len(moved) * 1000), "ms")
     total = sum(s["src_out"] - s["src_in"] for s in timeline)
@@ -175,6 +178,8 @@ def build(name, scratch, out_dir):
     for a, b in zip(caps, caps[1:]):
         a["end"] = b["start"] if b["start"] - a["end"] < 0.6 else a["end"] + 0.3
     caps[-1]["end"] = total
+    for c in caps:
+        c["end"] = max(c["end"], c["start"] + 0.25)  # readable minimum
     split_end = src_out(timeline, spec["title_end"]) if "title_end" in spec else sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
     data = {
         "fps": FPS, "durationInFrames": round(total * FPS), "title": spec["title"], "splitEnd": split_end,
