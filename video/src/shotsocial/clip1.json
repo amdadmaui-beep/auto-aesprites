@@ -12,8 +12,13 @@
  "broll": [],
  "captions": [
   {
-   "text": "And I actually found it by mistake",
+   "text": "And I actually found it",
    "from": 2,
+   "to": 27
+  },
+  {
+   "text": "by mistake",
+   "from": 27,
    "to": 45
   },
   {
@@ -27,13 +32,23 @@
    "to": 99
   },
   {
-   "text": "And then one of my clients saying,",
+   "text": "And then one",
+   "from": 111,
+   "to": 111
+  },
+  {
+   "text": "of my clients saying,",
    "from": 111,
    "to": 143
   },
   {
-   "text": "“I'm going to call off my wedding",
+   "text": "“I'm going to",
    "from": 143,
+   "to": 147
+  },
+  {
+   "text": "call off my wedding",
+   "from": 147,
    "to": 169
   },
   {
@@ -77,13 +92,23 @@
    "to": 422
   },
   {
-   "text": "And so if a man can fantasize",
+   "text": "And so if a man",
    "from": 422,
+   "to": 451
+  },
+  {
+   "text": "can fantasize",
+   "from": 451,
    "to": 479
   },
   {
-   "text": "about being with a new woman,",
+   "text": "about being with",
    "from": 479,
+   "to": 490
+  },
+  {
+   "text": "a new woman,",
+   "from": 490,
    "to": 519
   },
   {
@@ -132,8 +157,13 @@
    "to": 837
   },
   {
-   "text": "“Wow, we got pregnant so quickly,",
+   "text": "“Wow, we got pregnant",
    "from": 837,
+   "to": 855
+  },
+  {
+   "text": "so quickly,",
+   "from": 855,
    "to": 870
   },
   {
@@ -142,13 +172,23 @@
    "to": 903
   },
   {
-   "text": "It was just playing that game.",
+   "text": "It was just",
    "from": 903,
+   "to": 923
+  },
+  {
+   "text": "playing that game.",
+   "from": 923,
    "to": 940
   },
   {
-   "text": "And now we've got the children,",
+   "text": "And now we've got",
    "from": 940,
+   "to": 955
+  },
+  {
+   "text": "the children,",
+   "from": 955,
    "to": 955
   },
   {
