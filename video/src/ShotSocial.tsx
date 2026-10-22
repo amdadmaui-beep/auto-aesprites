@@ -1,24 +1,31 @@
-// Shot Social house style: split-screen hook with a yellow divider and a
-// white-box title, then bold white subtitles with a dark halo. B-roll plays in
-// the top half over the speaker, split by the same yellow line.
+// Shot Social house style, two layouts that follow the agency's references:
+// - "ref1" (VIDEO SAMPLE 1): split screen for the whole reel. Supporting footage on
+//   top, the speaker below, a yellow divider, subtitles just above the divider.
+// - "ref2" (VIDEO SAMPLE 2): split hook with a close-up below, then a burst of
+//   full-screen B-roll, then the clean full-screen podcast.
+// Positions and the divider colour are measured from the reference files.
 // The cut itself (shots, framing, audio) is pre-rendered to public/shotsocial/.
-import { AbsoluteFill, Composition, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Composition, OffthreadVideo, Sequence, staticFile } from "remotion";
 import clip1 from "./shotsocial/clip1.json";
 import clip2 from "./shotsocial/clip2.json";
 
 type Caption = { text: string; from: number; to: number };
-type BRoll = { file: string; from: number; to: number; srcFrom: number; posY: number };
+type BRoll = { file: string; from: number; to: number; srcFrom: number; posY: number; zoom?: number };
 type ReelData = {
   fps: number;
   durationInFrames: number;
   title: string[];
   splitEnd: number;
+  layout: "ref1" | "ref2";
+  hookBottom: { file: string; srcFrom: number; posY: number } | null;
   broll: BRoll[];
   captions: Caption[];
 };
 
 const FONT = '"SF Pro Display", "Inter Display", "Inter", sans-serif';
-const YELLOW = "#F5F50A";
+const YELLOW = "#EEEF14";
+// Subtitle box tops that put the baseline where the references have it.
+const SUB_TOP = { ref1: 778, ref2: 1127 };
 
 const Title: React.FC<{ lines: string[] }> = ({ lines }) => (
   <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
@@ -47,78 +54,98 @@ const Title: React.FC<{ lines: string[] }> = ({ lines }) => (
   </AbsoluteFill>
 );
 
-// Speaker crop for the bottom half during B-roll: rows 330-1290 of the full frame,
-// which keeps the face in the upper part of the half like the reference.
-const SPEAKER_TOP = 330;
+// Speaker crop for the bottom panel: rows 412-1372 of the full speaker frame,
+// which puts the eyes about 30% down the panel (the reference is ~25%; a little
+// more headroom keeps the host's hat in frame).
+const SPEAKER_TOP = 412;
 
 const YellowLine: React.FC = () => (
   <div style={{ position: "absolute", top: 955, left: 0, width: "100%", height: 10, background: YELLOW }} />
 );
 
-// Above the yellow line while B-roll is up, lower-middle otherwise.
-const Subtitle: React.FC<{ text: string; start: number; broll: BRoll[] }> = ({ text, start, broll }) => {
-  const frame = start + useCurrentFrame();
-  const split = broll.some((b) => frame >= b.from && frame < b.to);
-  return (
-    <AbsoluteFill>
-      <div
-        style={{
-          position: "absolute",
-          top: split ? 790 : 1130,
-          width: "100%",
-          textAlign: "center",
-          fontFamily: FONT,
-          fontWeight: 700,
-          fontSize: 46,
-          color: "#fff",
-          textShadow: "0 0 3px rgba(0,0,0,0.9), 0 0 9px rgba(0,0,0,0.8), 0 0 18px rgba(0,0,0,0.65)",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {text}
-      </div>
-    </AbsoluteFill>
-  );
-};
+const Panel: React.FC<{ top: number; children: React.ReactNode }> = ({ top, children }) => (
+  <div style={{ position: "absolute", top, width: 1080, height: 960, overflow: "hidden" }}>{children}</div>
+);
+
+// zoom > 1 punches in from the top, e.g. to keep a clip's own text clear of the subtitle.
+const Clip: React.FC<{ file: string; srcFrom: number; posY: number; zoom?: number }> = ({ file, srcFrom, posY, zoom = 1 }) => (
+  <OffthreadVideo
+    src={staticFile(`shotsocial/broll/${file}.mp4`)}
+    trimBefore={srcFrom}
+    muted
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: `50% ${posY}%`,
+      transform: `scale(${zoom})`,
+      transformOrigin: "50% 0%",
+    }}
+  />
+);
+
+const Subtitle: React.FC<{ text: string; top: number }> = ({ text, top }) => (
+  <AbsoluteFill>
+    <div
+      style={{
+        position: "absolute",
+        top,
+        width: "100%",
+        textAlign: "center",
+        fontFamily: FONT,
+        fontWeight: 700,
+        fontSize: 46,
+        color: "#fff",
+        textShadow: "0 0 3px rgba(0,0,0,0.9), 0 0 9px rgba(0,0,0,0.8), 0 0 18px rgba(0,0,0,0.65)",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {text}
+    </div>
+  </AbsoluteFill>
+);
 
 const Reel: React.FC<{ name: string; data: ReelData }> = ({ name, data }) => {
   const splitFrames = Math.round(data.splitEnd * data.fps);
+  const speaker = staticFile(`shotsocial/${name}.mp4`);
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
-      <OffthreadVideo src={staticFile(`shotsocial/${name}.mp4`)} />
-      {/* Real-life/influencer B-roll, muted, top half; the speaker stays in the bottom half. */}
-      {data.broll.map((b) => (
-        <Sequence key={b.from} from={b.from} durationInFrames={b.to - b.from}>
-          <div style={{ position: "absolute", top: 0, width: 1080, height: 960, overflow: "hidden" }}>
-            <OffthreadVideo
-              src={staticFile(`shotsocial/broll/${b.file}.mp4`)}
-              trimBefore={b.srcFrom}
-              muted
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: `50% ${b.posY}%` }}
-            />
-          </div>
-          <div style={{ position: "absolute", top: 960, width: 1080, height: 960, overflow: "hidden" }}>
-            <OffthreadVideo
-              src={staticFile(`shotsocial/${name}.mp4`)}
-              trimBefore={b.from}
-              muted
-              style={{ position: "absolute", top: -SPEAKER_TOP, width: 1080, height: 1920 }}
-            />
-          </div>
+      {data.layout === "ref1" ? (
+        <>
+          <Panel top={0}>
+            <OffthreadVideo src={staticFile(`shotsocial/${name}_top.mp4`)} muted />
+          </Panel>
+          <Panel top={960}>
+            <OffthreadVideo src={speaker} style={{ position: "absolute", top: -SPEAKER_TOP, width: 1080, height: 1920 }} />
+          </Panel>
           <YellowLine />
-        </Sequence>
-      ))}
-      <Sequence durationInFrames={splitFrames} layout="none">
-        <YellowLine />
-      </Sequence>
-      {/* The reference shows no subtitles while the hook title is up. */}
+        </>
+      ) : (
+        <>
+          <OffthreadVideo src={speaker} />
+          {data.hookBottom ? (
+            <Sequence durationInFrames={splitFrames} layout="none">
+              <Panel top={960}>
+                <Clip {...data.hookBottom} />
+              </Panel>
+              <YellowLine />
+            </Sequence>
+          ) : null}
+          {data.broll.map((b) => (
+            <Sequence key={b.from} from={b.from} durationInFrames={b.to - b.from}>
+              <Clip {...b} />
+            </Sequence>
+          ))}
+        </>
+      )}
+      {/* Neither reference shows subtitles while the hook title is up. */}
       {data.captions
         .filter((c) => c.to > splitFrames)
         .map((c) => {
           const from = Math.max(c.from, splitFrames);
           return (
             <Sequence key={c.from} from={from} durationInFrames={c.to - from} layout="none">
-              <Subtitle text={c.text} start={from} broll={data.broll} />
+              <Subtitle text={c.text} top={SUB_TOP[data.layout]} />
             </Sequence>
           );
         })}

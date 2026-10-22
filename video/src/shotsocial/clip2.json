@@ -6,14 +6,45 @@
   "ABOUT CAKE MAKES",
   "YOU GAIN WEIGHT 🍰"
  ],
- "splitEnd": 3.2949590000000626,
+ "splitEnd": 1.6266250000001037,
+ "layout": "ref2",
+ "hookBottom": {
+  "file": "cake_a",
+  "srcFrom": 0,
+  "posY": 40
+ },
  "broll": [
   {
-   "file": "cake_a",
-   "from": 958,
-   "to": 1009,
-   "srcFrom": 108,
-   "posY": 35
+   "file": "fridge_a",
+   "from": 39,
+   "to": 67,
+   "srcFrom": 1079,
+   "posY": 50,
+   "zoom": 1
+  },
+  {
+   "file": "yogurt_b",
+   "from": 67,
+   "to": 108,
+   "srcFrom": 5,
+   "posY": 0,
+   "zoom": 1.35
+  },
+  {
+   "file": "milk_a",
+   "from": 108,
+   "to": 132,
+   "srcFrom": 350,
+   "posY": 50,
+   "zoom": 1
+  },
+  {
+   "file": "slimfast_a",
+   "from": 132,
+   "to": 151,
+   "srcFrom": 398,
+   "posY": 50,
+   "zoom": 1
   }
  ],
  "captions": [

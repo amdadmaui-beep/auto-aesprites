@@ -7,9 +7,11 @@ FPS = 24000 / 1001
 
 LINES = {
     "clip1": {
-        # B-roll: (file, output start s, output end s, source start s, vertical crop %).
-        # Muted, top half of a split screen.
-        "broll": [("poolguy", 31.29, 33.12, 7.6, 15), ("pregnant_a", 34.15, 36.70, 56.5, 65)],
+        # VIDEO SAMPLE 1: split screen for the whole reel; the top panel is
+        # pre-built by build_top.py (B-roll + podcast cutaways).
+        "layout": "ref1",
+        "title_end": 3.80,  # first subtitle ("One of my clients saying,")
+        "broll": [],
         "title": ["HOW FANTASY", "HELPED HER CLIENTS", "GET PREGNANT 🤯"],
         "lines": [
             ("And I actually found it by mistake", 7),
@@ -45,7 +47,14 @@ LINES = {
         ],
     },
     "clip2": {
-        "broll": [("cake_a", 39.97, None, 4.5, 35)],
+        # VIDEO SAMPLE 2: split hook with a product close-up below, then a burst of
+        # full-screen B-roll, then clean podcast.
+        # B-roll: (file, output start s, output end s, source start s, vertical crop %).
+        "layout": "ref2",
+        "hook_bottom": ("cake_a", 0.0, 40),
+        # B-roll: (file, output start s, output end s, source start s, vertical crop %, zoom).
+        "broll": [("fridge_a", None, 2.79, 45.0, 50, 1), ("yogurt_b", 2.79, 4.49, 0.2, 0, 1.35),
+                  ("milk_a", 4.49, 5.51, 14.6, 50, 1), ("slimfast_a", 5.51, 6.30, 16.6, 50, 1)],
         "title": ["WHY THINKING", "ABOUT CAKE MAKES", "YOU GAIN WEIGHT 🍰"],
         "lines": [
             ("My mother was always on a diet.", 7),
@@ -111,12 +120,15 @@ def build(name, scratch, out_dir):
     for a, b in zip(caps, caps[1:]):
         a["end"] = b["start"] if b["start"] - a["end"] < 0.6 else a["end"] + 0.3
     caps[-1]["end"] = total
-    split_end = sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
+    split_end = spec.get("title_end") or sum(s["src_out"] - s["src_in"] for s in timeline if s["mode"] == "split")
     data = {
         "fps": FPS, "durationInFrames": round(total * FPS), "title": spec["title"], "splitEnd": split_end,
+        "layout": spec["layout"],
+        "hookBottom": ({"file": spec["hook_bottom"][0], "srcFrom": round(spec["hook_bottom"][1] * FPS),
+                        "posY": spec["hook_bottom"][2]} if "hook_bottom" in spec else None),
         "broll": [{"file": f, "from": round((split_end if a is None else a) * FPS),
-                   "to": round((total if b is None else b) * FPS), "srcFrom": round(src * FPS), "posY": pos}
-                  for f, a, b, src, pos in spec["broll"]],
+                   "to": round((total if b is None else b) * FPS), "srcFrom": round(src * FPS), "posY": pos, "zoom": zoom}
+                  for f, a, b, src, pos, zoom in spec["broll"]],
         "captions": [{"text": c["text"], "from": round(c["start"] * FPS), "to": round(c["end"] * FPS)} for c in caps],
     }
     json.dump(data, open(f"{out_dir}/{name}.json", "w"), indent=1, ensure_ascii=False)

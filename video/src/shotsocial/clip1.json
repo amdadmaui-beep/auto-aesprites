@@ -6,23 +6,10 @@
   "HELPED HER CLIENTS",
   "GET PREGNANT 🤯"
  ],
- "splitEnd": 3.7954590000000508,
- "broll": [
-  {
-   "file": "poolguy",
-   "from": 750,
-   "to": 794,
-   "srcFrom": 182,
-   "posY": 15
-  },
-  {
-   "file": "pregnant_a",
-   "from": 819,
-   "to": 880,
-   "srcFrom": 1355,
-   "posY": 65
-  }
- ],
+ "splitEnd": 3.8,
+ "layout": "ref1",
+ "hookBottom": null,
+ "broll": [],
  "captions": [
   {
    "text": "And I actually found it by mistake",
