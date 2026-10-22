@@ -9,3 +9,6 @@ out
 # The repo root ignores src/ for the Aseprite build; keep this project's source.
 !src/
 
+
+# Shot Social raw cuts (large, rendered from the agency footage)
+public/shotsocial/
