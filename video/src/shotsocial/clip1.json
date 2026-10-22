@@ -1,6 +1,6 @@
 {
  "fps": 23.976023976023978,
- "durationInFrames": 1009,
+ "durationInFrames": 1016,
  "title": [
   "HOW FANTASY",
   "HELPED HER CLIENTS",
@@ -149,17 +149,17 @@
   {
    "text": "And now we've got the children,",
    "from": 940,
-   "to": 956
+   "to": 955
   },
   {
    "text": "we're still doing it.",
-   "from": 956,
+   "from": 955,
    "to": 983
   },
   {
    "text": "It's still fantastic.",
    "from": 983,
-   "to": 1009
+   "to": 1016
   }
  ]
 }

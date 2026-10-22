@@ -1,6 +1,6 @@
 {
  "fps": 23.976023976023978,
- "durationInFrames": 1095,
+ "durationInFrames": 1068,
  "title": [
   "WHY THINKING",
   "ABOUT CAKE MAKES",
@@ -89,114 +89,109 @@
    "to": 259
   },
   {
-   "text": "of dieting and thinking,",
+   "text": "of dieting.",
    "from": 259,
-   "to": 297
-  },
-  {
-   "text": "“I can't eat that.”",
-   "from": 297,
-   "to": 320
+   "to": 293
   },
   {
    "text": "After years of dieting,",
-   "from": 320,
-   "to": 345
+   "from": 293,
+   "to": 318
   },
   {
    "text": "my weight stayed exactly the same.",
-   "from": 345,
-   "to": 405
+   "from": 318,
+   "to": 378
   },
   {
    "text": "I can wear whatever I want.",
-   "from": 405,
-   "to": 431
+   "from": 378,
+   "to": 404
   },
   {
    "text": "I just wasted 15 years",
-   "from": 431,
-   "to": 478
+   "from": 404,
+   "to": 451
   },
   {
    "text": "because I didn't understand",
-   "from": 478,
-   "to": 505
+   "from": 451,
+   "to": 478
   },
   {
    "text": "that your psychology is having",
-   "from": 505,
-   "to": 555
+   "from": 478,
+   "to": 519
   },
   {
    "text": "a full-on conversation",
-   "from": 555,
-   "to": 584
+   "from": 519,
+   "to": 556
   },
   {
    "text": "with your biology.",
-   "from": 584,
-   "to": 608
+   "from": 556,
+   "to": 577
   },
   {
    "text": "“I can't eat that or I'll get fat”",
-   "from": 608,
-   "to": 661
+   "from": 577,
+   "to": 634
   },
   {
    "text": "becomes your reality.",
-   "from": 661,
-   "to": 688
+   "from": 634,
+   "to": 662
   },
   {
    "text": "Actually, if you say,",
-   "from": 688,
-   "to": 715
+   "from": 662,
+   "to": 688
   },
   {
    "text": "“I get fat just looking at a cake,”",
-   "from": 715,
-   "to": 782
+   "from": 688,
+   "to": 755
   },
   {
    "text": "do you know that thought",
-   "from": 782,
-   "to": 807
+   "from": 755,
+   "to": 780
   },
   {
    "text": "creates cortisol,",
-   "from": 807,
-   "to": 840
+   "from": 780,
+   "to": 813
   },
   {
    "text": "and cortisol makes you gain weight.",
-   "from": 851,
-   "to": 896
+   "from": 824,
+   "to": 873
   },
   {
    "text": "So it's true that you can say,",
-   "from": 896,
-   "to": 931
+   "from": 873,
+   "to": 904
   },
   {
    "text": "“I can gain weight",
-   "from": 931,
-   "to": 951
+   "from": 904,
+   "to": 924
   },
   {
    "text": "just thinking about cake.”",
-   "from": 951,
-   "to": 980
+   "from": 924,
+   "to": 953
   },
   {
    "text": "Also true that you can be",
-   "from": 980,
-   "to": 1039
+   "from": 953,
+   "to": 1012
   },
   {
    "text": "a perfect weight while eating cake.",
-   "from": 1039,
-   "to": 1095
+   "from": 1012,
+   "to": 1068
   }
  ]
 }
