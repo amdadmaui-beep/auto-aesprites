@@ -27,7 +27,7 @@ CLIPS = {
         (1151.61, 1153.30, "AB", "split"),
         (1153.30, 1155.00, "A", "wide"),
         (1155.00, 1158.80, "A", "punch"),
-        (1159.90, 1161.20, "A", "wide"),
+        (1159.90, 1161.18, "A", "wide"),
         (1168.40, 1169.82, "A", "punch"),
         (1170.00, 1171.60, "A", "wide"),
         (1200.90, 1204.15, "A", "punch"),
@@ -37,7 +37,7 @@ CLIPS = {
         (1228.50, 1232.40, "A", "punch"),
         (1232.40, 1237.25, "A", "wide"),
         (1237.93, 1241.23, "B", "punch"),
-        (1241.82, 1246.85, "A", "punch"),
+        (1241.82, 1246.83, "A", "punch"),
     ],
 }
 
@@ -93,6 +93,25 @@ def crop_for(cam, mode, fx, ey, out_w, out_h, eye_frac):
     return f"crop={w}:{h}:{x}:{y},scale={out_w}:{out_h}:flags=lanczos"
 
 
+def audio_runs(name):
+    """Exact source audio ranges, one per run of shots that play continuous source.
+
+    Picture cuts sit on the frame grid; audio cuts sit on the exact measured word
+    boundary. Each run keeps the total length of its shots and ends exactly at the
+    requested out point, so lip sync moves by at most half a frame (21 ms) and the
+    audio never jumps inside a continuous take.
+    """
+    runs, start = [], 0
+    clip = CLIPS[name]
+    for i in range(len(clip)):
+        last = i == len(clip) - 1
+        if last or abs(snap(clip[i][1]) - snap(clip[i + 1][0])) > 1e-6:
+            dur = sum(snap(b) - snap(a) for a, b, *_ in clip[start:i + 1])
+            runs.append((clip[i][1] - dur, clip[i][1]))
+            start = i + 1
+    return runs
+
+
 def snap(t):
     return round(round(t * FPS) / FPS, 6)
 
@@ -135,10 +154,13 @@ def main(name):
                     "-c", "copy", f"{work}/video.mp4"], check=True)
     # Audio: both mics summed, same cuts, 15 ms fades at every cut, loudness to -14 LUFS.
     fl = []
-    for i, (a, b, *_ ) in enumerate(shots):
+    runs = audio_runs(name)
+    for i, (a, b) in enumerate(runs):
         d = b - a
-        fl.append(f"[m{i}]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d-0.015:.3f}:d=0.015[s{i}]")
-    n = len(shots)
+        fo = 0.06 if i == len(runs) - 1 else 0.015  # softer ending on the last word
+        fl.append(f"[m{i}]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,"
+                  f"afade=t=out:st={d - fo:.3f}:d={fo}[s{i}]")
+    n = len(fl)
     fc = (f"[0:a][1:a]amix=inputs=2:normalize=0,asplit={n}" + "".join(f"[m{i}]" for i in range(n)) + ";"
           + ";".join(fl) + ";" + "".join(f"[s{i}]" for i in range(n))
           + f"concat=n={n}:v=0:a=1,loudnorm=I=-14:TP=-1:LRA=11[a]")
