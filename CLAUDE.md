@@ -29,9 +29,11 @@ connectors, then the local setup steps. Check what's already installed before su
 
 ## Skills in this repo
 
-`.claude/skills/` holds all the user's skills (28), so they load in any session on this repo.
+`.claude/skills/` holds all the user's skills (29), so they load in any session on this repo.
 See `.claude/skills/README.md` for sources and licenses. The repo is private; keep it private.
 Plugins that need a service sign-in are listed in `MIGRATION.md`.
+"Jackie style" / "Jackie editing style" means the `jackie-edit-style` skill: the user's signature
+style for vertical stand-up clips.
 
 ## Sound effects
 

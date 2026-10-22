@@ -6,6 +6,7 @@ This repo is private; keep it that way, since several of these come from third-p
 | Skills | Source | License |
 |---|---|---|
 | `remotion-*` (12) | Remotion plugin v4.0.528, https://github.com/remotion-dev/claude-code-plugin | MIT |
+| `jackie-edit-style` | the user's signature comedy-clip style, from the Jackie Kashian edit | — |
 | `motion-studio-rules` | account skill | — |
 | `agent-reach` | account skill (web/social research) | — |
 | `hindsight-local`, `hindsight-architect` | account skills (memory) | — |
