@@ -10,14 +10,14 @@ LINES = {
         # VIDEO SAMPLE 1: split screen for the whole reel; the top panel is
         # pre-built by build_top.py (B-roll + podcast cutaways).
         "layout": "ref1",
-        "title_end": "src:367.74",  # first subtitle ("And then one of my clients saying,")
+        "title_end": "src:367.00",  # first subtitle ("And then one of my clients saying,")
         "broll": [],
         "title": ["HOW FANTASY", "HELPED HER CLIENTS", "GET PREGNANT 🤯"],
         "lines": [
             ("And I actually found it by mistake", 7),
             ("because I work a lot", 5),
             ("with infertile people.", 3),
-            ("I know, one of my clients saying,", 7),
+            ("And then one of my clients saying,", 7),
             ("“I'm going to call off my wedding", 7),
             ("because my husband's got", 4),
             ("a very low sperm count", 5),
@@ -35,13 +35,13 @@ LINES = {
             ("to help my clients", 4),
             ("who couldn't conceive", 3),
             ("fantasize their husband", 3),
-            ("was a pilot or the pool guy", 7),
+            ("was a pilot or a pool guy", 7),
             ("or anything.", 2),
             ("And they all said,", 4),
-            ("“Well, we got pregnant so quickly,", 6),
+            ("“Wow, we got pregnant so quickly,", 6),
             ("we gave up IVF.”", 4),
             ("It was just playing that game.", 6),
-            ("But now we've got the children,", 6),
+            ("And now we've got the children,", 6),
             ("we're still doing it.", 4),
             ("It's still fantastic.", 3),
         ],
@@ -62,10 +62,11 @@ LINES = {
             ("diet yogurt,", 2),
             ("diet milk,", 2),
             ("diet shakes,", 2),
-            ("so you pretty much", 4),
+            ("so pretty much", 3),
             ("learn what you live.", 4),
             ("And so I began many, many years", 7),
-            ("of dieting.", 2),
+            ("of dieting and thinking,", 4),
+            ("“I can't eat that.”", 4),
             ("After years of dieting,", 4),
             ("my weight stayed exactly the same.", 6),
             ("I can wear whatever I want.", 6),
@@ -105,6 +106,25 @@ def src_out(timeline, b):
             return s["out_in"] + max(0.0, t - s["src_in"])
 
 
+def onsets(path):
+    """Speech onsets (s) in the final edited audio: quiet for 40 ms, then loud."""
+    import wave
+    import numpy as np
+    wf = wave.open(path); sr = wf.getframerate(); ch = wf.getnchannels()
+    x = np.frombuffer(wf.readframes(wf.getnframes()), np.int16).astype(np.float32) / 32768
+    x = x.reshape(-1, ch).mean(1)
+    h = sr // 100; n = len(x) // h
+    e = 20 * np.log10(np.sqrt((x[:n * h].reshape(n, h) ** 2).mean(1) + 1e-12))
+    loud = e > -32
+    return [i / 100 for i in range(4, n) if loud[i] and not loud[i - 1] and (e[i - 4:i] < -36).all()]
+
+
+def snap_to_onset(t, ons, before=0.35, after=0.2):
+    """Move a subtitle start onto the nearest real speech onset, if there is one close by."""
+    near = [o for o in ons if t - before <= o <= t + after]
+    return min(near, key=lambda o: abs(o - t)) - 0.02 if near else t
+
+
 def build(name, scratch, out_dir):
     words = json.load(open(f"{scratch}/{name}_outwords.json"))
     timeline = json.load(open(f"{scratch}/build/{name}/timeline.json"))
@@ -128,6 +148,14 @@ def build(name, scratch, out_dir):
         caps.append({"text": text, "start": ws[0][0], "end": ws[-1][1]})
     assert i == len(words), f"{name}: used {i} of {len(words)} words"
     caps.sort(key=lambda c: c["start"])
+    # Subtitles appear when the words are actually heard, not when the transcript says.
+    ons = onsets(f"{scratch}/build/{name}/audio.wav")
+    moved = []
+    for c in caps:
+        new = snap_to_onset(c["start"], ons)
+        moved.append(new - c["start"]); c["start"] = new
+    print(name, "subtitle starts snapped to audio onsets:", sum(1 for m in moved if m), "of", len(caps),
+          "| mean shift", round(sum(moved) / len(moved) * 1000), "ms")
     total = sum(s["src_out"] - s["src_in"] for s in timeline)
     # Hold each line until the next one starts (no flicker between lines), max 0.6 s extra.
     for a, b in zip(caps, caps[1:]):
