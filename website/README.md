@@ -1,9 +1,10 @@
 # AVE Studio website
 
-`mockup-v2/` is the approved-direction prototype (not final). Open it through a local server:
+`mockup-v3/` is the current prototype: a scroll-driven 3D page (Three.js 0.170, `lib/`).
+`mockup-v2/` is the earlier 2D version. Open it through a local server:
 
 ```bash
-cd website/mockup-v2 && python3 -m http.server 8766
+cd website/mockup-v3 && python3 -m http.server 8766
 ```
 
 Then go to http://localhost:8766. All motion runs from one clock; `window.seek(t, scrollY)` paints a single frame,
