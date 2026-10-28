@@ -353,7 +353,7 @@ html.night .mode .knob{transform:translateX(28px)}html.night .mode .sun{color:va
 ::view-transition-new(root){animation:wipe 1s cubic-bezier(.7,0,.2,1)}
 @keyframes wipe{from{clip-path:circle(0 at var(--mx,50%) var(--my,0))}to{clip-path:circle(160% at var(--mx,50%) var(--my,0))}}
 @media (max-width:820px){
-  .nav{top:12px;gap:4px;padding:5px}.nav .go{padding:0 5px 0 12px;font-size:13px}.nav .go b{width:26px;height:26px}
+  .nav{top:12px;left:var(--g);right:var(--g);transform:none;justify-content:space-between;gap:6px;padding:5px}.nav .mark{width:48px}.nav .go{white-space:nowrap;padding:0 5px 0 14px;font-size:13px;margin-left:auto}.nav .go b{width:28px;height:28px}.nav .mode{flex:none}.nav .bar{left:20px;right:20px}
   #hero .hrow.r1{grid-template-columns:1fr;row-gap:calc(36vw*16/9 + 26px);top:10.5vh}
   #hero .hrow.r1 .l,#hero .hrow.r1 .rr{text-align:left}#hero .hrow.r1 .rr{text-align:right}#hero .hrow.r1>div:nth-child(2){display:none}
   .roll{font-size:16.5vw}
