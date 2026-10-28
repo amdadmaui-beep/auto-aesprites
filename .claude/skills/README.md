@@ -15,6 +15,8 @@ This repo is private; keep it that way, since several of these come from third-p
 | `accessibility-review`, `design-critique`, `design-handoff`, `design-system`, `research-synthesis`, `user-research`, `ux-copy` | Anthropic Design plugin | — |
 | `socialrobot-post-scheduling` | SocialRobot plugin, https://github.com/socialrobot-io/socialrobot-mcp | MIT |
 | `postiz` | Postiz plugin, https://github.com/gitroomhq/postiz-agent | AGPL-3.0 |
+| `impeccable` | Impeccable v4.8.0 (anti "AI slop" frontend design), https://github.com/pbakaus/impeccable | Apache-2.0, see `LICENSE.plugin` |
+| `frontend-design` | Anthropic skills repo, https://github.com/anthropics/skills | Apache-2.0, see `LICENSE.txt` |
 
 Skills that call an outside service (Postiz, SocialRobot, design connectors) still need that
 plugin/connector installed and signed in on the account; see `MIGRATION.md`.
