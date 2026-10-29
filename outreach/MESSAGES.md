@@ -75,3 +75,37 @@ These ones already post, but the clips get low views. Lead with a specific impro
 > Hey [Name], love that you're posting clips from [special] consistently. [bit] is a great one.
 > I edit stand-up for short-form. Want me to re-cut one of your clips for free with a tighter hook and beat-timed captions, so you can compare the numbers side by side?
 > https://ave-studio-website.vercel.app/
+
+---
+
+# Podcasts
+
+## 18. Elliot and Jamali's Drivetime Show (IG @elliotsteel)
+> Hey Elliot, been watching Drivetime. The Theo Von / Bruce Bruce opening stories episode was gold. Noticed the channel has no Shorts yet, and every episode has 3–4 moments that would fly on TikTok/Reels.
+> I run a small clip studio for comedians and podcasts. Want me to cut one from this week's episode for free so you can see it? https://ave-studio-website.vercel.app/
+
+## 19. Sports Bitches (IG @sportsbitches), pre-cut sample
+> Hey! Big fan of "What Team Is This Guy On Now?". I cut a moment from the LeBron's Head episode into a vertical clip with captions for you: [link]
+> Yours to post free. Three comics weekly = a lot of clips going to waste on YouTube. Happy to do more if you like it.
+
+## 20. AD-LIB with J.D. Witherspoon (email craig@ctrlagency.com, cc DM @jdwitherspoon)
+**Subject:** Free clips for AD-LIB
+> Hi Craig, I edit short-form clips for comedians and podcasts. AD-LIB has strong episodes (the Quincy Jones one especially) but no Shorts on the channel yet.
+> I'd be glad to cut one clip from a recent episode for free so J.D. can see the style. No call needed; I'll just send it over.
+> Work: https://ave-studio-website.vercel.app/
+
+## 21. Freak of Nature with Sara Contreras (IG @latindivacomedy)
+> Hey Sara, watched "What Has Comedy Become?". The part about comics needing followers more than laughs is so real.
+> That's literally what we help with: I cut comedians' podcasts and sets into clips for TikTok/Reels. Want me to cut one from Ep 2 for free?
+> https://ave-studio-website.vercel.app/
+
+## 22. Are We Flirting? (email hello@areweflirting.com)
+**Subject:** Clips for Are We Flirting?
+> Hi Greyson and Syd, love the "are we ___?" episodes (the AI beef one especially). I noticed the Shorts paused in August.
+> I edit podcasts into captioned vertical clips. Can I cut one from a recent episode for free so you can see if it fits?
+> https://ave-studio-website.vercel.app/
+
+## 23–25. Gravy Baby / Player Problems / Pulling The Cork
+> Hey [hosts], been watching [Show]. [Episode/guest, e.g. "Ep 234 with Bobby Kelly"] had a couple of moments that would kill as Shorts.
+> I cut podcasts into captioned vertical clips. Want me to make one from that episode for free so you can see it?
+> https://ave-studio-website.vercel.app/
