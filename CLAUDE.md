@@ -73,10 +73,10 @@ To continue one, check out its branch. Don't merge these into `main` without ask
 - Real edits come from the "AVE Studio Showcase" Drive folder (`1kj8XJg3Ot4bveMYElnLNeQbF7tpOpTon`); previews are 6 s muted MP4 loops in `public/clips/w-*.mp4`.
 - Brand: ink #0E0E0E, off-white #F3F2EE, lime #C8FF2E (accent only); day/night modes; cursor is the logo's A.
 
-## Next project: AVE dashboard (requested, not started)
+## Next project: AVE dashboard (scope confirmed by the user: ALL five parts below; not started)
 
 One app that connects the website, email and Instagram so the studio can track everything and use the data to win more clients.
-First session: confirm scope in one brief, then plan. Likely pieces:
+Scope is confirmed: build all of these. First session: check which accounts/access are ready, then plan:
 - Website analytics (visits, sources, which work gets watched, form opens vs sends), e.g. Vercel Analytics or Plausible.
 - Leads inbox: every form enquiry and Instagram DM in one list with status (new, sample sent, client, lost).
 - Instagram (@avestudio.production): post/reel stats and "SAMPLE" DMs. Needs a Business/Creator account linked to a Facebook Page and Meta developer app access.
