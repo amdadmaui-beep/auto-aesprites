@@ -82,4 +82,6 @@ Scope is confirmed: build all of these. First session: check which accounts/acce
 - Instagram (@avestudio.production): post/reel stats and "SAMPLE" DMs. Needs a Business/Creator account linked to a Facebook Page and Meta developer app access.
 - Email: Gmail (avestudio.production@gmail.com) for enquiries and replies.
 - Weekly summary: what brought clients in, what to post more of.
+- Must be a PWA: one codebase that works as a website and installs as an app on phone and desktop (offline shell, home-screen icon, push-ready), so the user can open it anywhere.
+- Track everything needed to improve and adapt: revenue (per client, per service, monthly), outreach (who was contacted, where, when, replies), lead temperature (cold, warm, hot, no lead / not interested), samples sent and how many turned into paying clients, plus the website, Instagram and email numbers above.
 Ask the user for the accounts/access above before building; don't fake data.
