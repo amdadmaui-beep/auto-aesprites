@@ -60,5 +60,26 @@ Mario/Sonic/Metal Gear ones in monetized work.
 | AVE Studio mascot promo (V1–V3) | `claude/practical-faraday-7a7049` | `ave-promo/`: film source, renders, VO; source footage is in the "AVE Studio Showcase" Google Drive folder (`ave-promo/tools/extract_clips.sh`) |
 | Motion graphics showreel (25 s) | `claude/elegant-keller-nekcgv` | `showreel/`: code-driven film, synth score, `reel.mp4` |
 | Shot Social reels | `claude/tender-clarke-32xjjk` | `video/src/ShotSocial.tsx`, `video/tools/shotsocial/` caption/cut tools |
+| AVE Studio website (prototypes v1–v8) | `claude/upbeat-sagan-jlkd6f` | `website/mockup-v*/`, Pinterest boards in `website/references/`. The live site is its own repo, see below |
 
 To continue one, check out its branch. Don't merge these into `main` without asking.
+
+## AVE Studio website (live)
+
+- Repo: `amdadmaui-beep/ave-studio-website` (Vite + Three.js + Lenis, no framework). Live: https://ave-studio-website.vercel.app
+- Vercel auto-deploys every push to `main` (about 30 s). Claude has no Vercel login; the user manages Vercel.
+- Contact form: Web3Forms (key in `src/main.js`, public by design) to avestudio.production@gmail.com.
+  Web3Forms rejects cloud/server IPs, so a cloud session can't send a real test; the user tests from their own browser.
+- Real edits come from the "AVE Studio Showcase" Drive folder (`1kj8XJg3Ot4bveMYElnLNeQbF7tpOpTon`); previews are 6 s muted MP4 loops in `public/clips/w-*.mp4`.
+- Brand: ink #0E0E0E, off-white #F3F2EE, lime #C8FF2E (accent only); day/night modes; cursor is the logo's A.
+
+## Next project: AVE dashboard (requested, not started)
+
+One app that connects the website, email and Instagram so the studio can track everything and use the data to win more clients.
+First session: confirm scope in one brief, then plan. Likely pieces:
+- Website analytics (visits, sources, which work gets watched, form opens vs sends), e.g. Vercel Analytics or Plausible.
+- Leads inbox: every form enquiry and Instagram DM in one list with status (new, sample sent, client, lost).
+- Instagram (@avestudio.production): post/reel stats and "SAMPLE" DMs. Needs a Business/Creator account linked to a Facebook Page and Meta developer app access.
+- Email: Gmail (avestudio.production@gmail.com) for enquiries and replies.
+- Weekly summary: what brought clients in, what to post more of.
+Ask the user for the accounts/access above before building; don't fake data.
