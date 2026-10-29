@@ -109,3 +109,17 @@ These ones already post, but the clips get low views. Lead with a specific impro
 > Hey [hosts], been watching [Show]. [Episode/guest, e.g. "Ep 234 with Bobby Kelly"] had a couple of moments that would kill as Shorts.
 > I cut podcasts into captioned vertical clips. Want me to make one from that episode for free so you can see it?
 > https://ave-studio-website.vercel.app/
+
+---
+
+# Producers and channels (B2B)
+
+Pitch: they release lots of long specials, so more clips per special means more viewers for each comic and the channel. We take that work off their plate. Price only if asked: $30 per video, clipping and editing included (offer a volume deal if they ask about many).
+
+**Subject:** Clips for [Channel]'s specials
+> Hi [Channel] team,
+> Love what you're doing with [recent special, e.g. Derek Sheen's Unrelatable]. Releasing that many full specials is a lot of great footage, and right now only a few moments from each make it to Shorts/Reels/TikTok.
+> We're a small studio that cuts stand-up into captioned vertical clips: hook in the first 2 seconds, captions on the beat, punchline never spoiled. We could turn each special you release into a set of ready-to-post clips for the channel and the comic.
+> Happy to cut a few clips from [special] for you on us, so you can judge the work before anything else.
+> Our work: https://ave-studio-website.vercel.app/
+> AVE Studio · IG @avestudio.production
