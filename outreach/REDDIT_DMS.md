@@ -57,7 +57,7 @@ https://www.reddit.com/r/FindVideoEditors/comments/1xa59tt/
 ---
 
 # Batch 2: fresh posts (Oct 10–30). Open each one first and skip it if it says filled.
-Replace **[SOFTWARE]** with what you edit in (for example Premiere Pro, DaVinci Resolve or CapCut).
+Replace **Premiere Pro** with what you edit in (for example Premiere Pro, DaVinci Resolve or CapCut).
 
 ## 6. The Movie List: comedy movie podcast, $200–300/week (u/Greenwaygoblin) ⭐ best fit
 https://www.reddit.com/r/FindVideoEditors/comments/1xcoasn/
@@ -67,7 +67,7 @@ They ask you to say which of their clips you liked and why, so watch "Stu had no
 > I really liked "Stu had no idea" because [WATCH IT FIRST, then write one real reason, e.g. how the cut lands on the reaction]. That's how we edit too: let the laugh breathe, and caption on the beat.
 >
 > Work (including a full stand-up clip breakdown): https://ave-studio-website.vercel.app/
-> Available weekly for the full episode plus 5 shorts. We edit in [SOFTWARE].
+> Available weekly for the full episode plus 5 shorts. We edit in Premiere Pro.
 
 ## 7. Creative YouTube comedy skits, $30–60/video (u/Mojo_Morningstar)
 https://www.reddit.com/r/FindVideoEditors/comments/1xgu4k6/
@@ -109,7 +109,7 @@ https://www.reddit.com/r/HireAnEditor/comments/1xj55u2/
 > [Your full name]
 > SHORTFORM
 > Portfolio: https://ave-studio-website.vercel.app/
-> We're a small studio cutting podcasts and talking-head content into captioned vertical clips. We're comfortable matching an existing style, and we edit in [SOFTWARE].
+> We're a small studio cutting podcasts and talking-head content into captioned vertical clips. We're comfortable matching an existing style, and we edit in Premiere Pro.
 
 ## 13. "Ben of the Week" style comedy editor, $80/video (u/jerry5382). Only 1 comment so far
 https://www.reddit.com/r/VideoEditors_forhire/comments/1xd6hki/
@@ -120,5 +120,5 @@ https://www.reddit.com/r/VideoEditors_forhire/comments/1xd6hki/
 
 ## Comment on the post or use their form (not a DM)
 - **Law firm interviews, $50/video** (https://www.reddit.com/r/slavelabour/comments/1x3phd8/): comment **`$bid`** on the post, then DM:
-  > Hi! Bid placed. We edit interviews into clean 2–3 minute videos: filler removed, audio cleaned, clear captions, simple branding, no flashy effects. Work: https://ave-studio-website.vercel.app/ · We edit in [SOFTWARE]. Happy to do the paid trial.
+  > Hi! Bid placed. We edit interviews into clean 2–3 minute videos: filler removed, audio cleaned, clear captions, simple branding, no flashy effects. Work: https://ave-studio-website.vercel.app/ · We edit in Premiere Pro. Happy to do the paid trial.
 - **Talking-head editor, $200–250/video** (https://www.reddit.com/r/VideoEditingConnect/comments/1xhz51b/): they say "don't DM". Apply through their form: https://forms.gle/czPEJBAThDj1vbwu7
