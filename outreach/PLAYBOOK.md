@@ -3,7 +3,7 @@
 Goal: first paying client by **November 15, 2026**.
 Offer: free sample edit first, then **$30 per video (clipping + editing included)**.
 Price rule: **never say the price first. Only when they ask.**
-Call rule: **no video calls. Everything happens in DMs/email.** The sample does the selling.
+Call rule: **avoid calls; keep it in DMs/email.** The sample does the selling. If a serious buyer insists and it's unavoidable, agree to a short call (see section 6).
 
 ---
 
@@ -85,7 +85,8 @@ Honest note: no one can promise a 99% hit rate. What makes it near-certain is
 **"Can we hop on a call?" / "Let's do a Zoom"**
 > Totally get it! I actually keep everything in messages so you always have it in writing and you never have to schedule around me.
 > Easiest way to see if we're a fit: send me one set or episode link and I'll turn around a sample in [24–48h]. If you like it, we go from there.
-(If they insist: "Happy to answer anything here. Fire away, I usually reply within the hour.")
+(If they insist once more: "Happy to answer anything here. Fire away, I usually reply within the hour.")
+(If it's truly unavoidable for a serious buyer: say yes to a **15-minute** call. Prep: have the sample open, know the price ($30/video incl. clipping + editing), and ask 3 questions: what they post, how often, which clips they like. Then follow up in writing the same day.)
 
 **"What do you need from me?"**
 > Just a link to the full set/episode (YouTube, Drive, or Dropbox). Timestamps are a bonus but not needed, we find the best moments ourselves.
@@ -101,6 +102,9 @@ Honest note: no one can promise a 99% hit rate. What makes it near-certain is
 
 **They liked the sample → close**
 > Glad you liked it! Want me to do more from [special]? I'd suggest [3–5] clips to start, so you can post a few times this week. Just say the word and I'll get going.
+
+**"Is this AI?"**
+> No, every clip is cut by a human editor. We pick the moments, time the captions to your delivery, and keep your timing intact.
 
 ## 7. Follow-up cadence
 
