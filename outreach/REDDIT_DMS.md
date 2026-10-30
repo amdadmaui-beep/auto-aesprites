@@ -64,7 +64,7 @@ https://www.reddit.com/r/FindVideoEditors/comments/1xcoasn/
 They ask you to say which of their clips you liked and why, so watch "Stu had no idea" first.
 > Hey! Saw your post for The Movie List. A comedy movie podcast is exactly our lane: we're a small studio that cuts comedians and podcasts into captioned vertical clips.
 >
-> I really liked "Stu had no idea". The cut lands right on Matt's reaction, and the caption doesn't give the joke away early. That's how we edit too: let the laugh breathe, and caption on the beat.
+> I really liked "Stu had no idea" because [WATCH IT FIRST, then write one real reason, e.g. how the cut lands on the reaction]. That's how we edit too: let the laugh breathe, and caption on the beat.
 >
 > Work (including a full stand-up clip breakdown): https://ave-studio-website.vercel.app/
 > Available weekly for the full episode plus 5 shorts. We edit in [SOFTWARE].
