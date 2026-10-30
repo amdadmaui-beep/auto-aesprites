@@ -47,11 +47,11 @@ Never go below **$25 a clip**. If they can't do $25, say "no worries, the sample
 - Reply to every lead **within 1 hour** while you're awake.
 - Sample turnaround: **24 hours or less.** Say it in the reply: "You'll have it tomorrow."
 - Don't wait for a call to move forward. If they want a call, offer the **earliest** slot (today or tomorrow), and send something useful before it (a sample, or the price ladder) so they aren't waiting.
-- Taking payment: have a **PayPal / Wise / Stripe payment link ready** so they can pay the minute they say yes.
+- Taking payment: use your **Wise link: https://wise.com/pay/me/tharrikjeffa** (Jackie already paid you through it). Send it the minute they say yes.
 
 ## Rule 5: Ask for the close
 After they react well, always end with a clear next step:
-> Want me to start on the next one? Send the video and I'll have it back to you tomorrow. You can pay here when you're happy: [payment link]
+> Want me to start on the next one? Send the video and I'll have it back to you tomorrow. You can pay here when you're happy: https://wise.com/pay/me/tharrikjeffa
 
 ## Rule 6: Every client is a lead machine
 After each paid delivery:
