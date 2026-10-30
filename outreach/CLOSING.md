@@ -56,4 +56,4 @@ After they react well, always end with a clear next step:
 ## Rule 6: Every client is a lead machine
 After each paid delivery:
 > Really glad you liked them! If you know any other comics or podcasters who'd want clips like this, I'd really appreciate an intro.
-Ask Jackie this now.
+**Jackie:** add this referral line to the reply right after she says she likes her next video (she was emailed Oct 30).
