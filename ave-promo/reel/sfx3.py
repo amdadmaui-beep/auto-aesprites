@@ -32,6 +32,12 @@ def asmr_brush(t0, d=.22, g=.14, pan0=-.3, pan1=.3):          # soft card/paper 
     x = bp(z, 2500, 11000) * .35 + bp(grains, 1800, 10000)
     x *= np.sin(np.pi * t / d) ** 1.6; pn = np.linspace(pan0, pan1, n)
     P_(t0, np.stack([x * np.cos((pn + 1) * np.pi / 4), x * np.sin((pn + 1) * np.pi / 4)], 1) * 1.414, g)
+def creamy(t0, g=.3, f0=420, f1=250, pan=0.):            # soft, round, satisfying "plop" — no grain, no hiss
+    t = tv(.32); f = f1 + (f0 - f1) * np.exp(-t / .035)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .07) * np.minimum(1, t / .004)
+    x += .45 * np.sin(2 * np.pi * np.cumsum(f * .5) / SR) * np.exp(-t / .09)         # warm body an octave down
+    x += .12 * lp(nz(.32), 900) * np.exp(-t / .03)                                    # a breath of air, low-passed
+    P_(t0, np.stack([x, x], 1), g, pan)
 # --- placement on the picture cues
 P_(0.0, cut(0.10, 0.75, .002, .12), .55)                                  # pixel blocks: the pack's low hit run
 P_(C['icon'] + .02, GLITCH, .35)
@@ -40,7 +46,7 @@ for i in range(5): P_(C['cap'] + i * .12, tickk(i + 3), .25, -.2 + .1 * i); asmr
 for c in CUTS:                                                            # colour cuts: pack riser lands on the cut, + sub weight
     P_(c - RISE_PEAK, RISE, .7); P_(c, lowhit(0, .35), .7); boom(c, .28, 58, 38, .2)
 for st, *_ in C['SHOTS']:                                                 # clip changes inside the card: pack glitch
-    if all(abs(st - c) > .02 for c in CUTS): asmr_brush(st - .14, .2, .16, .4, -.3); asmr_tap(st, .2, .1)
+    if all(abs(st - c) > .02 for c in CUTS): creamy(st, .32, 400 + 30 * (int(st * 7) % 3), 240)
 P_(C['title1'], CHIME, .4)                                                # "Impact" lands
 for c in CUTS[:4]:
     for i in range(5): P_(c + .12 + i * .05, tickk(i), .25, -.4 + .2 * i); asmr_tap(c + .12 + i * .05, .09, -.5 + .25 * i)   # stars

@@ -100,21 +100,35 @@ function buildDark(){
   D.tc=el('div','a lab',D.L);css(D.tc,{left:'64px',top:'72px',fontSize:'22px',color:'rgba(255,255,255,.45)'});
 }
 function ribbon(g,t,col,a){if(a<=0)return;
-  // the reference's light ring: a rounded square tilted around the card, always turning and breathing,
-  // its corners and sides flowing on their own; every kick adds a pulse
+  // the reference's ring: a soft rounded-square loop that turns in 3D (tilts, flips into a wave band),
+  // drifts around the frame and breathes in size; each colour section has its own pose. Kicks add a pulse.
   const bt=beatAt(t),kick=E.outCubic(bt);
-  const cx=540,cy=880,R0=430*(1+.035*Math.sin(t*1.1)+.04*kick);
-  const rot=.55+.42*Math.sin(t*.55)+.18*Math.sin(t*1.3+1);         // swings between diamond and square
-  const sq=3.2+1.2*Math.sin(t*.8+.5);                                 // corner roundness morphs
-  const pts=[];for(let i=0;i<=180;i++){const th=i/180*Math.PI*2;const c=Math.cos(th),sn=Math.sin(th);
-    const r=Math.pow(Math.pow(Math.abs(c),sq)+Math.pow(Math.abs(sn),sq),-1/sq);
-    const flow=1+.07*Math.sin(th*2+t*1.6)+.045*Math.sin(th*3-t*2.3)+.03*Math.sin(th*5+t*3.1);
-    const x=c*r*R0*flow*1.04,y=sn*r*R0*flow*.96;pts.push([cx+x*Math.cos(rot)-y*Math.sin(rot),cy+x*Math.sin(rot)+y*Math.cos(rot)]);}
-  const lg=D.lg;const path=c=>{c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();};
-  lg.save();lg.globalAlpha=a;lg.lineJoin='round';
-  lg.filter='blur(10.5px)';lg.strokeStyle=rgba(col,.9);lg.lineWidth=130+50*kick;path(lg);lg.stroke();
-  lg.filter='blur(3.5px)';lg.strokeStyle=`rgba(255,255,255,${.45+.3*kick})`;lg.lineWidth=46+16*kick;path(lg);lg.stroke();lg.restore();
-  g.save();g.globalAlpha=a*(.55+.25*kick);g.lineJoin='round';g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=8+3*kick;g.shadowColor='rgba(255,255,255,.9)';g.shadowBlur=0;path(g);g.stroke();g.restore();}
+  const sec=t>=C.card4?3:t>=C.card3?2:t>=C.card2?1:0;
+  const K=[[0,0,0,1.0],[ .35,-.2,.6,1.15],[1.05,.3,1.4,1.45],[1.25,-.4,2.3,1.55]][sec];   // per-section tilt/spin/size bias
+  const K0=[[0,0,0,1.0],[0,0,0,1.0],[ .35,-.2,.6,1.15],[1.05,.3,1.4,1.45]][sec];
+  const sw=E.outCubic(P(t,[C.card1,C.card2,C.card3,C.card4][sec],[C.card1,C.card2,C.card3,C.card4][sec]+.5));
+  const mixK=i=>lerp(K0[i],K[i],sw);
+  const rx=mixK(0)+.42*Math.sin(t*.9+.4),ry=mixK(1)+.35*Math.sin(t*.7+1.7),rz=mixK(2)+t*.55;
+  const scl=mixK(3)*(1+.12*Math.sin(t*1.1)+.05*kick);
+  const cx=540+150*Math.sin(t*.6+1.1)+40*Math.sin(t*1.7),cy=900+170*Math.sin(t*.5+.3)-120*(mixK(3)-1);
+  const R0=440*scl,sq=3.4+1.0*Math.sin(t*.8+.5),f=1500;
+  const cX=Math.cos(rx),sX=Math.sin(rx),cY=Math.cos(ry),sY=Math.sin(ry),cZ=Math.cos(rz),sZ=Math.sin(rz);
+  const pts=[];for(let i=0;i<=200;i++){const th=i/200*Math.PI*2;const c=Math.cos(th),sn=Math.sin(th);
+    const r=Math.pow(Math.pow(Math.abs(c),sq)+Math.pow(Math.abs(sn),sq),-1/sq)*(1+.06*Math.sin(th*2+t*1.6)+.04*Math.sin(th*3-t*2.3));
+    let x=c*r*R0,y=sn*r*R0*.92,z=0;
+    let x1=x*cZ-y*sZ,y1=x*sZ+y*cZ;x=x1;y=y1;                    // spin
+    y1=y*cX-z*sX;let z1=y*sX+z*cX;y=y1;z=z1;                      // tilt (flips into a wave band)
+    x1=x*cY+z*sY;z1=-x*sY+z*cY;x=x1;z=z1;                         // turn
+    const p=f/(f+z);pts.push([cx+x*p,cy+y*p,z]);}
+  const lg=D.lg;
+  const seg=(c,w0,w1,style)=>{for(let i=0;i<pts.length-1;i++){const[x0,y0,z0]=pts[i],[x1_,y1_]=pts[i+1];const near=clamp(.5-z0/(2*R0));
+    c.lineWidth=lerp(w0,w1,near);c.strokeStyle=style(near);c.beginPath();c.moveTo(x0,y0);c.lineTo(x1_,y1_);c.stroke();}};
+  // glow passes are stroked crisp on small scratch canvases, then blurred once each (not per segment)
+  const gl=D.rg||(D.rg=[0,1].map(()=>{const c=document.createElement('canvas');c.width=270;c.height=480;return c;}));
+  const [ga,gb]=gl.map(c=>{const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,270,480);x.setTransform(.25,0,0,.25,0,0);x.lineCap='round';return x;});
+  seg(ga,70,180+50*kick,n=>rgba(col,.55+.4*n));seg(gb,18,60+16*kick,n=>`rgba(255,255,255,${.25+.55*n})`);
+  lg.save();lg.setTransform(1,0,0,1,0,0);lg.globalAlpha=a;lg.filter='blur(11px)';lg.drawImage(gl[0],0,0);lg.filter='blur(4px)';lg.drawImage(gl[1],0,0);lg.restore();
+  g.save();g.globalAlpha=a;g.lineCap='round';seg(g,2,9+3*kick,n=>`rgba(255,255,255,${.35+.6*n})`);g.restore();}
 // rising heat curve along the bottom during the gauge, and glowing pixel blocks around the icon
 function heatWave(g,t,col){const a=E.outCubic(P(t,C.roll-.2,C.hot));if(a<=0)return;
   const h=lerp(60,330,a),w=lerp(260,420,a),lg=D.lg;
@@ -166,9 +180,13 @@ function updDark(t){
     const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));D.arc.querySelector('#ndl').setAttribute('transform',`rotate(${-135+270*v/99} 50 50)`);}
   else{
     const pad=28;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-230)+'px'});css(D.meta,{top:(H-230+10)+'px'});
-    const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st),false);show(D.imB,false);
-    const hit=bump(t,st,.001,0,.18);
-    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':`50% ${(FOCUS[name]??44)}%`});
+    // inside a card the clips change with a soft crossfade only (no flash, no jump)
+    const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st),false);
+    const pos=n=>/motion/.test(n)?'50% 50%':`50% ${(FOCUS[n]??44)}%`;
+    css(D.imA,{transform:`scale(${1.06-.04*E.outCubic(P(t,st,st+.6))})`,filter:bw?'grayscale(1) contrast(1.15)':'none',objectPosition:pos(name),opacity:1});
+    const si=C.SHOTS.findIndex(x=>x[0]===st),pv=si>0?C.SHOTS[si-1]:null,isCut=[C.card1,C.card2,C.card3,C.card4].some(c=>Math.abs(c-st)<.02);
+    const xf=pv&&!isCut?1-E.inOutSine(P(t,st,st+.18)):0;show(D.imB,xf>0);
+    if(xf>0){clip(D.imB,pv[1],pv[2]+(t-pv[0]),false);css(D.imB,{transform:'scale(1.02)',filter:pv[3]?'grayscale(1) contrast(1.15)':'none',objectPosition:pos(pv[1]),opacity:xf});}
     const ci=t>=C.card4?3:t>=C.card3?2:t>=C.card2?1:0;const ts=[C.card1,C.card2,C.card3,C.card4];
     D.cards.forEach((c,i)=>{const vis=i===ci;show(c.t.d,vis);show(c.s.d,vis);if(!vis)return;
       if(i===0){blurIn(c.s.w,t,C.card1+.25,.07,.3,10);blurIn(c.t.w,t,C.title1,.06,.25);}
