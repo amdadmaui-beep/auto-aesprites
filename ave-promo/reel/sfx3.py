@@ -45,8 +45,12 @@ for k in range(16): P_(C['roll'] + k * .05, tickk(k), .4 + .02 * k); asmr_tap(C[
 for i in range(5): P_(C['cap'] + i * .12, tickk(i + 3), .25, -.2 + .1 * i); asmr_tap(C['cap'] + i * .12, .1, -.3 + .15 * i)
 for c in CUTS:                                                            # colour cuts: pack riser lands on the cut, + sub weight
     P_(c - RISE_PEAK, RISE, .7); P_(c, lowhit(0, .35), .7); boom(c, .28, 58, 38, .2)
-for st, *_ in C['SHOTS']:                                                 # clip changes inside the card: pack glitch
-    if all(abs(st - c) > .02 for c in CUTS): creamy(st, .32, 400 + 30 * (int(st * 7) % 3), 240)
+SRC = {'s01':'jackie_safe','s15':'jackie_safe','s03':'jackie_safe','s14':'jackie_safe','s05':'debi','s06':'debi','s07':'brittany',
+       's08':'jackie_fathers','s17':'jackie_fathers','s10':'brenda','s12':'ave_motion','hero_motion':'notion'}
+_prev = None
+for st, _n, *_ in C['SHOTS']:                                              # clip changes inside the card
+    if all(abs(st - c) > .02 for c in CUTS) and SRC.get(_n) != SRC.get(_prev): creamy(st, .32, 400 + 30 * (int(st * 7) % 3), 240)   # only when the person/video changes
+    _prev = _n
 P_(C['title1'], CHIME, .4)                                                # "Impact" lands
 for c in CUTS[:4]:
     for i in range(5): P_(c + .12 + i * .05, tickk(i), .25, -.4 + .2 * i); asmr_tap(c + .12 + i * .05, .09, -.5 + .25 * i)   # stars
