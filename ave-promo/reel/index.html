@@ -53,7 +53,7 @@ const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mix=(a,b,k)=>a.map((v,i)=>Math.round(lerp(v,b[i],k)));
 const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
 // ---------------- footage ----------------
-const CLIPN={s01:50,s02:49,s03:49,s04:49,s05:49,s06:49,s07:49,s08:49,s09:48,s10:48,s11:48,s12:48,s13:48,s14:50,s15:49,s16:48,hero_motion:138,card_motion:120};
+const CLIPN={s01:50,s02:49,s03:49,s04:49,s05:49,s06:49,s07:49,s08:49,s09:48,s10:48,s11:48,s12:48,s13:48,s14:50,s15:49,s16:48,s17:49,hero_motion:138,card_motion:120};
 let pending=[];
 function clip(img,name,lt,loop=true){const n=CLIPN[name];let i=Math.floor(lt*30+1e-6)+1;if(loop)i=((i-1)%n+n)%n+1;i=Math.max(1,Math.min(n,i));
   const u=`clips/${name}/${String(i).padStart(4,'0')}.jpg`;if(img.dataset.u!==u){img.dataset.u=u;img.src=u;pending.push(img.decode().catch(()=>{}));}}
@@ -132,6 +132,7 @@ function blocks(g,t){const A=1-E.inCubic(P(t,C.roll,C.rollEnd+.2));if(A<=0)retur
     if(dz<.35){const lg=D.lg;lg.save();lg.filter='blur(1.5px)';lg.fillStyle=g.fillStyle;lg.fillRect(x-s/2,yy-s/2,s,s);lg.restore();}else g.fillRect(x-s/2,yy-s/2,s,s);
     g.fillStyle=`rgba(255,255,255,${a*.12})`;g.fillRect(x-s/2,yy-s/2,s,4);}
   g.restore();}
+const FOCUS={s01:28,s03:30,s14:32,s15:40,s07:26,s08:34,s17:34};   // per-clip vertical framing (keeps the face and the caption in the window)
 function shotAt(t){let s=C.SHOTS[0];for(const x of C.SHOTS)if(t>=x[0])s=x;return s;}
 function updDark(t){
   const on=t<C.white;show(D.L,on);if(!on)return;
@@ -152,7 +153,7 @@ function updDark(t){
   // ---------- glass object: icon until the cut, then the card (hard cut, like the reference) ----------
   const iconIn=E.outCubic(P(t,C.icon,C.icon+.3));
   const settle=card?E.outCubic(P(t,C.card1,C.card1+.3)):1;
-  const W=card?680:560,H=card?760:600,R=card?70:150,cy=card?880:800;
+  const W=card?700:560,H=card?960:600,R=card?70:150,cy=card?900:800;
   const cutPop=card?.025*Math.max(...CUTT.map(c=>bump(t,c,.001,0,.25))):0;
   css(D.glass,{width:W+'px',height:H+'px',borderRadius:R+'px',top:(cy-H/2)+'px',marginLeft:(-W/2)+'px',
     transform:`scale(${(card?lerp(1.06,1,settle):lerp(.9,1,iconIn))*(1+cutPop+.012*bt*(card?1:0)+.04*bd*(card?0:1))})`,opacity:card?1:iconIn,
@@ -167,7 +168,7 @@ function updDark(t){
     const pad=28;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-230)+'px'});css(D.meta,{top:(H-230+10)+'px'});
     const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st),false);show(D.imB,false);
     const hit=bump(t,st,.001,0,.18);
-    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':'50% 64%'});
+    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':`50% ${(FOCUS[name]??44)}%`});
     const ci=t>=C.card4?3:t>=C.card3?2:t>=C.card2?1:0;const ts=[C.card1,C.card2,C.card3,C.card4];
     D.cards.forEach((c,i)=>{const vis=i===ci;show(c.t.d,vis);show(c.s.d,vis);if(!vis)return;
       if(i===0){blurIn(c.s.w,t,C.card1+.25,.07,.3,10);blurIn(c.t.w,t,C.title1,.06,.25);}
