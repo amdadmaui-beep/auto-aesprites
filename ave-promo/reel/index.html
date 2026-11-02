@@ -77,11 +77,12 @@ const D={};
 function buildDark(){
   D.L=el('div','L');
   D.cv=el('canvas','L',D.L);D.cv.width=1080;D.cv.height=1920;D.g=D.cv.getContext('2d');
+  D.lo=document.createElement('canvas');D.lo.width=270;D.lo.height=480;D.lg=D.lo.getContext('2d');   // soft glows are drawn at quarter size, then scaled up
   const r=mulberry32(7);D.px=[];for(let y=0;y<1920;y+=60)for(let x=0;x<1080;x+=60)D.px.push({x,y,on:r()*.5,d:Math.hypot(x+30-540,(y+30-800)*1.1)});
   // glass object
   const g=D.glass=el('div',null,D.L);g.id='glass';
   D.icon=el('div','a',g);css(D.icon,{left:0,top:0,width:'100%',height:'100%'});
-  D.arc=el('div','a',D.icon);D.arc.innerHTML=`<svg width="420" height="420" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1.2" stroke-dasharray="197.9 263.9" transform="rotate(135 50 50)" stroke-linecap="round"/><circle id="arcv" cx="50" cy="50" r="42" fill="none" stroke-width="1.6" stroke-dasharray="0 263.9" transform="rotate(135 50 50)" stroke-linecap="round"/></svg>`;
+  D.arc=el('div','a',D.icon);D.arc.innerHTML=`<svg width="420" height="420" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1.2" stroke-dasharray="197.9 263.9" transform="rotate(135 50 50)" stroke-linecap="round"/><circle id="arcv" cx="50" cy="50" r="42" fill="none" stroke-width="1.6" stroke-dasharray="0 263.9" transform="rotate(135 50 50)" stroke-linecap="round"/><line id="ndl" x1="50" y1="50" x2="50" y2="14" stroke="rgba(255,255,255,.75)" stroke-width="1" stroke-linecap="round"/></svg>`;
   D.hl=el('div','a',D.icon,'heat');css(D.hl,{left:0,right:0,textAlign:'center',fontSize:'40px',fontWeight:500,color:'rgba(255,255,255,.72)'});
   D.num=el('div','a',D.icon);css(D.num,{left:0,right:0,textAlign:'center',fontSize:'250px',fontWeight:500,letterSpacing:'-.075em',lineHeight:1,fontVariantNumeric:'tabular-nums'});
   D.card=el('div','a',g);css(D.card,{left:0,top:0,width:'100%',height:'100%'});
@@ -90,8 +91,8 @@ function buildDark(){
   D.meta=el('div','a',D.card);css(D.meta,{left:0,right:0,textAlign:'center'});
   const mk=(txt,st)=>{const d=el('div','a',D.meta);css(d,{left:0,right:0,whiteSpace:'nowrap',...st});return {d,w:words(d,txt)};};
   D.cards=[['Impact',"It's about turning footage into",'flash_kt',.35],['Faster','Built for attention','flash_sp',.1],['Sharper','Every detail matters','mp_edit',2.2],['Unforgettable','Make them remember','hero_motion',2.4]]
-    .map(([a,b,clipN,off])=>({clipN,off,t:mk(a,{top:'0px',fontSize:'64px',fontWeight:600,letterSpacing:'-.02em'}),s:mk(b,{top:'84px',fontSize:'34px',fontWeight:500,color:'rgba(255,255,255,.66)'})}));
-  D.stars=el('div','a',D.meta);css(D.stars,{left:0,right:0,top:'150px',display:'flex',justifyContent:'center',gap:'18px'});
+    .map(([a,b,clipN,off])=>({clipN,off,t:mk(a,{top:'0px',fontSize:'54px',fontWeight:700,fontStyle:'italic',letterSpacing:'-.01em'}),s:mk(b,{top:'74px',fontSize:'30px',fontWeight:500,color:'rgba(255,255,255,.66)'})}));
+  D.stars=el('div','a',D.meta);css(D.stars,{left:0,right:0,top:'132px',display:'flex',justifyContent:'center',gap:'18px'});
   D.st=[0,1,2,3,4].map(()=>{const s=el('div',null,D.stars);s.innerHTML='<svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z" fill="#fff"/></svg>';return s;});
   // heat caption
   const cp=D.cap=el('div','a',D.L);css(cp,{left:0,right:0,top:'1290px',textAlign:'center',fontSize:'62px',fontWeight:500,letterSpacing:'-.02em',lineHeight:1.25});
@@ -99,22 +100,37 @@ function buildDark(){
   D.tc=el('div','a lab',D.L);css(D.tc,{left:'64px',top:'72px',fontSize:'22px',color:'rgba(255,255,255,.45)'});
 }
 function ribbon(g,t,col,a){if(a<=0)return;
-  // closed loop of light behind the card; every sub hit kicks its shape to a new pose and pulses it
-  const n=lastBeat(t),bt=beatAt(t);
-  const ph=n*1.7+E.outCubic(clamp(1-bt))*0;                    // shape seed steps on each beat
-  const kick=E.outCubic(bt);
-  const cx=540,cy=900,rx=470*(1+.05*kick),ry=360*(1+.05*kick),rot=-.3+n*.23;
-  const prevRot=-.3+(n-1)*.23,rr=lerp(rot,prevRot,Math.pow(bt,2));   // eases into the new pose after each hit
-  const pts=[];for(let i=0;i<=140;i++){const th=i/140*Math.PI*2;
-    const nA=.13*Math.sin(th*2+ph)+.08*Math.sin(th*3-ph*1.3)+.05*Math.sin(th*5+ph*.7),nB=.13*Math.sin(th*2+ph-1.7)+.08*Math.sin(th*3-(ph-1.7)*1.3)+.05*Math.sin(th*5+(ph-1.7)*.7);
-    const nn=1+lerp(nA,nB,Math.pow(bt,2));
-    const k=Math.pow(Math.abs(Math.cos(th)),.7)*Math.sign(Math.cos(th)),m=Math.pow(Math.abs(Math.sin(th)),.7)*Math.sign(Math.sin(th));
-    const x=k*rx*nn,y=m*ry*nn;pts.push([cx+x*Math.cos(rr)-y*Math.sin(rr),cy+x*Math.sin(rr)+y*Math.cos(rr)]);}
-  g.save();g.globalAlpha=a;g.lineJoin='round';
-  const path=()=>{g.beginPath();pts.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();};
-  g.filter='blur(30px)';g.strokeStyle=rgba(col,.85+.15*kick);g.lineWidth=80+40*kick;path();g.stroke();
-  g.filter='blur(7px)';g.strokeStyle=`rgba(255,255,255,${.6+.35*kick})`;g.lineWidth=16+10*kick;path();g.stroke();
-  g.filter='blur(1.5px)';g.strokeStyle='rgba(255,255,255,.95)';g.lineWidth=4+2*kick;path();g.stroke();
+  // the reference's light ring: a rounded square tilted around the card, always turning and breathing,
+  // its corners and sides flowing on their own; every kick adds a pulse
+  const bt=beatAt(t),kick=E.outCubic(bt);
+  const cx=540,cy=880,R0=430*(1+.035*Math.sin(t*1.1)+.04*kick);
+  const rot=.55+.42*Math.sin(t*.55)+.18*Math.sin(t*1.3+1);         // swings between diamond and square
+  const sq=3.2+1.2*Math.sin(t*.8+.5);                                 // corner roundness morphs
+  const pts=[];for(let i=0;i<=180;i++){const th=i/180*Math.PI*2;const c=Math.cos(th),sn=Math.sin(th);
+    const r=Math.pow(Math.pow(Math.abs(c),sq)+Math.pow(Math.abs(sn),sq),-1/sq);
+    const flow=1+.07*Math.sin(th*2+t*1.6)+.045*Math.sin(th*3-t*2.3)+.03*Math.sin(th*5+t*3.1);
+    const x=c*r*R0*flow*1.04,y=sn*r*R0*flow*.96;pts.push([cx+x*Math.cos(rot)-y*Math.sin(rot),cy+x*Math.sin(rot)+y*Math.cos(rot)]);}
+  const lg=D.lg;const path=c=>{c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();};
+  lg.save();lg.globalAlpha=a;lg.lineJoin='round';
+  lg.filter='blur(10.5px)';lg.strokeStyle=rgba(col,.9);lg.lineWidth=130+50*kick;path(lg);lg.stroke();
+  lg.filter='blur(3.5px)';lg.strokeStyle=`rgba(255,255,255,${.45+.3*kick})`;lg.lineWidth=46+16*kick;path(lg);lg.stroke();lg.restore();
+  g.save();g.globalAlpha=a*(.55+.25*kick);g.lineJoin='round';g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=8+3*kick;g.shadowColor='rgba(255,255,255,.9)';g.shadowBlur=0;path(g);g.stroke();g.restore();}
+// rising heat curve along the bottom during the gauge, and glowing pixel blocks around the icon
+function heatWave(g,t,col){const a=E.outCubic(P(t,C.roll-.2,C.hot));if(a<=0)return;
+  const h=lerp(60,330,a),w=lerp(260,420,a),lg=D.lg;
+  const path=c=>{c.beginPath();for(let x=0;x<=1080;x+=6){const u=(x-540)/w;const y=1920-60-h*Math.exp(-u*u*2.2)*(1+.04*Math.sin(t*6+x*.01));x?c.lineTo(x,y):c.moveTo(x,y);}};
+  lg.save();lg.filter='blur(10px)';lg.strokeStyle=rgba(col,.9);lg.lineWidth=110;path(lg);lg.stroke();
+  lg.filter='blur(2px)';lg.strokeStyle=rgba(mix(col,[255,255,255],.5),.9);lg.lineWidth=26;path(lg);lg.stroke();lg.restore();
+  g.save();g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=5;path(g);g.stroke();g.restore();}
+function blocks(g,t){const A=1-E.inCubic(P(t,C.roll,C.rollEnd+.2));if(A<=0)return;
+  const r=mulberry32(11);g.save();
+  for(let i=0;i<70;i++){const s=[90,120,150][Math.floor(r()*3)],x=r()*1080,y=r()*1920,ph=r()*6,sp=.2+r()*.6,dz=r();
+    const dx=x-540,dy=y-800;const dist=Math.hypot(dx,dy*0.8);if(dist<330)continue;
+    const inP=P(t,.03+dist/2400,.15+dist/2400);const fl=.55+.45*Math.sin(t*9*sp+ph);
+    const yy=y-t*40*sp*(dz>.5?1:-1);const a=inP*A*fl*(.25+.75*dz);
+    const lum=Math.floor(160+95*dz);g.fillStyle=`rgba(${Math.floor(lum*.78)},${lum},${Math.floor(lum*.18)},${a*.55})`;
+    if(dz<.35){const lg=D.lg;lg.save();lg.filter='blur(1.5px)';lg.fillStyle=g.fillStyle;lg.fillRect(x-s/2,yy-s/2,s,s);lg.restore();}else g.fillRect(x-s/2,yy-s/2,s,s);
+    g.fillStyle=`rgba(255,255,255,${a*.12})`;g.fillRect(x-s/2,yy-s/2,s,4);}
   g.restore();}
 function shotAt(t){let s=C.SHOTS[0];for(const x of C.SHOTS)if(t>=x[0])s=x;return s;}
 function updDark(t){
@@ -128,14 +144,15 @@ function updDark(t){
   if(!card){const hz=E.outCubic(P(t,C.icon,C.icon+.4))*(1+.6*bd);
     rg=g.createRadialGradient(540,2050,0,540,2050,1000);rg.addColorStop(0,rgba(col,.95*hz));rg.addColorStop(.5,rgba(col,.3*hz));rg.addColorStop(1,rgba(col,0));g.fillStyle=rg;g.fillRect(0,0,1080,1920);}
   // opening: lime pixel blocks flash on and off (peak at C.flash)
-  const gA=bump(t,0,.2,.03,.25);
-  if(gA>0){D.px.forEach(p=>{const a=gA*Math.max(0,1-p.d/(500+500*gA))*(p.on>.18?1:.4);if(a>0.01){g.fillStyle=`rgba(200,255,46,${.6*a})`;g.fillRect(p.x+2,p.y+2,56,56);}});}
+  const lg=D.lg;lg.setTransform(1,0,0,1,0,0);lg.clearRect(0,0,270,480);lg.setTransform(.25,0,0,.25,0,0);
+  blocks(g,t);if(!card)heatWave(g,t,col);
   if(card)ribbon(g,t,col,1);
+  g.save();g.globalCompositeOperation='screen';g.imageSmoothingQuality='high';g.drawImage(D.lo,0,0,1080,1920);g.restore();
   rg=g.createRadialGradient(540,900,500,540,900,1250);rg.addColorStop(0,'rgba(0,0,0,0)');rg.addColorStop(1,'rgba(0,0,0,.6)');g.fillStyle=rg;g.fillRect(0,0,1080,1920);
   // ---------- glass object: icon until the cut, then the card (hard cut, like the reference) ----------
   const iconIn=E.outCubic(P(t,C.icon,C.icon+.3));
   const settle=card?E.outCubic(P(t,C.card1,C.card1+.3)):1;
-  const W=card?800:560,H=card?1040:600,R=card?64:150,cy=card?880:800;
+  const W=card?680:560,H=card?760:600,R=card?70:150,cy=card?880:800;
   const cutPop=card?.025*Math.max(...CUTT.map(c=>bump(t,c,.001,0,.25))):0;
   css(D.glass,{width:W+'px',height:H+'px',borderRadius:R+'px',top:(cy-H/2)+'px',marginLeft:(-W/2)+'px',
     transform:`scale(${(card?lerp(1.06,1,settle):lerp(.9,1,iconIn))*(1+cutPop+.012*bt*(card?1:0)+.04*bd*(card?0:1))})`,opacity:card?1:iconIn,
@@ -145,9 +162,9 @@ function updDark(t){
   if(!card){const v=Math.round(99*E.outCubic(P(t,C.roll,C.rollEnd)));D.num.textContent=String(v).padStart(2,'0')+'°';
     css(D.num,{top:(H/2-125+10)+'px',filter:`blur(${(1-P(t,C.roll,C.rollEnd))*8}px)`,textShadow:`0 0 ${24*bd}px ${rgba(col,.9)}`});
     css(D.hl,{top:(H/2-205)+'px'});css(D.arc,{left:(W/2-210)+'px',top:(H/2-210+30)+'px'});
-    const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));}
+    const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));D.arc.querySelector('#ndl').setAttribute('transform',`rotate(${-135+270*v/99} 50 50)`);}
   else{
-    const pad=34;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-250)+'px'});css(D.meta,{top:(H-250+14)+'px'});
+    const pad=28;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-230)+'px'});css(D.meta,{top:(H-230+10)+'px'});
     const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st));show(D.imB,false);
     const hit=bump(t,st,.001,0,.18);
     css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':'50% 30%'});
