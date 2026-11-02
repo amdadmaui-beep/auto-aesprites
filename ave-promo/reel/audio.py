@@ -1,4 +1,4 @@
-# AVE "more heat" reel — approved music draft A + sound design on the picture cues + Jane Perry voiceover.
+# AVE "more heat" reel — sound design on the picture cues + Jane Perry voiceover (no background music).
 # SFX instruments reused from ../film.
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); FILM = os.path.join(HERE, '..', 'film')
@@ -7,10 +7,9 @@ a = a.replace("ROOT = os.path.dirname(os.path.abspath(__file__))", "ROOT = HERE"
 exec(a)
 b = open(os.path.join(FILM, 'score_v3.py')).read(); exec(b[:b.index('def score_v3():')])
 CUTS = [C['card1'], C['card2'], C['card3'], C['card4'], C['white']]
-# music: the approved draft A bed (music/track.py)
 def rv2(p):
     w = wave.open(p); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768; return x.reshape(-1, w.getnchannels())
-m = rv2(os.path.join(HERE, 'music', 'music.wav')); music[:min(N, len(m))] += m[:N]
+# no background music: voice + sound design only
 # sound design — every effect has a visible source, kept clearly audible over the music
 for k in range(14): tickp(.05 + k * .03, .12 * (1 - k / 16), 3800 + 450 * (k % 4), (-1) ** k * .45)       # pixel blocks flicker on
 mask(C['icon'] + .1, .2); whoosh(C['icon'] - .05, .4, .3, 600, 5000, -.3, .3, .5)                    # icon appears
@@ -19,7 +18,7 @@ t_ = tv(C['hot'] - C['roll']); add(sfx, C['roll'], np.sin(2 * np.pi * np.cumsum(
 for k, w_ in enumerate(['Your', 'content', 'needs', 'more', 'heat.']): mask(C['cap'] + k * .12, .1, -.2 + .1 * k)
 riser(C['build1'] - .4, C['card1'], .09)
 for c in CUTS:
-    hit(c, .3); whoosh(c - .14, .26, .26, 400, 9000, -.7, .7, .7); crash(c, .05)
+    hit(c, .34); whoosh(c - .14, .26, .3, 400, 9000, -.7, .7, .7); crash(c, .04); subdrop(c, .22, .9, 45)
 for st, *_ in C['SHOTS']:
     if all(abs(st - c) > .02 for c in CUTS): whoosh(st - .08, .18, .16, 1200, 9000, .5, -.5, .6); click(st, .14, 3600, .2)
 thump(C['title1'], .2, 160, 60, .08); tone(C['title1'] + .02, 1318.5, .06)                             # "Impact" lands

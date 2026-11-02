@@ -53,7 +53,7 @@ const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mix=(a,b,k)=>a.map((v,i)=>Math.round(lerp(v,b[i],k)));
 const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
 // ---------------- footage ----------------
-const CLIPN={card_comedy:121,card_motion:120,card_podcast:120,feed_conor:127,feed_jackie:127,feed_kt:126,feed_roast:126,feed_sp:126,flash_kt:58,flash_sp:57,hero_motion:138,longform:138,mp_edit:222};
+const CLIPN={s01:50,s02:49,s03:49,s04:49,s05:49,s06:49,s07:49,s08:49,s09:48,s10:48,s11:48,s12:48,s13:48,s14:50,s15:49,s16:48,hero_motion:138,card_motion:120};
 let pending=[];
 function clip(img,name,lt,loop=true){const n=CLIPN[name];let i=Math.floor(lt*30+1e-6)+1;if(loop)i=((i-1)%n+n)%n+1;i=Math.max(1,Math.min(n,i));
   const u=`clips/${name}/${String(i).padStart(4,'0')}.jpg`;if(img.dataset.u!==u){img.dataset.u=u;img.src=u;pending.push(img.decode().catch(()=>{}));}}
@@ -165,9 +165,9 @@ function updDark(t){
     const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));D.arc.querySelector('#ndl').setAttribute('transform',`rotate(${-135+270*v/99} 50 50)`);}
   else{
     const pad=28;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-230)+'px'});css(D.meta,{top:(H-230+10)+'px'});
-    const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st));show(D.imB,false);
+    const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st),false);show(D.imB,false);
     const hit=bump(t,st,.001,0,.18);
-    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':'50% 30%'});
+    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':'50% 64%'});
     const ci=t>=C.card4?3:t>=C.card3?2:t>=C.card2?1:0;const ts=[C.card1,C.card2,C.card3,C.card4];
     D.cards.forEach((c,i)=>{const vis=i===ci;show(c.t.d,vis);show(c.s.d,vis);if(!vis)return;
       if(i===0){blurIn(c.s.w,t,C.card1+.25,.07,.3,10);blurIn(c.t.w,t,C.title1,.06,.25);}
@@ -183,7 +183,7 @@ function updDark(t){
 // ======================================================================
 // white world: tagline, then the AVE lockup
 // ======================================================================
-const Wt={};const THUMBS=[['flash_kt',20],['flash_sp',18],['mp_edit',60],['hero_motion',80],['card_comedy',40]];
+const Wt={};const THUMBS=[['s01',20],['s05',20],['s08',20],['s10',20],['s12',20]];
 function buildWhite(){
   const L=Wt.L=el('div','L');css(L,{background:'radial-gradient(90% 60% at 50% 40%,#FFFFFF,#ECEBE5)',color:'var(--ink)'});
   Wt.grid=el('div','L',L);css(Wt.grid,{backgroundImage:'linear-gradient(rgba(22,21,15,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(22,21,15,.045) 1px,transparent 1px)',backgroundSize:'90px 90px'});
