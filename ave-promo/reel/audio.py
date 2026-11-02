@@ -10,7 +10,7 @@ CUTS = [C['card1'], C['card2'], C['card3'], C['card4'], C['white']]
 def rv2(p):
     w = wave.open(p); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768; return x.reshape(-1, w.getnchannels())
 # no background music: voice + sound design only
-exec(open(os.path.join(HERE, 'sfx2.py')).read())
+exec(open(os.path.join(HERE, 'sfx3.py')).read())
 # voice (Jane Perry): natural speed; only the pause inside line 6 is shortened
 def rv(p):
     w = wave.open(p); return np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
