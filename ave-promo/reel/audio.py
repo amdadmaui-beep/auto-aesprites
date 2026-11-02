@@ -10,30 +10,7 @@ CUTS = [C['card1'], C['card2'], C['card3'], C['card4'], C['white']]
 def rv2(p):
     w = wave.open(p); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768; return x.reshape(-1, w.getnchannels())
 # no background music: voice + sound design only
-# sound design — every effect has a visible source, kept clearly audible over the music
-for k in range(14): tickp(.05 + k * .03, .12 * (1 - k / 16), 3800 + 450 * (k % 4), (-1) ** k * .45)       # pixel blocks flicker on
-mask(C['icon'] + .1, .2); whoosh(C['icon'] - .05, .4, .3, 600, 5000, -.3, .3, .5)                    # icon appears
-for k in range(16): tick(C['roll'] + k * .05, .1 + .004 * k, .15)                                     # number rolls
-t_ = tv(C['hot'] - C['roll']); add(sfx, C['roll'], np.sin(2 * np.pi * np.cumsum(260 * 4 ** (t_ / t_[-1])) / SR) * (t_ / t_[-1]) ** 2 * .5, .12)   # heat rising
-for k, w_ in enumerate(['Your', 'content', 'needs', 'more', 'heat.']): mask(C['cap'] + k * .12, .1, -.2 + .1 * k)
-riser(C['build1'] - .4, C['card1'], .09)
-for c in CUTS:
-    hit(c, .34); whoosh(c - .14, .26, .3, 400, 9000, -.7, .7, .7); crash(c, .04); subdrop(c, .22, .9, 45)
-for st, *_ in C['SHOTS']:
-    if all(abs(st - c) > .02 for c in CUTS): whoosh(st - .08, .18, .16, 1200, 9000, .5, -.5, .6); click(st, .14, 3600, .2)
-thump(C['title1'], .2, 160, 60, .08); tone(C['title1'] + .02, 1318.5, .06)                             # "Impact" lands
-for c in CUTS[:4]:
-    for i in range(5): tone(c + .1 + i * .045, 1568 * 1.06 ** i, .035, -.4 + .2 * i, .04)              # stars pop
-for a0, c in [(C['build2'] - .3, C['card2']), (C['build3'] - .2, C['card3']), (C['card4'] - .45, C['card4']), (C['build5'] - .2, C['white'])]: riser(a0, c, .07)
-scrub(C['white'] + .03, C['stop'] - .02, .08); click(C['stop'], .24, 2600); tone(C['stop'] + .02, 1760, .06)
-thump(C['slam'], .32, 150, 55, .1); thump(C['slam'] + .07, .24, 150, 55, .1)
-whoosh(C['purpose'] - .05, .3, .12, 1500, 8000, -.5, .5, .5); whoosh(C['purpose'] + .15, .35, .1, 2000, 9000, -.4, .4, .5)   # marker swipe
-whoosh(C['lock'] - .2, .35, .14, 3000, 600, 0, 0, .4); mask(C['logo'] + .05, .1); thump(C['logo'] + .1, .16, 140, 60, .08)
-for i in range(6): tick(C['studio'] + i * .04, .04, -.3 + .12 * i)                                     # STUDIO tracks in
-whoosh(C['rule'], .3, .08, 2000, 7000, -.6, .6, .5)
-whoosh(C['dm'] - .05, .3, .1, 500, 3000, 0, 0, .6); mask(C['dm'] + .1, .08)
-for k in range(6): click(C['type'] + k * .075, .16, 3400 + 200 * k, .1)                                # S-A-M-P-L-E
-click(C['send'] - .02, .2, 2400); whoosh(C['send'], .3, .16, 800, 9000, -.2, .7, .4); tone(C['send'] + .06, 1760, .07); tone(C['send'] + .12, 2637, .05)
+exec(open(os.path.join(HERE, 'sfx2.py')).read())
 # voice (Jane Perry): natural speed; only the pause inside line 6 is shortened
 def rv(p):
     w = wave.open(p); return np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
@@ -49,7 +26,7 @@ envv = np.abs(vox).max(1); k = int(.03 * SR); envv = np.sqrt(np.convolve(envv **
 act = np.clip(envv / .02, 0, 1); gg = np.zeros_like(act); s_ = 0; ac, rc = np.exp(-1 / (.02 * SR)), np.exp(-1 / (.25 * SR))
 for i in range(len(act)):
     v = act[i]; c = ac if v > s_ else rc; s_ = c * s_ + (1 - c) * v; gg[i] = s_
-mix = .38 * music * (1 - .4 * gg)[:, None] + .9 * sfx * (1 - .2 * gg)[:, None] + vox * vn
+mix = 1.0 * sfx * (1 - .25 * gg)[:, None] + vox * vn
 fo = int(.3 * SR); mix[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
 mix = np.tanh(mix * 1.1) / 1.1
 os.makedirs(os.path.join(HERE, 'build'), exist_ok=True)
@@ -60,4 +37,4 @@ if '--report' in sys.argv:
     db = lambda x: 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-9)
     for a0 in np.arange(0, 15, 1.25):
         i, j = int(a0 * SR), int((a0 + 1.25) * SR)
-        print(f"{a0:5.2f}  music {db(.38*music[i:j]):6.1f}  sfx {db(.9*sfx[i:j]):6.1f}  voice {db(vox[i:j]*vn):6.1f}")
+        print(f"{a0:5.2f}  music {db(0*music[i:j]+1e-9):6.1f}  sfx {db(.9*sfx[i:j]):6.1f}  voice {db(vox[i:j]*vn):6.1f}")
