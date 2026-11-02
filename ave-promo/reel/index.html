@@ -53,7 +53,7 @@ const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mix=(a,b,k)=>a.map((v,i)=>Math.round(lerp(v,b[i],k)));
 const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
 // ---------------- footage ----------------
-const CLIPN={card_comedy:121,flash_kt:58,flash_sp:57,hero_motion:138,mp_edit:222};
+const CLIPN={card_comedy:121,card_motion:120,card_podcast:120,feed_conor:127,feed_jackie:127,feed_kt:126,feed_roast:126,feed_sp:126,flash_kt:58,flash_sp:57,hero_motion:138,longform:138,mp_edit:222};
 let pending=[];
 function clip(img,name,lt,loop=true){const n=CLIPN[name];let i=Math.floor(lt*30+1e-6)+1;if(loop)i=((i-1)%n+n)%n+1;i=Math.max(1,Math.min(n,i));
   const u=`clips/${name}/${String(i).padStart(4,'0')}.jpg`;if(img.dataset.u!==u){img.dataset.u=u;img.src=u;pending.push(img.decode().catch(()=>{}));}}
@@ -62,9 +62,14 @@ function vid(parent){const i=el('img','vid',parent);i.alt='';return i;}
 // ======================================================================
 // heat colour across the film: lime → ember, then one hue per card
 // ======================================================================
-const HUE=[[0,'#C8FF2E'],[C.roll+.2,'#C8FF2E'],[C.hit99,'#FF6A1A'],[C.morph+.1,'#FF6A1A'],[C.card1,'#1FB585'],[C.card2-.12,'#1FB585'],[C.card2+.1,'#D9CF1C'],[C.card3-.12,'#D9CF1C'],[C.card3+.1,'#3A7BE0'],[C.card4-.12,'#3A7BE0'],[C.card4+.1,'#9B3BE0']];
-function hueAt(t){if(t<=HUE[0][0])return hex(HUE[0][1]);for(let i=0;i<HUE.length-1;i++){const[a,A]=HUE[i],[b,B]=HUE[i+1];if(t<=b)return mix(hex(A),hex(B),E.inOutSine(P(t,a,b)));}return hex(HUE[HUE.length-1][1]);}
-
+const CUTS=[[0,'#C8FF2E'],[C.card1,'#18B98A'],[C.card2,'#C9D21A'],[C.card3,'#3A7BE0'],[C.card4,'#A63BE0']];
+function hueAt(t){if(t<C.card1){return mix(hex('#C8FF2E'),hex('#FF6A1A'),E.inOutSine(P(t,C.warm,C.hot)));}let c=CUTS[1][1];for(const[a,h]of CUTS)if(t>=a)c=h;return hex(c);}
+const CUTT=[C.card1,C.card2,C.card3,C.card4];
+// the reference punches every colour cut with a bright flash that decays, and swells the light just before the next cut
+function flashAt(t){let f=0;for(const c of CUTT)f=Math.max(f,bump(t,c,.001,.02,.28));return f;}
+function buildAt(t){return Math.max(E.inQuad(P(t,C.build1,C.card1)),E.inQuad(P(t,C.build2,C.card2)),E.inQuad(P(t,C.build3,C.card3)),E.inQuad(P(t,C.build5,C.white))*(t<C.white?1:0));}
+function beatAt(t){let b=0;for(const x of C.BEATS)if(t>=x)b=Math.max(b,Math.exp(-(t-x)*11));return b;}
+function lastBeat(t){let n=0;for(const x of C.BEATS)if(t>=x)n++;return n;}
 // ======================================================================
 // dark world: canvas background (glow, pixel grid, light ribbon)
 // ======================================================================
@@ -84,7 +89,7 @@ function buildDark(){
   D.imA=vid(D.media);D.imB=vid(D.media);
   D.meta=el('div','a',D.card);css(D.meta,{left:0,right:0,textAlign:'center'});
   const mk=(txt,st)=>{const d=el('div','a',D.meta);css(d,{left:0,right:0,whiteSpace:'nowrap',...st});return {d,w:words(d,txt)};};
-  D.cards=[['Impact','Turning footage into moments','flash_kt',.35],['Faster','Built for attention','flash_sp',.1],['Sharper','Every detail matters','mp_edit',2.2],['Unforgettable','Make them remember','hero_motion',2.4]]
+  D.cards=[['Impact',"It's about turning footage into",'flash_kt',.35],['Faster','Built for attention','flash_sp',.1],['Sharper','Every detail matters','mp_edit',2.2],['Unforgettable','Make them remember','hero_motion',2.4]]
     .map(([a,b,clipN,off])=>({clipN,off,t:mk(a,{top:'0px',fontSize:'64px',fontWeight:600,letterSpacing:'-.02em'}),s:mk(b,{top:'84px',fontSize:'34px',fontWeight:500,color:'rgba(255,255,255,.66)'})}));
   D.stars=el('div','a',D.meta);css(D.stars,{left:0,right:0,top:'150px',display:'flex',justifyContent:'center',gap:'18px'});
   D.st=[0,1,2,3,4].map(()=>{const s=el('div',null,D.stars);s.innerHTML='<svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z" fill="#fff"/></svg>';return s;});
@@ -94,70 +99,67 @@ function buildDark(){
   D.tc=el('div','a lab',D.L);css(D.tc,{left:'64px',top:'72px',fontSize:'22px',color:'rgba(255,255,255,.45)'});
 }
 function ribbon(g,t,col,a){if(a<=0)return;
-  // a soft closed loop of light that slowly turns and breathes behind the card
-  const cx=540,cy=880,rx=470,ry=360,rot=-.32+t*.32+.12*Math.sin(t*.9);
-  const pts=[];for(let i=0;i<=120;i++){const th=i/120*Math.PI*2;const n=1+.10*Math.sin(th*3+t*1.4)+.06*Math.sin(th*5-t*2.1);
-    const k=Math.pow(Math.abs(Math.cos(th)),.75)*Math.sign(Math.cos(th)),m=Math.pow(Math.abs(Math.sin(th)),.75)*Math.sign(Math.sin(th));
-    let x=k*rx*n,y=m*ry*n;const xr=x*Math.cos(rot)-y*Math.sin(rot),yr=x*Math.sin(rot)+y*Math.cos(rot);pts.push([cx+xr,cy+yr*1.05]);}
+  // closed loop of light behind the card; every sub hit kicks its shape to a new pose and pulses it
+  const n=lastBeat(t),bt=beatAt(t);
+  const ph=n*1.7+E.outCubic(clamp(1-bt))*0;                    // shape seed steps on each beat
+  const kick=E.outCubic(bt);
+  const cx=540,cy=900,rx=470*(1+.05*kick),ry=360*(1+.05*kick),rot=-.3+n*.23;
+  const prevRot=-.3+(n-1)*.23,rr=lerp(rot,prevRot,Math.pow(bt,2));   // eases into the new pose after each hit
+  const pts=[];for(let i=0;i<=140;i++){const th=i/140*Math.PI*2;
+    const nA=.13*Math.sin(th*2+ph)+.08*Math.sin(th*3-ph*1.3)+.05*Math.sin(th*5+ph*.7),nB=.13*Math.sin(th*2+ph-1.7)+.08*Math.sin(th*3-(ph-1.7)*1.3)+.05*Math.sin(th*5+(ph-1.7)*.7);
+    const nn=1+lerp(nA,nB,Math.pow(bt,2));
+    const k=Math.pow(Math.abs(Math.cos(th)),.7)*Math.sign(Math.cos(th)),m=Math.pow(Math.abs(Math.sin(th)),.7)*Math.sign(Math.sin(th));
+    const x=k*rx*nn,y=m*ry*nn;pts.push([cx+x*Math.cos(rr)-y*Math.sin(rr),cy+x*Math.sin(rr)+y*Math.cos(rr)]);}
   g.save();g.globalAlpha=a;g.lineJoin='round';
   const path=()=>{g.beginPath();pts.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();};
-  g.filter='blur(26px)';g.strokeStyle=rgba(col,.9);g.lineWidth=70;path();g.stroke();
-  g.filter='blur(6px)';g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=16;path();g.stroke();
-  g.filter='blur(1.5px)';g.strokeStyle='rgba(255,255,255,.95)';g.lineWidth=4;path();g.stroke();
+  g.filter='blur(30px)';g.strokeStyle=rgba(col,.85+.15*kick);g.lineWidth=80+40*kick;path();g.stroke();
+  g.filter='blur(7px)';g.strokeStyle=`rgba(255,255,255,${.6+.35*kick})`;g.lineWidth=16+10*kick;path();g.stroke();
+  g.filter='blur(1.5px)';g.strokeStyle='rgba(255,255,255,.95)';g.lineWidth=4+2*kick;path();g.stroke();
   g.restore();}
+function shotAt(t){let s=C.SHOTS[0];for(const x of C.SHOTS)if(t>=x[0])s=x;return s;}
 function updDark(t){
   const on=t<C.white;show(D.L,on);if(!on)return;
-  const col=hueAt(t),g=D.g;
-  // base: near-black tinted with the heat colour, glow from below during the heat beat, centred glow for the cards
-  g.filter='none';g.globalAlpha=1;g.fillStyle=rgba(mix([6,7,5],col,.10),1);g.fillRect(0,0,1080,1920);
-  const cardP=E.inOutCubic(P(t,C.morph,C.card1+.1));
-  let rg=g.createRadialGradient(540,820,0,540,820,820);rg.addColorStop(0,rgba(col,lerp(.55,.62,cardP)));rg.addColorStop(.55,rgba(col,.14));rg.addColorStop(1,rgba(col,0));
+  const col=hueAt(t),g=D.g,card=t>=C.card1,fl=flashAt(t),bd=buildAt(t),bt=beatAt(t);
+  g.filter='none';g.globalAlpha=1;g.fillStyle=rgba(mix([5,6,4],col,.08+.5*fl),1);g.fillRect(0,0,1080,1920);
+  // glow: bright on each cut, swelling before the next one, breathing with the hits
+  const ga=card?(.45+.5*fl+.35*bd+.08*bt):(.35+.25*bd);
+  let rg=g.createRadialGradient(540,860,0,540,860,900+300*fl);rg.addColorStop(0,rgba(col,Math.min(1,ga)));rg.addColorStop(.55,rgba(col,.16+.3*fl));rg.addColorStop(1,rgba(col,0));
   g.fillStyle=rg;g.fillRect(0,0,1080,1920);
-  const haze=(1-cardP)*E.outCubic(P(t,C.roll,C.hit99))*(1+.25*bump(t,C.hit99,.05,0,.5));
-  if(haze>0){rg=g.createRadialGradient(540,2050,0,540,2050,1000);rg.addColorStop(0,rgba(col,.95*haze));rg.addColorStop(.5,rgba(col,.3*haze));rg.addColorStop(1,rgba(col,0));g.fillStyle=rg;g.fillRect(0,0,1080,1920);}
-  // pixel grid: tiles flicker on near the centre, then hand over to the icon
-  const gA=1-E.inCubic(P(t,C.icon+.1,C.roll+.25));
-  if(gA>0){g.strokeStyle='rgba(200,255,46,.10)';g.lineWidth=1;for(let x=0;x<=1080;x+=60){g.beginPath();g.moveTo(x+.5,0);g.lineTo(x+.5,1920);g.stroke();}for(let y=0;y<=1920;y+=60){g.beginPath();g.moveTo(0,y+.5);g.lineTo(1080,y+.5);g.stroke();}
-    D.px.forEach(p=>{const arrive=p.d/900*.32+p.on*.12;const fl=Math.floor(t*30+p.x*.37+p.y*.11)%5===0?.55:1;const a=P(t,arrive,arrive+.05)*fl*Math.max(0,1-p.d/760)*gA;
-      if(a>0.01){g.fillStyle=`rgba(200,255,46,${.55*a})`;g.fillRect(p.x+3,p.y+3,54,54);}});}
-  ribbon(g,t,col,E.outCubic(P(t,C.morph+.05,C.card1+.25))*(1-P(t,C.push+.15,C.white)));
-  // vignette
+  if(!card){const hz=E.outCubic(P(t,C.icon,C.icon+.4))*(1+.6*bd);
+    rg=g.createRadialGradient(540,2050,0,540,2050,1000);rg.addColorStop(0,rgba(col,.95*hz));rg.addColorStop(.5,rgba(col,.3*hz));rg.addColorStop(1,rgba(col,0));g.fillStyle=rg;g.fillRect(0,0,1080,1920);}
+  // opening: lime pixel blocks flash on and off (peak at C.flash)
+  const gA=bump(t,0,.2,.03,.25);
+  if(gA>0){D.px.forEach(p=>{const a=gA*Math.max(0,1-p.d/(500+500*gA))*(p.on>.18?1:.4);if(a>0.01){g.fillStyle=`rgba(200,255,46,${.6*a})`;g.fillRect(p.x+2,p.y+2,56,56);}});}
+  if(card)ribbon(g,t,col,1);
   rg=g.createRadialGradient(540,900,500,540,900,1250);rg.addColorStop(0,'rgba(0,0,0,0)');rg.addColorStop(1,'rgba(0,0,0,.6)');g.fillStyle=rg;g.fillRect(0,0,1080,1920);
-
-  // ---------- the glass object ----------
-  const iconIn=E.outCubic(P(t,C.icon,C.icon+.45));
-  const hitB=.06*bump(t,C.hit99,.05,0,.35);
-  const W=lerp(560,800,cardP),H=lerp(600,1040,cardP),R=lerp(150,64,cardP),cy=lerp(800,880,cardP);
-  const pushS=1+.07*E.inCubic(P(t,C.push,C.white));
+  // ---------- glass object: icon until the cut, then the card (hard cut, like the reference) ----------
+  const iconIn=E.outCubic(P(t,C.icon,C.icon+.3));
+  const settle=card?E.outCubic(P(t,C.card1,C.card1+.3)):1;
+  const W=card?800:560,H=card?1040:600,R=card?64:150,cy=card?880:800;
+  const cutPop=card?.025*Math.max(...CUTT.map(c=>bump(t,c,.001,0,.25))):0;
   css(D.glass,{width:W+'px',height:H+'px',borderRadius:R+'px',top:(cy-H/2)+'px',marginLeft:(-W/2)+'px',
-    transform:`scale(${lerp(.86,1,iconIn)*(1+hitB)*pushS})`,opacity:iconIn,
-    filter:`blur(${(1-iconIn)*18}px)`,'--tint':`radial-gradient(90% 60% at 50% 105%,${rgba(col,.38)},transparent 70%)`,
-    borderColor:t>C.roll&&cardP<1?rgba(mix([255,255,255],col,.35*E.outCubic(P(t,C.roll,C.hit99))),.32):'rgba(255,255,255,.24)'});
-  // icon content
-  css(D.icon,{opacity:1-E.inCubic(P(t,C.morph,C.morph+.18))});
-  const v=Math.round(99*E.outCubic(P(t,C.roll,C.hit99)));D.num.textContent=String(v).padStart(2,'0')+'°';
-  css(D.num,{top:(H/2-125+10)+'px',opacity:lerp(.3,1,P(t,C.roll-.1,C.roll+.05)),textShadow:`0 0 ${30*bump(t,C.hit99,.04,0,.5)}px ${rgba(col,.9)}`});
-  css(D.hl,{top:(H/2-205)+'px'});css(D.arc,{left:(W/2-210)+'px',top:(H/2-210+30)+'px'});
-  const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));
-  // card content
-  const cA=E.outCubic(P(t,C.morph+.12,C.card1+.05));css(D.card,{opacity:cA});
-  const pad=34;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-250)+'px'});
-  css(D.meta,{top:(H-250+14)+'px'});
-  const ts=[C.card1,C.card2,C.card3,C.card4,99];let ci=0;for(let i=0;i<4;i++)if(t>=ts[i]-.001)ci=i;if(t<C.card1)ci=0;
-  const cur=D.cards[ci],lt=t-ts[ci];
-  // card change: the new clip whips in from the right inside the media window
-  const wp=E.outQuart(P(t,ts[ci],ts[ci]+.22));const prev=ci>0?D.cards[ci-1]:null;
-  clip(D.imA,cur.clipN,cur.off+Math.max(0,lt));
-  css(D.imA,{transform:`translateX(${prev?(1-wp)*100:0}%) scale(${1.06-.06*E.outCubic(P(lt,0,1.2))})`,filter:`blur(${prev?(1-wp)*14:0}px)`+(ci===0&&t<C.punch1?' grayscale(1) contrast(1.1)':''),objectPosition:cur.clipN==='hero_motion'?'50% 50%':'50% 30%'});
-  show(D.imB,!!prev&&wp<1);if(prev&&wp<1){clip(D.imB,prev.clipN,prev.off+(ts[ci]-ts[ci-1]));css(D.imB,{transform:`translateX(${-wp*100}%)`,filter:`blur(${wp*14}px)`,objectPosition:'50% 30%'});}
-  if(ci===0)D.imA.style.filter=t<C.punch1?'grayscale(1) contrast(1.1) brightness(.9)':`saturate(${1+.4*bump(t,C.punch1,.04,0,.4)})`;
-  D.cards.forEach((c,i)=>{const vis=i===ci;show(c.t.d,vis);show(c.s.d,vis);if(!vis)return;blurIn(c.t.w,t,ts[i]+.08,.06,.34);blurIn(c.s.w,t,ts[i]+.18,.045,.34,10);});
-  D.st.forEach((s,i)=>{let a=.95,sc=1;if(ci===3){const k=P(t,C.stars+i*.1,C.stars+i*.1+.12);a=lerp(.22,1,k);sc=1+.35*bump(t,C.stars+i*.1,.05,0,.18);}
-    else a=lerp(.2,.95,P(t,ts[ci]+.3+i*.04,ts[ci]+.42+i*.04));css(s,{opacity:a,transform:`scale(${sc})`});});
-  // heat caption
-  blurIn(D.c1,t,C.cap1,.08,.4);blurIn(D.c2,t,C.cap2,.1,.4);
+    transform:`scale(${(card?lerp(1.06,1,settle):lerp(.9,1,iconIn))*(1+cutPop+.012*bt*(card?1:0)+.04*bd*(card?0:1))})`,opacity:card?1:iconIn,
+    filter:`blur(${card?0:(1-iconIn)*16}px)`,'--tint':`radial-gradient(90% 60% at 50% 105%,${rgba(col,.38)},transparent 70%)`,
+    borderColor:card?'rgba(255,255,255,.24)':rgba(mix([255,255,255],col,.4),.32)});
+  show(D.icon,!card);show(D.card,card);
+  if(!card){const v=Math.round(99*E.outCubic(P(t,C.roll,C.rollEnd)));D.num.textContent=String(v).padStart(2,'0')+'°';
+    css(D.num,{top:(H/2-125+10)+'px',filter:`blur(${(1-P(t,C.roll,C.rollEnd))*8}px)`,textShadow:`0 0 ${24*bd}px ${rgba(col,.9)}`});
+    css(D.hl,{top:(H/2-205)+'px'});css(D.arc,{left:(W/2-210)+'px',top:(H/2-210+30)+'px'});
+    const av=D.arc.querySelector('#arcv');av.setAttribute('stroke-dasharray',`${(197.9*v/99).toFixed(1)} 263.9`);av.setAttribute('stroke',rgba(col,.9));}
+  else{
+    const pad=34;css(D.media,{left:pad+'px',top:pad+'px',width:(W-2*pad)+'px',height:(H-2*pad-250)+'px'});css(D.meta,{top:(H-250+14)+'px'});
+    const [st,name,off,bw]=shotAt(t);clip(D.imA,name,off+(t-st));show(D.imB,false);
+    const hit=bump(t,st,.001,0,.18);
+    css(D.imA,{transform:`scale(${1.08-.05*E.outCubic(P(t,st,st+.4))+.04*hit})`,filter:(bw?'grayscale(1) contrast(1.15) ':'')+`brightness(${1+.35*hit})`,objectPosition:/motion/.test(name)?'50% 50%':'50% 30%'});
+    const ci=t>=C.card4?3:t>=C.card3?2:t>=C.card2?1:0;const ts=[C.card1,C.card2,C.card3,C.card4];
+    D.cards.forEach((c,i)=>{const vis=i===ci;show(c.t.d,vis);show(c.s.d,vis);if(!vis)return;
+      if(i===0){blurIn(c.s.w,t,C.card1+.25,.07,.3,10);blurIn(c.t.w,t,C.title1,.06,.25);}
+      else{blurIn(c.t.w,t,ts[i]+.04,.06,.25);blurIn(c.s.w,t,ts[i]+.12,.045,.25,10);}});
+    D.st.forEach((s,i)=>css(s,{opacity:.95,transform:`scale(${1+.25*bump(t,ts[ci]+.05+i*.04,.04,0,.12)})`}));}
+  // caption, word by word with the voice
+  blurIn(D.c1,t,C.cap,.11,.3);blurIn(D.c2,t,C.cap+.45,.12,.3);
   D.c2.forEach(o=>css(o.wi,{color:'#fff',textShadow:`0 0 18px ${rgba(col,.95)},0 0 4px ${rgba(col,.9)}`}));
-  blurOut(D.c1,t,C.morph-.05);blurOut(D.c2,t,C.morph-.02);show(D.cap,t<C.morph+.2);
+  show(D.cap,!card);
   const f=Math.floor(t*30);D.tc.textContent=`AVE · ${String(Math.floor(t)).padStart(2,'0')}:${String(f%30).padStart(2,'0')}`;
 }
 
