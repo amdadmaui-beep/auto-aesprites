@@ -26,7 +26,7 @@ envv = np.abs(vox).max(1); k = int(.03 * SR); envv = np.sqrt(np.convolve(envv **
 act = np.clip(envv / .02, 0, 1); gg = np.zeros_like(act); s_ = 0; ac, rc = np.exp(-1 / (.02 * SR)), np.exp(-1 / (.25 * SR))
 for i in range(len(act)):
     v = act[i]; c = ac if v > s_ else rc; s_ = c * s_ + (1 - c) * v; gg[i] = s_
-mix = 1.0 * sfx * (1 - .25 * gg)[:, None] + vox * vn
+mix = 1.6 * sfx * (1 - .15 * gg)[:, None] + vox * vn
 fo = int(.3 * SR); mix[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 1.5
 mix = np.tanh(mix * 1.1) / 1.1
 os.makedirs(os.path.join(HERE, 'build'), exist_ok=True)
