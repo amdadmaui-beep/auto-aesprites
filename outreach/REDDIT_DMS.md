@@ -193,3 +193,41 @@ https://www.reddit.com/r/HireAnEditor/comments/1wyeqiy/
 ## 23. Funny streamer, VOD to YouTube, $80–120 (u/Pen15-x)
 https://www.reddit.com/r/YouTubeEditorsForHire/comments/1wt60m0/
 > Hey! Saw your post. We're a comedy-first studio, so "chaotic sense of humor" is a plus, not a problem: punch-ins, freeze frames and callbacks timed to the joke, not generic V-tuber edits. Work: https://ave-studio-website.vercel.app/ $100 a video works for us, with a 48–72h turnaround. Want to send a VOD for a first one?
+
+---
+
+# Batch 4: fresh posts (Nov 1–4). Open each post first and skip it if it says filled.
+
+## 24. ⭐ Film-content Shorts, $25–40/hour, 10–15 hrs/week, paid trial (u/ExlaCreative)
+https://www.reddit.com/r/FindVideoEditors/comments/1xn5klg/
+They asked for the message to **start with "Editor."** and to include 2 videos, your rate, time zone and availability. Attach or link 2 of your best vertical clips (Jackie's and Brenda's are good choices).
+> Editor.
+>
+> Hi! I'd love to make the TikToks, Reels and Shorts for Billy Knight's film content. We're a small studio of human editors who cut talking heads and story content into short-form, with clean captions, music and sound that keep people watching.
+>
+> Two examples: [CLIP LINK 1] and [CLIP LINK 2]
+> More work: https://ave-studio-website.vercel.app/
+> Rate: $25/hour · Time zone: [YOUR TIME ZONE] · Available 10–15 hrs/week, starting now. I edit in Premiere Pro and can deliver project files.
+> Happy to do the paid trial whenever you're ready.
+
+## 25. Quick cuts with music, Premiere only, NYC (u/photon_watts)
+https://www.reddit.com/r/HireAnEditor/comments/1xn5idg/
+> Hi! Saw your post. Short, quick cuts timed to music are a big part of what we do, and we edit in Premiere Pro, so your colour grade stays intact. We're remote and turn things around in 24–48h.
+>
+> Work: https://ave-studio-website.vercel.app/
+> What kind of projects are the short cuts for?
+
+## 26. One reel in their existing style, from a 5:41 video (u/enjoytheshowX)
+https://www.reddit.com/r/VideoEditors_forhire/comments/1xn5228/
+They asked for a rate, so the price is in the message.
+> Hi! I watched your reel. I can match that style for your new piece and cut it down from the 5:41 video into one reel. $35 for the reel, with a 48h turnaround and one round of changes.
+>
+> Our work: https://ave-studio-website.vercel.app/
+
+## 27. 15-second wedding invite reel, $20–40, PayPal (u/YaseenVayecee). Quick, small job
+https://www.reddit.com/r/HireAnEditor/comments/1xnnwp3/
+> Hi! Congrats on the wedding! I can do the 15-second invite in that vlog style: punchy jump cuts, whooshes, aesthetic text and a light grade, in 24–48h for $30 via PayPal.
+>
+> Quick shooting tips before you film: shoot vertical, keep each clip 3–5 seconds, start and end every shot with a small movement (a step forward, or a pan the same direction), and keep the light behind the camera.
+>
+> Work: https://ave-studio-website.vercel.app/
