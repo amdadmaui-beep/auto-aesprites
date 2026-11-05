@@ -1,0 +1,21 @@
+{
+  "user_agent": "python:ave-lead-radar:0.1 (by AVE Studio, avestudio.production@gmail.com)",
+  "subreddits": ["FindVideoEditors", "VideoEditors_forhire", "YouTubeEditorsForHire", "YouTubeEditorForHire", "HireAnEditor", "forhire", "VideoEditingRequests", "podcasting", "NewTubers"],
+  "search_queries": ["hiring clip editor", "looking for a video editor shorts", "need editor podcast clips", "stand-up comedy editor", "tiktok editor hiring"],
+  "max_age_hours": 24,
+  "min_score": 4,
+  "hot_score": 9,
+  "offer_patterns": ["\\[\\s*for hire\\s*\\]", "^\\s*for hire\\b", "\\bi am an? (video )?editor\\b", "\\bmy portfolio\\b"],
+  "hiring_patterns": ["\\[\\s*hiring\\s*\\]", "\\bhiring\\b", "looking for an? (\\w+ )?editor", "need(ing)? an? (\\w+ )?editor", "seeking an? (\\w+ )?editor", "\\beditor wanted\\b", "\\bwant(ed)? an? (\\w+ )?editor\\b"],
+  "skip_patterns": ["\\bfilled\\b", "\\bposition closed\\b", "\\bno longer (hiring|looking)\\b", "\\bfound (someone|an editor)\\b"],
+  "niches": {
+    "comedy": ["comedy", "comedian", "stand-up", "standup", "stand up", "sketch", "jokes", "funny", "skits"],
+    "podcast": ["podcast", "episode", "episodes", "multi-cam", "3-cam", "interview"],
+    "short-form": ["shorts", "short-form", "short form", "tiktok", "reels", "clips", "clipping", "vertical", "captions", "9:16"]
+  },
+  "niche_weight": {"comedy": 3, "podcast": 2, "short-form": 1},
+  "red_flags": ["unpaid", "for exposure", "exposure", "rev share", "revenue share", "free trial project", "volunteer", "no budget"],
+  "portfolio": "https://ave-studio-website.vercel.app/",
+  "instagram": "@avestudio.production",
+  "ntfy_topic": ""
+}
