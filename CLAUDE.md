@@ -29,11 +29,13 @@ connectors, then the local setup steps. Check what's already installed before su
 
 ## Skills in this repo
 
-`.claude/skills/` holds all the user's skills (31), so they load in any session on this repo.
+`.claude/skills/` holds all the user's skills (32), so they load in any session on this repo.
 See `.claude/skills/README.md` for sources and licenses. The repo is private; keep it private.
 Plugins that need a service sign-in are listed in `MIGRATION.md`.
 "Jackie style" / "Jackie editing style" means the `jackie-edit-style` skill: the user's signature
-style for vertical stand-up clips.
+style for vertical stand-up clips. It belongs to Jackie (a paying client): never use it for a prospect sample.
+For any prospect sample, use the `ave-style-lab` skill: it designs a new style per prospect and checks it against
+`.claude/skills/ave-style-lab/reserved-styles.json` (Jackie, Brenda and other paying clients).
 For websites and UI, use `impeccable` and `frontend-design` so pages don't look generic or AI-made.
 
 ## Sound effects

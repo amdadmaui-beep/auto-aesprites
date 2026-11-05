@@ -1,0 +1,44 @@
+{
+  "_note": "Styles that belong to paying clients (status: owned) or to AVE's own portfolio. A new prospect style must not copy any of these. Add every new client here the day they pay. Prospect styles live in styles/ with status sample.",
+  "styles": [
+    {
+      "id": "jackie",
+      "owner": "Jackie Kashian (client)",
+      "status": "owned",
+      "source": ".claude/skills/jackie-edit-style/SKILL.md",
+      "caption_font": "condensed bold sans (Bebas Neue / Oswald / Anton look)",
+      "caption_case": "ALL CAPS",
+      "caption_color": "white, soft drop shadow, no box",
+      "accent": "lime #C8F82C on one key word per caption; key numbers/punchlines 2-3x bigger on their own line",
+      "caption_animation": "short ~3-frame fade per phrase, no word-by-word pop",
+      "caption_position": "centred, 62-70% of frame height",
+      "graphics": "thin lime line-art story graphics: typed-on hook title, counter tag, dashed circle highlight, data grid, count-up number, jittering boxed punchline, dial/echo stack",
+      "hook": "left-aligned 3-line typed title with kicker over the wide shot",
+      "framing": "three shot sizes (wide, MCU, wide on big laugh, CU tag), hard cuts only",
+      "sound": "light clicks/pops on graphics only",
+      "end_card": "freeze/blur, centred handle with thin lime underline + special name",
+      "signature": "story graphics that illustrate the exact line being said"
+    },
+    {
+      "id": "brenda",
+      "owner": "Brenda Pontiff (client)",
+      "status": "owned",
+      "source": "delivered clips (Nov 2026); details not written down yet",
+      "todo": "Describe Brenda's style here from her delivered clips (caption font, colors, animation, graphics, hook, signature) so it can be checked against."
+    },
+    {
+      "id": "evan-hulla-portfolio",
+      "owner": "AVE portfolio case study (Evan Hulla, 'Yes, Fight Your Dad')",
+      "status": "portfolio",
+      "caption_font": "heavy condensed sans",
+      "caption_case": "ALL CAPS",
+      "caption_color": "white",
+      "accent": "lime key phrase ('FIGHT YOUR DAD'); punchlines in a solid lime box ('ANYMORE!', 'LITTLE B*TCH!')",
+      "caption_animation": "line lands as it is said",
+      "hook": "two-line title at the top for the first 3 s",
+      "framing": "hand-reframed, locked steady, punch-ins on close-ups",
+      "sound": "untouched room audio",
+      "signature": "solid lime punchline box"
+    }
+  ]
+}
