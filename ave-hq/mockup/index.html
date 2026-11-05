@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AVE HQ</title>
+<style>
+@font-face{font-family:"Archivo";src:url(fonts/archivo-latin-wdth-normal.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
+@font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-SemiBold.otf);font-weight:600}
+@font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-italic-400.woff2);font-style:italic}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/JetBrainsMono-normal-500.woff2);font-weight:500}
+:root{
+  --bg:#F3F2EE;--panel:#FFFFFF;--sunk:#E9E7E1;--ink:#0E0E0E;--text:#0E0E0E;--mute:#6A675F;--faint:#A9A69E;--line:rgba(14,14,14,.10);--line2:rgba(14,14,14,.18);
+  --lime:#C8FF2E;--limeInk:#0E0E0E;--warm:#F2B640;--hot:#FF6B4A;--cold:#8DA7C4;--client:#C8FF2E;--lost:#A9A69E;
+  --r:14px;
+}
+.night{--bg:#0E0E0E;--panel:#171716;--sunk:#1F1F1D;--text:#F3F2EE;--mute:#9C9990;--faint:#5E5B55;--line:rgba(243,242,238,.09);--line2:rgba(243,242,238,.17)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:"Inter Display",system-ui,sans-serif;font-weight:500;font-size:15px;-webkit-font-smoothing:antialiased}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12px;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.serif{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400}
+.disp{font-family:"Archivo",sans-serif;font-stretch:125%;font-weight:800;letter-spacing:-.02em}
+.cond{font-family:"Archivo",sans-serif;font-stretch:70%;font-weight:700;letter-spacing:.01em}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* app shell */
+.app{display:grid;grid-template-columns:232px 1fr 380px;height:100vh}
+.rail{border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;padding:2px 10px 22px}
+.logo i{width:54px;aspect-ratio:1111/362;background:var(--text);-webkit-mask:url(ave_logo.png) center/contain no-repeat;mask:url(ave_logo.png) center/contain no-repeat}
+.logo b{font-family:"Archivo";font-stretch:70%;font-weight:700;font-size:20px;letter-spacing:.02em}
+.nav a{display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:10px;color:var(--mute);text-decoration:none;font-size:15px}
+.nav a.on{background:var(--panel);color:var(--text);box-shadow:0 1px 0 var(--line),0 0 0 1px var(--line)}
+.nav a .n{margin-left:auto;font-family:"JetBrains Mono";font-size:11px;min-width:22px;height:20px;border-radius:10px;display:grid;place-items:center;background:var(--sunk);color:var(--text)}
+.nav a .n.lime{background:var(--lime);color:var(--limeInk)}
+.rail .foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding:0 6px}
+.sync{font-size:12px;color:var(--mute);line-height:1.6}
+.sync span{display:flex;align-items:center;gap:8px}.sync i{width:6px;height:6px;border-radius:50%;background:var(--lime)}.sync i.off{background:var(--faint)}
+.mode{display:flex;gap:4px;background:var(--sunk);border-radius:999px;padding:3px;width:max-content}
+.mode b{width:30px;height:26px;border-radius:999px;display:grid;place-items:center;color:var(--mute)}
+.mode b.on{background:var(--panel);color:var(--text)}
+.main{overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.top{display:flex;align-items:center;gap:14px;padding:22px 34px 18px;border-bottom:1px solid var(--line)}
+.top h1{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:30px;letter-spacing:-.03em}
+.top .sub{color:var(--mute);font-size:14px}
+.top .sp{flex:1}
+.search{height:40px;width:280px;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:10px;padding:0 14px;color:var(--faint);font-size:14px}
+.btn{height:40px;padding:0 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;background:var(--text);color:var(--bg)}
+.btn.lime{background:var(--lime);color:var(--limeInk)}
+.btn.ghost{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--line2)}
+.body{flex:1;overflow:auto;padding:26px 34px 40px}
+.insp{border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.example{display:inline-block;font-family:"JetBrains Mono";font-size:10px;padding:2px 6px;border-radius:4px;background:var(--sunk);color:var(--mute);vertical-align:middle}
+
+/* today */
+.date{font-size:44px;line-height:1;margin-bottom:6px}
+.lede{color:var(--mute);font-size:15px;max-width:60ch;margin-bottom:26px}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+.goal{background:var(--panel);border-radius:var(--r);padding:16px 18px;box-shadow:0 0 0 1px var(--line)}
+.goal .k{color:var(--mute);font-size:13px}
+.goal .v{display:flex;align-items:baseline;gap:6px;margin:8px 0 12px}
+.goal .v b{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:30px;letter-spacing:-.03em}
+.goal .v span{color:var(--mute);font-family:"JetBrains Mono";font-size:12px}
+.bar{height:4px;border-radius:4px;background:var(--sunk);overflow:hidden}.bar i{display:block;height:100%;background:var(--text)}
+.goal.due .bar i{background:var(--lime)}
+h2{font-size:17px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+h2 .c{font-family:"JetBrains Mono";font-size:12px;color:var(--mute);font-weight:500}
+.feed{display:flex;flex-direction:column;background:var(--panel);border-radius:var(--r);box-shadow:0 0 0 1px var(--line);margin-bottom:28px;overflow:hidden}
+.it{display:grid;grid-template-columns:36px 1fr auto;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--line)}
+.it:first-child{border-top:0}
+.it.sel{background:var(--sunk)}
+.src{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--sunk)}
+.src.ig{background:linear-gradient(135deg,#F9CE34,#EE2A7B 50%,#6228D7);color:#fff}
+.src.mail{background:#fff;color:#EA4335;box-shadow:inset 0 0 0 1px var(--line)}
+.src.radar{background:var(--text);color:var(--lime)}
+.src.site{background:var(--lime);color:var(--ink)}
+.src.cal{background:var(--sunk);color:var(--text)}
+.it .t{font-size:15px;line-height:1.35}.it .t b{font-weight:600}
+.it .m{color:var(--mute);font-size:13px;margin-top:3px}
+.it .when{font-family:"JetBrains Mono";font-size:11px;color:var(--mute);text-align:right}
+.it .act{display:flex;gap:8px;align-items:center}
+.chip{height:30px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;box-shadow:inset 0 0 0 1px var(--line2)}
+.chip.do{background:var(--text);color:var(--bg);box-shadow:none}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.tier{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--sunk)}
+.tier.hot .dot{background:var(--hot)}.tier.warm .dot{background:var(--warm)}.tier.cold .dot{background:var(--cold)}.tier.client .dot{background:var(--lime);box-shadow:0 0 0 1px rgba(14,14,14,.3)}.tier.lost .dot{background:var(--lost)}
+
+/* inspector: lead */
+.ihead{padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+.ihead .who{display:flex;align-items:center;gap:14px}
+.av{width:48px;height:48px;border-radius:50%;background:var(--sunk);display:grid;place-items:center;font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:16px}
+.ihead h3{font-size:20px;font-weight:600}
+.ihead .h{color:var(--mute);font-size:13px;margin-top:2px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin-top:18px}
+.facts div{font-size:13px;color:var(--mute)}.facts b{display:block;color:var(--text);font-size:14px;font-weight:600;margin-top:2px}
+.qa{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tl{flex:1;overflow:auto;padding:20px 24px}
+.tl h4{font-size:13px;color:var(--mute);font-weight:500;margin-bottom:12px}
+.ev{display:grid;grid-template-columns:56px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.ev:before{content:"";position:absolute;left:66px;top:18px;bottom:0;width:1px;background:var(--line)}
+.ev:last-child:before{display:none}
+.ev .tc{font-family:"JetBrains Mono";font-size:11px;color:var(--mute);padding-top:2px}
+.ev .b{padding-left:16px;position:relative;font-size:14px;line-height:1.45}
+.ev .b:before{content:"";position:absolute;left:-4px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--panel);box-shadow:0 0 0 1.5px var(--text)}
+.ev.now .b:before{background:var(--lime);box-shadow:0 0 0 1.5px var(--text)}
+.ev .q{margin-top:6px;padding:10px 12px;border-radius:12px;background:var(--sunk);font-size:13.5px;color:var(--text)}
+.ev .q.me{background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
+.next{margin:0 24px 22px;padding:16px;border-radius:var(--r);background:var(--text);color:var(--bg)}
+.next .k{font-size:12px;opacity:.65}.next p{font-size:15px;margin:6px 0 12px;line-height:1.4}
+.next .btn{background:var(--lime);color:var(--ink);height:36px}
+
+/* leads timeline (signature) */
+.legend{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.tlwrap{background:var(--panel);border-radius:var(--r);box-shadow:0 0 0 1px var(--line);overflow:hidden;position:relative}
+.ruler{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid var(--line)}
+.ruler .ticks{position:relative;height:34px}
+.ruler .ticks span{position:absolute;top:10px;white-space:nowrap;font-family:"JetBrains Mono";font-size:11px;color:var(--mute);transform:translateX(-50%)}
+.ruler .ticks i{position:absolute;bottom:0;width:1px;height:6px;background:var(--line2)}
+.track{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid var(--line);min-height:62px}
+.track:last-child{border-bottom:0}
+.track .lab{padding:12px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;gap:2px}
+.track .lab b{font-family:"Archivo";font-stretch:70%;font-weight:700;font-size:17px;letter-spacing:.01em}
+.track .lab span{font-family:"JetBrains Mono";font-size:11px;color:var(--mute)}
+.lane{position:relative;overflow:hidden}
+.clip{position:absolute;height:26px;border-radius:7px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;color:var(--ink)}
+.clip.hot{background:#FFD3C8}.clip.warm{background:#FBE3B0}.clip.cold{background:#DCE5EF}.clip.client{background:var(--lime)}.clip.lost{background:var(--sunk);color:var(--mute)}
+.night .clip.hot{background:#5A2A20;color:#FFD3C8}.night .clip.warm{background:#4D3D1C;color:#FBE3B0}.night .clip.cold{background:#26313D;color:#DCE5EF}.night .clip.client{background:var(--lime);color:var(--ink)}
+.clip .mono{font-size:10.5px;opacity:.7}
+.clip.stack{opacity:.9}
+.play{position:absolute;top:0;bottom:0;width:2px;background:var(--lime);z-index:3;box-shadow:0 0 0 1px rgba(14,14,14,.25)}
+.play:before{content:"Today";position:absolute;top:38px;left:50%;transform:translateX(-50%);font-family:"JetBrains Mono";font-size:10px;background:var(--lime);color:var(--ink);padding:2px 6px;border-radius:4px}
+.marker{position:absolute;top:0;bottom:0;width:0;border-left:1.5px dashed var(--text);opacity:.5;z-index:2}
+.marker span{position:absolute;bottom:8px;right:8px;font-family:"JetBrains Mono";font-size:10px;white-space:nowrap;opacity:1}
+.why{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:20px}
+.card{background:var(--panel);border-radius:var(--r);box-shadow:0 0 0 1px var(--line);padding:18px 20px}
+.card h3{font-size:15px;font-weight:600;margin-bottom:12px}
+.lostrow{display:grid;grid-template-columns:110px 1fr 40px;align-items:center;gap:12px;font-size:14px;margin-top:10px}
+.lostrow .bar{height:8px}
+
+/* analytics */
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px}
+.funnel{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.fs{display:grid;grid-template-columns:120px 1fr 64px;align-items:center;gap:14px;font-size:14px}
+.fs .b{height:30px;border-radius:7px;background:var(--sunk);position:relative;overflow:hidden}
+.fs .b i{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:7px}
+.fs .b i.l{background:var(--lime)}
+.fs .v{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:18px;text-align:right}
+.rate{font-family:"JetBrains Mono";font-size:11px;color:var(--mute);margin-left:134px;margin-top:-4px}
+.empty{border-radius:var(--r);box-shadow:inset 0 0 0 1.5px var(--line2);padding:22px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.empty p{color:var(--mute);font-size:14px;max-width:44ch;line-height:1.5}
+.big{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:40px;letter-spacing:-.03em;line-height:1}
+.rev{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.rev div{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-top:1px solid var(--line)}
+.rev div span:last-child{font-family:"JetBrains Mono";font-size:13px}
+
+/* strategy */
+.sprint{background:var(--text);color:var(--bg);border-radius:20px;padding:26px 28px;margin-bottom:16px;display:grid;grid-template-columns:1fr 300px;gap:30px}
+.sprint .k{font-size:13px;opacity:.6}
+.sprint h3{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:30px;letter-spacing:-.03em;line-height:1.05;margin:8px 0 12px}
+.sprint p{font-size:15px;line-height:1.5;opacity:.85;max-width:56ch}
+.weeks{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:20px}
+.weeks div{height:46px;border-radius:8px;background:rgba(243,242,238,.08);display:flex;flex-direction:column;justify-content:flex-end;padding:6px;font-family:"JetBrains Mono";font-size:10px;opacity:.8}
+.night .weeks div{background:rgba(14,14,14,.08)}
+.weeks div.now{background:var(--lime);color:var(--ink);opacity:1}
+.rules{display:flex;flex-direction:column;gap:10px}
+.rules div{border-radius:12px;padding:12px 14px;background:rgba(243,242,238,.07);font-size:13.5px;line-height:1.4}
+.night .rules div{background:rgba(14,14,14,.07)}
+.rules b{display:block;font-size:13px;margin-bottom:2px}
+.inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.research{display:flex;flex-direction:column;gap:12px}
+.research li{list-style:none;font-size:14px;line-height:1.5;padding-left:18px;position:relative}
+.research li:before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:2px;background:var(--text)}
+
+/* claude panel */
+.claude{display:flex;flex-direction:column;height:100%}
+.claude .ch{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.claude .ch b{font-size:16px}.claude .ch span{color:var(--mute);font-size:12px}
+.msgs{flex:1;overflow:auto;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.bub{max-width:92%;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.5}
+.bub.u{align-self:flex-end;background:var(--text);color:var(--bg);border-bottom-right-radius:4px}
+.bub.a{background:var(--sunk);border-bottom-left-radius:4px}
+.bub.a ol{padding-left:18px;margin-top:6px}.bub.a li{margin:4px 0}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 14px}
+.inp{margin:0 22px 22px;height:48px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line2);display:flex;align-items:center;gap:10px;padding:0 6px 0 18px;color:var(--faint);font-size:14px}
+.inp .send{margin-left:auto;width:36px;height:36px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--ink)}
+
+/* phone */
+.phone .app{grid-template-columns:1fr;height:100vh}
+.phone .rail,.phone .insp.desk{display:none}
+.phone .top{padding:54px 18px 12px;border:0}
+.phone .top h1{font-size:24px}
+.phone .top .search,.phone .top .btn.desk{display:none}
+.phone .body{padding:6px 18px 110px}
+.phone .date{font-size:34px}
+.phone .goals{grid-template-columns:repeat(3,1fr);gap:8px}
+.phone .goal{padding:12px}
+.phone .goal .v b{font-size:22px}.phone .goal .k{font-size:11.5px}
+.phone .it{grid-template-columns:34px 1fr;padding:13px 14px}
+.phone .it .act,.phone .it .when.d{grid-column:2}
+.phone .it .when{text-align:left}
+.chip{white-space:nowrap}
+.phone .it>div:last-child{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.phone .it>div:last-child .act{margin-top:0!important}
+.phone .claude{padding-bottom:86px}.phone .ihead{padding-top:54px}.phone .claude .ch{padding-top:54px}
+.phone .tl{padding-bottom:20px}.phone .next{margin-bottom:100px}
+.tabs{display:none}
+.phone .tabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;padding:8px 10px 26px;background:var(--panel);border-top:1px solid var(--line);z-index:10}
+.tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mute);text-decoration:none}
+.tabs a.on{color:var(--text)}
+.tabs .add{width:52px;height:52px;border-radius:50%;background:var(--lime);color:var(--ink);display:grid;place-items:center;margin-top:-22px;box-shadow:0 8px 20px -6px rgba(0,0,0,.4)}
+.phone .insp.mob{display:flex;border:0;background:var(--bg)}
+.insp.mob{display:none}
+.sheet{position:fixed;inset:0;z-index:20;display:none}
+.sheet.show{display:block}
+.sheet .bg{position:absolute;inset:0;background:rgba(14,14,14,.45)}
+.sheet .p{position:absolute;left:0;right:0;bottom:0;background:var(--panel);border-radius:24px 24px 0 0;padding:12px 18px 34px}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--line2);margin:0 auto 16px}
+.sheet h3{font-size:20px;font-weight:600;margin-bottom:14px}
+.kinds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.kinds b{height:64px;border-radius:14px;background:var(--sunk);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:12.5px;font-weight:600}
+.kinds b.on{background:var(--text);color:var(--bg)}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.fld span{font-size:12.5px;color:var(--mute)}
+.fld div{height:48px;border-radius:12px;background:var(--sunk);display:flex;align-items:center;padding:0 14px;font-size:16px}
+.fld .money{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:24px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sheet .btn{width:100%;justify-content:center;height:52px;font-size:16px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="logo"><i></i><b>HQ</b></div>
+    <nav class="nav">
+      <a href="#today" data-s="today"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Today<span class="n lime">6</span></a>
+      <a href="#leads" data-s="leads"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="11" width="11" height="4" rx="1"/><rect x="8" y="17" width="13" height="4" rx="1"/></svg>Leads<span class="n">127</span></a>
+      <a href="#clients" data-s="clients"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M16 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"/></svg>Clients<span class="n">2</span></a>
+      <a href="#analytics" data-s="analytics"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Analytics</a>
+      <a href="#strategy" data-s="strategy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Strategy</a>
+    </nav>
+    <div class="foot">
+      <div class="sync"><span><i></i>Gmail synced 2 min ago</span><span><i></i>Lead radar ran 41 min ago</span><span><i class="off"></i>Instagram not connected</span><span><i class="off"></i>Website stats waiting</span></div>
+      <div class="mode"><b class="d"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg></b><b class="n"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></b></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="top"><div><h1 id="title">Today</h1></div><div class="sp"></div>
+      <div class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search leads, clients, messages</div>
+      <button class="btn lime desk"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Log something</button></header>
+    <div class="body" id="body"></div>
+  </main>
+  <aside class="insp desk" id="insp"></aside>
+  <aside class="insp mob" id="inspMob"></aside>
+</div>
+<nav class="tabs"><a href="#today" data-s="today"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Today</a><a href="#leads" data-s="leads"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="11" width="11" height="4" rx="1"/><rect x="8" y="17" width="13" height="4" rx="1"/></svg>Leads</a><a><span class="add"><svg class="i" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M12 5v14M5 12h14"/></svg></span></a><a href="#analytics" data-s="analytics"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats</a><a href="#claude" data-s="claude"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg>Claude</a></nav>
+<div class="sheet" id="sheet"><div class="bg"></div><div class="p"><div class="grab"></div><h3>Log something</h3>
+  <div class="kinds"><b>Lead</b><b>Message sent</b><b>Reply</b><b>Sample sent</b><b class="on">Payment</b><b>Lost deal</b></div>
+  <div class="fld"><span>Client</span><div>Brenda Pontiff</div></div>
+  <div class="row2"><div class="fld"><span>Amount</span><div class="money">$50</div></div><div class="fld"><span>Paid with</span><div>PayPal</div></div></div>
+  <div class="row2"><div class="fld"><span>For</span><div>2 stand-up clips</div></div><div class="fld"><span>Date</span><div>Nov 1</div></div></div>
+  <button class="btn">Save payment</button></div></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const ic={ig:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+mail:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+radar:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 12l6-6"/><circle cx="12" cy="12" r="4"/></svg>',
+site:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>',
+cal:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'};
+const item=(src,t,m,when,act,sel)=>`<div class="it${sel?' sel':''}"><span class="src ${src}">${ic[src]}</span><div><div class="t">${t}</div><div class="m">${m}</div></div><div><div class="when">${when}</div>${act?`<div class="act" style="margin-top:8px">${act}</div>`:''}</div></div>`;
+const S={
+today:()=>`<div class="date serif">Thursday, 5 November</div>
+<p class="lede">Two clients waiting on you, one hot lead back in 11 days, and three fresh hiring posts from the radar.</p>
+<div class="goals">
+ <div class="goal due"><div class="k">Messages this week</div><div class="v"><b>23</b><span>of 100</span></div><div class="bar"><i style="width:23%"></i></div></div>
+ <div class="goal"><div class="k">Samples offered</div><div class="v"><b>2</b><span>of 10</span></div><div class="bar"><i style="width:20%"></i></div></div>
+ <div class="goal"><div class="k">Asked for the sale</div><div class="v"><b>1</b><span>of 5</span></div><div class="bar"><i style="width:20%"></i></div></div>
+</div>
+<h2>Needs you <span class="c">3</span></h2>
+<div class="feed">
+ ${item('mail','<b>Jackie Kashian</b> sent colour notes on the 3 clips','Client. Changes requested on Nov 4 delivery.','09:12',`<span class="chip do">Open</span>`,true)}
+ ${item('radar','<b>Comedian, part-time editor</b> on r/forhire, $400/week','Hot. Posted 38 min ago. Reply drafted.','10:46',`<span class="chip do">Review reply</span>`)}
+ ${item('mail','<b>Brenda Pontiff</b> asked to pay by PayPal','Client. $50 for 2 clips.','Yesterday',`<span class="chip">Send PayPal link</span>`)}
+</div>
+<h2>New <span class="c">4</span></h2>
+<div class="feed">
+ ${item('ig','<b>Patricia Yeazell</b> replied “Yep! I’m in China, back 11/16”','Hot. Reminder set for Nov 16.','11:51')}
+ ${item('radar','<b>Podcast editor</b> on r/FindVideoEditors, $50/video','Warm. Posted 2 h ago.','08:30')}
+ ${item('site','Someone opened the contact form on the website','No message sent yet.','07:05')}
+ ${item('cal','Follow-ups due: Ari Matti, Ehsan Ahmad, Kurt Metzger','Day 7 nudge from the playbook.','Today')}
+</div>
+<p class="lede" style="margin:0">Items are from your tracker and inbox. Times and the radar posts are <span class="example">example</span> until the app is connected.</p>`,
+leads:()=>{const D0=new Date('2026-10-26'),days=24,x=d=>((new Date(d)-D0)/864e5/days*100).toFixed(2)+'%';
+ const cx=d=>new Date(d)<D0?'2026-10-26':d;const cl=(c,name,a,b,top,extra='')=>`<div class="clip ${c}" style="left:${x(cx(a))};width:calc(${x(b)} - ${x(cx(a))});top:${top}px">${name}${extra}</div>`;
+ const ticks=[...Array(days+1)].map((_,i)=>{const d=new Date(+D0+i*864e5);return i%3?'' :`<span style="left:${(i/days*100)}%">${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>`}).join('');
+ return `<div class="legend"><span class="tier cold"><span class="dot"></span>Cold 1</span><span class="tier warm"><span class="dot"></span>Warm 105</span><span class="tier hot"><span class="dot"></span>Hot 19</span><span class="tier client"><span class="dot"></span>Client 2</span><span class="tier lost"><span class="dot"></span>Lost 1</span></div>
+<div class="tlwrap"><div class="ruler"><div></div><div class="ticks">${ticks}</div></div>
+ <div class="track" style="min-height:72px"><div class="lab"><b>Client</b><span>2 paying</span></div><div class="lane">${cl('client','Jackie Kashian <span class="mono">repeat</span>','2026-10-20','2026-11-06',8)}${cl('client','Brenda Pontiff <span class="mono">$50</span>','2026-10-29','2026-11-06',36)}</div></div>
+ <div class="track" style="min-height:58px"><div class="lab"><b>Sample</b><span>waiting on reply</span></div><div class="lane">${cl('warm','Evan Hulla <span class="mono">budget</span>','2026-10-22','2026-11-03',16)}</div></div>
+ <div class="track" style="min-height:128px"><div class="lab"><b>Hot</b><span>19 leads</span></div><div class="lane">${cl('hot','Patricia Yeazell <span class="mono">back Nov 16</span>','2026-11-04','2026-11-16',6)}${cl('hot','Ari Matti','2026-10-31','2026-11-06',36)}${cl('hot','Ehsan Ahmad','2026-10-31','2026-11-06',64)}${cl('hot','Reddit hiring ×7','2026-10-30','2026-11-06',92)}</div></div>
+ <div class="track" style="min-height:134px"><div class="lab"><b>Warm</b><span>105 leads</span></div><div class="lane">${cl('warm','Comedians ×20','2026-10-29','2026-11-06',8)}${cl('warm','Podcasts ×11','2026-10-29','2026-11-06',38)}${cl('warm','Agencies ×9','2026-10-30','2026-11-06',68)}${cl('warm','Real estate ×8','2026-10-30','2026-11-05',98)}</div></div>
+ <div class="track" style="min-height:58px"><div class="lab"><b>Lost</b><span>with a reason</span></div><div class="lane">${cl('lost','Ben Miller <span class="mono">not interested</span>','2026-10-29','2026-11-02',18)}</div></div>
+ <div class="play" style="left:calc(130px + (100% - 130px) * ${(new Date('2026-11-05')-D0)/864e5/days})"></div>
+ <div class="marker" style="left:calc(130px + (100% - 130px) * ${(new Date('2026-11-16')-D0)/864e5/days})"><span>Patricia back</span></div>
+</div>
+<div class="why">
+ <div class="card"><h3>Why deals don’t close</h3>
+  <div class="lostrow"><span>Budget</span><div class="bar"><i style="width:75%;background:var(--hot)"></i></div><span class="mono">3</span></div>
+  <div class="lostrow"><span>No reply</span><div class="bar"><i style="width:100%"></i></div><span class="mono">69</span></div>
+  <div class="lostrow"><span>Not interested</span><div class="bar"><i style="width:25%"></i></div><span class="mono">1</span></div>
+  <p style="color:var(--mute);font-size:13px;margin-top:14px;line-height:1.5">Budget counts Evan, Debi and Brenda’s first ask, from your notes.</p></div>
+ <div class="card"><h3>Where clients came from</h3><div class="rev" style="margin-top:0">
+  <div><span>Referral (Debi)</span><span>Brenda</span></div><div><span>Repeat client</span><span>Jackie</span></div><div><span>Cold email and DMs</span><span>0 of 72</span></div></div></div>
+</div>`},
+analytics:()=>`<div class="grid2">
+ <div class="card"><h3>Outreach funnel, since Oct 29</h3><div class="funnel">
+  <div class="fs"><span>In tracker</span><div class="b"><i style="width:100%"></i></div><span class="v">127</span></div>
+  <div class="fs"><span>Contacted</span><div class="b"><i style="width:56.7%"></i></div><span class="v">72</span></div><div class="rate">57% of tracked</div>
+  <div class="fs"><span>Replied</span><div class="b"><i style="width:3.1%"></i></div><span class="v">4</span></div><div class="rate">5.6% reply rate, Patricia included</div>
+  <div class="fs"><span>Paying</span><div class="b"><i class="l" style="width:1.6%"></i></div><span class="v">2</span></div><div class="rate">both from referral or repeat</div>
+ </div></div>
+ <div class="card"><h3>Revenue</h3><div class="big">$50<span class="serif" style="font-size:22px;font-weight:400;color:var(--mute)"> logged</span></div>
+  <div class="rev"><div><span>Brenda Pontiff, 2 clips</span><span>$50</span></div><div><span>Jackie Kashian, 3 clips</span><span style="color:var(--mute)">not logged yet</span></div></div></div>
+</div>
+<div class="grid2">
+ <div class="empty"><b style="font-size:16px">Website visits</b><p>Turn on Analytics in your Vercel project and visits, sources and countries show up here within a day.</p><span class="btn ghost">How to turn it on</span></div>
+ <div class="empty"><b style="font-size:16px">Instagram</b><p>Connect @avestudio.production once it’s a Business account linked to a Facebook Page.</p><span class="btn ghost">Connect later</span></div>
+</div>`,
+strategy:()=>`<div class="sprint"><div><div class="k">Sprint 1, week 1 of 7</div><h3>Fast replies and referrals</h3>
+ <p>Bet: answering hiring posts within two hours, and asking happy clients for referrals, gets more replies than cold outreach. Every client so far came through a person, and 72 cold messages brought none.</p>
+ <div class="weeks"><div class="now">Nov 5</div><div>Nov 12</div><div>Nov 19</div><div>Nov 26</div><div>Dec 3</div><div>Dec 10</div><div>Dec 17</div></div></div>
+ <div class="rules"><div><b>Keep</b>Replies grow week on week: tighten the message, add a subreddit.</div><div><b>Change one thing</b>Flat for 2 weeks: change the angle, the offer or who we target.</div><div><b>Stop</b>No replies by week 3: research the market and positioning, then start Sprint 2.</div></div></div>
+<div class="inputs">
+ <div class="goal"><div class="k">Radar replies sent</div><div class="v"><b>0</b><span>of 20</span></div><div class="bar"><i style="width:2%"></i></div></div>
+ <div class="goal"><div class="k">Referral asks</div><div class="v"><b>1</b><span>of 3</span></div><div class="bar"><i style="width:33%"></i></div></div>
+ <div class="goal"><div class="k">Samples after a yes</div><div class="v"><b>0</b><span>of 5</span></div><div class="bar"><i style="width:2%"></i></div></div>
+ <div class="goal"><div class="k">Sale asks</div><div class="v"><b>1</b><span>of 5</span></div><div class="bar"><i style="width:20%"></i></div></div>
+</div>
+<div class="grid2"><div class="card"><h3>This week’s read</h3><ul class="research">
+ <li>Budget is the blocker, not interest: offer a 3-clip starter before the monthly package.</li>
+ <li>Ask Debi and Jackie for one name each this week.</li>
+ <li>First review on Monday, Nov 9, once the radar has 4 days of data.</li></ul></div>
+ <div class="card"><h3>Week 1 baseline</h3><div class="rev" style="margin-top:0"><div><span>Reply rate</span><span>5.6%</span></div><div><span>Reply to paid</span><span>2 of 4</span></div><div><span>Revenue</span><span>$50</span></div></div></div></div>`,
+claude:()=>``
+};
+function lead(){return `<div class="ihead"><div class="who"><span class="av">PY</span><div><h3>Patricia Yeazell</h3><div class="h">Instagram, @patriciayeazell</div></div></div>
+ <div class="facts"><div>Stage<b><span class="tier hot"><span class="dot"></span>Hot</span></b></div><div>Next step<b>Follow up Nov 16</b></div><div>Budget<b style="color:var(--mute)">Not asked yet</b></div><div>Style<b>Style Lab guide pending</b></div></div>
+ <div class="qa"><span class="chip do">Log reply</span><span class="chip">Start style guide</span><span class="chip">Set reminder</span></div></div>
+<div class="tl"><h4>Conversation</h4>
+ <div class="ev"><span class="tc">Nov 4</span><div class="b">You offered a free sample on Instagram<div class="q me">Here’s some of our work… Would you be open to that?</div></div></div>
+ <div class="ev"><span class="tc">11:51</span><div class="b">Patricia replied<div class="q">Yep! I’m in China so I’ll have to get back to you 11/16</div></div></div>
+ <div class="ev"><span class="tc">12:55</span><div class="b">You replied<div class="q me">Sounds great, Patricia! … Let’s reconnect when you’re back on the 16th.</div></div></div>
+ <div class="ev now"><span class="tc">Nov 16</span><div class="b">Reminder: welcome her back and offer the first clip</div></div></div>
+<div class="next"><div class="k">Suggested next move</div><p>Have her style guide and storyboard ready by the 15th, so the sample goes out the day she’s back.</p><span class="btn">Start style guide</span></div>`}
+function claude(){return `<div class="claude"><div class="ch"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg><div><b>Ask Claude</b><br><span>Uses AVE HQ through your Claude app</span></div></div>
+ <div class="msgs"><div class="bub u">What needs a reply today?</div>
+ <div class="bub a">Three things, most urgent first:<ol><li>Jackie’s colour notes on the 3 clips (client).</li><li>The $400/week comedian post on r/forhire, 38 min old. Reply is drafted.</li><li>Brenda wants a PayPal link for the $50.</li></ol></div>
+ <div class="bub u">Log that Brenda paid $50 by PayPal</div><div class="bub a">Logged: $50 from Brenda Pontiff, PayPal, Nov 5. Revenue this month is now $50.</div></div>
+ <div class="sugg"><span class="chip">Who should I follow up?</span><span class="chip">Draft Patricia’s welcome back</span><span class="chip">How is Sprint 1 going?</span></div>
+ <div class="inp">Ask about leads, clients or numbers<span class="send"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div>`}
+const titles={today:'Today',leads:'Leads',analytics:'Analytics',strategy:'Strategy',claude:'Claude',lead:'Lead',clients:'Clients'};
+function render(){const h=location.hash.slice(1).split('&');const s=h[0]||'today';const o=new Set(h.slice(1));
+ document.body.classList.toggle('night',o.has('night'));document.body.classList.toggle('phone',o.has('phone'));
+ document.querySelectorAll('[data-s]').forEach(a=>a.classList.toggle('on',a.dataset.s===s));
+ document.querySelectorAll('.mode b').forEach((b,i)=>b.classList.toggle('on',(i===1)===o.has('night')));
+ $('#title').textContent=titles[s];
+ const phone=o.has('phone');
+ if(s==='lead'||s==='claude'){ $('#body').innerHTML='';$('#inspMob').innerHTML=s==='lead'?lead():claude();$('#body').style.display='none'}
+ else{$('#body').style.display='';$('#body').innerHTML=S[s]();$('#inspMob').innerHTML=''}
+ $('#insp').innerHTML=(s==='strategy'||s==='analytics')?claude():lead();
+ $('#sheet').classList.toggle('show',o.has('sheet'));
+ if(phone&&(s==='lead'||s==='claude'))document.querySelector('.main').style.display='none';else document.querySelector('.main').style.display='';
+}
+addEventListener('hashchange',render);render();
+</script>
+</body>
+</html>
