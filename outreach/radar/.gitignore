@@ -1,3 +1,4 @@
 out/
 seen.json
 __pycache__/
+secrets.json

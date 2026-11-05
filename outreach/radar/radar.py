@@ -16,13 +16,35 @@ SEEN = os.path.join(HERE, "seen.json")
 
 def load_config():
     with open(os.path.join(HERE, "config.json"), encoding="utf-8") as f:
-        return json.load(f)
+        cfg = json.load(f)
+    sec = os.path.join(HERE, "secrets.json")  # Reddit app ID + secret; git-ignored, never committed
+    if os.path.exists(sec):
+        with open(sec, encoding="utf-8") as f:
+            cfg.update(json.load(f))
+    return cfg
 
 
 # ---------- fetching ----------
 
-def get_json(url, ua):
-    req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "application/json"})
+def get_token(cfg):
+    """App-only token from Reddit's official API (needs a 'script' app at reddit.com/prefs/apps)."""
+    cid, secret = cfg.get("reddit_client_id", "").strip(), cfg.get("reddit_client_secret", "").strip()
+    if not cid or not secret or cid.startswith("PASTE"):
+        return None
+    import base64
+    auth = base64.b64encode(f"{cid}:{secret}".encode()).decode()
+    req = urllib.request.Request("https://www.reddit.com/api/v1/access_token", data=b"grant_type=client_credentials",
+                                 headers={"User-Agent": cfg["user_agent"], "Authorization": "Basic " + auth})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)["access_token"]
+
+
+def get_json(url, ua, token=None):
+    headers = {"User-Agent": ua, "Accept": "application/json"}
+    if token:
+        headers["Authorization"] = "Bearer " + token
+        url = url.replace("https://www.reddit.com", "https://oauth.reddit.com")
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
@@ -30,12 +52,17 @@ def get_json(url, ua):
 def fetch_reddit(cfg):
     """New posts from each subreddit, plus a keyword search across Reddit."""
     ua, posts = cfg["user_agent"], []
+    try:
+        token = get_token(cfg)
+    except Exception as e:
+        print(f"  Reddit sign-in failed: {e}", file=sys.stderr)
+        token = None
     urls = [f"https://www.reddit.com/r/{s}/new.json?limit=50&raw_json=1" for s in cfg["subreddits"]]
     for q in cfg["search_queries"]:
         urls.append("https://www.reddit.com/search.json?sort=new&t=day&limit=50&raw_json=1&q=" + urllib.parse.quote(q))
     for url in urls:
         try:
-            data = get_json(url, ua)
+            data = get_json(url, ua, token)
         except Exception as e:  # one bad source should not stop the rest
             print(f"  skip {url.split('?')[0]}: {e}", file=sys.stderr)
             continue
