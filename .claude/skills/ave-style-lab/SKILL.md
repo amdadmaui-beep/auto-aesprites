@@ -77,13 +77,32 @@ hook format, signature move.
 - Also compare with other prospects' guides in `styles/`: two prospects should not share a
   concept.
 
-## 6. Edit the sample
+## 6. Storyboard for the user's review (required: no editing before approval)
+
+Before cutting anything, show the user what the sample will look like:
+
+1. Pull 6 real frames from the chosen bit with ffmpeg (hook moment, setup, a mid-story line,
+   the punchline, the big laugh, the last line).
+2. Mock each frame up as a finished 1080x1920 still in the new style: captions in the chosen font,
+   size, position and colours with the real words from that moment, the emphasis rule applied, and
+   the graphic motif planned for that beat. Build them as HTML or a Remotion still and screenshot
+   them (Playwright / `npx remotion still`). Use the real footage, not generated images: it's free
+   and shows the user exactly what they'll get. Never use paid image generation (Fish Audio) without
+   an estimate and the user's approval.
+3. Lay the 6 stills out on one storyboard sheet: frame number, timestamp, what happens there
+   (caption, graphic, cut, sound cue) under each, the concept name and the 3 colour swatches on top,
+   and one sheet section for the end card.
+4. Save it as `styles/<prospect-slug>-storyboard.jpg`, send it to the user with a 3-line summary
+   (concept, signature move, why it fits them), and **stop**. Wait for "approved" or their changes.
+   Apply changes to the guide and re-send the storyboard until approved.
+
+## 7. Edit the sample (only after the storyboard is approved)
 
 Edit with the guide open: Remotion in `video/` for graphics-heavy looks, or ffmpeg cuts plus
 burned-in ASS captions for simple ones. Render, make a 1 fps contact sheet, and check it against
 the guide's don't-list before showing the user.
 
-## 7. Keep the registry current
+## 8. Keep the registry current
 
 - New guide: `status: sample` in its own file. List it in the user's tracker next to the lead.
 - Prospect becomes a paying client: add their style to `reserved-styles.json` with
