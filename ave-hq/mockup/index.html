@@ -460,14 +460,20 @@ body:not(.phone) .sheet .p{width:520px}
 .ins .src i{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#fff}
 .ins p{font-size:15px;line-height:1.45}
 .ins .to{font-size:13px;color:var(--mute)}.ins .to b{color:var(--text)}
+
+#splash .sp-tl,#splash .sp-joji{display:none}
+#splash .sp-ring{position:absolute;left:50%;bottom:calc(14vh + env(safe-area-inset-bottom,0px));width:64px;height:64px;transform:translateX(-50%);opacity:0;animation:fade .4s .3s forwards}
+#splash .sp-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+#splash .sp-ring circle{fill:none;stroke-width:2.5}
+#splash .sp-ring .tr{stroke:rgba(243,242,238,.14)}
+#splash .sp-ring .pr{stroke:#C8FF2E;stroke-linecap:round;stroke-dasharray:175.9;stroke-dashoffset:175.9}
+#splash .sp-ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:500;font-size:14px;color:#F3F2EE;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
 <div id="splash" aria-hidden="true">
  <div class="sp-c"><div class="lg"></div><div class="sp-wm">STUDIO</div></div>
- <div class="sp-tl"><div class="sp-tc"><span id="sptc">00:00:00:00</span><span>Getting your day ready</span></div><div class="sp-rule"><i class="ph"></i></div>
-  <ul class="sp-steps"><li style="--d:.5s">Gmail</li><li style="--d:.9s">Lead radar</li><li style="--d:1.3s">Leads and clients</li><li style="--d:1.7s">Website</li></ul></div>
- <div class="sp-joji"><img src="img/joji.png" alt=""><span>Joji has your day ready</span></div>
+ <div class="sp-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" class="tr"/><circle cx="32" cy="32" r="28" class="pr" id="sppr"/></svg><b id="spn">0</b></div>
 </div>
 <div class="app">
   <aside class="rail">
@@ -668,7 +674,7 @@ document.querySelector('.top .btn').addEventListener('click',()=>{sheetOpen=true
 document.querySelector('#sheet .bg').addEventListener('click',()=>{sheetOpen=false;render()});
 document.querySelector('#sheet .save').addEventListener('click',()=>{sheetOpen=false;render()});
 matchMedia('(max-width:760px)').addEventListener('change',render);
-{const sp=document.getElementById('splash');const t=Q.has('nosplash')?0:2900;{const tc=document.getElementById('sptc'),t0=performance.now();(function f(){const e=Math.min(2.4,(performance.now()-t0)/1000);const fr=Math.floor(e*30);tc.textContent='00:00:0'+Math.floor(e)+':'+String(fr%30).padStart(2,'0');if(e<2.4&&document.getElementById('splash'))requestAnimationFrame(f)})()}setTimeout(()=>{sp.classList.add('out');setTimeout(()=>sp.remove(),950)},t);if(!t)sp.remove()}
+{const sp=document.getElementById('splash');const t=Q.has('nosplash')?0:2600;{const n=document.getElementById('spn'),pr=document.getElementById('sppr'),t0=performance.now(),D=2200;(function f(){const k=Math.min(1,(performance.now()-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;n.textContent=Math.round(e*100);pr.style.strokeDashoffset=175.9*(1-e);if(k<1&&document.getElementById('splash'))requestAnimationFrame(f)})()}setTimeout(()=>{sp.classList.add('out');setTimeout(()=>sp.remove(),950)},t);if(!t)sp.remove()}
 addEventListener('hashchange',render);render();
 </script>
 </body>
