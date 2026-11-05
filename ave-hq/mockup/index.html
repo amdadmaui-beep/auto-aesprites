@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AVE HQ</title>
+<title>AVE Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:"Archivo";src:url(fonts/archivo-latin-wdth-normal.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
 @font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
@@ -204,7 +206,7 @@ h2 .c{font-family:"JetBrains Mono";font-size:12px;color:var(--mute);font-weight:
 .chip{white-space:nowrap}
 .phone .it>div:last-child{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .phone .it>div:last-child .act{margin-top:0!important}
-.phone .claude{padding-bottom:86px}.phone .ihead{padding-top:54px}.phone .claude .ch{padding-top:54px}
+.phone .claude{padding-bottom:112px}.phone .ihead{padding-top:54px}.phone .claude .ch{padding-top:54px}
 .phone .tl{padding-bottom:20px}.phone .next{margin-bottom:100px}
 .tabs{display:none}
 .phone .tabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;padding:8px 10px 26px;background:var(--panel);border-top:1px solid var(--line);z-index:10}
@@ -228,17 +230,156 @@ h2 .c{font-family:"JetBrains Mono";font-size:12px;color:var(--mute);font-weight:
 .fld .money{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:24px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sheet .btn{width:100%;justify-content:center;height:52px;font-size:16px;margin-top:6px}
+
+/* ===== round 2: friendlier, bigger ===== */
+body{font-family:"Poppins","Inter Display",system-ui,sans-serif;font-weight:400;font-size:16.5px;line-height:1.5}
+b,strong,.it .t b,h2,h3,.btn,.chip{font-weight:600}
+.mono{font-size:13px}
+.logo{gap:12px;padding:2px 10px 26px}
+.logo i{width:62px}
+.wm{display:flex;flex-direction:column;line-height:1}
+.wm b{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;font-size:27px;letter-spacing:-.01em}
+.wm em{font-style:normal;font-size:11.5px;color:var(--mute);margin-top:4px}
+.nav a{height:46px;font-size:16px;gap:14px}
+.nav .grp{font-size:12px;color:var(--faint);padding:16px 12px 6px}
+.sync{font-size:13px}
+.top h1{font-size:34px}
+.date{font-size:52px}
+.lede{font-size:17px}
+.goal .k{font-size:14.5px}.goal .v b{font-size:34px}
+h2{font-size:19px}
+.it .t{font-size:16.5px}.it .m{font-size:14.5px}
+.it{grid-template-columns:40px minmax(0,1fr) auto;padding:16px 20px}
+.it>div:last-child{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:0}
+.it .act{margin-top:0!important;flex-wrap:wrap;justify-content:flex-end}
+.chip{height:34px;padding:0 14px;font-size:14px}
+.facts div{font-size:14px}.facts b{font-size:15.5px}
+.ev .b{font-size:15px}.ev .q{font-size:14.5px}
+.card h3{font-size:17px}
+.fs{font-size:15px}.lostrow{font-size:15px}.rev div{font-size:15px}
+.track .lab b{font-size:19px}
+.clip{font-size:13.5px;height:28px}
+/* narrow desktops / tablets: inspector folds away, rows stack actions */
+@media (max-width:1280px){.app{grid-template-columns:232px 1fr}.insp.desk{display:none}}
+@media (max-width:1020px){.it{grid-template-columns:40px minmax(0,1fr)}.it>div:last-child{grid-column:2;flex-direction:row;align-items:center;justify-content:space-between}}
+
+/* needs you: person-first action cards */
+.needs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:30px}
+.nc{position:relative;background:var(--panel);border-radius:20px;padding:18px 18px 16px;box-shadow:0 0 0 1px var(--line),0 14px 30px -24px rgba(14,14,14,.5);display:flex;flex-direction:column;gap:12px;min-width:0}
+.nc .hd{display:flex;align-items:center;gap:12px;min-width:0}
+.nc .pic{width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:15px;background:var(--sunk);position:relative}
+.nc .pic .s{position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;border-radius:7px;display:grid;place-items:center;box-shadow:0 0 0 2px var(--panel)}
+.nc .pic .s svg{width:12px;height:12px}
+.nc .who{min-width:0}.nc .who b{display:block;font-size:16.5px}.nc .who span{font-size:13.5px;color:var(--mute)}
+.nc .ago{margin-left:auto;align-self:flex-start;font-family:"JetBrains Mono";font-size:12px;color:var(--mute);white-space:nowrap}
+.nc blockquote{font-size:15.5px;line-height:1.45;padding:12px 14px;border-radius:14px;background:var(--sunk)}
+.nc .why{font-size:13.5px;color:var(--mute);display:flex;align-items:center;gap:8px}
+.nc .why .tag{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--text);color:var(--bg)}
+.nc .why .tag.l{background:var(--lime);color:var(--ink)}
+.nc .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.nc .acts .chip{height:38px}
+.nc.first{box-shadow:0 0 0 2px var(--text),0 18px 34px -24px rgba(14,14,14,.6)}
+
+/* log something: redesigned sheet */
+.sheet .p{padding:12px 22px 30px;max-height:92vh;overflow:auto}
+.sheet h3{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:26px;letter-spacing:-.02em;margin-bottom:4px}
+.sheet .sub{color:var(--mute);font-size:14.5px;margin-bottom:18px}
+.kinds{display:flex;gap:8px;overflow-x:auto;margin:0 -22px 20px;padding:0 22px 4px;scrollbar-width:none}
+.kinds b{flex:none;height:44px;padding:0 16px;border-radius:999px;flex-direction:row;gap:8px;font-size:14.5px;background:var(--sunk)}
+.kinds b svg{width:16px;height:16px}
+.kinds b.on{background:var(--text);color:var(--bg)}
+.amount{display:flex;align-items:baseline;justify-content:center;gap:4px;padding:18px 0 6px}
+.amount .cur{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:34px;color:var(--mute)}
+.amount .val{font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:72px;letter-spacing:-.04em;line-height:1}
+.amount .caret{width:3px;height:56px;background:var(--lime);align-self:center;border-radius:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.quick{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+.quick span{height:32px;padding:0 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line2);display:inline-flex;align-items:center;font-size:13.5px}
+.lbl{font-size:13.5px;color:var(--mute);margin:0 0 8px}
+.people{display:flex;gap:10px;margin-bottom:18px;overflow-x:auto;scrollbar-width:none}
+.person{flex:none;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px 0 6px;border-radius:999px;background:var(--sunk);font-size:15px}
+.person i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--panel);font-style:normal;font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:13px}
+.person.on{background:var(--text);color:var(--bg)}.person.on i{background:var(--lime);color:var(--ink)}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pills span{height:40px;padding:0 16px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;font-size:14.5px;background:var(--sunk)}
+.pills span.on{box-shadow:inset 0 0 0 2px var(--text);background:var(--panel)}
+.note{height:52px;border-radius:14px;background:var(--sunk);display:flex;align-items:center;padding:0 16px;font-size:15px;color:var(--mute);margin-bottom:18px}
+.sheet .save{width:100%;height:58px;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;gap:10px}
+.sheet .save small{font-weight:400;opacity:.7;font-size:14px}
+body:not(.phone) .sheet .p{width:520px}
+
+/* ask claude: aesthetic */
+.claude{background:radial-gradient(120% 60% at 100% 0%,rgba(200,255,46,.10),transparent 60%),var(--panel)}
+.claude .ch{gap:12px}
+.claude .orb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 200deg,var(--lime),#9BE7FF,#F3F2EE,var(--lime));color:var(--ink);box-shadow:0 8px 20px -8px rgba(200,255,46,.7)}
+.claude .ch b{font-size:17px}.claude .ch span{font-size:13px}
+.claude .ch .live{margin-left:auto;font-size:12px;display:flex;align-items:center;gap:6px;color:var(--mute)}
+.claude .ch .live i{width:7px;height:7px;border-radius:50%;background:var(--lime)}
+.bub{font-size:15.5px}
+.bub.a{background:transparent;padding:0;max-width:100%}
+.ans{display:flex;flex-direction:column;gap:8px}
+.ans p{font-size:15.5px}
+.ref{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:var(--sunk);font-size:14.5px}
+.ref .n{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-family:"JetBrains Mono";font-size:13px;background:var(--panel)}
+.ref .go{font-size:13px;font-weight:600;padding:6px 10px;border-radius:999px;background:var(--text);color:var(--bg);white-space:nowrap}
+.done{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;box-shadow:inset 0 0 0 1.5px var(--lime);font-size:15px}
+.done .tick{width:28px;height:28px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--ink);flex:none}
+.done .mono{margin-left:auto}
+.sugg .chip{height:36px;background:var(--panel);box-shadow:0 0 0 1px var(--line2)}
+.inp{height:56px;background:var(--panel);box-shadow:0 0 0 1px var(--line2),0 10px 24px -18px rgba(14,14,14,.6);font-size:15px;gap:12px}
+.inp .mic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--mute)}
+.inp .send{width:42px;height:42px}
+
+/* style lab */
+.lab-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-bottom:18px}
+.sb{background:var(--panel);border-radius:20px;box-shadow:0 0 0 1px var(--line);padding:20px;display:flex;flex-direction:column;gap:14px}
+.sb .frames{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.fr{aspect-ratio:9/16;border-radius:10px;background:linear-gradient(160deg,#2a2622,#0E0E0E);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding:8px}
+.fr .cap{font-family:"DM Serif Display","Instrument Serif",serif;font-style:italic;color:#F7E7C6;font-size:12px;line-height:1.1;text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.fr .cap u{text-decoration:none;color:#E8A04A}
+.fr .tc{position:absolute;left:6px;top:6px;font-family:"JetBrains Mono";font-size:9px;color:rgba(255,255,255,.7)}
+.sw{display:flex;gap:8px;align-items:center}.sw i{width:26px;height:26px;border-radius:8px;box-shadow:0 0 0 1px var(--line)}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps span{font-size:13px;padding:6px 12px;border-radius:999px;background:var(--sunk);color:var(--mute)}
+.steps span.d{background:var(--text);color:var(--bg)}
+.steps span.n{background:var(--lime);color:var(--ink);font-weight:600}
+.queue{display:flex;flex-direction:column}
+.qrow{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.qrow:first-child{border-top:0}
+.qrow .pic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:"Archivo";font-stretch:125%;font-weight:800;font-size:14px;background:var(--sunk)}
+.qrow b{display:block;font-size:16px}.qrow span{font-size:14px;color:var(--mute)}
+.lock{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--mute)}
+.reserved{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rs{border-radius:16px;padding:14px;background:var(--sunk);display:flex;flex-direction:column;gap:6px}
+.rs b{font-size:15.5px}.rs span{font-size:13.5px;color:var(--mute)}
+.rs .own{font-size:12px;font-weight:600;align-self:flex-start;padding:3px 9px;border-radius:999px;background:var(--text);color:var(--bg)}
+@media (max-width:760px){.lab-hero,.reserved{grid-template-columns:1fr}.sb .frames{grid-template-columns:repeat(3,1fr)}}
+
+/* splash */
+#splash{position:fixed;inset:0;z-index:100;background:var(--ink);color:#F3F2EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
+#splash .lg{width:min(46vw,260px);aspect-ratio:1111/362;background:#F3F2EE;-webkit-mask:url(ave_logo.png) center/contain no-repeat;mask:url(ave_logo.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:wipe 1s cubic-bezier(.16,1,.3,1) .1s forwards}
+#splash .st{font-family:"Instrument Serif",serif;font-style:italic;font-size:30px;opacity:0;animation:fade .6s .7s forwards}
+#splash .ld{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(243,242,238,.12)}
+#splash .ld i{display:block;height:100%;width:0;background:#C8FF2E;animation:load 1.5s cubic-bezier(.6,0,.2,1) forwards}
+#splash .msg{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom,0px));font-size:13.5px;color:#9C9990}
+#splash.out{clip-path:inset(0 0 100% 0)}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}@keyframes fade{to{opacity:1}}@keyframes load{to{width:100%}}
+@media (prefers-reduced-motion:reduce){#splash *{animation-duration:.01s!important}}
+.phone .tabs{grid-template-columns:repeat(6,1fr)}
+.tabs a{font-size:11.5px}
 </style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><div class="lg"></div><div class="st">Studio</div><div class="ld"><i></i></div><div class="msg">Syncing Gmail, leads and the radar</div></div>
 <div class="app">
   <aside class="rail">
-    <div class="logo"><i></i><b>HQ</b></div>
+    <div class="logo"><i></i><span class="wm"><b>Studio</b><em>your business, live</em></span></div>
     <nav class="nav">
       <a href="#today" data-s="today"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Today<span class="n lime">6</span></a>
       <a href="#leads" data-s="leads"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="11" width="11" height="4" rx="1"/><rect x="8" y="17" width="13" height="4" rx="1"/></svg>Leads<span class="n">127</span></a>
       <a href="#clients" data-s="clients"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M16 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-6"/></svg>Clients<span class="n">2</span></a>
       <a href="#analytics" data-s="analytics"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Analytics</a>
+      <a href="#style" data-s="style"><svg class="i" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/><path d="M4 4h5M4 8h3"/></svg>Style Lab<span class="n">1</span></a>
       <a href="#strategy" data-s="strategy"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Strategy</a>
     </nav>
     <div class="foot">
@@ -255,10 +396,20 @@ h2 .c{font-family:"JetBrains Mono";font-size:12px;color:var(--mute);font-weight:
   <aside class="insp desk" id="insp"></aside>
   <aside class="insp mob" id="inspMob"></aside>
 </div>
-<nav class="tabs"><a href="#today" data-s="today"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Today</a><a href="#leads" data-s="leads"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="11" width="11" height="4" rx="1"/><rect x="8" y="17" width="13" height="4" rx="1"/></svg>Leads</a><a><span class="add"><svg class="i" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M12 5v14M5 12h14"/></svg></span></a><a href="#analytics" data-s="analytics"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats</a><a href="#claude" data-s="claude"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg>Claude</a></nav>
-<div class="sheet" id="sheet"><div class="bg"></div><div class="p"><div class="grab"></div><h3>Log something</h3>
-  <div class="kinds"><b>Lead</b><b>Message sent</b><b>Reply</b><b>Sample sent</b><b class="on">Payment</b><b>Lost deal</b></div>
-  <div class="fld"><span>Client</span><div>Brenda Pontiff</div></div>
+<nav class="tabs"><a href="#today" data-s="today"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Today</a><a href="#leads" data-s="leads"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="11" width="11" height="4" rx="1"/><rect x="8" y="17" width="13" height="4" rx="1"/></svg>Leads</a><a><span class="add"><svg class="i" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M12 5v14M5 12h14"/></svg></span></a><a href="#analytics" data-s="analytics"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats</a><a href="#style" data-s="style"><svg class="i" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg>Style</a><a href="#claude" data-s="claude"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg>Claude</a></nav>
+<div class="sheet" id="sheet"><div class="bg"></div><div class="p"><div class="grab"></div>
+  <h3>Log something</h3><p class="sub">Takes a few seconds. It shows up in Today and the weekly numbers.</p>
+  <div class="kinds"><b><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Lead</b><b><svg class="i" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2-6z"/></svg>Message sent</b><b><svg class="i" viewBox="0 0 24 24"><path d="M9 14l-5-5 5-5M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Reply</b><b><svg class="i" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Sample sent</b><b class="on"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Payment</b><b><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8"/></svg>Lost deal</b></div>
+  <div class="amount"><span class="cur">$</span><span class="val">50</span><span class="caret"></span></div>
+  <div class="quick"><span>$30</span><span>$50</span><span>$90</span><span>$150</span></div>
+  <p class="lbl">From</p>
+  <div class="people"><span class="person on"><i>BP</i>Brenda Pontiff</span><span class="person"><i>JK</i>Jackie Kashian</span><span class="person"><i>+</i>New client</span></div>
+  <p class="lbl">Paid with</p>
+  <div class="pills"><span class="on">PayPal</span><span>Wise</span><span>GCash</span><span>Bank</span></div>
+  <p class="lbl">For</p>
+  <div class="pills"><span class="on">2 stand-up clips</span><span>Starter, 3 clips</span><span>Monthly</span></div>
+  <div class="note">Add a note (optional)</div>
+  <button class="save">Save payment <small>Nov 1</small></button></div></div>
   <div class="row2"><div class="fld"><span>Amount</span><div class="money">$50</div></div><div class="fld"><span>Paid with</span><div>PayPal</div></div></div>
   <div class="row2"><div class="fld"><span>For</span><div>2 stand-up clips</div></div><div class="fld"><span>Date</span><div>Nov 1</div></div></div>
   <button class="btn">Save payment</button></div></div>
@@ -280,10 +431,19 @@ today:()=>`<div class="date serif">Thursday, 5 November</div>
  <div class="goal"><div class="k">Asked for the sale</div><div class="v"><b>1</b><span>of 5</span></div><div class="bar"><i style="width:20%"></i></div></div>
 </div>
 <h2>Needs you <span class="c">3</span></h2>
-<div class="feed">
- ${item('mail','<b>Jackie Kashian</b> sent colour notes on the 3 clips','Client. Changes requested on Nov 4 delivery.','09:12',`<span class="chip do">Open</span>`,true)}
- ${item('radar','<b>Comedian, part-time editor</b> on r/forhire, $400/week','Hot. Posted 38 min ago. Reply drafted.','10:46',`<span class="chip do">Review reply</span>`)}
- ${item('mail','<b>Brenda Pontiff</b> asked to pay by PayPal','Client. $50 for 2 clips.','Yesterday',`<span class="chip">Send PayPal link</span>`)}
+<div class="needs">
+ <div class="nc first"><div class="hd"><span class="pic">JK<span class="s src mail">${ic.mail}</span></span><div class="who"><b>Jackie Kashian</b><span>Client, repeat</span></div><span class="ago">09:12</span></div>
+  <blockquote>Colour notes on the 3 clips from Nov 4.</blockquote>
+  <div class="why"><span class="tag">Client</span>Delivered Nov 4, changes in progress</div>
+  <div class="acts"><span class="chip do">Open notes</span><span class="chip">Mark done</span></div></div>
+ <div class="nc"><div class="hd"><span class="pic" style="background:var(--text);color:var(--lime)">r/<span class="s src radar">${ic.radar}</span></span><div class="who"><b>Comedian, part-time editor</b><span>r/forhire</span></div><span class="ago">38 min</span></div>
+  <blockquote>$400 a week for stand-up clips and a weekly podcast cut.</blockquote>
+  <div class="why"><span class="tag l">Hot</span>Reply drafted, be one of the first</div>
+  <div class="acts"><span class="chip do">Review reply</span><span class="chip">Skip</span></div></div>
+ <div class="nc"><div class="hd"><span class="pic">BP<span class="s src mail">${ic.mail}</span></span><div class="who"><b>Brenda Pontiff</b><span>Client</span></div><span class="ago">Yesterday</span></div>
+  <blockquote>Can I pay with PayPal? Wise is too much paperwork.</blockquote>
+  <div class="why"><span class="tag">Client</span>$50 for 2 clips</div>
+  <div class="acts"><span class="chip do">Send PayPal link</span><span class="chip">Log payment</span></div></div>
 </div>
 <h2>New <span class="c">4</span></h2>
 <div class="feed">
@@ -344,7 +504,25 @@ strategy:()=>`<div class="sprint"><div><div class="k">Sprint 1, week 1 of 7</div
  <li>Ask Debi and Jackie for one name each this week.</li>
  <li>First review on Monday, Nov 9, once the radar has 4 days of data.</li></ul></div>
  <div class="card"><h3>Week 1 baseline</h3><div class="rev" style="margin-top:0"><div><span>Reply rate</span><span>5.6%</span></div><div><span>Reply to paid</span><span>2 of 4</span></div><div><span>Revenue</span><span>$50</span></div></div></div></div>`,
-claude:()=>``
+claude:()=>``,
+style:()=>`<p class="lede" style="margin-top:4px">A new look for every prospect, checked so it never copies a client. Nothing gets edited until you approve the storyboard.</p>
+<div class="lab-hero">
+ <div class="sb"><div style="display:flex;align-items:center;gap:12px"><span class="av" style="width:44px;height:44px">PY</span><div><b style="font-size:17px">Patricia Yeazell</b><div style="font-size:14px;color:var(--mute)">Storyboard draft <span class="example">example</span></div></div><span class="chip do" style="margin-left:auto">Review</span></div>
+  <div class="steps"><span class="d">Study</span><span class="d">Concept</span><span class="d">Style guide</span><span class="d">Check passed 6 of 7</span><span class="n">Storyboard: waiting for you</span><span>Edit</span></div>
+  <div class="frames">${['Hook','Setup','Story','Punchline','Laugh','End card'].map((t,i)=>`<div class="fr"><span class="tc">0${i}:${['02','09','21','34','38','46'][i]}</span><span class="cap">${['so I went to <u>China</u>','alone, which my mom','loved, by the way','and I came back <u>engaged</u>','','@patricia<br>yeazell'][i]}</span></div>`).join('')}</div>
+  <div class="sw"><span style="font-size:14px;color:var(--mute)">Palette</span><i style="background:#F7E7C6"></i><i style="background:#E8A04A"></i><i style="background:#2A2622"></i><span style="font-size:14px;margin-left:8px">Concept: <b>Travel diary</b></span></div></div>
+ <div class="sb"><h3 style="font-size:17px">Queue</h3><div class="queue">
+  <div class="qrow"><span class="pic">PY</span><div><b>Patricia Yeazell</b><span>Storyboard ready for review, she’s back Nov 16</span></div><span class="chip do">Review</span></div>
+  <div class="qrow"><span class="pic">AM</span><div><b>Ari Matti</b><span>Needs a link to his special</span></div><span class="chip">Add link</span></div>
+  <div class="qrow"><span class="pic">+</span><div><b>New style guide</b><span>Paste a special, podcast or Instagram link</span></div><span class="chip">Start</span></div>
+ </div></div>
+</div>
+<h2>Reserved styles <span class="c">never reused for prospects</span></h2>
+<div class="reserved">
+ <div class="rs"><span class="own">Client</span><b>Jackie Kashian</b><span>Condensed caps, one lime word, thin line-art story graphics</span></div>
+ <div class="rs"><span class="own">Client</span><b>Brenda Pontiff</b><span>Style not written down yet. Add it from a delivered clip.</span></div>
+ <div class="rs"><span class="own" style="background:var(--sunk);color:var(--text);box-shadow:inset 0 0 0 1px var(--line2)">Portfolio</span><b>Evan Hulla</b><span>Top title hook, solid lime punchline box</span></div>
+</div>`
 };
 function lead(){return `<div class="ihead"><div class="who"><span class="av">PY</span><div><h3>Patricia Yeazell</h3><div class="h">Instagram, @patriciayeazell</div></div></div>
  <div class="facts"><div>Stage<b><span class="tier hot"><span class="dot"></span>Hot</span></b></div><div>Next step<b>Follow up Nov 16</b></div><div>Budget<b style="color:var(--mute)">Not asked yet</b></div><div>Style<b>Style Lab guide pending</b></div></div>
@@ -355,25 +533,42 @@ function lead(){return `<div class="ihead"><div class="who"><span class="av">PY<
  <div class="ev"><span class="tc">12:55</span><div class="b">You replied<div class="q me">Sounds great, Patricia! … Let’s reconnect when you’re back on the 16th.</div></div></div>
  <div class="ev now"><span class="tc">Nov 16</span><div class="b">Reminder: welcome her back and offer the first clip</div></div></div>
 <div class="next"><div class="k">Suggested next move</div><p>Have her style guide and storyboard ready by the 15th, so the sample goes out the day she’s back.</p><span class="btn">Start style guide</span></div>`}
-function claude(){return `<div class="claude"><div class="ch"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg><div><b>Ask Claude</b><br><span>Uses AVE HQ through your Claude app</span></div></div>
+function claude(){return `<div class="claude"><div class="ch"><span class="orb"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/></svg></span><div><b>Ask Claude</b><br><span>Sees your leads, inbox and numbers</span></div><span class="live"><i></i>Connected</span></div>
  <div class="msgs"><div class="bub u">What needs a reply today?</div>
- <div class="bub a">Three things, most urgent first:<ol><li>Jackie’s colour notes on the 3 clips (client).</li><li>The $400/week comedian post on r/forhire, 38 min old. Reply is drafted.</li><li>Brenda wants a PayPal link for the $50.</li></ol></div>
- <div class="bub u">Log that Brenda paid $50 by PayPal</div><div class="bub a">Logged: $50 from Brenda Pontiff, PayPal, Nov 5. Revenue this month is now $50.</div></div>
+ <div class="bub a"><div class="ans"><p>Three things, most urgent first:</p>
+  <div class="ref"><span class="n">1</span><span><b>Jackie</b> sent colour notes on the 3 clips</span><span class="go">Open</span></div>
+  <div class="ref"><span class="n">2</span><span><b>$400/week</b> comedian post, 38 min old</span><span class="go">Reply</span></div>
+  <div class="ref"><span class="n">3</span><span><b>Brenda</b> wants a PayPal link</span><span class="go">Send</span></div></div></div>
+ <div class="bub u">Log that Brenda paid $50 by PayPal</div>
+ <div class="bub a"><div class="done"><span class="tick"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M5 12l5 5 9-10"/></svg></span><span>Payment saved. Brenda, PayPal</span><span class="mono">$50</span></div></div></div>
  <div class="sugg"><span class="chip">Who should I follow up?</span><span class="chip">Draft Patricia’s welcome back</span><span class="chip">How is Sprint 1 going?</span></div>
- <div class="inp">Ask about leads, clients or numbers<span class="send"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div>`}
-const titles={today:'Today',leads:'Leads',analytics:'Analytics',strategy:'Strategy',claude:'Claude',lead:'Lead',clients:'Clients'};
-function render(){const h=location.hash.slice(1).split('&');const s=h[0]||'today';const o=new Set(h.slice(1));
- document.body.classList.toggle('night',o.has('night'));document.body.classList.toggle('phone',o.has('phone'));
+ <div class="inp">Ask about leads, clients or numbers<span class="mic" style="margin-left:auto"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="send" style="margin-left:0"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div>`}
+const titles={style:'Style Lab',today:'Today',leads:'Leads',analytics:'Analytics',strategy:'Strategy',claude:'Claude',lead:'Lead',clients:'Clients'};
+const Q=new URLSearchParams(location.search);
+let night=Q.has('night');if(!Q.has('night')&&!Q.has('day')){try{night=matchMedia('(prefers-color-scheme: dark)').matches;const v=localStorage.getItem('hq-night');if(v!==null)night=v==='1'}catch(e){}}
+let sheetOpen=Q.has('sheet');
+const isPhone=()=>Q.has('phone')||matchMedia('(max-width:760px)').matches;
+function render(){let s=location.hash.slice(1)||'today';if(s==='clients')s='leads';if(!titles[s])s='today';
+ const phone=isPhone();
+ document.body.classList.toggle('night',night);document.body.classList.toggle('phone',phone);
  document.querySelectorAll('[data-s]').forEach(a=>a.classList.toggle('on',a.dataset.s===s));
- document.querySelectorAll('.mode b').forEach((b,i)=>b.classList.toggle('on',(i===1)===o.has('night')));
+ document.querySelectorAll('.mode b').forEach((b,i)=>b.classList.toggle('on',(i===1)===night));
  $('#title').textContent=titles[s];
- const phone=o.has('phone');
- if(s==='lead'||s==='claude'){ $('#body').innerHTML='';$('#inspMob').innerHTML=s==='lead'?lead():claude();$('#body').style.display='none'}
- else{$('#body').style.display='';$('#body').innerHTML=S[s]();$('#inspMob').innerHTML=''}
- $('#insp').innerHTML=(s==='strategy'||s==='analytics')?claude():lead();
- $('#sheet').classList.toggle('show',o.has('sheet'));
- if(phone&&(s==='lead'||s==='claude'))document.querySelector('.main').style.display='none';else document.querySelector('.main').style.display='';
+ const side=s==='lead'||s==='claude';
+ if(side&&phone){$('#body').innerHTML='';$('#inspMob').innerHTML=s==='lead'?lead():claude();document.querySelector('.main').style.display='none'}
+ else{document.querySelector('.main').style.display='';$('#body').innerHTML=S[side?'today':s]();$('#inspMob').innerHTML=''}
+ $('#insp').innerHTML=(s==='strategy'||s==='analytics'||s==='claude'||s==='style')?claude():lead();
+ $('#sheet').classList.toggle('show',sheetOpen);
+ document.querySelectorAll('.chip,.btn').forEach(el=>{if(/style guide/i.test(el.textContent)){el.style.cursor='pointer';el.onclick=()=>{location.hash='style'}}});
+ document.querySelectorAll('.it').forEach(el=>{if(el.textContent.includes('Patricia')){el.style.cursor='pointer';el.onclick=()=>{location.hash='lead'}}});
 }
+document.querySelectorAll('.mode b').forEach((b,i)=>b.addEventListener('click',()=>{night=i===1;try{localStorage.setItem('hq-night',night?'1':'0')}catch(e){};render()}));
+document.querySelector('.tabs .add').parentElement.addEventListener('click',()=>{sheetOpen=true;render()});
+document.querySelector('.top .btn').addEventListener('click',()=>{sheetOpen=true;render()});
+document.querySelector('#sheet .bg').addEventListener('click',()=>{sheetOpen=false;render()});
+document.querySelector('#sheet .save').addEventListener('click',()=>{sheetOpen=false;render()});
+matchMedia('(max-width:760px)').addEventListener('change',render);
+{const sp=document.getElementById('splash');const t=Q.has('nosplash')?0:1700;setTimeout(()=>{sp.classList.add('out');setTimeout(()=>sp.remove(),950)},t);if(!t)sp.remove()}
 addEventListener('hashchange',render);render();
 </script>
 </body>
