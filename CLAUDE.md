@@ -82,6 +82,7 @@ To continue one, check out its branch. Don't merge these into `main` without ask
   Drive edit + Pinterest research, Hooks lab, Builder with motion graph/keyframes, all Google Fonts), Prices, Connections, Joji.
 - Data: Supabase (owner-only RLS). Money received is in pesos; prices in USD. Gmail syncs via Google Apps Script
   (`tools/gmail-sync.gs`, copied from the Connections screen).
-- Still to do: website visit counter into `site_events` (ave-studio-website), Joji connected to Claude (MCP), urgent SMS via
+- Editor round 1 is live in the app (timeline editing). Clip-finder (`video/tools/clipfinder`) was cancelled by the user: don't extend it.
+- Still to do: editor render to MP4 (round 2), website visit counter into `site_events` (ave-studio-website), Joji connected to Claude (MCP), urgent SMS via
   UniSMS (needs a local session: unismsapi.com is blocked in the cloud), Instagram (needs a Business account + Facebook Page),
   weekly review automation, Brenda/Debi styles (need their clips in Drive).
