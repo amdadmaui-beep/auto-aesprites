@@ -75,15 +75,13 @@ To continue one, check out its branch. Don't merge these into `main` without ask
 - Real edits come from the "AVE Studio Showcase" Drive folder (`1kj8XJg3Ot4bveMYElnLNeQbF7tpOpTon`); previews are 6 s muted MP4 loops in `public/clips/w-*.mp4`.
 - Brand: ink #0E0E0E, off-white #F3F2EE, lime #C8FF2E (accent only); day/night modes; cursor is the logo's A.
 
-## Next project: AVE dashboard (scope confirmed by the user: ALL five parts below; not started)
+## AVE Studio app (live, Nov 2026)
 
-One app that connects the website, email and Instagram so the studio can track everything and use the data to win more clients.
-Scope is confirmed: build all of these. First session: check which accounts/access are ready, then plan:
-- Website analytics (visits, sources, which work gets watched, form opens vs sends), e.g. Vercel Analytics or Plausible.
-- Leads inbox: every form enquiry and Instagram DM in one list with status (new, sample sent, client, lost).
-- Instagram (@avestudio.production): post/reel stats and "SAMPLE" DMs. Needs a Business/Creator account linked to a Facebook Page and Meta developer app access.
-- Email: Gmail (avestudio.production@gmail.com) for enquiries and replies.
-- Weekly summary: what brought clients in, what to post more of.
-- Must be a PWA: one codebase that works as a website and installs as an app on phone and desktop (offline shell, home-screen icon, push-ready), so the user can open it anywhere.
-- Track everything needed to improve and adapt: revenue (per client, per service, monthly), outreach (who was contacted, where, when, replies), lead temperature (cold, warm, hot, no lead / not interested), samples sent and how many turned into paying clients, plus the website, Instagram and email numbers above.
-Ask the user for the accounts/access above before building; don't fake data.
+- Repo: `amdadmaui-beep/ave-hq` (Vite PWA + Supabase), deployed on Vercel from `main`. Its own CLAUDE.md has the rules.
+- Has: Today, Leads, Clients, Follow-ups, Analytics, Strategy (weekly sprint from real numbers), Style Lab (looks from every
+  Drive edit + Pinterest research, Hooks lab, Builder with motion graph/keyframes, all Google Fonts), Prices, Connections, Joji.
+- Data: Supabase (owner-only RLS). Money received is in pesos; prices in USD. Gmail syncs via Google Apps Script
+  (`tools/gmail-sync.gs`, copied from the Connections screen).
+- Still to do: website visit counter into `site_events` (ave-studio-website), Joji connected to Claude (MCP), urgent SMS via
+  UniSMS (needs a local session: unismsapi.com is blocked in the cloud), Instagram (needs a Business account + Facebook Page),
+  weekly review automation, Brenda/Debi styles (need their clips in Drive).
