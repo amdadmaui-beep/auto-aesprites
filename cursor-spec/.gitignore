@@ -2,3 +2,8 @@ film/build/*.wav
 film/build/video.mp4
 film/build/render.log
 film/st/
+film2/build/*.wav
+film2/build/video.mp4
+film2/build/render.log
+film2/st/
+film2/st2/
