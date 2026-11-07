@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cursor Spec Storyboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sequence of shots, each a 9:16 frame beside its direction notes; one column on phones */
+:root{--ink:#14120B;--paper:#F7F7F4;--mid:#26251E;--mute:#8A877D;--line:#2E2C25;--ok:#7FD39A;
+  --ui:"Inter Tight",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--ui)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:48px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:grid;gap:12px;margin-bottom:40px;max-width:70ch}
+.k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:clamp(34px,5vw,56px);font-weight:500;letter-spacing:-.03em;margin:0;line-height:1.02;text-wrap:balance}
+p{line-height:1.55;margin:0}.lede{color:#C9C6BC}
+.specs{display:flex;flex-wrap:wrap;gap:8px}.specs span{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:#B5B2A8}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin-top:18px;gap:2px}.bar i{display:block;background:#3a382f}.bar i.h{background:var(--paper)}
+.barlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:6px}
+.shot{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,210px)) minmax(260px,1fr);gap:18px;align-items:start;padding:28px 0;border-top:1px solid var(--line)}
+.f{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#0D0C08;border:1px solid #23211b;font-size:9px}
+.f .tc{position:absolute;left:8px;top:7px;font-family:var(--mono);font-size:8px;color:#6d6a61;z-index:9}
+.notes{display:grid;gap:10px;min-width:0}.notes h2{margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em}
+.notes .t{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.notes ul{margin:0;padding-left:16px;display:grid;gap:4px;line-height:1.45;font-size:14px;color:#D9D6CC}
+.copy{font-size:15px;font-weight:500;border-left:2px solid var(--paper);padding-left:10px}
+/* mock UI */
+.ed{position:absolute;inset:14% 6% 18%;border-radius:8px;background:#181711;border:1px solid #2b2a23;overflow:hidden}
+.ed .tb{height:14px;border-bottom:1px solid #2b2a23;display:flex;align-items:center;gap:3px;padding:0 5px}.ed .tb b{width:4px;height:4px;border-radius:50%;background:#3b3a32}
+.code{font-family:var(--mono);font-size:6.6px;line-height:1.6;padding:6px 7px;color:#D8D5CB;white-space:pre}
+.code .kw{color:#C7B8FF}.code .fn{color:#9FD7FF}.code .st{color:#E8CFA0}.code .gh{color:#5E5C54}
+.cap{position:absolute;left:8%;right:8%;bottom:6.5%;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.15}
+.tab{display:inline-block;font-family:var(--mono);font-size:7px;border:1px solid #6d6a61;border-radius:3px;padding:1px 4px;color:var(--paper)}
+.ag{position:absolute;inset:12% 6% 20%;border-radius:8px;background:#181711;border:1px solid #2b2a23;padding:8px;display:grid;gap:5px;align-content:start;font-size:7px}
+.ag .pr{background:#211f18;border:1px solid #34322a;border-radius:6px;padding:6px;font-size:7.5px;line-height:1.35}
+.ag .st{font-family:var(--mono);font-size:6.5px;color:#B5B2A8;display:flex;justify-content:space-between}.ag .st em{font-style:normal;color:var(--ok)}
+.dash{position:absolute;inset:10% 6% 20%;border-radius:8px;background:#F7F7F4;color:#14120B;padding:8px;display:grid;gap:6px;align-content:start}
+.dash .m{display:grid;grid-template-columns:1fr 1fr;gap:5px}.dash .c{background:#fff;border:1px solid #E4E2DA;border-radius:6px;padding:5px}
+.dash .c small{display:block;font-size:5.5px;color:#7a776e}.dash .c b{font-size:11px;font-weight:600}
+.dash svg{width:100%;display:block}
+</style></head><body><div class="wrap">
+<header>
+  <div class="k">AVE Studio · spec commercial · storyboard v1 for approval</div>
+  <h1>Cursor — From idea to reality</h1>
+  <p class="lede">A 40-second vertical spec spot. The product is the hero: a caret becomes the editor, Tab finishes a real hook, Agent builds a dashboard, and the dashboard folds back into the official Cursor cube. Warm black and warm off-white from Cursor's own palette, one UI typeface, one code typeface, no neon, no glitch.</p>
+  <div class="specs"><span>1080×1920 · 9:16</span><span>60 fps · H.264</span><span>40.0 s</span><span>original score + SFX (your UI SaaS pack + designed)</span><span>official Cursor brand kit</span></div>
+  <div class="bar" aria-hidden="true"><i class="h" style="flex:4"></i><i style="flex:6"></i><i class="h" style="flex:7"></i><i style="flex:8"></i><i class="h" style="flex:8"></i><i style="flex:7"></i></div>
+  <div class="barlab"><span>0s</span><span>10s</span><span>20s</span><span>30s</span><span>40s</span></div>
+</header>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:00.6</span><div style="position:absolute;left:50%;top:50%;width:2px;height:16px;background:var(--paper);transform:translate(-50%,-50%)"></div></div>
+  <div class="f"><span class="tc">00:02.9</span><div style="position:absolute;left:0;right:0;top:44%;text-align:center;font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.2">WHAT IF YOUR IDEAS<br>MOVED FASTER?<span style="display:inline-block;width:2px;height:13px;background:var(--paper);vertical-align:-2px;margin-left:2px"></span></div></div>
+  <div class="notes"><div class="t">01 · 0.0 – 4.0s · The hook</div><h2>A caret on black</h2>
+    <ul><li>0.0–0.8: pure black, near silence. One caret blinks in the centre.</li>
+    <li>0.8–2.0: "WHAT IF YOUR IDEAS" types, one key click per letter (soft, not spammy).</li>
+    <li>2.0–2.4: pause, the caret blinks twice. 2.4–3.2: "MOVED FASTER?" types.</li>
+    <li>3.3: on the question mark, a tight reverse suction, then the camera dives <em>through the caret</em> into the editor, with a deep sub impact and a short shimmer.</li></ul>
+    <div class="lab">Sound</div><ul><li>Silence, key clicks, reverse suck, one sub hit. No music until the dive.</li></ul></div>
+</section>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:04.8</span><img src="img/cube.png" alt="" style="position:absolute;left:50%;top:44%;width:44%;transform:translate(-50%,-50%)"></div>
+  <div class="f"><span class="tc">00:08.0</span>
+    <div class="ed"><div class="tb"><b></b><b></b><b></b></div><div style="display:grid;grid-template-columns:22% 1fr;height:100%"><div style="border-right:1px solid #2b2a23;padding:5px;font-family:var(--mono);font-size:5.5px;color:#8A877D;line-height:1.8">app/<br>components/<br>hooks/<br>lib/</div><div class="code"><span class="kw">import</span> { <span class="fn">useState</span> } <span class="kw">from</span> <span class="st">"react"</span></div></div></div>
+    <div class="cap">MEET CURSOR.<br><span style="color:#B5B2A8">BUILD AT THE SPEED OF THOUGHT.</span></div></div>
+  <div class="notes"><div class="t">02 · 4.0 – 10.0s · Introducing Cursor</div><h2>The cube assembles, the editor builds around it</h2>
+    <ul><li>4.0–5.6: the official 2.5D cube resolves out of the dive. Its three faces settle in sequence with a slow light sweep. This is the real asset, never redrawn.</li>
+    <li>5.6–7.4: the cube shrinks to the title bar. The file tree, editor and Agent panel slide in, staggered by 80ms, with soft magnetic snaps and a subtle 3D tilt that settles flat.</li>
+    <li>6.6 "MEET CURSOR." · 7.6 "BUILD AT THE SPEED OF THOUGHT." Short, held, readable.</li></ul>
+    <div class="lab">Sound</div><ul><li>A low riser under the cube, glass clicks on each panel snap, one stereo whoosh. A minimal electronic pulse starts.</li></ul></div>
+</section>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:12.0</span>
+    <div class="ed" style="inset:18% 4% 26%"><div class="tb"><b></b><b></b><b></b></div><div class="code"><span class="kw">export function</span> <span class="fn">useMetrics</span>(range: <span class="st">"7d"</span> | <span class="st">"30d"</span>) {
+<span class="gh">  const [data, setData] = useState&lt;Metric[]&gt;([])
+  useEffect(() =&gt; {
+    fetch(`/api/metrics?range=${range}`)
+      .then(r =&gt; r.json()).then(setData)
+  }, [range])
+  return data</span>
+}</div></div>
+    <div class="cap" style="font-size:11px"><span class="tab">Tab</span> &nbsp;to accept</div></div>
+  <div class="f"><span class="tc">00:13.4</span>
+    <div class="ed" style="inset:18% 4% 26%"><div class="tb"><b></b><b></b><b></b></div><div class="code"><span class="kw">export function</span> <span class="fn">useMetrics</span>(range: <span class="st">"7d"</span> | <span class="st">"30d"</span>) {
+  <span class="kw">const</span> [data, setData] = <span class="fn">useState</span>&lt;Metric[]&gt;([])
+  <span class="fn">useEffect</span>(() =&gt; {
+    <span class="fn">fetch</span>(<span class="st">`/api/metrics?range=${range}`</span>)
+      .<span class="fn">then</span>(r =&gt; r.<span class="fn">json</span>()).<span class="fn">then</span>(setData)
+  }, [range])
+  <span class="kw">return</span> data
+}</div></div>
+    <div class="cap">LESS TYPING.<br><span style="color:#B5B2A8">MORE BUILDING.</span></div></div>
+  <div class="notes"><div class="t">03 · 10.0 – 17.0s · Tab autocomplete</div><h2>Real, legible TypeScript</h2>
+    <ul><li>The camera pushes into the editor. The developer types <code>export function useMetrics(</code>, with realistic key timing.</li>
+    <li>12.0: Cursor Tab's grey multi-line suggestion fades in. 12.8: a <span class="tab">Tab</span> keycap presses and the ghost text solidifies line by line with a soft light wipe.</li>
+    <li>14.6: a second, shorter completion is accepted the same way, so the moment repeats with a variation.</li>
+    <li>13.2 "LESS TYPING." · 15.2 "MORE BUILDING." The code stays readable at phone size.</li></ul>
+    <div class="lab">Sound</div><ul><li>Real-feeling taps, one crisp Tab click, a light pop and a completion shimmer. The quietest, most satisfying section.</li></ul></div>
+</section>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:18.4</span>
+    <div class="ag"><div class="lab" style="margin:0;font-size:6px">Agent</div><div class="pr">Build a clean analytics dashboard with charts and responsive cards.</div></div></div>
+  <div class="f"><span class="tc">00:22.0</span>
+    <div class="ag"><div class="pr" style="opacity:.6">Build a clean analytics dashboard…</div>
+      <div class="st"><span>Read app/page.tsx</span><em>✓</em></div><div class="st"><span>Edit components/MetricCard.tsx</span><em>+42</em></div>
+      <div class="st"><span>Edit components/RevenueChart.tsx</span><em>+67</em></div><div class="st"><span>Edit app/dashboard/page.tsx</span><em>+31</em></div>
+      <div class="st" style="margin-top:4px"><span>$ npm run dev</span><em>ready</em></div></div>
+    <div class="cap">ONE PROMPT.<br><span style="color:#B5B2A8">REAL PROGRESS.</span></div></div>
+  <div class="notes"><div class="t">04 · 17.0 – 25.0s · The Agent</div><h2>Understandable, not chaotic</h2>
+    <ul><li>The camera glides to the Agent panel. The prompt types in, then Send.</li>
+    <li>The steps appear one by one, each landing with a snap. For each file edit, the camera dips to that file's tab and green diff lines slide in for a beat. The files match the dashboard we'll see.</li>
+    <li>The terminal runs <code>npm run dev</code>, then "ready". A browser preview tab opens.</li>
+    <li>19.5 "ONE PROMPT." · 23.0 "REAL PROGRESS."</li></ul>
+    <div class="lab">Sound</div><ul><li>Input clicks, a rhythmic file-switch tick per step, fast soft ticking while it works, and a controlled bass pulse when the preview opens.</li></ul></div>
+</section>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:27.5</span>
+    <div class="dash"><b style="font-size:9px">Analytics</b>
+      <div class="m"><div class="c"><small>MRR</small><b>$48.2k</b></div><div class="c"><small>Active users</small><b>12,904</b></div><div class="c"><small>Conversion</small><b>3.8%</b></div><div class="c"><small>Churn</small><b>1.2%</b></div></div>
+      <div class="c"><small>Revenue · 30d</small><svg viewBox="0 0 100 34"><path d="M0 28 L12 25 L24 26 L36 19 L48 21 L60 14 L72 15 L84 8 L100 5" fill="none" stroke="#14120B" stroke-width="1.4"/></svg></div>
+      <div class="c"><small>Signups by channel</small><svg viewBox="0 0 100 28"><g fill="#14120B"><rect x="4" y="12" width="12" height="16"/><rect x="24" y="6" width="12" height="22"/><rect x="44" y="15" width="12" height="13"/><rect x="64" y="3" width="12" height="25"/><rect x="84" y="10" width="12" height="18"/></g></svg></div></div>
+    <div class="cap">IDEAS INTO SOFTWARE.<br>FASTER.</div></div>
+  <div class="notes"><div class="t">05 · 25.0 – 33.0s · The reveal</div><h2>The result of the code we just saw</h2>
+    <ul><li>The preview pulls forward, out of the editor, into a full-frame light dashboard. It's the inverse palette, the brightest moment of the film.</li>
+    <li>The metric cards mask in on a stagger and count up. The revenue line draws itself, the bars rise in sequence, and a slow dolly with layered parallax runs across the cards. Short, crisp motion blur on the fast moves only.</li>
+    <li>The components on screen are exactly the ones Agent edited (MetricCard, RevenueChart, dashboard page). The numbers are clearly sample data.</li>
+    <li>28.2 "IDEAS INTO SOFTWARE." · 30.4 "FASTER." on the strongest music hit.</li></ul>
+    <div class="lab">Sound</div><ul><li>A low sweep into the reveal, rhythmic UI snaps per card, refined chart sounds, and one satisfying bass impact on "FASTER."</li></ul></div>
+</section>
+
+<section class="shot">
+  <div class="f"><span class="tc">00:34.2</span><img src="img/cube.png" alt="" style="position:absolute;left:50%;top:46%;width:34%;transform:translate(-50%,-50%)"></div>
+  <div class="f"><span class="tc">00:37.5</span><img src="img/lockup_v.png" alt="Cursor" style="position:absolute;left:50%;top:40%;width:62%;transform:translate(-50%,-50%)">
+    <div style="position:absolute;left:0;right:0;top:60%;text-align:center;font-size:12px;font-weight:500;letter-spacing:-.01em">THE FUTURE IS BUILT.</div>
+    <div style="position:absolute;left:0;right:0;top:66%;text-align:center;font-family:var(--mono);font-size:8px;color:#B5B2A8">cursor.com</div>
+    <div style="position:absolute;left:0;right:0;bottom:4%;text-align:center;font-family:var(--mono);font-size:5.5px;color:#6d6a61">Spec ad by AVE Studio · not affiliated with Cursor</div></div>
+  <div class="notes"><div class="t">06 · 33.0 – 40.0s · Brand moment</div><h2>The dashboard folds into the cube</h2>
+    <ul><li>33.0–34.2: the dashboard's panels fold inward along their edges into a small dimensional cube (three faces, the same angles as the logo).</li>
+    <li>34.2: it resolves exactly into the official 2.5D Cursor cube. 34.4–34.9: a full silence beat.</li>
+    <li>34.9: the official vertical lockup (cube + CURSOR wordmark) reveals with the sonic logo hit. 35.8 "THE FUTURE IS BUILT." · 36.5 cursor.com. Hold until 40.0.</li>
+    <li>A small line at the bottom reads "Spec ad by AVE Studio · not affiliated with Cursor", so it can't be mistaken for an official Cursor ad.</li></ul>
+    <div class="lab">Sound</div><ul><li>Soft folding snaps, a silence beat, then one deep, clean sonic logo hit with a long, quiet tail.</li></ul></div>
+</section>
+
+<section class="shot" style="grid-template-columns:1fr">
+  <div class="notes"><h2>Honest notes before I build</h2>
+    <ul><li><b>Product footage:</b> I don't have real Cursor screen recordings, and I can't run Cursor here. The editor, Tab and Agent shots will be faithful <em>illustrative recreations</em> with real, working code, styled to Cursor's look but not passed off as screenshots. If you can record ~20s of real Tab and Agent use on your machine, I'll cut it in and it gets better.</li>
+    <li><b>Logo:</b> only the official files from cursor.com/brand (2.5D cube and vertical lockup), never redrawn or recoloured.</li>
+    <li><b>Typeface:</b> Cursor's own typeface isn't in the public kit, so I'll use one neutral grotesk (Inter) for UI and type and JetBrains Mono for code.</li>
+    <li><b>Sound:</b> an original minimal electronic score, plus SFX from your UI SaaS pack (clicks, ticks, glitch-free pops, the riser) and designed layers (keys, Tab click, sub hits, sonic logo). Delivered with separate music and SFX stems, and a version without music.</li>
+    <li><b>Deliverables:</b> the 1080×1920 MP4 at 60fps, the source project, the stems, a no-music version and a thumbnail. Optionally a 16:9 cut later.</li></ul></div>
+</section>
+</div></body></html>
