@@ -1,0 +1,82 @@
+[
+ {
+  "file": "uisaas_000.09_swell.wav",
+  "t": 0.087,
+  "dur": 2.008,
+  "cls": "swell",
+  "peak_db": -5.6,
+  "centroid": 210,
+  "flatness": 0.002,
+  "attack": 0.742
+ },
+ {
+  "file": "uisaas_002.69_hit.wav",
+  "t": 2.688,
+  "dur": 0.716,
+  "cls": "hit",
+  "peak_db": -8.0,
+  "centroid": 2868,
+  "flatness": 0.1,
+  "attack": 0.036
+ },
+ {
+  "file": "uisaas_004.15_whoosh.wav",
+  "t": 4.148,
+  "dur": 0.373,
+  "cls": "whoosh",
+  "peak_db": -8.1,
+  "centroid": 8794,
+  "flatness": 0.248,
+  "attack": 0.148
+ },
+ {
+  "file": "uisaas_005.75_hit.wav",
+  "t": 5.747,
+  "dur": 0.584,
+  "cls": "hit",
+  "peak_db": -5.9,
+  "centroid": 477,
+  "flatness": 0.005,
+  "attack": 0.098
+ },
+ {
+  "file": "uisaas_006.36_pop.wav",
+  "t": 6.358,
+  "dur": 0.086,
+  "cls": "pop",
+  "peak_db": -11.9,
+  "centroid": 470,
+  "flatness": 0.006,
+  "attack": 0.032
+ },
+ {
+  "file": "uisaas_006.48_pop.wav",
+  "t": 6.477,
+  "dur": 0.087,
+  "cls": "pop",
+  "peak_db": -13.7,
+  "centroid": 1185,
+  "flatness": 0.02,
+  "attack": 0.032
+ },
+ {
+  "file": "uisaas_006.61_pop.wav",
+  "t": 6.612,
+  "dur": 0.086,
+  "cls": "pop",
+  "peak_db": -10.6,
+  "centroid": 464,
+  "flatness": 0.006,
+  "attack": 0.032
+ },
+ {
+  "file": "uisaas_007.33_swell.wav",
+  "t": 7.326,
+  "dur": 1.681,
+  "cls": "swell",
+  "peak_db": -3.7,
+  "centroid": 580,
+  "flatness": 0.006,
+  "attack": 0.408
+ }
+]

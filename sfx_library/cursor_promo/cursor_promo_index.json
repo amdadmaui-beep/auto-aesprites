@@ -1,0 +1,452 @@
+[
+ {
+  "file": "cursor_promo_000.57_ping.wav",
+  "t": 0.575,
+  "dur": 0.121,
+  "cls": "ping",
+  "peak_db": -44.7,
+  "centroid": 707,
+  "flatness": 0.019,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_000.84_click.wav",
+  "t": 0.841,
+  "dur": 0.054,
+  "cls": "click",
+  "peak_db": -22.1,
+  "centroid": 5864,
+  "flatness": 0.072,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_001.23_whoosh.wav",
+  "t": 1.227,
+  "dur": 0.501,
+  "cls": "whoosh",
+  "peak_db": -37.7,
+  "centroid": 6526,
+  "flatness": 0.097,
+  "attack": 0.163
+ },
+ {
+  "file": "cursor_promo_002.75_hit.wav",
+  "t": 2.746,
+  "dur": 0.28,
+  "cls": "hit",
+  "peak_db": -30.8,
+  "centroid": 6840,
+  "flatness": 0.091,
+  "attack": 0.249
+ },
+ {
+  "file": "cursor_promo_003.17_click.wav",
+  "t": 3.17,
+  "dur": 0.096,
+  "cls": "click",
+  "peak_db": -35.9,
+  "centroid": 2965,
+  "flatness": 0.087,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_003.31_pop.wav",
+  "t": 3.311,
+  "dur": 0.164,
+  "cls": "pop",
+  "peak_db": -34.4,
+  "centroid": 7602,
+  "flatness": 0.12,
+  "attack": 0.041
+ },
+ {
+  "file": "cursor_promo_004.06_pop.wav",
+  "t": 4.056,
+  "dur": 0.199,
+  "cls": "pop",
+  "peak_db": -37.1,
+  "centroid": 1084,
+  "flatness": 0.025,
+  "attack": 0.106
+ },
+ {
+  "file": "cursor_promo_004.44_ping.wav",
+  "t": 4.436,
+  "dur": 0.13,
+  "cls": "ping",
+  "peak_db": -22.8,
+  "centroid": 842,
+  "flatness": 0.004,
+  "attack": 0.045
+ },
+ {
+  "file": "cursor_promo_005.12_pop.wav",
+  "t": 5.121,
+  "dur": 0.169,
+  "cls": "pop",
+  "peak_db": -43.0,
+  "centroid": 715,
+  "flatness": 0.022,
+  "attack": 0.103
+ },
+ {
+  "file": "cursor_promo_005.61_pop.wav",
+  "t": 5.612,
+  "dur": 0.144,
+  "cls": "pop",
+  "peak_db": -46.8,
+  "centroid": 897,
+  "flatness": 0.033,
+  "attack": 0.027
+ },
+ {
+  "file": "cursor_promo_006.67_whoosh.wav",
+  "t": 6.671,
+  "dur": 0.333,
+  "cls": "whoosh",
+  "peak_db": -31.0,
+  "centroid": 6413,
+  "flatness": 0.087,
+  "attack": 0.163
+ },
+ {
+  "file": "cursor_promo_007.97_click.wav",
+  "t": 7.974,
+  "dur": 0.057,
+  "cls": "click",
+  "peak_db": -21.7,
+  "centroid": 5967,
+  "flatness": 0.099,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_008.59_pop.wav",
+  "t": 8.589,
+  "dur": 0.091,
+  "cls": "pop",
+  "peak_db": -44.1,
+  "centroid": 1264,
+  "flatness": 0.04,
+  "attack": 0.041
+ },
+ {
+  "file": "cursor_promo_008.89_click.wav",
+  "t": 8.892,
+  "dur": 0.108,
+  "cls": "click",
+  "peak_db": -25.2,
+  "centroid": 5875,
+  "flatness": 0.097,
+  "attack": 0.047
+ },
+ {
+  "file": "cursor_promo_009.22_pop.wav",
+  "t": 9.224,
+  "dur": 0.19,
+  "cls": "pop",
+  "peak_db": -19.6,
+  "centroid": 8984,
+  "flatness": 0.099,
+  "attack": 0.118
+ },
+ {
+  "file": "cursor_promo_009.57_blip.wav",
+  "t": 9.574,
+  "dur": 0.087,
+  "cls": "blip",
+  "peak_db": -27.6,
+  "centroid": 872,
+  "flatness": 0.005,
+  "attack": 0.043
+ },
+ {
+  "file": "cursor_promo_009.72_hit.wav",
+  "t": 9.724,
+  "dur": 0.447,
+  "cls": "hit",
+  "peak_db": -22.6,
+  "centroid": 8069,
+  "flatness": 0.123,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_010.22_hit.wav",
+  "t": 10.217,
+  "dur": 0.214,
+  "cls": "hit",
+  "peak_db": -22.7,
+  "centroid": 9302,
+  "flatness": 0.128,
+  "attack": 0.039
+ },
+ {
+  "file": "cursor_promo_010.47_whoosh.wav",
+  "t": 10.475,
+  "dur": 0.482,
+  "cls": "whoosh",
+  "peak_db": -22.5,
+  "centroid": 7881,
+  "flatness": 0.121,
+  "attack": 0.281
+ },
+ {
+  "file": "cursor_promo_010.99_whoosh.wav",
+  "t": 10.987,
+  "dur": 0.483,
+  "cls": "whoosh",
+  "peak_db": -24.0,
+  "centroid": 7615,
+  "flatness": 0.117,
+  "attack": 0.269
+ },
+ {
+  "file": "cursor_promo_011.99_click.wav",
+  "t": 11.989,
+  "dur": 0.132,
+  "cls": "click",
+  "peak_db": -30.5,
+  "centroid": 4237,
+  "flatness": 0.082,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_promo_012.51_blip.wav",
+  "t": 12.514,
+  "dur": 0.07,
+  "cls": "blip",
+  "peak_db": -27.5,
+  "centroid": 1144,
+  "flatness": 0.018,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_013.87_click.wav",
+  "t": 13.867,
+  "dur": 0.082,
+  "cls": "click",
+  "peak_db": -35.6,
+  "centroid": 1866,
+  "flatness": 0.03,
+  "attack": 0.048
+ },
+ {
+  "file": "cursor_promo_016.96_hit.wav",
+  "t": 16.964,
+  "dur": 0.486,
+  "cls": "hit",
+  "peak_db": -19.4,
+  "centroid": 5023,
+  "flatness": 0.086,
+  "attack": 0.078
+ },
+ {
+  "file": "cursor_promo_019.11_blip.wav",
+  "t": 19.111,
+  "dur": 0.063,
+  "cls": "blip",
+  "peak_db": -23.0,
+  "centroid": 1147,
+  "flatness": 0.015,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_019.65_click.wav",
+  "t": 19.646,
+  "dur": 0.136,
+  "cls": "click",
+  "peak_db": -21.2,
+  "centroid": 8245,
+  "flatness": 0.174,
+  "attack": 0.11
+ },
+ {
+  "file": "cursor_promo_019.95_click.wav",
+  "t": 19.947,
+  "dur": 0.066,
+  "cls": "click",
+  "peak_db": -30.4,
+  "centroid": 5262,
+  "flatness": 0.092,
+  "attack": 0.057
+ },
+ {
+  "file": "cursor_promo_023.64_pop.wav",
+  "t": 23.641,
+  "dur": 0.151,
+  "cls": "pop",
+  "peak_db": -23.8,
+  "centroid": 8653,
+  "flatness": 0.087,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_024.04_blip.wav",
+  "t": 24.042,
+  "dur": 0.057,
+  "cls": "blip",
+  "peak_db": -24.4,
+  "centroid": 1750,
+  "flatness": 0.016,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_024.44_click.wav",
+  "t": 24.442,
+  "dur": 0.118,
+  "cls": "click",
+  "peak_db": -23.5,
+  "centroid": 4587,
+  "flatness": 0.076,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_024.81_pop.wav",
+  "t": 24.81,
+  "dur": 0.152,
+  "cls": "pop",
+  "peak_db": -22.1,
+  "centroid": 3732,
+  "flatness": 0.089,
+  "attack": 0.063
+ },
+ {
+  "file": "cursor_promo_026.53_hit.wav",
+  "t": 26.531,
+  "dur": 0.238,
+  "cls": "hit",
+  "peak_db": -19.7,
+  "centroid": 3049,
+  "flatness": 0.035,
+  "attack": 0.098
+ },
+ {
+  "file": "cursor_promo_028.87_click.wav",
+  "t": 28.874,
+  "dur": 0.092,
+  "cls": "click",
+  "peak_db": -19.8,
+  "centroid": 5940,
+  "flatness": 0.113,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_029.48_click.wav",
+  "t": 29.476,
+  "dur": 0.067,
+  "cls": "click",
+  "peak_db": -24.2,
+  "centroid": 4530,
+  "flatness": 0.113,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_promo_030.37_click.wav",
+  "t": 30.374,
+  "dur": 0.116,
+  "cls": "click",
+  "peak_db": -19.9,
+  "centroid": 5967,
+  "flatness": 0.111,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_030.47_click.wav",
+  "t": 30.475,
+  "dur": 0.057,
+  "cls": "click",
+  "peak_db": -24.2,
+  "centroid": 4965,
+  "flatness": 0.141,
+  "attack": 0.032
+ },
+ {
+  "file": "cursor_promo_031.48_click.wav",
+  "t": 31.476,
+  "dur": 0.086,
+  "cls": "click",
+  "peak_db": -24.1,
+  "centroid": 4107,
+  "flatness": 0.104,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_promo_031.61_ping.wav",
+  "t": 31.607,
+  "dur": 0.122,
+  "cls": "ping",
+  "peak_db": -28.5,
+  "centroid": 928,
+  "flatness": 0.007,
+  "attack": 0.041
+ },
+ {
+  "file": "cursor_promo_034.38_click.wav",
+  "t": 34.379,
+  "dur": 0.091,
+  "cls": "click",
+  "peak_db": -19.6,
+  "centroid": 3558,
+  "flatness": 0.073,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_promo_036.45_whoosh.wav",
+  "t": 36.449,
+  "dur": 0.33,
+  "cls": "whoosh",
+  "peak_db": -17.0,
+  "centroid": 3913,
+  "flatness": 0.058,
+  "attack": 0.125
+ },
+ {
+  "file": "cursor_promo_038.61_blip.wav",
+  "t": 38.607,
+  "dur": 0.101,
+  "cls": "blip",
+  "peak_db": -25.3,
+  "centroid": 1110,
+  "flatness": 0.018,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_promo_039.48_click.wav",
+  "t": 39.475,
+  "dur": 0.069,
+  "cls": "click",
+  "peak_db": -22.9,
+  "centroid": 4090,
+  "flatness": 0.112,
+  "attack": 0.031
+ },
+ {
+  "file": "cursor_promo_040.61_click.wav",
+  "t": 40.611,
+  "dur": 0.127,
+  "cls": "click",
+  "peak_db": -23.4,
+  "centroid": 2754,
+  "flatness": 0.053,
+  "attack": 0.042
+ },
+ {
+  "file": "cursor_promo_053.48_click.wav",
+  "t": 53.478,
+  "dur": 0.107,
+  "cls": "click",
+  "peak_db": -21.7,
+  "centroid": 5733,
+  "flatness": 0.086,
+  "attack": 0.028
+ },
+ {
+  "file": "cursor_promo_057.42_ping.wav",
+  "t": 57.415,
+  "dur": 0.265,
+  "cls": "ping",
+  "peak_db": -16.4,
+  "centroid": 2684,
+  "flatness": 0.006,
+  "attack": 0.052
+ }
+]
