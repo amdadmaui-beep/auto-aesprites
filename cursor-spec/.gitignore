@@ -12,3 +12,8 @@ film3/build/video.mp4
 film3/build/render.log
 film3/st/
 film3/music/
+film4/build/*.wav
+film4/build/video.mp4
+film4/build/render.log
+film4/st/
+film4/music
