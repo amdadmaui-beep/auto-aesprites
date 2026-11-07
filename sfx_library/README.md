@@ -131,6 +131,70 @@ Clean: the source has silences between sounds.
 | `uisaas_006.61_pop.wav` | 0.086 | pop |  |
 | `uisaas_007.33_swell.wav` | 1.681 | swell |  |
 
+
+## satisfying/: THE target sound (SATISYING.mp4, first 3 s; same file as the UI SaaS pack)
+This is the sound to build the whole V3 sound design around.
+
+- `bloop_burst_full.wav`: the full 2-second burst of about 22 liquid bloops, as in the original.
+- `bloop_00…21_*.wav`: each bloop on its own.
+- `ding_confirm.wav`: the bright "ding" at 2.7 s, with sustained tones at about 400 and 700 Hz.
+- `synth_bloop_burst_match.wav`: my synthesised copy, matched to the reference spectrogram, so we can make unlimited pitch and size variants.
+
+**Anatomy of one bloop:**
+- The pitch falls fast: it starts at about 0.7–2.5 kHz and lands at about 80–110 Hz, with a glide time constant of about 20–40 ms.
+- It is gently saturated, which gives a harmonic comb.
+- A liquid low body sits at 40–150 Hz.
+- It lasts about 50–150 ms and has almost nothing above about 4 kHz, which is why it feels creamy rather than crispy.
+- In the burst, bloops come every 40–130 ms and swell in loudness toward the middle (0.6–1.2 s), then thin out.
+
+## premium_pack/: "Premium sound effects" library (r4)
+- `cyber_shift.wav`: 1.35 s
+- `cine_strike.wav`: 1.23 s
+- `distorting_glitch.wav`: 1.43 s
+- `basscrack.wav`: 1.4 s
+- `ripple_texture.wav`: 0.97 s
+- `ripple_texture_2.wav`: 1.28 s
+- `alienated_warps.wav`: 1.51 s
+
+## musicapp_ad/: music-app promo, "Find your perfect sound" (r5)
+Separated from its music. This ad also uses bloop-style downward pitch drops (1.6–1.9 s, 2.85–3.0 s, 4.9–5.1 s) and soft noise "clouds" (4.3, 5.3, 6.2 s) on transitions.
+
+- `musicapp_ad_000.10_click.wav`: 0.076 s, click
+- `musicapp_ad_000.49_pop.wav`: 0.165 s, pop
+- `musicapp_ad_001.27_ping.wav`: 0.213 s, ping
+- `musicapp_ad_001.62_swell.wav`: 0.399 s, swell
+- `musicapp_ad_002.09_hit.wav`: 0.281 s, hit
+- `musicapp_ad_002.61_pop.wav`: 0.181 s, pop
+- `musicapp_ad_002.89_click.wav`: 0.072 s, click
+- `musicapp_ad_003.00_hit.wav`: 0.319 s, hit
+- `musicapp_ad_004.06_swell.wav`: 0.302 s, swell
+- `musicapp_ad_005.08_swell.wav`: 0.409 s, swell
+- `musicapp_ad_006.73_whoosh.wav`: 0.601 s, whoosh
+- `musicapp_ad_007.79_impact.wav`: 0.304 s, impact
+- `musicapp_ad_008.16_hit.wav`: 0.298 s, hit
+- `musicapp_ad_008.97_swell.wav`: 0.369 s, swell
+- `musicapp_ad_009.79_swell.wav`: 0.628 s, swell
+- `musicapp_ad_010.95_ping.wav`: 0.258 s, ping
+- `musicapp_ad_011.29_ping.wav`: 0.159 s, ping
+
+## cursor_orange_ad/: Cursor "Ship while you sleep" ad by riccardo bosso (r6)
+Separated pings and blips, plus `moment_*_withmusic.wav` cuts of its big cinematic moments. Those still carry its music bed, so treat them as reference for timing and feel only.
+
+- `cursor_orange_ad_003.80_ping.wav`: 0.142 s, ping
+- `cursor_orange_ad_004.07_ping.wav`: 0.149 s, ping
+- `cursor_orange_ad_004.49_blip.wav`: 0.072 s, blip
+- `cursor_orange_ad_004.75_pop.wav`: 0.142 s, pop
+- `cursor_orange_ad_004.96_blip.wav`: 0.087 s, blip
+- `cursor_orange_ad_005.84_ping.wav`: 0.286 s, ping
+- `cursor_orange_ad_006.86_ping.wav`: 0.132 s, ping
+- `cursor_orange_ad_007.81_click.wav`: 0.122 s, click
+- `cursor_orange_ad_008.32_pop.wav`: 0.143 s, pop
+- `cursor_orange_ad_009.77_pop.wav`: 0.186 s, pop
+- `cursor_orange_ad_011.00_swell.wav`: 0.327 s, swell
+- `cursor_orange_ad_011.91_blip.wav`: 0.092 s, blip
+- `cursor_orange_ad_013.13_ping.wav`: 0.268 s, ping
+- `cursor_orange_ad_014.02_ping.wav`: 0.477 s, ping
+
 ## Re-run
 ```bash
 python tools/sep.py <name> 2.5 1024          # <name>.wav → <name>_fg.wav (SFX) + <name>_bg.wav (music)

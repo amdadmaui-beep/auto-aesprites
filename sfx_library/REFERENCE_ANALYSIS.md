@@ -75,3 +75,45 @@ Inputs:
 **Patterns:** each 8-bar loop ends with a one-bar **fill and sub dip** (around 17.6, 30.2, 42.9, 55.5), which is a natural place for a transition or a hit. The loops are almost identical, so variety has to come from the picture and the SFX.
 
 **Edit plan for 40 s:** the opening hits sync to the first title smash. The 4.94–6.5 build becomes the suction into the logo reveal, and the drop at about 6.5 is the logo or "MEET CURSOR." Section changes at 19.15 and 31.81 mark Agent and the hero dashboard. The fill around 30.2 sets up the montage, and a hard music stop on a bar line around 38.1 lands the lockup.
+
+## 4 · SATISYING.mp4: the target sound
+
+This file is byte-identical to the UI SaaS pack video. Its first 3 seconds are:
+- **About 22 liquid "bloops" in 2 seconds.** Each falls fast in pitch, from about 0.7–2.5 kHz down to about 100 Hz, over a warm low body. They come every 40–130 ms and swell toward the middle.
+- **One bright "ding"** to confirm, at 2.7 s.
+
+This is the "creamy and satisfying" reference. My V2 plops glided *up* in pitch, the wrong direction, and were too sparse. V3 will use the real bloops plus a matched synth (`satisfying/synth_bloop_burst_match.wav`) for:
+- bursts when UI assembles (cards, code lines, chart bars, letters),
+- single bloops on taps and snaps,
+- the ding on confirmations (Tab accept, ✓, Ready).
+
+## 5 · Cursor "Ship while you sleep" ad (r6, riccardo bosso): strong visual reference
+
+| t | Picture |
+|---|---|
+| 0–0.6 | A tiny orange ember in deep red-navy space |
+| 0.75 | It **explodes into a sun flare** that fills the frame |
+| 1.0 | A shockwave ring, with the cube logo at the centre |
+| 1.75 | The logo stretches into a glowing horizontal capsule |
+| 2.0 | It splits into **three framed cube tiles** |
+| 2.25–3.6 | The tiles become three agent task cards. **Golden light streaks** write the code lines |
+| 3.75 / 4.75 | **Motion-blur zooms** through the cards, as light-speed streaks |
+| 4.0–4.6 | Close-up of "Add dark mode toggle": the code is written by a comet of light |
+| 5–7 | The three cards are all busy, with ✓ ticks and a status pill glowing gold |
+| 7.25–7.75 | The cards fold into one |
+| 8.0–9.0 | **A golden checkmark is drawn by a comet**, then a "Done" pill pops |
+| 9.25–9.5 | The card flies off; three comets curve away |
+| 9.75–10.5 | A **horizon lens flare**, with the cube on the light line |
+| 11–12 | The cube slides left; the **CURSOR** wordmark resolves out of glow; "Ship while you sleep." |
+| 13–14.7 | Fade to black; a soft vignette carries the credit |
+
+**What to borrow:**
+- Light as the hero: the comet and streak "writing" code, a drawn checkmark, the horizon flare under the logo.
+- Warm orange/gold against navy, with a starfield of dust particles.
+- Energy built by zooming *through* the UI with motion blur, rather than by cutting.
+
+## 6 · Music-app promo (r5): sound-design notes
+
+- It uses the same bloop family: downward pitch drops, here on taps and hearts.
+- Soft noise "clouds" swell under the UI morphs.
+- The bass-heavy music cuts out completely between sections (3.2–6.6 s), so the SFX play solo. That's a strong contrast trick we can use before the drop.

@@ -1,0 +1,156 @@
+[
+ {
+  "file": "bloop_00_0.10s.wav",
+  "t": 0.096,
+  "dur": 0.072,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_01_0.17s.wav",
+  "t": 0.168,
+  "dur": 0.056,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_02_0.22s.wav",
+  "t": 0.224,
+  "dur": 0.037,
+  "f_start": 64,
+  "f_end": 152
+ },
+ {
+  "file": "bloop_03_0.26s.wav",
+  "t": 0.261,
+  "dur": 0.048,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_04_0.31s.wav",
+  "t": 0.309,
+  "dur": 0.059,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_05_0.37s.wav",
+  "t": 0.368,
+  "dur": 0.128,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_06_0.50s.wav",
+  "t": 0.496,
+  "dur": 0.104,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_07_0.60s.wav",
+  "t": 0.6,
+  "dur": 0.131,
+  "f_start": 76,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_08_0.73s.wav",
+  "t": 0.731,
+  "dur": 0.088,
+  "f_start": 64,
+  "f_end": 105
+ },
+ {
+  "file": "bloop_09_0.82s.wav",
+  "t": 0.819,
+  "dur": 0.04,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_10_0.86s.wav",
+  "t": 0.859,
+  "dur": 0.045,
+  "f_start": 298,
+  "f_end": 128
+ },
+ {
+  "file": "bloop_11_0.90s.wav",
+  "t": 0.904,
+  "dur": 0.075,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_12_0.98s.wav",
+  "t": 0.979,
+  "dur": 0.069,
+  "f_start": 380,
+  "f_end": 76
+ },
+ {
+  "file": "bloop_13_1.05s.wav",
+  "t": 1.048,
+  "dur": 0.048,
+  "f_start": 70,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_14_1.10s.wav",
+  "t": 1.096,
+  "dur": 0.101,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_15_1.20s.wav",
+  "t": 1.197,
+  "dur": 0.139,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_16_1.34s.wav",
+  "t": 1.336,
+  "dur": 0.112,
+  "f_start": 64,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_17_1.45s.wav",
+  "t": 1.448,
+  "dur": 0.155,
+  "f_start": 410,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_18_1.60s.wav",
+  "t": 1.603,
+  "dur": 0.173,
+  "f_start": 369,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_19_1.78s.wav",
+  "t": 1.776,
+  "dur": 0.101,
+  "f_start": 333,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_20_1.88s.wav",
+  "t": 1.877,
+  "dur": 0.128,
+  "f_start": 527,
+  "f_end": 64
+ },
+ {
+  "file": "bloop_21_2.01s.wav",
+  "t": 2.005,
+  "dur": 0.115,
+  "f_start": 416,
+  "f_end": 64
+ }
+]

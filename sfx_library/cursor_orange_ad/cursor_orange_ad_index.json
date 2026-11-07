@@ -1,0 +1,142 @@
+[
+ {
+  "file": "cursor_orange_ad_003.80_ping.wav",
+  "t": 3.796,
+  "dur": 0.142,
+  "cls": "ping",
+  "peak_db": -20.7,
+  "centroid": 2547,
+  "flatness": 0.015,
+  "attack": 0.052
+ },
+ {
+  "file": "cursor_orange_ad_004.07_ping.wav",
+  "t": 4.073,
+  "dur": 0.149,
+  "cls": "ping",
+  "peak_db": -19.2,
+  "centroid": 3225,
+  "flatness": 0.009,
+  "attack": 0.075
+ },
+ {
+  "file": "cursor_orange_ad_004.49_blip.wav",
+  "t": 4.487,
+  "dur": 0.072,
+  "cls": "blip",
+  "peak_db": -19.2,
+  "centroid": 3635,
+  "flatness": 0.01,
+  "attack": 0.028
+ },
+ {
+  "file": "cursor_orange_ad_004.75_pop.wav",
+  "t": 4.754,
+  "dur": 0.142,
+  "cls": "pop",
+  "peak_db": -17.0,
+  "centroid": 3608,
+  "flatness": 0.02,
+  "attack": 0.096
+ },
+ {
+  "file": "cursor_orange_ad_004.96_blip.wav",
+  "t": 4.956,
+  "dur": 0.087,
+  "cls": "blip",
+  "peak_db": -19.9,
+  "centroid": 3007,
+  "flatness": 0.008,
+  "attack": 0.078
+ },
+ {
+  "file": "cursor_orange_ad_005.84_ping.wav",
+  "t": 5.845,
+  "dur": 0.286,
+  "cls": "ping",
+  "peak_db": -14.2,
+  "centroid": 2259,
+  "flatness": 0.013,
+  "attack": 0.07
+ },
+ {
+  "file": "cursor_orange_ad_006.86_ping.wav",
+  "t": 6.864,
+  "dur": 0.132,
+  "cls": "ping",
+  "peak_db": -15.8,
+  "centroid": 2655,
+  "flatness": 0.01,
+  "attack": 0.05
+ },
+ {
+  "file": "cursor_orange_ad_007.81_click.wav",
+  "t": 7.81,
+  "dur": 0.122,
+  "cls": "click",
+  "peak_db": -19.6,
+  "centroid": 5784,
+  "flatness": 0.06,
+  "attack": 0.025
+ },
+ {
+  "file": "cursor_orange_ad_008.32_pop.wav",
+  "t": 8.321,
+  "dur": 0.143,
+  "cls": "pop",
+  "peak_db": -19.7,
+  "centroid": 6756,
+  "flatness": 0.046,
+  "attack": 0.093
+ },
+ {
+  "file": "cursor_orange_ad_009.77_pop.wav",
+  "t": 9.77,
+  "dur": 0.186,
+  "cls": "pop",
+  "peak_db": -12.1,
+  "centroid": 5270,
+  "flatness": 0.054,
+  "attack": 0.03
+ },
+ {
+  "file": "cursor_orange_ad_011.00_swell.wav",
+  "t": 11.002,
+  "dur": 0.327,
+  "cls": "swell",
+  "peak_db": -19.3,
+  "centroid": 5797,
+  "flatness": 0.047,
+  "attack": 0.121
+ },
+ {
+  "file": "cursor_orange_ad_011.91_blip.wav",
+  "t": 11.908,
+  "dur": 0.092,
+  "cls": "blip",
+  "peak_db": -31.2,
+  "centroid": 1219,
+  "flatness": 0.006,
+  "attack": 0.026
+ },
+ {
+  "file": "cursor_orange_ad_013.13_ping.wav",
+  "t": 13.127,
+  "dur": 0.268,
+  "cls": "ping",
+  "peak_db": -22.9,
+  "centroid": 4698,
+  "flatness": 0.014,
+  "attack": 0.109
+ },
+ {
+  "file": "cursor_orange_ad_014.02_ping.wav",
+  "t": 14.02,
+  "dur": 0.477,
+  "cls": "ping",
+  "peak_db": -26.9,
+  "centroid": 1673,
+  "flatness": 0.006,
+  "attack": 0.038
+ }
+]

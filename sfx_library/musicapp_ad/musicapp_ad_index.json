@@ -1,0 +1,172 @@
+[
+ {
+  "file": "musicapp_ad_000.10_click.wav",
+  "t": 0.104,
+  "dur": 0.076,
+  "cls": "click",
+  "peak_db": -9.5,
+  "centroid": 6986,
+  "flatness": 0.042,
+  "attack": 0.044
+ },
+ {
+  "file": "musicapp_ad_000.49_pop.wav",
+  "t": 0.494,
+  "dur": 0.165,
+  "cls": "pop",
+  "peak_db": -7.3,
+  "centroid": 2578,
+  "flatness": 0.026,
+  "attack": 0.031
+ },
+ {
+  "file": "musicapp_ad_001.27_ping.wav",
+  "t": 1.265,
+  "dur": 0.213,
+  "cls": "ping",
+  "peak_db": -12.1,
+  "centroid": 3986,
+  "flatness": 0.019,
+  "attack": 0.074
+ },
+ {
+  "file": "musicapp_ad_001.62_swell.wav",
+  "t": 1.624,
+  "dur": 0.399,
+  "cls": "swell",
+  "peak_db": -3.8,
+  "centroid": 193,
+  "flatness": 0.001,
+  "attack": 0.326
+ },
+ {
+  "file": "musicapp_ad_002.09_hit.wav",
+  "t": 2.091,
+  "dur": 0.281,
+  "cls": "hit",
+  "peak_db": -7.1,
+  "centroid": 75,
+  "flatness": 0.001,
+  "attack": 0.173
+ },
+ {
+  "file": "musicapp_ad_002.61_pop.wav",
+  "t": 2.611,
+  "dur": 0.181,
+  "cls": "pop",
+  "peak_db": -18.7,
+  "centroid": 6076,
+  "flatness": 0.079,
+  "attack": 0.153
+ },
+ {
+  "file": "musicapp_ad_002.89_click.wav",
+  "t": 2.894,
+  "dur": 0.072,
+  "cls": "click",
+  "peak_db": -11.3,
+  "centroid": 6937,
+  "flatness": 0.043,
+  "attack": 0.033
+ },
+ {
+  "file": "musicapp_ad_003.00_hit.wav",
+  "t": 2.996,
+  "dur": 0.319,
+  "cls": "hit",
+  "peak_db": -10.2,
+  "centroid": 7576,
+  "flatness": 0.045,
+  "attack": 0.098
+ },
+ {
+  "file": "musicapp_ad_004.06_swell.wav",
+  "t": 4.062,
+  "dur": 0.302,
+  "cls": "swell",
+  "peak_db": -11.8,
+  "centroid": 4447,
+  "flatness": 0.021,
+  "attack": 0.28
+ },
+ {
+  "file": "musicapp_ad_005.08_swell.wav",
+  "t": 5.076,
+  "dur": 0.409,
+  "cls": "swell",
+  "peak_db": -28.3,
+  "centroid": 4455,
+  "flatness": 0.043,
+  "attack": 0.148
+ },
+ {
+  "file": "musicapp_ad_006.73_whoosh.wav",
+  "t": 6.729,
+  "dur": 0.601,
+  "cls": "whoosh",
+  "peak_db": -18.2,
+  "centroid": 4889,
+  "flatness": 0.064,
+  "attack": 0.26
+ },
+ {
+  "file": "musicapp_ad_007.79_impact.wav",
+  "t": 7.785,
+  "dur": 0.304,
+  "cls": "impact",
+  "peak_db": -18.8,
+  "centroid": 442,
+  "flatness": 0.011,
+  "attack": 0.036
+ },
+ {
+  "file": "musicapp_ad_008.16_hit.wav",
+  "t": 8.156,
+  "dur": 0.298,
+  "cls": "hit",
+  "peak_db": -25.7,
+  "centroid": 3868,
+  "flatness": 0.041,
+  "attack": 0.175
+ },
+ {
+  "file": "musicapp_ad_008.97_swell.wav",
+  "t": 8.97,
+  "dur": 0.369,
+  "cls": "swell",
+  "peak_db": -24.9,
+  "centroid": 1991,
+  "flatness": 0.046,
+  "attack": 0.236
+ },
+ {
+  "file": "musicapp_ad_009.79_swell.wav",
+  "t": 9.787,
+  "dur": 0.628,
+  "cls": "swell",
+  "peak_db": -13.0,
+  "centroid": 4410,
+  "flatness": 0.028,
+  "attack": 0.157
+ },
+ {
+  "file": "musicapp_ad_010.95_ping.wav",
+  "t": 10.954,
+  "dur": 0.258,
+  "cls": "ping",
+  "peak_db": -25.0,
+  "centroid": 1282,
+  "flatness": 0.015,
+  "attack": 0.184
+ },
+ {
+  "file": "musicapp_ad_011.29_ping.wav",
+  "t": 11.287,
+  "dur": 0.159,
+  "cls": "ping",
+  "peak_db": -34.3,
+  "centroid": 626,
+  "flatness": 0.014,
+  "attack": 0.07
+ }
+]
