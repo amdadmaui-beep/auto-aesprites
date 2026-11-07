@@ -1,0 +1,4 @@
+film/build/*.wav
+film/build/video.mp4
+film/build/render.log
+film/st/
