@@ -31,3 +31,7 @@ film6/st/
 film6/music
 film6/st4/
 film6/st3/
+film6v/build/*.wav
+film6v/build/video.mp4
+film6v/build/render.log
+film6v/st/

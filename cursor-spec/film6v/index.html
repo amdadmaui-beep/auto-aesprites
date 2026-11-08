@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cursor — From Idea to Reality V2 (AVE Studio spec)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="vpage" style="position:relative;width:1080px;height:1920px;overflow:hidden;background:#0E0D09"><div id="stage" style="position:absolute;left:0;top:0;transform-origin:0 0"></div></div>
+<script src="cues.js"></script>
+<script src="lib.js"></script>
+<script src="shots.js"></script>
+<script src="vcam.js"></script>
+<script>
+async function init(){
+  for(const f of['500 40px UI','600 40px UI','400 20px Mono','500 20px Mono'])await document.fonts.load(f);await document.fonts.ready;
+  await Promise.all(['brand/CUBE_25D.png','brand/WORDMARK_DARK.svg'].map(src=>new Promise(r=>{const i=new Image();i.onload=r;i.onerror=r;i.src=src;})));
+  buildWorld();buildDash();buildKey();buildShots();buildGrain();
+  // everything except the grain rides on one camera rig, so the whole frame can float, push and kick on cuts
+  const cam=document.createElement('div');cam.id='cam';cam.style.cssText='position:absolute;inset:0;transform-origin:50% 50%;will-change:transform';
+  [...stage.children].filter(e=>e!==grain).forEach(e=>cam.appendChild(e));stage.insertBefore(cam,grain);window.CAM=cam;
+  window.CUTS=EDIT.map(e=>e[0]);
+  window.VSTAGE=stage;window.VPAGE=document.getElementById('vpage');
+  // soft top/bottom edges so the composition dissolves into the page instead of showing a hard band
+  stage.style.webkitMaskImage=stage.style.maskImage='linear-gradient(180deg,transparent 0,#000 110px,#000 970px,transparent 1080px)';
+  window.seek=async(t,tf)=>{render(t);camRig(t);vcam(t);updGrain(tf==null?t:tf);};
+  const q=new URLSearchParams(location.search);await window.seek(q.has('t')?parseFloat(q.get('t')):0);
+  window.READY=true;
+}
+init().catch(e=>{window.INITERR=String(e&&e.stack||e);console.error(e);});
+</script>
+</body>
+</html>
