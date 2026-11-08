@@ -24,3 +24,8 @@ film5/build/render.log
 film5/st/
 film5/st2/
 film5/music
+film6/build/*.wav
+film6/build/video.mp4
+film6/build/render.log
+film6/st/
+film6/music
