@@ -17,3 +17,10 @@ film4/build/video.mp4
 film4/build/render.log
 film4/st/
 film4/music
+film5/build/*.wav
+film5/build/video.mp4
+film5/build/finale.mp4
+film5/build/render.log
+film5/st/
+film5/st2/
+film5/music
