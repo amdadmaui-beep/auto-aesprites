@@ -144,7 +144,7 @@ SEG = [
                                                   (27.97, '4047', 2.0, (.52, .22, .34, .38)), (28.40, '43033', 5.0, (.04, .44, .36, .40))]}),
 ]
 IW, IH = int(AW * .84) // 2 * 2, int(AH * .84) // 2 * 2; IX, IY = AX + (AW - IW) // 2 + 18 * S, AY + (AH - IH) // 2; MI = rrect_mask(IW, IH, RAD)
-OUTRO = 2.2
+OUTRO = float(os.environ.get('OUTRO', '0'))   # AVE logo outro off by default (client asked to remove it); OUTRO=2.2 brings it back
 enc = subprocess.Popen(['ffmpeg', '-y', '-v', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                         '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', OUT + '.video.mp4'], stdin=subprocess.PIPE)
 def emit(fr): enc.stdin.write((np.clip(fr, 0, 1) * 255).astype(np.uint8).tobytes())
@@ -202,7 +202,7 @@ STA = np.asarray(stl, np.float32) / 255; sty = ly + lg2.height + 70 * S
 fur = ImageFont.truetype(FONT, 30 * S); ur = 'Real estate photo → cinematic video'
 url = Image.new('RGBA', (W, 80 * S), (0, 0, 0, 0)); ImageDraw.Draw(url).text(((W - ImageDraw.Draw(url).textlength(ur, font=fur)) / 2, 10 * S), ur, font=fur, fill=(60, 56, 48, 255))
 URA = np.asarray(url, np.float32) / 255; ury = sty + 150 * S
-n_out = int(OUTRO * FPS); TP = [0.05 + .12 * i for i in range(4)]
+n_out = int(OUTRO * FPS); TP = [0.05 + .12 * i for i in range(4)] if OUTRO else []
 for k in range(n_out):
     t = k / FPS; fr = base.copy()
     # transition in: the last frame's cards fade out quickly
@@ -230,7 +230,7 @@ mix = np.zeros((N, 2), np.float32); m = mus[:int(end * SR)].copy(); fo = int(.06
 bl = sorted(f for f in os.listdir(f'{SFXLIB}/satisfying') if f.startswith('bloop_') and f[6:8].isdigit())
 for i, tp in enumerate(TP):   # one bloop per logo panel, then the ding on STUDIO
     x = wav(f'{SFXLIB}/satisfying/{bl[(i * 5 + 3) % len(bl)]}'); s = int((end + tp + .1) * SR); mix[s:s + len(x)] += x[:N - s] * .55
-x = wav(f'{SFXLIB}/satisfying/ding_confirm.wav'); s = int((end + .75) * SR); mix[s:s + len(x)] += x[:N - s] * .5
+if OUTRO: x = wav(f'{SFXLIB}/satisfying/ding_confirm.wav'); s = int((end + .75) * SR); mix[s:s + len(x)] += x[:N - s] * .5
 pk = np.abs(mix).max(); mix *= min(1, .97 / pk)
 w = wave.open(OUT + '.wav', 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
 subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', OUT + '.video.mp4', '-i', OUT + '.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k', '-shortest', '-movflags', '+faststart', OUT])

@@ -59,7 +59,7 @@ To use real client work instead of stock, swap each `SEG` entry's clip for that 
   - a faint architectural grid with corner ticks around each card;
   - "Before" and "After" chips;
   - a small AVE Studio header.
-- **Outro:** the AVE logo builds from the same vertical panels, then "STUDIO" and a tagline appear. The sound is bloops plus a ding from `sfx_library/satisfying/`.
+- **Outro (off by default; the client asked to remove it, `OUTRO=2.2` brings it back):** the AVE logo builds from the same vertical panels, then "STUDIO" and a tagline appear. The sound is bloops plus a ding from `sfx_library/satisfying/`.
 
 ```bash
 python build_reel2.py <clips_dir> <reference_audio.wav> ../sfx_library build/RealEstate_BeforeAfter_V2_4K.mp4
