@@ -11,7 +11,7 @@ Hi [Name],
 
 [One real, specific fact about them, e.g. their tour/special/show and the clip gap.]
 
-We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. You can see their clips here: https://www.instagram.com/avestudio.production/
+We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. You can see their clips on our Instagram (https://www.instagram.com/avestudio.production/) or website (https://ave-studio-website.vercel.app/).
 
 [One yes/no question, e.g. "If I cut one bit from a recent set, would you post it before your next show?"]
 
@@ -26,7 +26,7 @@ Hi [Name],
 
 [One real fact: the clip service they sell, packages, hiring page, or clients.]
 
-We're a small team of human editors cutting captioned vertical clips. We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff: https://www.instagram.com/avestudio.production/
+We're a small team of human editors cutting captioned vertical clips. We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. See their clips on our Instagram (https://www.instagram.com/avestudio.production/) or website (https://ave-studio-website.vercel.app/).
 
 Would a backup editor for busy weeks be useful, white-label and back within 48 hours?
 
