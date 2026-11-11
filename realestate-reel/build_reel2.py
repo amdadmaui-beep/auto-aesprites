@@ -66,6 +66,7 @@ ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
 g = 60 * S
 for x in range(0, W, g): d.line([(x, 0), (x, H)], fill=(20, 18, 12, 14), width=S)
 for y in range(0, H, g): d.line([(0, y), (W, y)], fill=(20, 18, 12, 14), width=S)
+GRID = np.asarray(ov, np.float32) / 255                               # grid alone, for the outro
 for (x, y, w, h) in ((BX, BY, BW, BH), (AX, AY, AW, AH)):          # architectural corner ticks around each card
     m, L = 18 * S, 34 * S
     for cx, cy, sx, sy in ((x - m, y - m, 1, 1), (x + w + m, y - m, -1, 1), (x - m, y + h + m, 1, -1), (x + w + m, y + h + m, -1, -1)):
@@ -192,7 +193,7 @@ for t0, t1, c, sa, sp, fx in SEG:
 
 # ---------------------------------------------------------------- outro: the AVE logo builds itself from the same vertical panels
 amb = ambient((last[1] * 255).astype(np.uint8)); base = amb * .35 + CREAM * .65
-gx, gy = np.mgrid[0:H, 0:W]; base = base * (1 - OVA * .6) + OVC * OVA * .6   # keep the grid, softly
+base = base * (1 - GRID[..., 3:4]) + GRID[..., :3] * GRID[..., 3:4]                  # keep only the grid
 LW = 1300 * S // 2 * 2 // 2; lg2 = logo.resize((LW, int(LW * logo.height / logo.width)), Image.LANCZOS); LA = np.asarray(lg2, np.float32) / 255
 lx, ly = (W - LW) // 2, int(H * .44) - lg2.height // 2
 fst = ImageFont.truetype(FONT, 46 * S); st = 'S T U D I O'

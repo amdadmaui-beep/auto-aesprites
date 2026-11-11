@@ -47,3 +47,20 @@ python build_reel.py <clips_dir> <reference_audio.wav> build/RealEstate_BeforeAf
 ```
 
 To use real client work instead of stock, swap each `SEG` entry's clip for that client's own raw photo ("Before") and finished video ("After").
+
+## V2 (`build_reel2.py`): 4K
+- **Resolution:** 2160×3840 at 30 fps, 31.1 s (28.9 s reel plus a 2.2 s outro).
+- **Transitions from the reference:**
+  - **diagonal glass shards:** dusk to the manor aerial at 4.53 s, and kitchen to villa at 25.40 s;
+  - **vertical panel builds:** terrace to the white suite at 9.55 s, and aerial to the pool at 12.55 s;
+  - the box reveal (at 21.20 s) and circle reveal (at 24.57 s) are kept.
+- **Designed backdrop:**
+  - an ambient wash of the current "After" shot, blurred and pulled toward cream;
+  - a faint architectural grid with corner ticks around each card;
+  - "Before" and "After" chips;
+  - a small AVE Studio header.
+- **Outro:** the AVE logo builds from the same vertical panels, then "STUDIO" and a tagline appear. The sound is bloops plus a ding from `sfx_library/satisfying/`.
+
+```bash
+python build_reel2.py <clips_dir> <reference_audio.wav> ../sfx_library build/RealEstate_BeforeAfter_V2_4K.mp4
+```
