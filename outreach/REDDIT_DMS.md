@@ -231,3 +231,30 @@ https://www.reddit.com/r/HireAnEditor/comments/1xnnwp3/
 > Quick shooting tips before you film: shoot vertical, keep each clip 3–5 seconds, start and end every shot with a small movement (a step forward, or a pan the same direction), and keep the light behind the camera.
 >
 > Work: https://ave-studio-website.vercel.app/
+
+---
+
+# Batch 5: ONGOING / MONTHLY jobs, posted Nov 10–11 (send within 24h of posting)
+
+## 28. ⭐ Right Click Culture: LA creator talent agency, comedy creators on roster, $40/hr, ongoing (u/RightClickKoury)
+https://www.reddit.com/r/HireAnEditor/comments/1xt1kb8/
+They asked for a DM with portfolio and rates.
+> Hi Koury, saw your post for Right Click Culture. Comedy creators are our main lane. We cut stand-up and podcast clips for comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff: https://ave-studio-website.vercel.app/
+> Short-form for TikTok/Reels/Shorts with 24–48h turnaround, and your $40/hr works for us. Want me to cut a test clip for one of your comedy creators?
+> Jeff, AVE Studio
+
+## 29. TWINTUBE "Pop Off": weekly pop-culture talking-head series for TikTok/Reels (u/twintubekai)
+https://www.reddit.com/r/YouTubeEditorsForHire/comments/1xsz9ec/
+> Hi! Saw your post for Pop Off. Making a talking-head video feel like an entertaining conversation, not a news report, is exactly what we do with comedians (Jackie Kashian, Debi Bradshaw, Brenda Pontiff): https://ave-studio-website.vercel.app/
+> Bold captions, hooks in the first 2 seconds, B-roll and timing that lets the jokes land. Want me to cut one episode as a test so you can see the fit?
+> Jeff, AVE Studio
+
+## 30. Megan and Ben (@thehitobito): $3–5k/month, 8–10 shorts + 1 long video monthly, CapCut. Stretch: travel niche, 70 comments
+https://www.reddit.com/r/HireAnEditor/comments/1xsp6ze/
+> Hi Ben, saw your post. We edit shorts in CapCut, with hooks, captions in the creator's style, and personality, not AI cuts. Our work is mostly comedy and talking heads: https://ave-studio-website.vercel.app/
+> 8–10 shorts plus one long video a month fits our capacity, and you'd be a top-priority client. Want me to cut one short from your raw footage as a test?
+> Jeff, AVE Studio
+
+## 31. Data-career education channel (61K subs): $400–550 per long-form video, 2–3 a month. Apply through their form (link in post). Stretch: needs light motion graphics
+https://www.reddit.com/r/FindVideoEditors/comments/1xt7766/
+Pitch in the form: clean talking-head plus screen-share edits, callouts and zooms, draft within their 2-week window. Use the website as the portfolio.
