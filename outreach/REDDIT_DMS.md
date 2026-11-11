@@ -258,3 +258,18 @@ https://www.reddit.com/r/HireAnEditor/comments/1xsp6ze/
 ## 31. Data-career education channel (61K subs): $400–550 per long-form video, 2–3 a month. Apply through their form (link in post). Stretch: needs light motion graphics
 https://www.reddit.com/r/FindVideoEditors/comments/1xt7766/
 Pitch in the form: clean talking-head plus screen-share edits, callouts and zooms, draft within their 2-week window. Use the website as the portfolio.
+
+## 32. ⭐ Content creator, new page, $100–150 per Reel (u/Chatter_Monkey)
+https://www.reddit.com/r/HireAnEditor/comments/1xsd7k8/
+> Hi! Saw your post. Yes, I'm up for it. Mid-level Reels with hooks, captions and clean pacing are what we do every day. Examples (comedians Jackie Kashian, Debi Bradshaw, Brenda Pontiff): https://ave-studio-website.vercel.app/
+> Your budget works. Want me to edit your first Reel so you can see the fit? Send the footage and I'll have it back within 24h.
+> Jeff, AVE Studio
+
+## 33. ⭐ Monthly short-form editor, CapCut, cutting long episodes into shorts (u/oishipillowsube)
+https://www.reddit.com/r/HireAnEditor/comments/1xt49h4/
+They want: resume + portfolio, a short plan for how you'd cut their reference episode (https://youtu.be/KMg30pqICC8) into shorts, your monthly rate, and how many videos you can do per day or week.
+**Watch the reference first (10 min) and fill in the [PLAN] part with 3 real moments from it.**
+> Hi! Saw your post. I edit in CapCut every day, mostly comedy and talking-head shorts cut from long episodes: https://ave-studio-website.vercel.app/ (clients include comedians Jackie Kashian, Debi Bradshaw, Brenda Pontiff).
+> How I'd cut your episode: [PLAN: e.g. "Short 1: the 0:00–0:45 story about X, hook = the punchline line first. Short 2: … Short 3: …"]. Each short opens on the strongest line, keeps one story per clip, and ends on a payoff.
+> Capacity: 2–3 shorts a day / 10–15 a week. Rate: what's your monthly budget? For reference, I charge around $25 a short, less per clip on a monthly package.
+> Jeff, AVE Studio
