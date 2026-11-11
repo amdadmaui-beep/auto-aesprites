@@ -25,6 +25,14 @@ When they like the sample, **don't quote yet.** Ask:
 - They give a number → fit an option to it (see the ladder below).
 - They say "what do you charge?" → give the **starter** first, then the ladder.
 
+## Price script (user's rule, Nov 11): ask budget first, anchor at $25
+When they ask the price:
+> Happy to work with what fits you. Do you have a budget in mind per clip or per month? For reference, a clip like the sample I sent (or the ones on our site) is $25.
+
+- They give a number at or above $25 a clip → say yes and start.
+- They want ongoing work → offer monthly: "8 clips a month for $180" (saves them $20).
+- They're below $25 → "I can do 2 clips for $45 to start." Never under $20 a clip.
+
 ## Rule 3: The price ladder (always start small)
 
 | Option | What | Price |
