@@ -31,7 +31,7 @@ When they ask the price:
 
 - They give a number at or above $25 a clip → say yes and start.
 - They want ongoing work → offer monthly: "8 clips a month for $180" (saves them $20).
-- They're below $25 → "I can do 2 clips for $45 to start." Never under $20 a clip.
+- They're below $25 → stay friendly: "No worries, the sample's yours to keep. If the budget opens up, I'm here." Never go under $25 a clip.
 
 ## Rule 3: The price ladder (always start small)
 
