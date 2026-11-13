@@ -298,3 +298,13 @@ https://www.reddit.com/r/HireAnEditor/comments/1xv008s/
 > Jeff, AVE Studio
 
 Send link: https://www.reddit.com/message/compose/?to=taylor13fan&subject=Editor%20for%20your%20channel%20%28audition%29&message=Hi%21%20Saw%20your%20post.%20Assembling%20clips%20to%20a%20script%20and%20voiceover%20with%20clean%20pacing%20is%20a%20good%20fit%20for%20us%2C%20and%204%20videos%20a%20month%20works.%20Our%20work%20so%20far%20is%20mostly%20comedy%20and%20short-form%3A%20https%3A//ave-studio-website.vercel.app/%0A%0AHappy%20to%20do%20the%20audition%20so%20you%20can%20judge%20the%20long-form%20side.%20Could%20you%20send%20the%20audition%20brief%3F%0A%0AJeff%2C%20AVE%20Studio
+
+## 36. YouTuber whose editor is blackmailing them (viral 1M-view video); needs a trustworthy new editor (u/Disastrous_Drink9224)
+https://www.reddit.com/r/youtubers/comments/1xofeyz/
+> Hi, I saw your post about the editor threatening copyright claims. Really sorry, that's an awful situation. For what it's worth, the advice in the thread is right: you paid for the work, so keep every message and payment receipt.
+> 
+> If you need a new editor once it's sorted, we're a small team that edits for creators and comedians (Jackie Kashian, Debi Bradshaw, Brenda Pontiff). We put in writing that you own everything we deliver, and we never upload your videos anywhere. Happy to do a test edit first.
+> 
+> Jeff, AVE Studio
+
+Send link: https://www.reddit.com/message/compose/?to=Disastrous_Drink9224&subject=Sorry%20about%20your%20editor%20situation&message=Hi%2C%20I%20saw%20your%20post%20about%20the%20editor%20threatening%20copyright%20claims.%20Really%20sorry%2C%20that%27s%20an%20awful%20situation.%20For%20what%20it%27s%20worth%2C%20the%20advice%20in%20the%20thread%20is%20right%3A%20you%20paid%20for%20the%20work%2C%20so%20keep%20every%20message%20and%20payment%20receipt.%0A%0AIf%20you%20need%20a%20new%20editor%20once%20it%27s%20sorted%2C%20we%27re%20a%20small%20team%20that%20edits%20for%20creators%20and%20comedians%20%28Jackie%20Kashian%2C%20Debi%20Bradshaw%2C%20Brenda%20Pontiff%29.%20We%20put%20in%20writing%20that%20you%20own%20everything%20we%20deliver%2C%20and%20we%20never%20upload%20your%20videos%20anywhere.%20Happy%20to%20do%20a%20test%20edit%20first.%0A%0AJeff%2C%20AVE%20Studio
