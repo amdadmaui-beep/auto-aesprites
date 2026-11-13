@@ -273,3 +273,28 @@ They want: resume + portfolio, a short plan for how you'd cut their reference ep
 > How I'd cut your episode: Short 1 (2:26-2:57), "The ranger": open on "He was eating a raccoon like a burrito," then the keys reveal, ending on "11 miles back up the mountain." Short 2 (1:31-2:11), "217 notifications": hook "We touched grass for 3 days. The world got eaten." Build through the emergency alert and end on the unanswered call to his dad as a cliffhanger. Short 3 (3:04-3:48), the chase: Kai running laps screaming song lyrics, then Ren's trekking pole and the zombie stuck "like a cork." Plus a trailer short for Ep 2 from the ring-light livestreamer at 5:07.. Each short opens on the strongest line, keeps one story per clip, and ends on a payoff.
 > Capacity: 2–3 shorts a day / 10–15 a week. Rate: what's your monthly budget? For reference, I charge around $25 a short, less per clip on a monthly package.
 > Jeff, AVE Studio
+
+
+---
+
+# Batch 7 (Nov 13)
+
+## 34. Priceless Media Agency: new clipping agency (podcasts/streams to shorts) building a founding editor team (u/ZealousidealRiver301)
+https://www.reddit.com/r/HireAnEditor/comments/1xv01lw/
+> Hi! Saw your post about Priceless Media's founding editor team. Turning podcasts and long-form into 15–60s clips with strong hooks and captions is exactly what we do. We cut clips for comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff: https://ave-studio-website.vercel.app/
+> 
+> We're a small team in the Philippines, so we can turn clips around overnight for US clients. Want me to cut a sample from one of your clients' episodes?
+> 
+> Jeff, AVE Studio
+
+Send link: https://www.reddit.com/message/compose/?to=ZealousidealRiver301&subject=Founding%20editor%20for%20Priceless%20Media&message=Hi%21%20Saw%20your%20post%20about%20Priceless%20Media%27s%20founding%20editor%20team.%20Turning%20podcasts%20and%20long-form%20into%2015%E2%80%9360s%20clips%20with%20strong%20hooks%20and%20captions%20is%20exactly%20what%20we%20do.%20We%20cut%20clips%20for%20comedians%20like%20Jackie%20Kashian%2C%20Debi%20Bradshaw%20and%20Brenda%20Pontiff%3A%20https%3A//ave-studio-website.vercel.app/%0A%0AWe%27re%20a%20small%20team%20in%20the%20Philippines%2C%20so%20we%20can%20turn%20clips%20around%20overnight%20for%20US%20clients.%20Want%20me%20to%20cut%20a%20sample%20from%20one%20of%20your%20clients%27%20episodes%3F%0A%0AJeff%2C%20AVE%20Studio
+
+## 35. YouTube channel: ~$130/video long-form (voiceover + clip assembly), 4 a month (about $520/month). Stretch: long-form, but there's an audition (u/taylor13fan)
+https://www.reddit.com/r/HireAnEditor/comments/1xv008s/
+> Hi! Saw your post. Assembling clips to a script and voiceover with clean pacing is a good fit for us, and 4 videos a month works. Our work so far is mostly comedy and short-form: https://ave-studio-website.vercel.app/
+> 
+> Happy to do the audition so you can judge the long-form side. Could you send the audition brief?
+> 
+> Jeff, AVE Studio
+
+Send link: https://www.reddit.com/message/compose/?to=taylor13fan&subject=Editor%20for%20your%20channel%20%28audition%29&message=Hi%21%20Saw%20your%20post.%20Assembling%20clips%20to%20a%20script%20and%20voiceover%20with%20clean%20pacing%20is%20a%20good%20fit%20for%20us%2C%20and%204%20videos%20a%20month%20works.%20Our%20work%20so%20far%20is%20mostly%20comedy%20and%20short-form%3A%20https%3A//ave-studio-website.vercel.app/%0A%0AHappy%20to%20do%20the%20audition%20so%20you%20can%20judge%20the%20long-form%20side.%20Could%20you%20send%20the%20audition%20brief%3F%0A%0AJeff%2C%20AVE%20Studio
