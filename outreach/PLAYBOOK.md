@@ -117,3 +117,7 @@ Honest note: no one can promise a 99% hit rate. What makes it near-certain is
 
 Use `prospects.csv` in this folder. Update `status` as you go:
 `to-contact → messaged → replied → sample-sent → asked-price → client` (or `no-reply` / `not-interested`).
+
+## Saved for later (Nov 13)
+- Website: put 3 instantly-playing vertical clips above the fold (Jackie, Debi, Brenda), with results, before any "welcome" text. Repo: amdadmaui-beep/ave-studio-website.
+- Separate sending domain for cold email (about $10/yr + about $7/month for Workspace) once replies start.
