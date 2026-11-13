@@ -32,4 +32,4 @@ Last updated: 2026-11-13. Update this file at the end of every session.
 - Later: website above-the-fold vertical clips; separate sending domain; a long-form sample.
 
 ## Files
-prospects.csv (tracker), NEW_TEMPLATE.md, CLOSING.md, REDDIT_DMS.md, NEED_LEADS.md, PROFILES.md, PLAYBOOK.md
+TROJAN_HORSE.md (main strategy), prospects.csv (tracker), NEW_TEMPLATE.md, CLOSING.md, REDDIT_DMS.md, NEED_LEADS.md, PROFILES.md, PLAYBOOK.md
