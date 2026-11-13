@@ -1,35 +1,43 @@
-# New cold email template (from the Nov 11 review; replaces the old style)
+# Cold email template (v2, Nov 13): "Trojan Horse"
 
-Rules: open with THEIR situation, one short proof line, one yes/no question, under ~80 words,
-footer with city and opt-out. No "free" in the subject or first line. A follow-up must add something new
-(for example, send the finished clip).
+Rules
+- Email #1 has NO links (better for spam filters, and nothing for them to decide about). Plain text, under 80 words.
+- Name a specific episode or set plus an exact timestamp (proof we actually watched).
+- Proof = client names only: Jackie Kashian, Debi Bradshaw, Brenda Pontiff.
+- One low-friction yes/no question: "Mind if I cut it for you?"
+- Footer: Jeff, AVE Studio · Cagayan de Oro City, Philippines · opt-out line.
+- When they say yes: cut that exact clip within 24h, reply with the Drive link + website (ave-studio-website.vercel.app) + IG (@avestudio.production).
+- Targets: sweet spot only (comics 10k–100k followers with tour dates; podcasts/YouTubers 15k–150k subs), active in last 14 days, with a money signal.
 
-## Comedians / podcasts
-Subject: [2–3 words about them, e.g. "tour clips"]
+## Email #1
+Subject: quick clip idea for [Name/Show]
 
 Hi [Name],
 
-[One real, specific fact about them, e.g. their tour/special/show and the clip gap.]
+I edit vertical clips for comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff.
 
-We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. You can see their clips on our Instagram (https://www.instagram.com/avestudio.production/) or website (https://ave-studio-website.vercel.app/).
+I watched your [episode/set] "[title]" and the moment at [mm:ss] ("[hook line]") would crush on Reels and Shorts.
 
-[One yes/no question, e.g. "If I cut one bit from a recent set, would you post it before your next show?"]
+Mind if I cut it for you to check out? No strings attached.
 
 Jeff, AVE Studio
 Cagayan de Oro City, Philippines
 Not interested? Reply "no" and I won't email again.
 
-## Agencies (white-label overflow)
-Subject: [overflow clips / extra editor]
+## Follow-ups (same thread)
+- Day 3: "Just bumping this in case you're on the road. Still happy to cut that [topic] clip if you want to see it."
+- Day 7: "Quick question: are you already working with a short-form editor, or still handling clips yourself?"
+- Day 12: "Last note from me. If you ever get backed up turning your [sets/episodes] into weekly Reels, keep my info handy. Keep crushing it."
 
-Hi [Name],
+## Agencies (white-label), same no-link rule
+Subject: backup editor for [Agency]'s clips
 
-[One real fact: the clip service they sell, packages, hiring page, or clients.]
+Hi [Name], I saw [Agency] sells [clips/social cuts] for [client/show]. We're a small team of human editors cutting clips for comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. Would a white-label editor for busy weeks, back within 48h, be useful? Happy to cut a test clip from any episode.
+(footer as above)
 
-We're a small team of human editors cutting captioned vertical clips. We work with comedians like Jackie Kashian, Debi Bradshaw and Brenda Pontiff. See their clips on our Instagram (https://www.instagram.com/avestudio.production/) or website (https://ave-studio-website.vercel.app/).
-
-Would a backup editor for busy weeks be useful, white-label and back within 48 hours?
-
-Jeff, AVE Studio
-Cagayan de Oro City, Philippines
-Not interested? Reply "no" and I won't email again.
+## Monthly offer (when they ask "how do we work together")
+Ask their budget first. Reference packages:
+- Paid trial: 4 clips in 4 days, $120
+- 12 clips/month (3 a week): $360/month
+- 16 clips/month (4 a week): $480/month, the anchor to pitch first
+"Done for you": they drop the raw episode or set in Drive, we pick the best moments, edit and hand back a ready-to-post folder every week.
