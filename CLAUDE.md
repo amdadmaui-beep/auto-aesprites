@@ -62,3 +62,6 @@ Mario/Sonic/Metal Gear ones in monetized work.
 | Shot Social reels | `claude/tender-clarke-32xjjk` | `video/src/ShotSocial.tsx`, `video/tools/shotsocial/` caption/cut tools |
 
 To continue one, check out its branch. Don't merge these into `main` without asking.
+
+## Outreach (client hunting)
+Read `outreach/STATUS.md` first. It is the short current-state summary; open other outreach files only when needed. Update STATUS.md at the end of each session.
