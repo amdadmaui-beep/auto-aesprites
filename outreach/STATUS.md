@@ -11,6 +11,7 @@ Last updated: 2026-11-13. Update this file at the end of every session.
 - Jackie Kashian: repeat client (asked for caption colour changes Nov 4). Travelling; she'll check Drive next week. Ask for a referral after she approves.
 - Brenda Pontiff: PAID $50 (Nov 4, via Debi's referral). Wants Duck Foot set clips + a Santa bit; after Thanksgiving.
 - Debi Bradshaw: liked the samples; brought Brenda. Ask for another referral.
+- Debi and Brenda both did IG collab posts with @avestudio.production (proof is public). Use their audiences: comics who like/comment on those posts are the warmest leads.
 - Amish Patel: free clip sent Nov 8, no reply yet. Evan Hull: offered $25/clip, waiting.
 
 ## Rules
@@ -23,6 +24,11 @@ Last updated: 2026-11-13. Update this file at the end of every session.
 - Need-based (they posted "need an editor"): ~35 → 4 responses, 0 hires. Leaks: late replies, off-niche samples, no feedback asked.
 - Paid work came only from referrals and repeat clients.
 - Best channel now: fresh (<24h) comedy/podcast/talking-head job posts on Reddit + the IG "dream targets" approach.
+
+## Gmail check (Nov 13)
+- Since Nov 9: ~54 sent, 0 replies except Adam Segal (Emil Wakim) declining. No bounces, nothing in spam. Amish nudge already sent Nov 13.
+- Problem: the auto-sender mailed off-niche businesses (dentist, real estate, trucking, vet, fishing) with "application"-style and generic openers. Pause it.
+- Vercel says a website domain is misconfigured (Nov 7): check the site loads.
 
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
