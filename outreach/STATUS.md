@@ -35,7 +35,9 @@ Last updated: 2026-11-16. Update this file at the end of every session.
 - 3 Gmail drafts ready (Brad Kofman, Jason Salmon, Julian Stern; Ryan Conner removed: he already passed on our edits) Plus 3 podcast drafts: Josh Adam Meyers (The 500), Jimmy Pardo, Alex Lynch (Out Of Character). All checked against Sent, no duplicates. + Janelle Draper via site form. All warm via Brenda's IG circle. Follow up day 3.
 
 - SENT Nov 16: Brad Kofman, Jason Salmon, Julian Stern, Josh Adam Meyers, Jimmy Pardo, Alex Lynch. Follow up Nov 19.
-- Jackie's circle: Dork Forest guests are the best lead list (feed: feeds.megaphone.fm/NSM7546490835). Drafts ready: Joey Clift, Kelly MacFarland, Selena Price (via manager). Laurie Kilmartin: ask Jackie for an intro instead of cold email.
+- Jackie's circle: Dork Forest guests are the best lead list (feed: feeds.megaphone.fm/NSM7546490835). Drafts ready: Joey Clift, Kelly MacFarland, Selena Price (via manager). Laurie Kilmartin: ALREADY contacted (sample sent, 1 follow-up, no reply). Do not email again; only via Jackie.
+
+- Patricia Yeazell (IG): sample done, quoted $25/clip; back from China 11/16. Sent welcome-back offer: we pull 4 bits from her page, pay only for posted clips. Monthly for her at $25 rate: $400/16, $300/12. Her boyfriend (musician) is interested too.
 
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
