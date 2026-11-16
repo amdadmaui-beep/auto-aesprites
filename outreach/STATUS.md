@@ -1,5 +1,5 @@
 # AVE Studio outreach: current status (read this first; keep it under ~80 lines)
-Last updated: 2026-11-13. Update this file at the end of every session.
+Last updated: 2026-11-16. Update this file at the end of every session.
 
 ## Business
 - AVE Studio: Jeff (user), editors in Cagayan de Oro City, Philippines. Captioned vertical clips for comedians, podcasts and talking heads.
@@ -29,6 +29,10 @@ Last updated: 2026-11-13. Update this file at the end of every session.
 - Since Nov 9: ~54 sent, 0 replies except Adam Segal (Emil Wakim) declining. No bounces, nothing in spam. Amish nudge already sent Nov 13.
 - Problem: the auto-sender mailed off-niche businesses (dentist, real estate, trucking, vet, fishing) with "application"-style and generic openers. Pause it.
 - Vercel says a website domain is misconfigured (Nov 7): check the site loads.
+
+## Nov 16
+- Reddit is blocked from cloud sessions (403 + crawler block). Do Reddit from the desktop app with Claude in Chrome, or paste posts here.
+- 4 Gmail drafts ready (Brad Kofman, Jason Salmon, Julian Stern, Ryan Conner) + Janelle Draper via site form. All warm via Brenda's IG circle. Follow up day 3.
 
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
