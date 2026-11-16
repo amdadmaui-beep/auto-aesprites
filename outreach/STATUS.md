@@ -34,6 +34,9 @@ Last updated: 2026-11-16. Update this file at the end of every session.
 - Reddit is blocked from cloud sessions (403 + crawler block). Do Reddit from the desktop app with Claude in Chrome, or paste posts here.
 - 3 Gmail drafts ready (Brad Kofman, Jason Salmon, Julian Stern; Ryan Conner removed: he already passed on our edits) Plus 3 podcast drafts: Josh Adam Meyers (The 500), Jimmy Pardo, Alex Lynch (Out Of Character). All checked against Sent, no duplicates. + Janelle Draper via site form. All warm via Brenda's IG circle. Follow up day 3.
 
+- SENT Nov 16: Brad Kofman, Jason Salmon, Julian Stern, Josh Adam Meyers, Jimmy Pardo, Alex Lynch. Follow up Nov 19.
+- Jackie's circle: Dork Forest guests are the best lead list (feed: feeds.megaphone.fm/NSM7546490835). Drafts ready: Joey Clift, Kelly MacFarland, Selena Price (via manager). Laurie Kilmartin: ask Jackie for an intro instead of cold email.
+
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
 - Emails Nov 11: UpHigh, Crushed It, Podhead, Podomedy, Bodett Problem → follow up Nov 14 (day 3).
