@@ -39,6 +39,8 @@ Last updated: 2026-11-16. Update this file at the end of every session.
 
 - Patricia Yeazell (IG): sample done, quoted $25/clip; back from China 11/16. Sent welcome-back offer: we pull 4 bits from her page, pay only for posted clips. Monthly for her at $25 rate: $400/16, $300/12. Her boyfriend (musician) is interested too.
 
+- Nov 18 hiring-lead search (job boards, Reddit excluded): best live lead = Dream Three Short Form Video Editor (remote 1099, comedy/podcast clips, Premiere Pro, 10-20 h/wk) apply at jobs.ashbyhq.com/dreamthree/33fbcf62-312d-46b9-be77-db2a5af675f9/application. One Decision ($100/clip) expired. 7xContent = full-time UK with London shoots (poor fit). No prospect replies yet; FU to the 9 on Nov 19.
+
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
 - Emails Nov 11: UpHigh, Crushed It, Podhead, Podomedy, Bodett Problem → follow up Nov 14 (day 3).
