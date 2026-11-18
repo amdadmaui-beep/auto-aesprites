@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notion Agents spec spot</title>
+<style>
+@font-face{font-family:UI;src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
+@font-face{font-family:UI;src:url(fonts/InterDisplay-SemiBold.otf);font-weight:600}
+@font-face{font-family:UI;src:url(fonts/InterDisplay-Bold.otf);font-weight:700}
+@font-face{font-family:SerifI;src:url(fonts/InstrumentSerif-italic-400.woff2)}
+:root{--ink:#191919;--ink2:#37352f;--mute:#8a8984;--blue:#2383e2;--red:#e03e3e;--green:#0f9d58}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#eef0f7;font-family:UI,'Noto Color Emoji',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+.scene{position:absolute;inset:0;transform-origin:50% 50%}
+.emo{font-family:'Noto Color Emoji';line-height:1}
+/* frosted glass rim around a white card, the reference's signature surface */
+.glass{position:absolute;padding:12px;border-radius:38px;background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,.18));border:1.5px solid rgba(255,255,255,.85);box-shadow:0 40px 90px rgba(35,30,110,.22),0 6px 18px rgba(35,30,110,.10),inset 0 1px 0 #fff}
+.glass>.in{position:relative;width:100%;height:100%;background:#fff;border-radius:27px;overflow:hidden}
+.pill{position:absolute;display:flex;align-items:center;gap:14px;background:#fff;border-radius:999px;white-space:nowrap}
+.gp{padding:9px;border-radius:999px;background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(255,255,255,.2));border:1.5px solid rgba(255,255,255,.85);box-shadow:0 24px 60px rgba(35,30,110,.2)}
+.tag{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:7px 16px;font-weight:600;font-size:26px}
+.ph{position:relative;overflow:hidden;flex:none}
+.ph img{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.blob{position:absolute;border-radius:50%;filter:blur(120px)}
+svg{display:block}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="cues.js"></script>
+<script>
+const C=window.CUES, S=C.scene;
+// ---------------------------------------------------------------- math
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), lerp=(a,b,u)=>a+(b-a)*u, P=(t,a,b)=>cl((t-a)/(b-a));
+const oC=u=>1-Math.pow(1-u,3), oQ=u=>1-Math.pow(1-u,5), ioC=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2, ioQ=u=>u<.5?16*u**5:1-Math.pow(-2*u+2,5)/2;
+const oB=(u,s=1.7)=>{u=cl(u);const c=s+1;return 1+c*Math.pow(u-1,3)+s*Math.pow(u-1,2)};
+const spr=(u,z=.5,w=13)=>{u=Math.max(0,u);return u>=1.8?1:1-Math.exp(-z*w*u)*Math.cos(w*Math.sqrt(1-z*z)*u)};
+const win=(t,a,b,fi=.25,fo=.25)=>Math.min(P(t,a,a+fi),1-P(t,b-fo,b));
+// ---------------------------------------------------------------- dom
+const stage=document.getElementById('stage');
+function el(par,cls,html,css){const e=document.createElement('div');if(cls)e.className=cls;if(html!=null)e.innerHTML=html;if(css)e.style.cssText=css;par.appendChild(e);return e}
+function vis(e,o){e.style.opacity=o;e.style.visibility=o<=.001?'hidden':'visible'}
+const BG={maya:'#f7d9cc',zoe:'#d5e3fb',ava:'#d9efdf',ben:'#ece3f7',kai:'#fbe9bd',lea:'#f8d6e2',g1:'#dfe7fb',g2:'#f8dccb',g3:'#e3f1e6',g4:'#efe4f8',notes:'#dbe6fb',hero:'#f5d7c6',risk:'#e8e1f7',cal:'#fbe9bd'};
+const ph=(k,w,h,r='50%',bg)=>`<div class="ph" style="width:${w}px;height:${h}px;border-radius:${r};background:${bg||BG[k]}"><img src="img/${k}.png"></div>`;
+// ---------------------------------------------------------------- icons
+const I=(d,c='#191919',s=26,w=2.4)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const IC={doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',spark:'<path d="M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+  pen:'<path d="M4 20l4-1 11-11-3-3L5 16z"/>',bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',cal:'<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  vid:'<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3"/>',up:'<path d="M12 19V5M6 11l6-6 6 6"/>',phone:'<path d="M3 13c5-5 13-5 18 0l-2.5 3-3.5-1.5v-2.5c-2-.7-4-.7-6 0v2.5L5.5 16z"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'};
+const CURSOR=s=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.3 2.9 6.6 3.2-1.4-2.9-6.5h6.3z" fill="#111" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+const MARK=s=>`<img src="brand/notion-mark.svg" width="${s}" height="${s}" style="display:block">`;
+const SPIN=(s,c='#191919')=>`<svg class="spin" width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="3"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`;
+
+// ================================================================ backgrounds
+const bgA=el(stage,'scene','','background:radial-gradient(ellipse at 30% 20%,#ffffff 0%,#eef0f8 45%,#e3e6f4 100%)');
+const bgMesh=el(stage,'scene','','background:#8f93f3;overflow:hidden');
+const blobs=[['#5d63ee',1100,-300,-350],['#f3a9d6',900,1150,520],['#c9d3ff',900,900,-380],['#6f8ff7',800,-250,520],['#ffffff',620,560,200],['#f7c4e2',600,250,760],['#7b70ea',700,1450,-150]]
+  .map(([c,s,x,y])=>({e:el(bgMesh,'blob','',`background:${c};width:${s}px;height:${s}px;left:${x}px;top:${y}px;opacity:.9`)}));
+const bgStreak=el(stage,'scene','','background:#8f93f3;overflow:hidden');
+const streaks=Array.from({length:16},(_,i)=>el(bgStreak,'abs','',`left:-600px;width:3120px;height:${50+((i*41)%110)}px;top:${i*70-50}px;filter:blur(${10+(i%3)*8}px);background:linear-gradient(90deg,transparent,${['#5d63ee','#f3a9d6','#ffffff','#c9d3ff','#7b70ea','#f7c4e2'][i%6]} 25%,${['#ffffff','#8f93f3','#f3a9d6','#5d63ee'][i%4]} 70%,transparent)`));
+const bgDark=el(stage,'scene','','background:radial-gradient(ellipse at 50% 48%,#2d2a48 0%,#16151f 55%,#0b0b10 100%)');
+const bgEnd=el(stage,'scene','','background-color:#fbfbfa;background-image:radial-gradient(rgba(55,53,47,.16) 1.5px,transparent 1.7px);background-size:38px 38px');
+
+// ================================================================ A: meeting chaos (3D tilted cards)
+const A=el(stage,'scene','','perspective:1600px');
+const Aw=el(A,'abs','','inset:0;transform-style:preserve-3d;transform-origin:50% 50%');
+const aCards=[];
+function aCard(x,y,w,h,ry,rx,z,html,inbg){const c=el(Aw,'glass',`<div class="in" style="${inbg?'background:'+inbg:''}">${html}</div>`,`left:${x}px;top:${y}px;width:${w}px;height:${h}px`);aCards.push({e:c,ry,rx,z});return c}
+const clockC=aCard(170,250,460,560,28,4,-60,`<div style="padding:38px 40px;font-weight:600;font-size:28px;color:var(--mute);display:flex;gap:12px;align-items:center">${I(IC.cal,'#8a8984',30)}Daily stand-up</div><div class="clock" style="position:absolute;top:190px;width:100%;text-align:center;font-size:150px;font-weight:600;letter-spacing:-5px">10:13</div><div style="position:absolute;bottom:52px;left:40px;right:40px;height:12px;border-radius:9px;background:#efefee"><div class="bar" style="height:100%;border-radius:9px;background:var(--red);width:30%"></div></div>`);
+const gridC=aCard(700,215,560,600,-4,2,40,`<div class="pill" style="position:absolute;left:30px;top:28px;padding:12px 22px;font-weight:600;font-size:24px;background:#f3f3f1"><span class="rec" style="width:13px;height:13px;border-radius:50%;background:var(--red)"></span>Status meeting · <span class="mins">47</span> min</div>
+  <div style="position:absolute;left:24px;top:100px;display:grid;grid-template-columns:1fr 1fr;gap:14px">${['g1','g2','g3','g4'].map((k,i)=>`<div style="position:relative">${ph(k,242,224,'18px')}<div class="spk" style="position:absolute;inset:0;border-radius:18px;box-shadow:inset 0 0 0 4px #2ecc71;opacity:0"></div></div>`).join('')}</div>
+  <div style="position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:16px">${[IC.mic,IC.vid].map(d=>`<span style="width:54px;height:54px;border-radius:50%;background:#f3f3f1;display:flex;align-items:center;justify-content:center">${I(d,'#37352f',26)}</span>`).join('')}<span style="width:54px;height:54px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center">${I(IC.phone,'#fff',28)}</span></div>`);
+const joinC=aCard(790,-40,330,190,-12,-8,-120,`<div style="padding:28px 32px;font-size:24px;font-weight:600;color:var(--mute)">Status sync · 11:00</div><div class="join" style="position:absolute;left:32px;right:32px;bottom:28px;height:58px;border-radius:14px;background:#5b5bd6;color:#fff;font-weight:600;font-size:26px;display:flex;align-items:center;justify-content:center">Join</div>`);
+const syncC=aCard(1330,300,380,440,-30,3,-40,`<div style="padding:34px;font-weight:600;font-size:26px;color:#a15c3c">Team sync starts in</div><div class="cd" style="position:absolute;top:150px;width:100%;text-align:center;font-size:140px;font-weight:600;letter-spacing:-5px;color:#2b1a12">1:00</div>`,'#fde3d6');
+const calC=aCard(470,850,640,118,10,-6,60,`<div style="display:flex;align-items:center;gap:18px;padding:0 20px 0 30px;height:100%;font-size:30px;font-weight:600;white-space:nowrap">${I(IC.vid,'#2383e2',34)}<span>Weekly check-in</span><span style="color:var(--mute);font-weight:500">2:30 PM</span><div style="margin-left:auto;display:flex">${['kai','maya','zoe'].map((k,i)=>`<div style="margin-left:-14px;border:3px solid #fff;border-radius:50%">${ph(k,62,62)}</div>`).join('')}</div></div>`);
+const faceC=aCard(1520,10,300,320,-26,-6,-80,ph('cal',276,296,'26px'),'#fbe9bd');
+const aCurBig=el(A,'abs',CURSOR(420),'left:0;top:0;transform-origin:0 0;filter:blur(5px)');
+const aCur=el(A,'abs',CURSOR(72),'left:0;top:0;transform-origin:0 0');
+
+// ================================================================ B: chat bubbles + "Nobody doing."
+const B=el(stage,'scene');
+const bWrap=el(B,'abs','','left:470px;top:150px;width:980px;height:800px');
+const bub=[['maya','Maya','9:02 AM','Almost there.'],['zoe','Zoe','9:03 AM','No blockers. Still in progress.'],['ava','Ava','9:04 AM','Same as last week.'],['ben','Ben','9:05 AM','Waiting on review.']].map(([k,n,t,m],i)=>
+  el(bWrap,'glass',`<div class="in" style="display:flex;gap:24px;align-items:center;padding:0 34px">${ph(k,84,84)}<div><div style="font-size:28px;font-weight:600">${n}<span style="color:var(--mute);font-size:24px;margin-left:14px;font-weight:500">${t}</span></div><div style="font-size:40px;font-weight:500;color:var(--ink2);letter-spacing:-.5px">${m}</div></div></div>`,`left:0;top:${i*158}px;width:980px;height:148px;border-radius:34px`));
+bub.forEach(b=>b.firstChild.style.borderRadius='23px');
+const typing=el(bWrap,'pill gp',`<div class="pill" style="position:relative;padding:8px 26px 8px 8px">${ph('kai',58,58)}${[0,1,2].map(()=>'<span class="d" style="width:12px;height:12px;border-radius:50%;background:#b8b7c9"></span>').join('')}</div>`,'left:385px;top:660px');
+const tint=el(B,'abs','','inset:-100px;background:radial-gradient(ellipse at 50% 50%,rgba(40,30,120,.42),rgba(40,30,120,.12));opacity:0');
+const nobody=el(B,'abs','<span>Nobody</span> <span>doing.</span>','left:0;right:0;top:445px;text-align:center;font-size:190px;font-weight:700;letter-spacing:-8px;color:#fff;text-shadow:0 10px 60px rgba(40,30,120,.35)');
+// ================================================================ C: Notion AI prompt
+const Cs=el(stage,'scene');
+const box=el(Cs,'glass',`<div class="in">
+  <div style="position:absolute;left:60px;top:48px;display:flex;align-items:center;gap:16px;font-size:28px;font-weight:600;color:var(--ink2)">${MARK(44)}Notion AI</div>
+  <div class="txt" style="position:absolute;left:60px;top:130px;font-size:84px;font-weight:500;letter-spacing:-2.5px;white-space:nowrap;color:#191919"></div>
+  <div style="position:absolute;left:60px;bottom:50px;display:flex;gap:16px">${[['spark','Ask','#2383e2','#e7f1fb'],['search','Research','#7c4dbe','#f1ebfa'],['pen','Draft','#d9730d','#fbefe4'],['bolt','Agents','#0f9d58','#e5f4ec']].map(([i,l,c,b])=>`<span class="tag chip" style="color:${c};background:${b}">${I(IC[i],c,24)}${l}</span>`).join('')}</div>
+  <div class="send" style="position:absolute;right:50px;bottom:42px;width:72px;height:72px;border-radius:50%;background:#191919;display:flex;align-items:center;justify-content:center">${I(IC.up,'#fff',34,2.8)}</div></div>`,'left:250px;top:300px;width:1420px;height:400px');
+const assign=el(Cs,'pill gp',`<div class="pill" style="position:relative;padding:18px 34px">${SPIN(34)}<span style="font-size:32px;font-weight:600">Assigning agents…</span></div>`,'left:720px;top:760px');
+const cCur=el(Cs,'abs',CURSOR(72),'left:0;top:0;transform-origin:0 0');
+// ================================================================ D: agent cards (people on pastel, like the reference)
+const D=el(stage,'scene');
+const agents=[['notes','Meeting Notes','Summarizes every meeting','8 action items captured','linear-gradient(160deg,#dbe6fb,#c6d4fa)'],['hero','Project Tracker','Reports progress automatically','3 off-track tasks caught','linear-gradient(160deg,#f9e0d2,#f3c6b4)'],['risk','Risk Radar','Flags what could slip','12 docs reviewed','linear-gradient(160deg,#ebe4f8,#d8cdf4)']].map(([k,n,s,b,g],i)=>
+  el(D,'glass',`<div class="in"><div class="art" style="position:absolute;left:16px;top:16px;right:16px;height:440px;border-radius:20px;overflow:hidden;background:${g}"><img src="img/${k}.png" style="position:absolute;left:50%;bottom:0;height:100%;transform:translateX(-50%)"></div>
+  <div class="pill" style="left:34px;top:392px;padding:9px 20px 9px 9px;font-size:23px;font-weight:600;box-shadow:0 8px 22px rgba(0,0,0,.14)">${ph(k,40,40)}${b}</div>
+  <div style="position:absolute;left:34px;top:482px;font-size:40px;font-weight:700;letter-spacing:-1px">${n}</div><div style="position:absolute;left:34px;top:534px;font-size:25px;color:var(--mute);font-weight:500">${s}</div></div>`,`left:${960-240}px;top:${540-300}px;width:480px;height:600px`));
+const dCur=el(D,'abs',CURSOR(72),'left:0;top:0;transform-origin:0 0');
+// ================================================================ E: avatar + chips
+const E=el(stage,'scene');
+const eAv=el(E,'abs',`<div style="padding:12px;border-radius:50%;background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(255,255,255,.2));border:1.5px solid rgba(255,255,255,.85);box-shadow:0 30px 80px rgba(35,30,110,.25)">${ph('hero',300,300,'50%','linear-gradient(160deg,#f9e0d2,#f3c6b4)')}</div>`,'left:0;top:0;transform-origin:50% 50%');
+const chipDefs=[['doc','Read','#2383e2','#e7f1fb','every doc'],['flag','Flag','#e03e3e','#fdeaea','what’s stuck'],['arrow','Push','#0f9d58','#e5f4ec','it forward']];
+const chips=chipDefs.map(([i,l,c,b,txt],k)=>el(E,'pill gp',`<div class="pill" style="position:relative;padding:12px 26px 12px 12px"><span class="tag" style="color:${c};background:${b};font-size:34px;padding:10px 20px">${I(IC[i],c,32)}${l}</span><span style="font-size:44px;font-weight:500;letter-spacing:-1px">${txt}</span>${k==1?'<span class="tag stuck" style="background:#e03e3e;color:#fff;font-size:28px;padding:8px 16px">Stuck</span>':''}</div>`,'left:0;top:0;transform-origin:0 50%'));
+// ================================================================ F1: "3 risks flagged" on streaks
+const F1=el(stage,'scene');
+const rLine=el(F1,'abs',`<span class="n" style="font-size:150px;font-weight:700;color:#fff">3</span>${['🚩','⏳','💸'].map(e=>`<span class="ti" style="display:inline-flex;width:150px;height:150px;border-radius:36px;background:#fff;box-shadow:0 20px 50px rgba(35,30,110,.25);align-items:center;justify-content:center"><span class="emo" style="font-size:84px">${e}</span></span>`).join('')}<span class="w" style="font-size:150px;font-weight:700;letter-spacing:-6px;color:#fff">risks flagged</span>`,'left:0;right:0;top:450px;display:flex;justify-content:center;align-items:center;gap:30px;text-shadow:0 10px 50px rgba(40,30,120,.3)');
+// ================================================================ F2: Notion pages
+const F2=el(stage,'scene');
+const pageDefs=[['Q4 Roadmap','roadmap','🗺️'],['Hiring Plan','hiring','👋'],['Launch Plan','launch','🚀'],['Budget Review','budget','💰'],['Team Retro','retro','🔁']];
+const pages=pageDefs.map(([n,cov,emo],i)=>{const big=i==2;const w=big?700:500,h=big?760:560,cv=big?230:180;
+  return el(F2,'glass',`<div class="in"><img src="img/covers/${cov}.jpg" style="position:absolute;left:0;top:0;width:100%;height:${cv}px;object-fit:cover">
+  <span class="emo" style="position:absolute;left:44px;top:${cv-50}px;font-size:${big?96:76}px">${emo}</span>
+  <div style="position:absolute;left:44px;top:${cv+(big?70:50)}px;font-size:${big?58:42}px;font-weight:700;letter-spacing:-1.5px">${n}</div>
+  ${big?`<div style="position:absolute;left:44px;top:${cv+160}px;display:grid;grid-template-columns:170px 1fr;row-gap:16px;font-size:26px;font-weight:500;align-items:center"><span style="color:var(--mute)">Owner</span><span style="display:flex;gap:12px;align-items:center">${ph('hero',38,38)}Project Tracker</span><span style="color:var(--mute)">Status</span><span><span class="tag status" style="font-size:24px;padding:5px 14px;background:#e5f4ec;color:#0f9d58">${I(IC.check,'#0f9d58',22,3)}Drafted</span></span></div>
+  <div style="position:absolute;left:44px;top:${cv+290}px;right:44px;border-top:1.5px solid #efefed;padding-top:14px">${['Lock launch date','Brief design + eng','Write announcement','Prep support docs'].map(t=>`<div class="row" style="display:flex;gap:18px;align-items:center;height:58px;font-size:30px;font-weight:500"><span class="bx" style="width:32px;height:32px;border-radius:7px;border:2.5px solid #c9c8c4;display:flex;align-items:center;justify-content:center"></span><span class="tx">${t}</span></div>`).join('')}</div>`
+  :`<div style="position:absolute;left:44px;right:44px;top:${cv+130}px">${[82,64,74,52,68].map(w=>`<div style="height:16px;border-radius:8px;background:#efeeec;margin-bottom:22px;width:${w}%"></div>`).join('')}</div>`}</div>`,
+  `left:${960-w/2}px;top:${540-h/2}px;width:${w}px;height:${h}px`)});
+// ================================================================ G: orbit (dark)
+const G=el(stage,'scene');
+const orbit=el(G,'abs','',`left:${960-1400}px;top:${540-1400}px;width:2800px;height:2800px`);
+orbit.innerHTML=`<svg width="2800" height="2800" viewBox="0 0 2800 2800"><defs><radialGradient id="gl"><stop offset="0" stop-color="#8f7cff" stop-opacity=".35"/><stop offset="1" stop-color="#8f7cff" stop-opacity="0"/></radialGradient></defs><circle cx="1400" cy="1400" r="520" fill="url(#gl)"/>${[270,450,650,880,1130].map((r,i)=>`<circle cx="1400" cy="1400" r="${r}" fill="none" stroke="rgba(255,255,255,${.24-i*.035})" stroke-width="2" stroke-dasharray="${i%2?'3 14':'2 0'}"/>`).join('')}
+  ${Array.from({length:26},(_,i)=>{const a=i*2.4,r=[270,450,650,880][i%4];return `<circle cx="${1400+r*Math.cos(a)}" cy="${1400+r*Math.sin(a)}" r="${i%3?3:6}" fill="rgba(255,255,255,.6)"/>`}).join('')}</svg>`;
+const gPage=el(G,'glass',`<div class="in"><img src="img/covers/launch.jpg" style="position:absolute;left:0;top:0;width:100%;height:90px;object-fit:cover"><span class="emo" style="position:absolute;left:22px;top:62px;font-size:48px">🚀</span><div style="position:absolute;left:22px;top:128px;font-size:28px;font-weight:700;letter-spacing:-.5px">Launch Plan</div>${[76,56,66].map((w,i)=>`<div style="position:absolute;left:22px;top:${176+i*24}px;height:10px;border-radius:5px;background:#ecebe8;width:${w}%"></div>`).join('')}</div>`,
+  'left:820px;top:385px;width:280px;height:280px;padding:8px;border-radius:30px;border-color:rgba(190,170,255,.9);box-shadow:0 0 0 10px rgba(150,130,255,.14),0 0 120px rgba(150,130,255,.55)');
+gPage.firstChild.style.borderRadius='23px';
+const gTasks=[['🗓️','Timeline',960,160],['💰','Budget',560,820],['👥','Owners',1360,820]].map(([emo,n,x,y])=>{
+  const p=el(G,'pill gp',`<div class="pill" style="position:relative;padding:12px 18px 12px 12px"><span style="width:64px;height:64px;border-radius:18px;background:#f3f2fb;display:flex;align-items:center;justify-content:center"><span class="emo" style="font-size:36px">${emo}</span></span><span style="font-size:42px;font-weight:700;letter-spacing:-1px">${n}</span>
+    <span style="position:relative;width:170px;height:52px"><span class="tag wk" style="position:absolute;left:0;top:0;background:#fdf1e3;color:#d9730d;font-size:26px">${I('<path d="M12 3a9 9 0 1 0 9 9"/>','#d9730d',22,3)}Working</span><span class="tag dn" style="position:absolute;left:0;top:0;background:#e3f6ea;color:#0f9d58;font-size:26px">${I(IC.check,'#0f9d58',22,3.2)}Done</span></span></div>`,'left:0;top:0');
+  const dot=el(G,'abs','','width:24px;height:24px;border-radius:50%;background:#2ecc71;box-shadow:0 0 0 8px rgba(46,204,113,.25),0 0 34px #2ecc71;left:0;top:0');
+  return {p,dot,x,y}});
+const gAv=el(G,'abs',`<div style="border:5px solid #fff;border-radius:50%;box-shadow:0 0 50px rgba(150,130,255,.6)">${ph('hero',130,130,'50%','linear-gradient(160deg,#f9e0d2,#f3c6b4)')}</div>`,'left:890px;top:900px');
+// ================================================================ H: meeting pill -> Cancelled
+const Hs=el(stage,'scene');
+const meet=el(Hs,'pill gp',`<div class="pill" style="position:relative;width:900px;height:124px;padding:14px">
+  <div style="display:flex;margin-left:8px">${['g1','maya','ben'].map((k,i)=>`<div style="margin-left:${i?-18:0}px;border:4px solid #fff;border-radius:50%">${ph(k,72,72)}</div>`).join('')}</div>
+  <div style="display:flex;flex-direction:column;margin-left:6px"><span style="font-size:38px;font-weight:700;letter-spacing:-1px">Weekly status meeting</span><span style="font-size:26px;color:var(--mute);font-weight:500;display:flex;align-items:center;gap:10px"><span class="gd" style="width:12px;height:12px;border-radius:50%;background:#2ecc71"></span>Starts in 2 min · 12 people</span></div>
+  <span class="hang" style="margin-left:auto;width:96px;height:96px;border-radius:50%;background:#e03e3e;display:flex;align-items:center;justify-content:center;flex:none">${I(IC.phone,'#fff',50,2.4)}</span></div>`,'left:0;top:0');
+const canc=el(Hs,'pill gp',`<div class="pill" style="position:relative;width:560px;height:136px;padding:14px;background:linear-gradient(90deg,#2b1d4a,#8e1f3a 65%,#d0303f)"><span style="font-size:52px;font-weight:700;color:#fff;margin-left:44px;letter-spacing:-1.5px">Cancelled</span><span style="margin-left:auto;width:108px;height:108px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none">${I(IC.phone,'#e03e3e',56,2.4)}</span></div>`,'left:0;top:0');
+const hCur=el(Hs,'abs',CURSOR(72),'left:0;top:0;transform-origin:0 0');
+// ================================================================ I: end card
+const Ie=el(stage,'scene');
+const eDot=el(Ie,'abs','','left:948px;top:528px;width:24px;height:24px;border-radius:50%;background:#191919');
+const eLock=el(Ie,'abs',`<span class="mk">${MARK(170)}</span><span class="wd" style="font-size:150px;font-weight:700;letter-spacing:-6px;line-height:1">Notion</span>`,'left:0;right:0;top:300px;display:flex;justify-content:center;align-items:center;gap:34px');
+const eLine=el(Ie,'abs','<span class="l1">Less talk.</span> <span class="l2" style="font-family:SerifI;font-weight:400;font-size:104px;letter-spacing:-1px;color:#2383e2">More done.</span>','left:0;right:0;top:560px;text-align:center;font-size:84px;font-weight:600;letter-spacing:-3px;color:#37352f');
+const eUrl=el(Ie,'abs','notion.com','left:0;right:0;top:960px;text-align:center;font-size:28px;font-weight:600;color:#8a8984');
+const fade=el(stage,'scene','','background:#000;opacity:0');
+
+// ================================================================ render
+function cursorAt(e,pts,t,click,base=1){
+  let x=pts[0][1],y=pts[0][2];
+  for(let i=0;i<pts.length-1;i++){const [t0,x0,y0]=pts[i],[t1,x1,y1]=pts[i+1];if(t>=t0){const u=ioQ(P(t,t0,t1));x=lerp(x0,x1,u);y=lerp(y0,y1,u)}}
+  let s=base;if(click!=null){const d=t-click;if(d>-.08&&d<.25)s*=1-.2*Math.sin(Math.PI*cl((d+.08)/.33))}
+  e.style.transform=`translate(${x}px,${y}px) scale(${s})`}
+const press=(t,c,d=.25,k=.1)=>{const x=t-c;return x>0&&x<d?1-k*Math.sin(Math.PI*x/d):1};
+function render(t){
+  // ---- backgrounds
+  vis(bgA,1-P(t,S.B-.2,S.B+.2));
+  const oMesh=Math.max(P(t,S.B-.3,S.B+.2)*(1-P(t,S.F1-.1,S.F1+.15)),P(t,S.F2-.2,S.F2+.15)*(1-P(t,S.G-.1,S.G+.2)),P(t,S.H-.15,S.H+.25)*(1-P(t,S.I-.1,S.I+.3)));
+  vis(bgMesh,oMesh);blobs.forEach((b,i)=>b.e.style.transform=`translate(${Math.sin(t*.45+i*1.7)*180}px,${Math.cos(t*.37+i)*140}px) scale(${1+.15*Math.sin(t*.5+i)})`);
+  vis(bgStreak,win(t,S.F1-.15,S.F2+.2,.2,.3));streaks.forEach((s,i)=>s.style.transform=`translateX(${((t*(700+i*110)+i*330)%1500)-750}px)`);
+  vis(bgDark,win(t,S.G-.15,S.H+.1,.25,.25));
+  vis(bgEnd,P(t,S.I-.1,S.I+.3));
+  // ---- A
+  { const o=1-P(t,S.B-.12,S.B+.12); vis(A,o);
+    if(o>0){ const ex=oC(P(t,S.B-.35,S.B+.12));
+      Aw.style.transform=`translateZ(${lerp(-80,60,ioC(P(t,0,S.B)))+ex*900}px) rotateX(${5-4*ioC(P(t,0,S.B))}deg) rotateY(${-8+10*ioC(P(t,0,S.B))}deg)`;
+      A.style.filter=`blur(${14*P(t,S.B-.25,S.B+.1)}px)`;
+      aCards.forEach((c,i)=>{const u=spr(P(t,C.cardsIn[i],C.cardsIn[i]+1.3));const fl=Math.sin(t*1.3+i*1.9)*10;
+        c.e.style.transform=`translateY(${(1-u)*160+fl}px) translateZ(${c.z+(1-u)*-500}px) rotateY(${c.ry*(1-.25*P(t,0,3))}deg) rotateX(${c.rx}deg) scale(${.7+.3*u})`;c.e.style.opacity=cl(u*1.6)});
+      clockC.querySelector('.clock').textContent='10:'+String(13+Math.floor(34*ioC(P(t,0,2.6)))).padStart(2,'0');
+      clockC.querySelector('.bar').style.width=(30+62*P(t,0,2.6))+'%';
+      gridC.querySelector('.mins').textContent=47+Math.floor(t*4);gridC.querySelector('.rec').style.opacity=.4+.6*(Math.sin(t*7)>0);
+      gridC.querySelectorAll('.spk').forEach((s,i)=>s.style.opacity=(Math.floor(t*2.2)%4==i)?1:0);
+      syncC.querySelector('.cd').textContent=`0:${String(Math.max(0,60-Math.floor(t*23))).padStart(2,'0')}`;
+      const jb=joinC.querySelector('.join');jb.style.transform=`scale(${press(t,C.joinClick)})`;jb.style.background=t>C.joinClick?'#4343b8':'#5b5bd6';
+      cursorAt(aCur,[[0,1600,1300],[.5,1400,700],[1.45,985,120],[2.1,1040,200],[2.7,1150,420]],t,C.joinClick);aCur.style.opacity=P(t,.35,.6);
+      // a giant out-of-focus cursor sweeps the foreground at the top, like the reference's opening
+      const gu=ioC(P(t,0,1.3));aCurBig.style.transform=`translate(${lerp(-60,-700,gu)}px,${lerp(560,1250,gu)}px) rotate(-8deg)`;aCurBig.style.opacity=1-P(t,.9,1.3);
+    } }
+  // ---- B
+  { const o=win(t,S.B,S.C+.05,.15,.3); vis(B,o);
+    if(o>0){ B.style.transform=`scale(${1.1-.12*ioC(P(t,S.B,S.C))})`;
+      const nb=P(t,C.nobody-.05,C.nobody+.3);bWrap.style.filter=`blur(${14*nb}px)`;bWrap.style.opacity=1-.5*nb;tint.style.opacity=nb;
+      bub.forEach((b,i)=>{const u=spr(P(t,C.bubbles[i],C.bubbles[i]+1.2));b.style.transform=`translateY(${(1-u)*90}px) scale(${.8+.2*u})`;b.style.opacity=cl(u*2)});
+      const ty=P(t,C.bubbles[3]+.25,C.bubbles[3]+.5);typing.style.opacity=ty;typing.style.transform=`scale(${.8+.2*oB(ty)})`;
+      typing.querySelectorAll('.d').forEach((d,i)=>d.style.transform=`translateY(${-7*Math.max(0,Math.sin(t*9-i*.8))}px)`);
+      nobody.querySelectorAll('span').forEach((w,i)=>{const u=oQ(P(t,C.nobody+i*.3,C.nobody+i*.3+.4));w.style.display='inline-block';w.style.opacity=u;w.style.transform=`translateY(${(1-u)*50}px) scale(${1.15-.15*u})`;w.style.filter=`blur(${(1-u)*14}px)`});
+      nobody.style.transform=`scale(${1+.04*P(t,C.nobody,S.C)})`;
+    } }
+  // ---- C
+  { const o=win(t,S.C,S.D+.1,.2,.25); vis(Cs,o);
+    if(o>0){ const u=spr(P(t,S.C,S.C+1.3));box.style.transform=`translateY(${(1-u)*120}px) scale(${.9+.1*u})`;
+      Cs.style.transform=`scale(${1.06-.06*ioC(P(t,S.C,S.D))+.5*oC(P(t,S.D-.12,S.D+.1))})`;Cs.style.filter=`blur(${12*P(t,S.D-.08,S.D+.1)}px)`;
+      const T=C.type,txt=T.text,n=Math.round(txt.length*P(t,T.t0,T.t1)),ag=txt.indexOf('agents'),v=txt.slice(0,n);
+      const caret=(Math.floor(t*2.2)%2==0||n<txt.length)?'<span style="display:inline-block;width:5px;height:80px;background:#2383e2;vertical-align:-12px;margin-left:5px"></span>':'';
+      box.querySelector('.txt').innerHTML=(n>ag?v.slice(0,ag)+'<span style="color:#2383e2">'+v.slice(ag)+'</span>':v)+caret;
+      box.querySelectorAll('.chip').forEach((c,i)=>{const s=oB(P(t,S.C+.35+i*.08,S.C+.75+i*.08));c.style.transform=`scale(${s})`;c.style.opacity=cl(s)});
+      const sb=box.querySelector('.send');sb.style.transform=`scale(${press(t,C.send,.25,.15)})`;sb.style.background=n>=txt.length?'#2383e2':'#cfcec9';
+      const a=oB(P(t,C.send+.08,C.send+.4));assign.style.opacity=cl(a);assign.style.transform=`translateY(${(1-a)*24}px) scale(${.8+.2*a})`;assign.querySelector('.spin').style.transform=`rotate(${t*540}deg)`;
+      cursorAt(cCur,[[S.C,1750,950],[7.6,1640,860],[8.35,1600,640],[9,1640,740]],t,C.send);cCur.style.opacity=P(t,S.C+.6,S.C+.9);
+    } }
+  // ---- D
+  { const o=win(t,S.D,S.E+.15,.12,.2); vis(D,o);
+    if(o>0){ const pk=oC(P(t,C.pickClick+.05,C.pickClick+.5)),sh=ioC(P(t,S.E-.35,S.E+.1));
+      const lay=[[-560,40,-6],[0,-10,0],[560,40,6]];
+      agents.forEach((c,i)=>{const u=spr(P(t,C.agentCards[i],C.agentCards[i]+1.2));const [x,y,r]=lay[i];
+        if(i==1){c.style.transform=`translate(0px,${y+(1-u)*260}px) scale(${lerp(.86+.14*u,1.12,pk)*(1-.5*sh)})`;c.style.opacity=cl(u*2)*(1-sh);c.style.zIndex=2}
+        else{c.style.transform=`translate(${x*(1+.3*pk)}px,${y+(1-u)*260+100*pk}px) rotate(${r*(1+1.5*pk)}deg) scale(${(.86+.14*u)*(1-.15*pk)})`;c.style.opacity=cl(u*2)*(1-pk);c.style.filter=`blur(${8*pk}px)`}});
+      cursorAt(dCur,[[S.D,1600,1050],[9.4,1350,850],[9.9,1030,690],[10.4,1080,780]],t,C.pickClick);dCur.style.opacity=P(t,S.D+.2,S.D+.4)*(1-P(t,10.3,10.5));
+    } }
+  // ---- E
+  { const o=win(t,S.E-.12,S.F1+.15,.15,.25); vis(E,o);
+    if(o>0){ const u=ioC(P(t,S.E-.12,S.E+.45));eAv.style.transform=`translate(${lerp(798,430,u)}px,${378}px) scale(${lerp(.8,1,oB(P(t,S.E-.12,S.E+.4)))})`;
+      E.style.transform=`translateX(${-1800*Math.pow(P(t,S.F1-.15,S.F1+.1),2)}px)`;E.style.filter=`blur(${20*P(t,S.F1-.15,S.F1+.1)}px)`;
+      chips.forEach((c,i)=>{let y=480;for(let k=i+1;k<3;k++)y-=140*oC(P(t,C.chips[k],C.chips[k]+.45));const v=spr(P(t,C.chips[i],C.chips[i]+1.2));
+        const older=C.chips.slice(i+1).filter(x=>t>=x).length;
+        c.style.transform=`translate(${830-(1-v)*140}px,${y}px) scale(${(.6+.4*v)*(1-.06*older)})`;c.style.opacity=cl(v*2)*(1-.18*older)});
+      const st=chips[1].querySelector('.stuck');const sv=oB(P(t,C.stuckTag,C.stuckTag+.35),2.4);st.style.transform=`scale(${sv})`;st.style.opacity=cl(sv);
+    } }
+  // ---- F1
+  { const o=win(t,S.F1,S.F2+.15,.12,.3); vis(F1,o);
+    if(o>0){ const n=rLine.querySelector('.n'),w=rLine.querySelector('.w'),tis=rLine.querySelectorAll('.ti');
+      const u0=oQ(P(t,S.F1,S.F1+.4));n.style.opacity=u0;n.style.transform=`translateX(${(1-u0)*-240}px)`;
+      tis.forEach((e,i)=>{const v=oB(P(t,C.risks-.1+i*.12,C.risks+.25+i*.12),2);e.style.transform=`scale(${v}) rotate(${(1-v)*-24}deg)`;e.style.opacity=cl(v)});
+      const wv=oQ(P(t,C.risks+.45,C.risks+.95));w.style.opacity=wv;w.style.filter=`blur(${(1-wv)*16}px)`;w.style.transform=`translateX(${(1-wv)*200}px)`;
+      F1.style.transform=`translateX(${-1000*Math.pow(P(t,S.F2-.2,S.F2+.15),2)}px) scale(${1+.05*P(t,S.F1,S.F2)})`;F1.style.filter=`blur(${18*P(t,S.F2-.2,S.F2+.15)}px)`;
+    } }
+  // ---- F2
+  { const o=win(t,S.F2-.05,S.G+.15,.15,.3); vis(F2,o);
+    if(o>0){ const u=oQ(P(t,S.F2-.05,S.F2+.9)),sl=(1-u)*1600,xs=[-900,-480,0,480,900];
+      pages.forEach((p,i)=>{const big=i==2,lift=big?spr(P(t,C.plan-.25,C.plan+1)):0,lb=spr(P(t,C.plan-.25,C.plan+1));
+        p.style.transform=`translate(${xs[i]*(1+.15*lb)+sl}px,${big?0:30}px) scale(${big?lerp(.74,1,lift):.74*(1-.08*lb)})`;p.style.opacity=big?1:1-.45*lb;p.style.zIndex=big?3:(i==1||i==3?2:1);p.style.filter=big?'none':`blur(${lb*4}px)`});
+      const bg=pages[2];bg.querySelectorAll('.row').forEach((r,j)=>{const v=oC(P(t,C.planChecks[j],C.planChecks[j]+.3));r.style.opacity=.2+.8*v;r.style.transform=`translateX(${(1-v)*24}px)`;
+        const bx=r.querySelector('.bx'),on=t>=C.planChecks[j]+.15;bx.style.background=on?'#2383e2':'transparent';bx.style.borderColor=on?'#2383e2':'#c9c8c4';bx.innerHTML=on?I(IC.check,'#fff',22,3.4):'';
+        r.querySelector('.tx').style.color=on?'#a5a4a0':'#37352f';r.querySelector('.tx').style.textDecoration=on?'line-through':'none'});
+      const sv=oB(P(t,C.plan+.25,C.plan+.6),2.2),stt=bg.querySelector('.status');stt.style.transform=`scale(${sv})`;stt.style.opacity=cl(sv);
+      F2.style.transform=`scale(${1+.05*P(t,S.F2,S.G)-.6*ioC(P(t,S.G-.35,S.G+.1))})`;F2.style.filter=`blur(${10*P(t,S.G-.2,S.G+.1)}px)`;
+    } }
+  // ---- G
+  { const o=win(t,S.G-.05,S.H+.05,.2,.25); vis(G,o);
+    if(o>0){ orbit.style.transform=`rotate(${(t-S.G)*7}deg)`;
+      const z=1.3-.3*oC(P(t,S.G-.05,S.G+.9))+.1*ioC(P(t,C.dones[0]-.3,C.dones[2]+.4)),exit=P(t,S.H-.3,S.H+.05);
+      G.style.transform=`scale(${z*(1+1.3*exit*exit)})`;G.style.filter=`blur(${12*exit}px)`;
+      const gp=spr(P(t,S.G,S.G+1.1));gPage.style.transform=`scale(${.6+.4*gp}) translateY(${Math.sin(t*2)*4}px)`;
+      gTasks.forEach((g,i)=>{const v=spr(P(t,C.working-.2+i*.15,C.working+1+i*.15)),ang=Math.atan2(g.y-540,g.x-960),done=t>=C.dones[i],dv=oB(P(t,C.dones[i],C.dones[i]+.3),2.4);
+        g.p.style.transform=`translate(${g.x-205-(1-v)*Math.cos(ang)*140}px,${g.y-48-(1-v)*Math.sin(ang)*140}px) scale(${(.7+.3*v)*(done?1+.1*Math.sin(Math.PI*cl((t-C.dones[i])/.3)):1)})`;g.p.style.opacity=cl(v*2);
+        g.p.querySelector('.wk').style.opacity=done?0:1;g.p.querySelector('.wk svg').style.transform=`rotate(${t*400}deg)`;const dn=g.p.querySelector('.dn');dn.style.opacity=done?1:0;dn.style.transform=`scale(${done?dv:.5})`;
+        const dx=lerp(960,g.x,.6),dy=lerp(540,g.y,.6);g.dot.style.transform=`translate(${dx-12}px,${dy-12}px) scale(${done?1+.6*Math.sin(Math.PI*cl((t-C.dones[i])/.4)):.6})`;g.dot.style.opacity=v*(done?1:.35)});
+      const ga=oB(P(t,C.dones[2]+.3,C.dones[2]+.7));gAv.style.transform=`translateY(${(1-ga)*90}px) scale(${ga})`;gAv.style.opacity=cl(ga);
+    } }
+  // ---- H
+  { const o=win(t,S.H,S.I+.05,.15,.3); vis(Hs,o);
+    if(o>0){ const u=spr(P(t,C.meetPill,C.meetPill+1.2)),mc=P(t,C.cancelled-.05,C.cancelled+.12);
+      meet.style.transform=`translate(${960-459}px,${540-71+(1-u)*80}px) scale(${(.8+.2*u)*(1-.2*mc)})`;meet.style.opacity=cl(u*2)*(1-mc);
+      const hb=meet.querySelector('.hang');hb.style.transform=`scale(${press(t,C.hangClick,.2,.15)}) rotate(${Math.sin(t*22)*7*P(t,23.2,23.5)*(1-P(t,24,24.1))}deg)`;
+      meet.querySelector('.gd').style.opacity=.4+.6*(Math.sin(t*7)>0);
+      const cv=spr(P(t,C.cancelled,C.cancelled+1.2),.4,15);canc.style.transform=`translate(${960-289}px,${540-77}px) scale(${.55+.45*cv})`;canc.style.opacity=cl(cv*3);
+      Hs.style.transform=`scale(${1+.05*P(t,S.H,S.I)})`;Hs.style.filter=`blur(${12*P(t,S.I-.25,S.I+.05)}px)`;
+      cursorAt(hCur,[[S.H,1650,1050],[23.2,1520,800],[24.05,1352,560],[24.6,1380,660],[25.3,1420,740]],t,C.hangClick);hCur.style.opacity=P(t,S.H+.3,S.H+.6)*(1-P(t,25,25.3));
+    } }
+  // ---- I
+  { const o=P(t,S.I,S.I+.25); vis(Ie,o);
+    if(o>0){ const dv=oB(P(t,C.endDot,C.endDot+.35),2.5),m=P(t,C.logo-.05,C.logo+.1);
+      eDot.style.transform=`scale(${dv*(1-m)})`;eDot.style.opacity=1-m;
+      const mk=eLock.querySelector('.mk'),wd=eLock.querySelector('.wd');
+      const mv=spr(P(t,C.logo,C.logo+1.3),.42,13),wv=oQ(P(t,C.word,C.word+.55)),slide=ioQ(P(t,C.word-.05,C.word+.5));
+      mk.style.display=wd.style.display='inline-block';
+      mk.style.transform=`translateX(${(1-slide)*(wd.offsetWidth+34)/2}px) scale(${mv}) rotate(${(1-mv)*-14}deg)`;mk.style.opacity=cl(mv*3);
+      wd.style.opacity=wv;wd.style.transform=`translateX(${(1-wv)*60}px)`;wd.style.filter=`blur(${(1-wv)*10}px)`;
+      [[eLine.querySelector('.l1'),C.less],[eLine.querySelector('.l2'),C.more]].forEach(([e,c])=>{const v=oQ(P(t,c,c+.45));e.style.display='inline-block';e.style.opacity=v;e.style.transform=`translateY(${(1-v)*36}px)`;e.style.filter=`blur(${(1-v)*10}px)`});
+      eUrl.style.opacity=P(t,C.more+.4,C.more+.9);
+      Ie.style.transform=`scale(${1.04-.04*oC(P(t,S.I,31))})`;
+    } }
+  fade.style.opacity=P(t,C.fadeOut,C.dur);
+}
+async function init(){
+  for(const f of['500 40px UI','600 40px UI','700 40px UI','40px SerifI','40px "Noto Color Emoji"'])await document.fonts.load(f,'🚀');await document.fonts.ready;
+  await Promise.all([...document.images].map(i=>i.complete?0:new Promise(r=>{i.onload=r;i.onerror=r})));
+  window.seek=async t=>render(t);
+  const q=new URLSearchParams(location.search);render(q.has('t')?parseFloat(q.get('t')):0);window.READY=true;
+}
+init().catch(e=>{window.INITERR=String(e&&e.stack||e);console.error(e)});
+</script>
+</body>
+</html>
