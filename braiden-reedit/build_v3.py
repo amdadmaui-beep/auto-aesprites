@@ -33,6 +33,7 @@ b1, v1 = b2.b1, b2.v1
 W, H, FPS, PW, PH = b2.W, b2.H, b2.FPS, b2.PW, b2.PH
 N, END = b2.N, b2.END
 TEAL, TEAL_D, TEAL_L, WHITE = b2.TEAL, b2.TEAL_D, b2.TEAL_L, b2.WHITE
+BOX_FG = BAND_FG = WHITE   # text on the accent box / band (a palette can override)
 word, pad, banknote, coin, engraving, dot_grid = b2.word, b2.pad, b2.banknote, b2.coin, b2.engraving, b2.dot_grid
 
 CUTS = [(10.54, 11.08, "car"), (11.08, 11.62, "house"), (11.62, 14.45, "jetski")]
@@ -227,12 +228,12 @@ class Renderer(b2.Renderer):
             if t >= 1.30:
                 q = expo((t - 1.30) / 0.45)
                 d = ImageDraw.Draw(fg)
-                hp = word("Happiness", "serif800", 86, WHITE)
+                hp = word("Happiness", "serif800", 86, BOX_FG)
                 d.rectangle((0, 226, int((hp.width + 70) * q), 226 + 98), fill=TEAL + (240,))
                 # letters rise in one by one
                 x = 34
                 for li, ch in enumerate("Happiness"):
-                    lw_ = word(ch, "serif800", 86, WHITE)
+                    lw_ = word(ch, "serif800", 86, BOX_FG)
                     lq = expo((t - 1.36 - li * 0.035) / 0.35)
                     if lq > 0:
                         place(fg, lw_, x, 224 + (1 - lq) * 40, alpha=lq, blur=(1 - lq) * 4)
@@ -255,11 +256,13 @@ class Renderer(b2.Renderer):
             db.rectangle((0, 0, PW, int(bh * p)), fill=TEAL + (255,))
             # subtle diagonal sheen moving across the band
             sx = (t - 6.4) * 700 - 200
-            db.polygon([(sx, 0), (sx + 90, 0), (sx - 60, bh * p), (sx - 150, bh * p)], fill=(255, 255, 255, 22))
             bgl.alpha_composite(band)
+            sheen = Image.new("RGBA", (PW, PH), (0, 0, 0, 0))
+            ImageDraw.Draw(sheen).polygon([(sx, 0), (sx + 90, 0), (sx - 60, bh * p), (sx - 150, bh * p)], fill=(255, 255, 255, 40))
+            bgl.alpha_composite(sheen)
             x = PW * 0.47
             for st, wd in ((6.48, "are"), (6.58, "the"), (6.72, "worst"), (7.10, "at"), (7.34, "buying")):
-                w_ = word(wd, "urb600" if wd != "worst" else "urb800", 48, WHITE)
+                w_ = word(wd, "urb600" if wd != "worst" else "urb800", 48, BAND_FG)
                 q = expo((t - st) / 0.3)
                 if q > 0:
                     place(fg, w_, x, 92 + (1 - q) * 14, alpha=q, blur=(1 - q) * 4)
