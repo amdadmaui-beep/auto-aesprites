@@ -33,22 +33,33 @@ WHITE = (255, 255, 255)
 CARD, BEFORE = pv2.CARD, pv2.BEFORE
 
 # (start, end, kicker, big, add-on, add-on time) — 1080x1920 edit coordinates
+# (start, end, style, kicker / stacked words, big word, add-on, add-on time)
+#   style "fill": pale big word with a big thin kicker dropped onto its first letters
+#   style "outline": lime outlined big word with bold white words stacked in its middle
 TYPE = [
-    (0.00, 1.30, None, "money", None, None),
-    (3.40, 4.22, "most of", "us", None, None),
-    (4.80, 5.12, "a little bit of", "money", None, None),
-    (7.10, 8.77, "the worst at", "buying", "happiness", 7.82),
-    (10.14, 10.54, "so you", "upgrade", None, None),
-    (13.55, 14.42, "just feels", "normal", None, None),
-    (15.98, END, "no longer", "happiness", "that can come from it", 16.46),
+    (0.00, 1.30, "fill", None, "money", None, None),
+    (3.40, 4.22, "fill", "most of", "us", None, None),
+    (4.52, 5.12, "outline", ("a little", "bit of"), "money", None, None),
+    (7.10, 8.77, "fill", "worst at", "buying", "happiness", 7.82),
+    (9.95, 10.54, "outline", ("so", "you"), "upgrade", None, None),
+    (13.55, 14.42, "fill", "feels", "normal", None, None),
+    (15.98, END, "fill", "no longer", "happiness", "that can come from it", 16.46),
 ]
 BRACKETS = [(1.82, 3.04), (8.42, 9.86), (14.42, 15.9)]
-TOP = 470
-CAP_Y = 1330
+TOP = 600
+CAP_Y = 1720
+PALE_T, PALE_B = (244, 250, 214), (214, 234, 146)
 
 
-def big_word(s, maxw=980):
-    im = pv4.grad(pv4.word_img(s, "black", 330, WHITE))
+def big_word(s, style="fill", maxw=1010):
+    if style == "outline":
+        fill = pv4.word_img(s, "black", 360, WHITE)
+        outer = pv4.word_img(s, "black", 360, WHITE, stroke=7)
+        inner = np.pad(np.asarray(fill.getchannel("A")), ((7, 7), (7, 7)))[:outer.height, :outer.width]
+        ring = np.clip(np.asarray(outer.getchannel("A")).astype(np.int16) - inner, 0, 255).astype(np.uint8)
+        im = Image.new("RGBA", outer.size, LIME + (0,)); im.putalpha(Image.fromarray(ring))
+    else:
+        im = pv4.grad(pv4.word_img(s, "black", 360, WHITE), PALE_T, (232, 244, 186), PALE_B)
     if im.width > maxw:
         im = im.resize((maxw, int(im.height * maxw / im.width)), Image.LANCZOS)
     return im
@@ -60,6 +71,51 @@ class Edit(bg.Renderer):
     def __init__(self, work):
         super().__init__(work)
         self.words = json.load(open(os.path.join(work, "words.json")))
+
+    TOP_EXT, BOT_EXT = 720, 140
+
+    def zoom(self, t):
+        return 1 + (bg.Renderer.zoom(self, t) - 1) * 0.55
+
+    def punch(self, t):
+        return 1 + (bg.Renderer.punch(self, t) - 1) * 0.6
+
+    def footage(self, i, t, z):
+        k = next(n for n, (a, b) in enumerate(sf.SHOTS) if a <= t < b or n == len(sf.SHOTS) - 1)
+        _, cx, top, bot = self.shot_geo[k]
+        T, Bx = self.TOP_EXT, self.BOT_EXT
+        src = np.asarray(self.raw(i)).astype(np.float32) / 255
+        mk = np.asarray(self.mask(i)).astype(np.float32) / 255
+        # depth: soften his real background a touch
+        soft_bg = cv2.GaussianBlur(src, (0, 0), 2.2)
+        src = src * mk[..., None] + soft_bg * (1 - mk[..., None])
+        topx = cv2.GaussianBlur(cv2.resize(src[:150], (1080, T + 80)), (0, 0), 26) * 0.75
+        botx = cv2.GaussianBlur(cv2.resize(src[-70:], (1080, Bx + 60)), (0, 0), 18) * 0.8
+        ext = np.concatenate([topx[:T], src, botx[60:]], 0)
+        yy = np.arange(80, dtype=np.float32)[:, None, None] / 80
+        ext[T:T + 80] = topx[T:T + 80] * (1 - yy) + src[:80] * yy
+        mke = np.concatenate([np.zeros((T, 1080), np.float32), mk, np.zeros((Bx, 1080), np.float32)], 0)
+        He = 608 + T + Bx
+        ch = He / z
+        cw = ch * W / H
+        head = T + top + 0.15 * (bot - top)
+        cy = He / 2 + (head - He / 2) * clamp01((z - 1) / 0.3)
+        dx = 3 * math.sin(t * 1.3) + 1.5 * math.sin(t * 2.9)
+        dy = 2 * math.sin(t * 1.7 + 1)
+        x0 = min(max(cx - cw / 2 + dx, 0), 1080 - cw)
+        y0 = min(max(cy - ch / 2 + dy, 0), He - ch)
+        M = np.float32([[W / cw, 0, -x0 * W / cw], [0, H / ch, -y0 * H / ch]])
+        a = cv2.warpAffine(ext, M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+        m = cv2.warpAffine(mke, M, (W, H), flags=cv2.INTER_LINEAR)
+        bl = cv2.GaussianBlur(a, (0, 0), 1.4)
+        a = np.clip(a + (a - bl) * 0.45, 0, 1)
+        m = cv2.GaussianBlur(np.clip((m - 0.12) / 0.76, 0, 1), (0, 0), 1.5)
+        # warm, slightly lifted grade + vignette
+        a = np.clip((a - 0.015) * 1.08, 0, 1) * np.array([1.02, 1.0, 0.97])
+        yy2, xx2 = np.mgrid[0:H:8, 0:W:8].astype(np.float32)
+        vg = 1 - 0.28 * np.clip(((xx2 - W / 2) / (W * 0.7)) ** 2 + ((yy2 - H * 0.5) / (H * 0.62)) ** 2, 0, 1)
+        a = a * cv2.resize(vg, (W, H))[..., None]
+        return a, m
 
     def whip(self, t, on, off):
         p = expo((t - on) / 0.38)
@@ -108,27 +164,39 @@ class Edit(bg.Renderer):
         base = base * self.top_shade
         behind = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         front = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        for on, off, kick, big, extra, et in TYPE:
+        for on, off, style, kick, big, extra, et in TYPE:
             if not (on - 0.12 <= t < off):
                 continue
-            bw = big_word(big)
+            bw = big_word(big, style)
             bx = (W - bw.width) / 2
             dx, bl, al = self.whip(t, on, off)
             sh = Image.new("RGBA", bw.size, (0, 0, 0, 0))
-            sh.putalpha(bw.getchannel("A").filter(ImageFilter.GaussianBlur(18)).point(lambda v: int(v * 0.5)))
-            place(behind, pv4.hblur(sh, bl), bx + dx, TOP + 16, alpha=al)
-            place(behind, pv4.hblur(bw, bl), bx + dx, TOP, alpha=al)
-            if kick:
-                kp = expo((t - on + 0.12) / 0.35)
-                ki = pv4.word_img(kick, "light", 96 if len(kick) < 9 else 74, WHITE)
-                place(front, ki, bx + 14 + (1 - kp) * -50, TOP - ki.height * 0.60, alpha=kp * (al if t > on else 1))
+            sh.putalpha(bw.getchannel("A").filter(ImageFilter.GaussianBlur(20)).point(lambda v: int(v * 0.45)))
+            layer = behind if style == "fill" else front
+            place(layer, pv4.hblur(sh, bl), bx + dx, TOP + 18, alpha=al)
+            place(layer, pv4.hblur(bw, bl), bx + dx, TOP, alpha=al)
+            if style == "fill" and kick:
+                kp = expo((t - on + 0.10) / 0.4)
+                ki = pv4.word_img(kick, "light", int(bw.height * 0.44), WHITE)
+                if ki.width > bw.width * 0.75:
+                    ki = ki.resize((int(bw.width * 0.75), int(ki.height * bw.width * 0.75 / ki.width)), Image.LANCZOS)
+                place(front, ki, bx + 18, TOP - ki.height * 0.58 + (1 - kp) * -40, alpha=kp * (al if t > on else 1))
+            if style == "outline":
+                ims = [pv4.word_img(k_, "bold", int(bw.height * 0.44), WHITE) for k_ in kick]
+                th = sum(im.height for im in ims) - 40 * (len(ims) - 1)
+                y = TOP + (bw.height - th) / 2
+                for j, im in enumerate(ims):
+                    q = spring(t - on - 0.05, 14, 0.62)
+                    place(front, im, W / 2, y + (1 - min(q, 1)) * 30, alpha=min(1, q * 1.6) * al,
+                          scale=1.15 - 0.15 * min(q, 1), anchor="ct")
+                    y += im.height - 40
             if extra and t >= et:
                 q = spring(t - et, 14, 0.6)
-                ei = pv4.word_img(extra, "blacki", 92, WHITE)
+                ei = pv4.word_img(extra, "blacki", 96, WHITE)
                 if ei.width > W - 120:
                     ei = ei.resize((W - 120, int(ei.height * (W - 120) / ei.width)), Image.LANCZOS)
-                ex = min(bx + bw.width - ei.width * 0.75, W - ei.width - 40)
-                place(front, ei, ex + (1 - min(q, 1)) * 70, TOP + bw.height * 0.80, alpha=min(1, q * 1.6) * al,
+                ex = min(bx + bw.width - ei.width * 0.8, W - ei.width - 40)
+                place(front, ei, ex + (1 - min(q, 1)) * 70, TOP + bw.height * 0.78, alpha=min(1, q * 1.6) * al,
                       scale=1.12 - 0.12 * min(q, 1))
         ba = np.asarray(behind).astype(np.float32) / 255
         al_ = ba[..., 3:4] * (1 - m[..., None])
@@ -176,6 +244,7 @@ class Page:
 
     def __init__(self, work, fonts_work):
         pv2.FD = os.path.join(fonts_work, "fonts")
+        pv2.LIME_PALE = (236, 235, 229)   # off-white page instead of the lime tint
         self.edit = Edit(work)
         self.page = pv2.build_page()
         bs, bp = pv2.shadow_layer(BEFORE, a=0.16)
