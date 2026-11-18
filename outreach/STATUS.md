@@ -41,6 +41,8 @@ Last updated: 2026-11-16. Update this file at the end of every session.
 
 - Nov 18 hiring-lead search (job boards, Reddit excluded): best live lead = Dream Three Short Form Video Editor (remote 1099, comedy/podcast clips, Premiere Pro, 10-20 h/wk) apply at jobs.ashbyhq.com/dreamthree/33fbcf62-312d-46b9-be77-db2a5af675f9/application. One Decision ($100/clip) expired. 7xContent = full-time UK with London shoots (poor fit). No prospect replies yet; FU to the 9 on Nov 19.
 
+- Nov 18 top 8: emailed Tristan Miller + Greenpoint Comedy Club (FU Nov 21). Still to do by hand: Dream Three (Ashby form), Janelle Draper (site form), IG DMs to Alaina Bamfield, Brian Smight, Tuesday Thomas, Rochelle McConico. IG lists: IG_JACKIE_CIRCLE.md, IG_CLUB_COMICS.md (do from a laptop session with Claude in Chrome).
+
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
 - Emails Nov 11: UpHigh, Crushed It, Podhead, Podomedy, Bodett Problem → follow up Nov 14 (day 3).
