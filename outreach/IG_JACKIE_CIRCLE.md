@@ -11,7 +11,7 @@ Already contacted (skip): Ben Miller, Derek Sheen, Myq Kaplan, Joey Clift, Kelly
 Removed after checking (not clearly working comedians): JoAnna Ross, Monique Sanchez.
 
 Template (fill in name + topic):
-> Hey [Name]! Loved your Dork Forest episode on [topic] 😂 We edit Jackie's clips (and Brenda Pontiff's and Debi Bradshaw's), turning sets into captioned Reels and Shorts. Want me to cut one bit from a recent set so you can see what we'd do with it? No strings.
+> Hey [Name]! Loved your Dork Forest episode on [topic] 😂 We edit Jackie's clips (and Brenda Pontiff's and Debi Bradshaw's). We handle the whole backend: going through your sets, finding the best bits, editing, captions, and ready-to-post Reels and Shorts, so your account keeps growing while you focus on shows. Want me to cut one bit from a recent set so you can see what we'd do with it? No strings.
 
 ## Comedians (all checked as working stand-ups)
 1. Alaina Bamfield (EP 886, cheerleading): @alainabamfieldcomedy. Brooklyn comic, opened for Dave Attell; recording her first special Nov 28 at the Indy in Hamtramck. Add: "Congrats on the special taping on the 28th!"
@@ -35,6 +35,6 @@ Template (fill in name + topic):
 
 ## Comedy clubs and shows
 19. Greenpoint Comedy Club, Brooklyn: @greenpointcomedyclub (owner Jeremy Pinsly was on Dork Forest EP 870, tennis)
-> Hey! Loved Jeremy on Jackie Kashian's Dork Forest. We edit Jackie's clips, turning sets into captioned Reels and Shorts. Clubs that post their comics' best moments fill more seats. Want me to cut one clip from a recent Greenpoint set so you can see what we'd do with it? No strings.
+> Hey! Loved Jeremy on Jackie Kashian's Dork Forest. We edit Jackie's clips and handle the whole backend: going through your sets, picking the best bits, editing and captions, so your page posts ready-made Reels every week. Clubs that post their comics' best moments fill more seats. Want me to cut one clip from a recent Greenpoint set so you can see what we'd do with it? No strings.
 20. Firecracker Comedy: @firecrackercomedy (Kate Strobel, Salma Zaky and Gabby Gutierrez-Reed came on Dork Forest through it)
-> Hey! Found you through Jackie Kashian's Dork Forest (Kate, Salma and Gabby were all great). We edit Jackie's clips, turning sets into captioned Reels and Shorts. Want me to cut one clip from a recent Firecracker show so you can see what we'd do with it? No strings.
+> Hey! Found you through Jackie Kashian's Dork Forest (Kate, Salma and Gabby were all great). We edit Jackie's clips and handle the whole backend: going through your shows, picking the best bits, editing and captions, so your page keeps growing with ready-made Reels. Want me to cut one clip from a recent Firecracker show so you can see what we'd do with it? No strings.
