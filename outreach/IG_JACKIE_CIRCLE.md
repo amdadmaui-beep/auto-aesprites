@@ -7,7 +7,7 @@ Rules before each DM:
 3. Max 15 a day, 3–5 minutes apart. Stop if Instagram shows any warning.
 Never say "free" in the message.
 
-Already contacted (skip): Ben Miller, Derek Sheen, Myq Kaplan, Joey Clift, Kelly MacFarland, Selena Price, Ryan Conner, Laurie Kilmartin, Jimmy Pardo.
+Already contacted (skip): Alaina Bamfield, Tuesday Thomas, Rochelle McConico, Caitlin Gill, Katie Compa, Matt Koff, Denise Winkelman, Kate Strobel (IG drafts Nov 19), Ben Miller, Derek Sheen, Myq Kaplan, Joey Clift, Kelly MacFarland, Selena Price, Ryan Conner, Laurie Kilmartin, Jimmy Pardo.
 Removed after checking (not clearly working comedians): JoAnna Ross, Monique Sanchez.
 
 Template (compliment, intro, what we do, ask). Fill in name + topic:
@@ -20,18 +20,18 @@ Template (compliment, intro, what we do, ask). Fill in name + topic:
 > Want me to cut one bit from a recent set so you can see what we'd do with it? No strings.
 
 ## Comedians (all checked as working stand-ups)
-1. Alaina Bamfield (EP 886, cheerleading): @alainabamfieldcomedy. Brooklyn comic, opened for Dave Attell; recording her first special Nov 28 at the Indy in Hamtramck. Add: "Congrats on the special taping on the 28th!"
-2. Tuesday Thomas (EP 895, old Hollywood): @mamawarnedme (check it's her). LA headliner, Laugh Factory regular, special "Tuesday's Trash" on Prime.
+1. Alaina Bamfield (EP 886, cheerleading): @alainabamfield. Brooklyn comic, opened for Dave Attell; recording her first special Nov 28 at the Indy in Hamtramck. Add: "Congrats on the special taping on the 28th!"
+2. Tuesday Thomas (EP 895, old Hollywood): @mommawarnedme (confirmed). LA headliner, Laugh Factory regular, special "Tuesday's Trash" on Prime.
 3. Tristan Miller (EP 879, David Lynch): search "Tristan Miller comedian". NYC comic; special "Manic Impressive".
 4. Rochelle McConico (EP 889, using AI as a tool): @rochelle_war. Austin comic and producer (MoonCricket Productions).
-5. Caitlin Gill (EP 898, stargazing): search "Caitlin Gill comedian"
+5. Caitlin Gill (EP 898, stargazing): @caitlinistall
 6. Dan Bulger (EP 896, the Odyssey movie): search "Dan Bulger comedian"
 7. Katie Compa (EP 882, being PREPARED for air travel): @katiecompa
 8. Matt Koff (EP 873, candy): @mattkoff
 9. Jenny Zigrino (EP 868, theater inspired by history): @jennyzigrino
 10. Mary Houlihan (EP 859, Mario Party): @maryhoulie
-11. Nancy Norton (EP 845, trauma comedy): @nancynorton
-12. Denise Winkelman (EP 839, Minnesota sports): @denisewinklemancomedy
+11. Nancy Norton (EP 845, trauma comedy): (no IG found)
+12. Denise Winkelman (EP 839, Minnesota sports): @denisewinkelmancomedy
 13. Kate Strobel (EP 838, Prospect Park): @kate.strobel
 14. Salma Zaky (EP 837, boxing): @salmazaky_
 15. Brian Kiley (EP 835, historical anecdotes): @kileybriancomic

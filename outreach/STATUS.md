@@ -1,5 +1,5 @@
 # AVE Studio outreach: current status (read this first; keep it under ~80 lines)
-Last updated: 2026-11-16. Update this file at the end of every session.
+Last updated: 2026-11-19. Update this file at the end of every session.
 
 ## Business
 - AVE Studio: Jeff (user), editors in Cagayan de Oro City, Philippines. Captioned vertical clips for comedians, podcasts and talking heads.
@@ -42,6 +42,11 @@ Last updated: 2026-11-16. Update this file at the end of every session.
 - Nov 18 hiring-lead search (job boards, Reddit excluded): best live lead = Dream Three Short Form Video Editor (remote 1099, comedy/podcast clips, Premiere Pro, 10-20 h/wk) apply at jobs.ashbyhq.com/dreamthree/33fbcf62-312d-46b9-be77-db2a5af675f9/application. One Decision ($100/clip) expired. 7xContent = full-time UK with London shoots (poor fit). No prospect replies yet; FU to the 9 on Nov 19.
 
 - Nov 18 top 8: emailed Tristan Miller + Greenpoint Comedy Club (FU Nov 21). Still to do by hand: Dream Three (Ashby form), Janelle Draper (site form), IG DMs to Alaina Bamfield, Brian Smight, Tuesday Thomas, Rochelle McConico. IG lists: IG_JACKIE_CIRCLE.md, IG_CLUB_COMICS.md (do from a laptop session with Claude in Chrome).
+
+## Nov 19: IG DMs (drafted in Jeff's Chrome, Jeff clicks Send; 3-5 min apart)
+- READY (8): Alaina Bamfield @alainabamfield (old handle was wrong; bio says "not taking subs" = show subs), Tuesday Thomas @mommawarnedme (NOT @mamawarnedme, that's an AI account), Rochelle McConico @rochelle_war, Caitlin Gill @caitlinistall, Katie Compa @katiecompa (no Message button: via ... > Send message; goes to Requests), Matt Koff @mattkoff, Denise Winkelman @denisewinkelmancomedy (file had a typo; Jackie + Debi follow her), Kate Strobel @kate.strobel.
+- SKIPPED: Brian Smight (already DM'd Sat), Jenny Zigrino, Mary Houlihan, Salma Zaky, Brian Kiley (all post polished captioned clips), Dan Bulger (can't confirm account: one empty, one private), Nancy Norton (no account found).
+- Next from IG_JACKIE_CIRCLE.md: Cindy Caponera, Abigoliah Schamaun, Chemda, then Firecracker; then IG_CLUB_COMICS.md. Follow up the 8 on Nov 22.
 
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
