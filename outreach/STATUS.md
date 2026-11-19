@@ -50,6 +50,11 @@ Last updated: 2026-11-19. Update this file at the end of every session.
 - SKIPPED: Brian Smight (already DM'd), Jenny Zigrino, Mary Houlihan, Salma Zaky, Brian Kiley, Abigoliah, Firecracker Comedy (clips by Blonde Medicine), Ray Lau, John Campanelli, Kat Bird (all post polished clips); Cindy Caponera (no stand-up, no Message button); Dan Bulger, Nancy Norton (account not found).
 - Lesson: club-calendar comics (IG_CLUB_COMICS.md) mostly already have editors. Better lists: small festival lineups, Dork Forest guests with few clips.
 
+## Proof numbers (use in pitches, esp. non-comedy prospects)
+- Jackie Kashian IG: our edited stand-up clips 60.8K, 17.3K, 11.4K, 10.4K, 10K views vs her other posts ~855-1.4K (10-40x).
+- Brenda Pontiff IG: our first 2 edits 3,843 and 1,655 views vs her other posts 173-946 (about 2-20x).
+- Pitch line: "For Jackie Kashian our clips hit 10K-60K views vs ~1K on her other posts; Brenda Pontiff's first two edits did 4-20x her usual."
+
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
 - Emails Nov 11: UpHigh, Crushed It, Podhead, Podomedy, Bodett Problem → follow up Nov 14 (day 3).
