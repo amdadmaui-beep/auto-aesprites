@@ -21,11 +21,17 @@ if (args.times) {
   for (const ts of String(args.times).split(',')) { const t = parseFloat(ts); fs.writeFileSync(path.join(out, `t${t.toFixed(2).padStart(5, '0')}.jpg`), await shot(t)); }
 } else {
   const N = Math.round(C.dur * fps), outv = args.video || path.join(ROOT, 'build', 'video.mp4'); fs.mkdirSync(path.dirname(outv), { recursive: true });
-  const sub = +(args.sub || 2), vf = sub > 1 ? `tmix=frames=${sub},select='eq(mod(n\\,${sub})\\,${sub - 1})',setpts=N/(${fps}*TB)` : 'null';
-  const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps * sub), '-i', '-', '-vf', vf, '-r', String(fps), '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', outv], { stdio: ['pipe', 'inherit', 'inherit'] });
-  const t0 = Date.now();
-  // motion blur: `sub` samples spread over a 180-degree shutter, averaged by tmix
-  for (let i = 0; i < N; i++) { for (let k = 0; k < sub; k++) { const b = await shot(Math.max(0, i / fps + ((k + .5) / sub - .5) * .5 / fps)); if (!ff.stdin.write(b)) await new Promise(r => ff.stdin.once('drain', r)); } if (i % 120 === 0) console.log(`frame ${i}/${N} ${((Date.now() - t0) / 1000).toFixed(0)}s`); }
+  // motion blur: every output frame averages M=6 equal slots. Slow frames take 2 real samples (each repeated 3x),
+  // frames inside the fast camera moves take 6, spread over a 180-degree shutter, so fast moves smear instead of doubling.
+  const M = 6, HI = [[2.25, 2.95], [8.5, 9.1], [10.15, 11.05], [14.65, 15.15], [16.4, 16.9], [18.3, 22.7], [24.4, 25.9]];
+  const nAt = t => HI.some(([a, b]) => t >= a && t <= b) ? 6 : 2;
+  const vf = `tmix=frames=${M},select='eq(mod(n\\,${M})\\,${M - 1})',setpts=N/(${fps}*TB)`;
+  const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps * M), '-i', '-', '-vf', vf, '-r', String(fps), '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', outv], { stdio: ['pipe', 'inherit', 'inherit'] });
+  const t0 = Date.now(); let caps = 0;
+  for (let i = 0; i < N; i++) { const n = nAt(i / fps);
+    for (let k = 0; k < n; k++) { const b = await shot(Math.max(0, i / fps + ((k + .5) / n - .5) * .5 / fps)); caps++;
+      for (let r = 0; r < M / n; r++) if (!ff.stdin.write(b)) await new Promise(res => ff.stdin.once('drain', res)); }
+    if (i % 120 === 0) console.log(`frame ${i}/${N} captures ${caps} ${((Date.now() - t0) / 1000).toFixed(0)}s`); }
   ff.stdin.end(); await new Promise(r => ff.on('close', r));
 }
 await browser.close(); srv.close();
