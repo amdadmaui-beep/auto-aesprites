@@ -1,4 +1,32 @@
-# Notion Agents spec spot (31s, 16:9)
+# Notion Agents spec spot
+
+## V3 (current): `Notion_Agents_Spec_V3_16x9.mp4`, source in `film3/`
+Rebuilt after review of V2 ("two voices", "not smooth", "AI slop"). What changed and why:
+- **One voice, one take.** The whole script is a single Fish Audio `drama-3` generation (voice "Sarah", picked by
+  speaker-embedding similarity to the reference narrator: 0.747, highest of 9 candidates). Long pauses were trimmed
+  to the reference's rhythm (32.6 s -> 29.1 s), and word times were measured with faster-whisper (`vo/v3/words_tight.json`).
+- **Nothing cuts; everything morphs.** One shape (`MO` in `film3/index.html`) carries the film: calendar pill -> Ava's
+  chat bubble -> Notion AI prompt box -> "Assigning agents" pill -> (orbit) -> call pill -> "Cancelled" -> dot -> Notion mark.
+  The chosen agent card rounds itself into the avatar; the orbit camera travels to each pill on each "done".
+- **Text types with the voice**, word by word, from the measured timings in `film3/cues.js`.
+- **Black and off-white** palette (paper #f7f6f3, ink #191919), one blue accent used once, official Notion mark.
+- **3D cast** generated once as a 6-up character sheet (Fish `gpt-image-2`, 930 credits), cut out with rembg (`film3/img/chars/`).
+- **GSAP** paused timeline scrubbed by `seek(t)` (pure function of time), with the official GSAP skills installed in `.claude/skills/`.
+- Score: original, 160 BPM half-time, so the three "done"s land on beats 54/56/58. Mix -14 LUFS, -1 dBTP.
+- QA followed `motion-studio-rules`: beat contact sheets scored on six axes and fixed until all were 8+.
+
+Rebuild:
+```bash
+cd film3
+python audio.py                                   # build/music.wav, sfx.wav, vo.wav, mix_raw.wav
+ffmpeg -i build/mix_raw.wav -af "alimiter=limit=0.89:attack=2:release=60,loudnorm=I=-14:TP=-1:LRA=9" -ar 48000 build/mix.wav
+node render.mjs --video=build/video.mp4           # 2 sub-frames per frame for motion blur
+ffmpeg -i build/video.mp4 -i build/mix.wav -c:v copy -c:a aac -b:a 320k -shortest ../Notion_Agents_Spec_V3_16x9.mp4
+```
+
+---
+
+## V2 (superseded)
 
 A spec commercial for Notion's AI agents, modelled on the beat structure of the client's reference (a monday.com agents promo): meeting chaos → status-update chat bubbles → "Nobody doing." → AI prompt → pick an agent → Read / Flag / Push → results → "The meeting? Cancelled." → end card. Picture is built as code with real assets: the official Notion mark, real (stock) people cut out with rembg, Notion-style pages with photo covers and emoji icons. Music and sound design are original. Rendered with 2-sample motion blur.
 

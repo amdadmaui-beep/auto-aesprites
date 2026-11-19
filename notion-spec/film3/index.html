@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notion Agents V3</title>
+<style>
+@font-face{font-family:UI;src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
+@font-face{font-family:UI;src:url(fonts/InterDisplay-SemiBold.otf);font-weight:600}
+@font-face{font-family:UI;src:url(fonts/InterDisplay-Bold.otf);font-weight:700}
+@font-face{font-family:Serif;src:url(fonts/InstrumentSerif-normal-400.woff2)}
+@font-face{font-family:Serif;font-style:italic;src:url(fonts/InstrumentSerif-italic-400.woff2)}
+/* design system: ink on paper, one accent used once per scene at most */
+:root{--paper:#f7f6f3;--ink:#191919;--ink2:#37352f;--mute:#9b9a97;--line:#e6e5e1;--fill:#efeeea;--accent:#2383e2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--paper);font-family:UI,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+.L{position:absolute;inset:0;transform-origin:960px 540px}
+.a{position:absolute}
+.card{position:absolute;background:#fff;border:1.5px solid var(--line);border-radius:26px;box-shadow:0 30px 80px rgba(25,25,25,.10),0 4px 14px rgba(25,25,25,.05);overflow:hidden}
+.pill{position:absolute;display:flex;align-items:center;gap:16px;background:#fff;border:1.5px solid var(--line);border-radius:999px;box-shadow:0 22px 60px rgba(25,25,25,.10);white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:8px 18px;font-weight:600;font-size:28px;background:var(--fill);color:var(--ink2)}
+.ph{position:relative;overflow:hidden;flex:none;background:var(--fill)}
+.ph img{position:absolute;left:50%;bottom:-4%;height:108%;transform:translateX(-50%)}
+.serif{font-family:Serif;font-weight:400}
+svg{display:block}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="vendor/gsap.min.js"></script>
+<script src="cues.js"></script>
+<script>
+const C=CUES, w=C.w, st=document.getElementById('stage');
+function el(p,cls,html,css){const e=document.createElement('div');if(cls)e.className=cls;if(html!=null)e.innerHTML=html;if(css)e.style.cssText=css;p.appendChild(e);return e}
+const ph=(k,s,r='50%')=>`<div class="ph" style="width:${s}px;height:${s}px;border-radius:${r}"><img src="img/chars/${k}.png"></div>`;
+const I=(d,s=28,c='#191919',sw=2.3)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const IC={doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',spark:'<path d="M12 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7z"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+ pen:'<path d="M4 20l4-1 11-11-3-3L5 16z"/>',bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',cal:'<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+ vid:'<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3"/>',up:'<path d="M12 19V5M6 11l6-6 6 6"/>',phone:'<path d="M3 13c5-5 13-5 18 0l-2.5 3-3.5-1.5v-2.5c-2-.7-4-.7-6 0v2.5L5.5 16z"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.5 3.3-5.5 6.5-5.5s5.8 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .8 3.2 2.6 3.5 5.2"/>',
+ coin:'<circle cx="12" cy="12" r="9"/><path d="M14.8 9.2c-.5-1-1.5-1.5-2.8-1.5-1.7 0-2.8.9-2.8 2.1 0 2.9 5.8 1.5 5.8 4.5 0 1.3-1.2 2.2-3 2.2-1.4 0-2.5-.6-3-1.6M12 6v1.7M12 16.6V18"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'};
+const CUR=s=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.3 2.9 6.6 3.2-1.4-2.9-6.5h6.3z" fill="#111" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+const SPIN=s=>`<svg class="spin" width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#e6e5e1" stroke-width="3"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="#191919" stroke-width="3" stroke-linecap="round"/></svg>`;
+const MARK=s=>`<img src="brand/notion-mark.svg" width="${s}" height="${s}" style="display:block">`;
+const box=(cx,cy,W,H,r)=>({left:cx-W/2,top:cy-H/2,width:W,height:H,borderRadius:r});
+
+// ============================================================ layers (back to front)
+const bgPaper=el(st,'L','','background:radial-gradient(ellipse at 50% 45%,#fbfaf8 0%,#f4f3ef 70%,#ecebe6 100%)');
+const dots=el(st,'L','','background-image:radial-gradient(rgba(25,25,25,.10) 1.4px,transparent 1.6px);background-size:40px 40px;opacity:.55');
+const bgStreak=el(st,'L','','background:#e9e8e4;overflow:hidden;opacity:0');
+const streaks=Array.from({length:15},(_,i)=>el(bgStreak,'a','',`left:-700px;width:3320px;top:${i*75-40}px;height:${46+(i*37)%96}px;filter:blur(${9+(i%3)*7}px);background:linear-gradient(90deg,transparent,${['#ffffff','#c9c8c3','#f7f6f3','#9b9a97','#ffffff','#dcdbd6'][i%6]} 30%,${['#d3d2cd','#ffffff','#b5b4af','#f7f6f3'][i%4]} 72%,transparent)`));
+const bgDark=el(st,'L','','background:radial-gradient(ellipse at 50% 50%,#262626 0%,#121212 55%,#080808 100%);opacity:0');
+
+// ============================================================ S1 meeting chaos (CSS 3D)
+const S1=el(st,'L','','perspective:1700px');
+const W1=el(S1,'L','','transform-style:preserve-3d');
+const c1=(x,y,W,H,html,css='')=>el(W1,'card',html,`left:${x}px;top:${y}px;width:${W}px;height:${H}px;${css}`);
+const clock=c1(180,240,450,560,`<div style="padding:38px 40px;display:flex;gap:12px;align-items:center;font-weight:600;font-size:28px;color:var(--mute)">${I(IC.cal,30,'#9b9a97')}Daily stand-up</div><div id="clk" style="position:absolute;top:175px;width:100%;text-align:center;font-size:160px;font-weight:600;letter-spacing:-6px">10:13</div><div style="position:absolute;left:40px;right:40px;bottom:52px;height:12px;border-radius:9px;background:var(--fill)"><div id="bar" style="height:100%;width:30%;border-radius:9px;background:#191919"></div></div>`);
+const grid=c1(700,200,560,620,`<div class="pill" style="left:28px;top:26px;padding:12px 22px;font-size:24px;font-weight:600;box-shadow:none;background:var(--fill);border:0"><span id="rec" style="width:12px;height:12px;border-radius:50%;background:#191919"></span>Status meeting · <span id="mins">47</span> min</div>
+ <div style="position:absolute;left:24px;top:98px;display:grid;grid-template-columns:1fr 1fr;gap:14px">${['curly','braids','beard','blond'].map(k=>`<div style="position:relative;width:249px;height:232px;border-radius:18px;overflow:hidden;background:var(--fill)"><img src="img/chars/${k}.png" style="position:absolute;left:50%;bottom:-6%;height:112%;transform:translateX(-50%)"><div class="spk" style="position:absolute;inset:0;border-radius:18px;box-shadow:inset 0 0 0 4px #191919;opacity:0"></div></div>`).join('')}</div>
+ <div style="position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:16px">${[IC.mic,IC.vid].map(d=>`<span style="width:54px;height:54px;border-radius:50%;background:var(--fill);display:flex;align-items:center;justify-content:center">${I(d,26,'#37352f')}</span>`).join('')}<span style="width:54px;height:54px;border-radius:50%;background:#191919;display:flex;align-items:center;justify-content:center">${I(IC.phone,28,'#fff')}</span></div>`);
+const join=c1(800,-40,330,190,`<div style="padding:28px 32px;font-size:25px;font-weight:600;color:var(--mute)">Status sync · 11:00</div><div id="jb" style="position:absolute;left:32px;right:32px;bottom:28px;height:60px;border-radius:14px;background:#191919;color:#fff;font-weight:600;font-size:27px;display:flex;align-items:center;justify-content:center">Join</div>`);
+const sync=c1(1330,290,390,450,`<div style="padding:34px;font-weight:600;font-size:26px;color:var(--mute)">Team sync starts in</div><div id="cd" style="position:absolute;top:150px;width:100%;text-align:center;font-size:150px;font-weight:600;letter-spacing:-6px">0:59</div>`,'background:var(--fill)');
+const cal=c1(470,860,640,118,`<div style="display:flex;align-items:center;gap:18px;padding:0 22px 0 32px;height:100%;font-size:31px;font-weight:600;white-space:nowrap">${I(IC.vid,34)}<span>Weekly check-in</span><span style="color:var(--mute);font-weight:500">2:30 PM</span><div style="margin-left:auto;display:flex">${['hero','curly','silver'].map((k,i)=>`<div style="margin-left:-16px;border:3px solid #fff;border-radius:50%">${ph(k,62)}</div>`).join('')}</div></div>`,'border-radius:59px');
+const face=c1(1530,10,300,330,`<div style="position:absolute;inset:14px;border-radius:16px;overflow:hidden;background:var(--fill)"><img src="img/chars/silver.png" style="position:absolute;left:50%;bottom:-4%;height:108%;transform:translateX(-50%)"></div>`);
+const S1cards=[grid,clock,sync,join,cal,face], S1z=[40,-80,-60,-160,90,-120], S1ry=[-4,24,-26,-10,8,-24], S1rx=[2,4,3,-8,-6,-6];
+const curBig=el(S1,'a',CUR(440),'left:0;top:0;filter:blur(6px);transform-origin:0 0');
+const cur1=el(S1,'a',CUR(74),'left:0;top:0;transform-origin:0 0');
+
+// ============================================================ S2 bubbles (camera group) + morph shape
+const S2=el(st,'L');
+const bub=(k,n,t,m,y)=>el(S2,'card',`<div style="display:flex;gap:24px;align-items:center;height:100%;padding:0 34px">${ph(k,84)}<div><div style="font-size:28px;font-weight:600">${n}<span style="color:var(--mute);font-size:24px;margin-left:14px;font-weight:500">${t}</span></div><div style="font-size:40px;font-weight:500;color:var(--ink2);letter-spacing:-.5px">${m}</div></div></div>`,`left:470px;top:${540-75+y}px;width:980px;height:150px;border-radius:36px`);
+const bMaya=bub('silver','Maya','9:02 AM','Almost there.',-340), bZoe=bub('hero','Zoe','9:03 AM','No blockers. Still in progress.',-170), bBen=bub('beard','Ben','9:05 AM','Waiting on review.',170);
+const typing=el(S2,'pill',`<div style="display:flex;align-items:center;gap:12px;padding:8px 26px 8px 8px">${ph('blond',58)}${[0,1,2].map(()=>'<span class="dt" style="width:12px;height:12px;border-radius:50%;background:#c9c8c3"></span>').join('')}</div>`,'left:810px;top:840px');
+const others2=[bMaya,bZoe,bBen,typing];
+const nob=el(st,'a','<span class="w1">Nobody</span> <span class="w2" style="font-style:italic">doing.</span>','left:0;right:0;top:420px;z-index:7;text-align:center;font-family:Serif;font-size:230px;line-height:1;letter-spacing:-4px;color:#191919;opacity:0');
+
+const MO=el(st,'card','','opacity:0;visibility:hidden;z-index:5');   // the one shape that carries the film from scene to scene
+const moAva=el(MO,'a',`<div style="display:flex;gap:24px;align-items:center;height:150px;padding:0 34px">${ph('braids',84)}<div><div style="font-size:28px;font-weight:600">Ava<span style="color:var(--mute);font-size:24px;margin-left:14px;font-weight:500">9:04 AM</span></div><div id="avaTxt" style="font-size:40px;font-weight:500;color:var(--ink2);letter-spacing:-.5px;height:50px;white-space:nowrap"></div></div></div>`,'left:0;top:0;width:980px;height:150px');
+const moPrompt=el(MO,'a',`<div style="position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:16px;font-size:30px;font-weight:600;color:var(--ink2)">${MARK(46)}Notion AI</div>
+ <div id="ptxt" style="position:absolute;left:64px;top:140px;font-size:88px;font-weight:500;letter-spacing:-2.8px;white-space:nowrap"></div>
+ <div style="position:absolute;left:64px;bottom:54px;display:flex;gap:16px">${[['spark','Ask'],['search','Research'],['pen','Draft'],['bolt','Agents']].map(([i,l])=>`<span class="tag chip">${I(IC[i],24,'#37352f')}${l}</span>`).join('')}</div>
+ <div id="send" style="position:absolute;right:52px;bottom:44px;width:76px;height:76px;border-radius:50%;background:#c9c8c3;display:flex;align-items:center;justify-content:center">${I(IC.up,36,'#fff',2.8)}</div>`,'left:0;top:0;width:1440px;height:420px;opacity:0');
+const moAssign=el(MO,'a',`<div style="display:flex;align-items:center;justify-content:center;gap:18px;height:104px">${SPIN(36)}<span style="font-size:34px;font-weight:600">Assigning agents…</span></div>`,'left:0;top:0;width:560px;height:104px;opacity:0');
+const moCall=el(MO,'a',`<div style="display:flex;align-items:center;gap:18px;height:128px;padding:0 14px 0 26px">
+  <div style="display:flex">${['curly','hero','beard'].map((k,i)=>`<div style="margin-left:${i?-20:0}px;border:4px solid #fff;border-radius:50%">${ph(k,74)}</div>`).join('')}</div>
+  <div style="display:flex;flex-direction:column"><span style="font-size:40px;font-weight:700;letter-spacing:-1px">Weekly status meeting</span><span style="font-size:27px;color:var(--mute);font-weight:500">Starts now · 12 people</span></div>
+  <div style="margin-left:auto;position:relative;width:230px;height:100px;border-radius:50px;background:var(--fill)"><span style="position:absolute;left:28px;top:32px;font-size:24px;font-weight:600;color:var(--mute)">‹ slide</span><div id="knob" style="position:absolute;right:0;top:0;width:100px;height:100px;border-radius:50%;background:#191919;display:flex;align-items:center;justify-content:center">${I(IC.phone,48,'#fff')}</div></div></div>`,'left:0;top:0;width:960px;height:128px;opacity:0');
+const moCancel=el(MO,'a',`<div style="display:flex;align-items:center;height:128px;padding:0 14px 0 50px"><span style="font-size:56px;font-weight:700;color:#fff;letter-spacing:-1.5px">Cancelled</span><span style="margin-left:auto;width:100px;height:100px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center">${I(IC.phone,50,'#191919')}</span></div>`,'left:0;top:0;width:580px;height:128px;opacity:0');
+const cur3=el(st,'a',CUR(74),'left:0;top:0;transform-origin:0 0;z-index:9;opacity:0');
+
+// ============================================================ S4 agent cards
+const S4=el(st,'L');
+const agents=[['silver','Meeting Notes','Summarizes every meeting','8 action items captured'],['hero','Project Tracker','Reports progress automatically','3 off-track tasks caught'],['curly','Risk Radar','Flags what could slip','12 docs reviewed']].map(([k,n,s,b])=>
+  el(S4,'card',`<div class="art" style="position:absolute;left:16px;top:16px;right:16px;height:420px;border-radius:18px;overflow:hidden;background:var(--fill)"><img src="img/chars/${k}.png" style="position:absolute;left:50%;bottom:-4%;height:106%;transform:translateX(-50%)"></div>
+  <div class="txt"><div class="pill" style="left:32px;top:372px;padding:8px 20px 8px 8px;font-size:23px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.12)">${ph(k,40)}${b}</div>
+  <div style="position:absolute;left:34px;top:468px;font-size:42px;font-weight:700;letter-spacing:-1px">${n}</div><div style="position:absolute;left:34px;top:522px;font-size:25px;color:var(--mute);font-weight:500">${s}</div></div>`,
+  `left:${960-230}px;top:${600-290}px;width:460px;height:580px;opacity:0`));
+const cur4=el(S4,'a',CUR(74),'left:0;top:0;transform-origin:0 0;opacity:0');
+
+// ============================================================ S5 chips
+const S5=el(st,'L');
+const chips=[['doc','Read','every doc'],['flag','Flag','what’s stuck'],['arrow','Push','it forward']].map(([i,l,t],k)=>
+  el(S5,'pill',`<div style="display:flex;align-items:center;gap:16px;padding:12px 30px 12px 12px"><span class="tag" style="font-size:34px;padding:10px 22px">${I(IC[i],32)}${l}</span><span class="ct" data-t="${t}" style="font-size:46px;font-weight:500;letter-spacing:-1px"></span>${k==1?'<span class="tag stuck" style="background:#191919;color:#fff;font-size:28px;opacity:0">Stuck</span>':''}</div>`,`left:760px;top:${540-50}px;opacity:0;transform-origin:0 50%`));
+
+// ============================================================ S6 streak line
+const S6=el(st,'L');
+const rl=el(S6,'a',`<span class="n serif" style="font-size:170px">3</span>${[IC.check,IC.flag,IC.clock].map(d=>`<span class="ti" style="display:inline-flex;width:118px;height:118px;border-radius:30px;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.12);align-items:center;justify-content:center">${I(d,58,'#191919',2)}</span>`).join('')}<span class="wd" style="font-size:118px;font-weight:700;letter-spacing:-5px"><span class="b1">blockers</span> <span class="b2">cleared</span></span>`,'left:0;right:0;top:470px;display:flex;justify-content:center;align-items:center;gap:22px;opacity:0');
+
+// ============================================================ S7 Notion pages
+const S7=el(st,'L');
+const pdefs=[['Q4 Roadmap','roadmap',IC.cal],['Hiring Plan','hiring',IC.users],['Launch Plan','launch',IC.bolt],['Budget Review','budget',IC.coin],['Team Retro','retro',IC.doc]];
+const pages=pdefs.map(([n,cov,ic],i)=>{const big=i==2,W=big?700:500,H=big?760:560,cv=big?230:180;
+ return el(S7,'card',`<img src="img/covers/${cov}_bw.jpg" style="position:absolute;left:0;top:0;width:100%;height:${cv}px;object-fit:cover">
+ <span style="position:absolute;left:44px;top:${cv-46}px;width:${big?96:76}px;height:${big?96:76}px;border-radius:20px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center">${I(ic,big?48:38)}</span>
+ <div style="position:absolute;left:44px;top:${cv+(big?72:52)}px;font-size:${big?60:42}px;font-weight:700;letter-spacing:-1.8px">${n}</div>
+ ${big?`<div style="position:absolute;left:44px;top:${cv+162}px;display:grid;grid-template-columns:170px 1fr;row-gap:16px;font-size:27px;font-weight:500;align-items:center"><span style="color:var(--mute)">Owner</span><span style="display:flex;gap:12px;align-items:center">${ph('hero',40)}Project Tracker</span><span style="color:var(--mute)">Status</span><span><span class="tag status" style="font-size:24px;padding:5px 14px;background:#191919;color:#fff;opacity:0">${I(IC.check,22,'#fff',3)}Drafted</span></span></div>
+ <div style="position:absolute;left:44px;right:44px;top:${cv+292}px;border-top:1.5px solid var(--line);padding-top:14px">${['Lock launch date','Brief design + eng','Write announcement','Prep support docs'].map(t=>`<div class="row" style="display:flex;gap:18px;align-items:center;height:58px;font-size:30px;font-weight:500"><span class="bx" style="width:32px;height:32px;border-radius:7px;border:2.5px solid #c9c8c3;display:flex;align-items:center;justify-content:center"></span><span class="tx">${t}</span></div>`).join('')}</div>`
+ :`<div style="position:absolute;left:44px;right:44px;top:${cv+130}px">${[82,64,74,52,68].map(x=>`<div style="height:16px;border-radius:8px;background:var(--fill);margin-bottom:22px;width:${x}%"></div>`).join('')}</div>`}`,
+ `left:${960-W/2}px;top:${540-H/2}px;width:${W}px;height:${H}px;opacity:0`)});
+
+// ============================================================ S8 orbit (dark), its own camera
+const S8=el(st,'L','','opacity:0');
+const orbit=el(S8,'a','',`left:${960-1400}px;top:${540-1400}px;width:2800px;height:2800px`);
+orbit.innerHTML=`<svg width="2800" height="2800" viewBox="0 0 2800 2800">${[250,430,630,860,1110].map((r,i)=>`<circle cx="1400" cy="1400" r="${r}" fill="none" stroke="rgba(255,255,255,${.22-i*.035})" stroke-width="2" stroke-dasharray="${i%2?'3 14':'2 0'}"/>`).join('')}${Array.from({length:26},(_,i)=>{const a=i*2.4,r=[250,430,630,860][i%4];return `<circle cx="${1400+r*Math.cos(a)}" cy="${1400+r*Math.sin(a)}" r="${i%3?3:6}" fill="rgba(255,255,255,.55)"/>`}).join('')}</svg>`;
+const gPage=el(S8,'card',`<img src="img/covers/launch_bw.jpg" style="position:absolute;left:0;top:0;width:100%;height:96px;object-fit:cover"><span style="position:absolute;left:22px;top:66px;width:56px;height:56px;border-radius:14px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center">${I(IC.bolt,30)}</span><div style="position:absolute;left:22px;top:136px;font-size:30px;font-weight:700;letter-spacing:-.5px">Launch Plan</div>${[76,56,66].map((x,i)=>`<div style="position:absolute;left:22px;top:${188+i*24}px;height:10px;border-radius:5px;background:var(--fill);width:${x}%"></div>`).join('')}`,
+ 'left:810px;top:390px;width:300px;height:300px;border-color:#fff;box-shadow:0 0 0 10px rgba(255,255,255,.08),0 0 120px rgba(255,255,255,.25)');
+const tdefs=[[IC.cal,'Timeline',960,150],[IC.coin,'Budget',530,860],[IC.users,'Owners',1390,860]];
+const tasks=tdefs.map(([ic,n,x,y])=>{const p=el(S8,'pill',`<div style="display:flex;align-items:center;gap:16px;padding:12px 20px 12px 12px"><span style="width:66px;height:66px;border-radius:18px;background:var(--fill);display:flex;align-items:center;justify-content:center">${I(ic,34)}</span><span style="font-size:44px;font-weight:700;letter-spacing:-1px">${n}</span><span style="position:relative;width:176px;height:54px"><span class="tag wk" style="position:absolute;left:0;top:0;font-size:27px">${I('<path d="M12 3a9 9 0 1 0 9 9"/>',22,'#9b9a97',3)}Working</span><span class="tag dn" style="position:absolute;left:0;top:0;font-size:27px;background:#191919;color:#fff;opacity:0">${I(IC.check,22,'#fff',3.2)}Done</span></span></div>`,`left:${x-215}px;top:${y-46}px;opacity:0;border-color:#fff`);
+ const dot=el(S8,'a','',`left:${960+(x-960)*.6-12}px;top:${540+(y-540)*.6-12}px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 0 0 8px rgba(255,255,255,.15),0 0 30px #fff;opacity:0`);return {p,dot,x,y}});
+const gAv=el(S8,'a',`<div style="border:5px solid #fff;border-radius:50%;box-shadow:0 0 50px rgba(255,255,255,.35)">${ph('hero',130)}</div>`,'left:890px;top:905px;opacity:0');
+
+// ============================================================ S10 end card
+const S10=el(st,'L');
+const lock=el(S10,'a',`<span class="mk" style="display:inline-block">${MARK(176)}</span><span class="wd" style="display:inline-block;font-size:156px;font-weight:700;letter-spacing:-6px;line-height:1">Notion</span>`,'left:0;right:0;top:290px;display:flex;justify-content:center;align-items:center;gap:36px');
+const tagl=el(S10,'a','<span class="l1" style="display:inline-block">Less talk.</span> <span class="l2 serif" style="display:inline-block;font-style:italic;font-size:118px;letter-spacing:-1px">More done.</span>','left:0;right:0;top:560px;text-align:center;font-size:92px;font-weight:600;letter-spacing:-3.5px;color:#191919');
+const url=el(S10,'a','notion.com','left:0;right:0;top:965px;text-align:center;font-size:28px;font-weight:600;color:var(--mute);opacity:0');
+const fade=el(st,'L','','background:#000;opacity:0;z-index:20');
+
+// ============================================================ GSAP choreography (paused; seek(t) scrubs it)
+gsap.defaults({ease:'power3.out',duration:.6});
+const tl=gsap.timeline({paused:true});
+// --- initial states
+gsap.set([S2,S4,S5,S6,S7,S10],{autoAlpha:0});
+gsap.set(others2,{autoAlpha:0,y:60,scale:.85});
+gsap.set(S1cards,{autoAlpha:0});
+gsap.set([nob.querySelector('.w1'),nob.querySelector('.w2')],{display:'inline-block',autoAlpha:0,y:60,filter:'blur(14px)'});
+gsap.set(lock.querySelector('.mk'),{autoAlpha:0,scale:.16});gsap.set(lock.querySelector('.wd'),{autoAlpha:0,x:-90,filter:'blur(10px)'});
+gsap.set([tagl.querySelector('.l1'),tagl.querySelector('.l2')],{autoAlpha:0,y:40,filter:'blur(10px)'});
+
+// --- S1: cards arrive in depth, camera dollies, giant cursor wipes the foreground
+S1cards.forEach((c,i)=>tl.fromTo(c,{autoAlpha:i<3?.85:0,z:S1z[i]-(i<3?220:600),y:i<3?50:140,rotationY:S1ry[i]*1.3,rotationX:S1rx[i]},{autoAlpha:1,z:S1z[i],y:0,rotationY:S1ry[i],rotationX:S1rx[i],duration:.9,ease:'expo.out'},i<3?0:.12+i*.08));
+tl.progress(0);
+tl.fromTo(W1,{z:160,rotationX:7,rotationY:-10},{z:60,rotationX:1,rotationY:3,duration:2.4,ease:'sine.out'},0);
+tl.fromTo(curBig,{x:-80,y:520,rotation:-8},{x:-760,y:1260,duration:1.25,ease:'power2.in'},0);
+tl.fromTo(cur1,{x:1640,y:1240,autoAlpha:0},{x:1400,y:700,autoAlpha:1,duration:.7},.35).to(cur1,{x:985,y:120,duration:.8,ease:'power3.inOut'},1.05)
+  .to(cur1,{scale:.8,duration:.08,ease:'none'},C.joinClick-.06).to(cur1,{scale:1,duration:.2},C.joinClick+.02).to('#jb',{scale:.92,duration:.08,ease:'none'},C.joinClick-.06).to('#jb',{scale:1,duration:.25},C.joinClick+.02);
+// exit: the camera dives at the calendar pill; everything else flies past and blurs
+tl.to(W1,{z:520,y:-260,rotationX:-4,rotationY:0,duration:.5,ease:'power3.in'},C.s2-.15);
+tl.to(S1,{filter:'blur(16px)',autoAlpha:0,duration:.35,ease:'power2.in'},C.s2+.05);
+tl.to(cur1,{autoAlpha:0,duration:.2},C.s2-.1);
+// --- the morph shape is born from the calendar pill and stretches into Ava's bubble
+tl.set(MO,{autoAlpha:1,...box(790,910,640,118,59)},C.s2+.12);
+tl.set(cal,{autoAlpha:0},C.s2+.12);
+tl.to(MO,{...box(960,540,980,150,36),duration:.5,ease:'expo.out'},C.s2+.14);
+tl.set(S2,{autoAlpha:1},C.s2+.3);
+// --- S2: camera pulls back while the team stacks up around Ava
+gsap.set(MO,{transformOrigin:'50% 50%'});
+tl.fromTo(S2,{scale:1.28},{scale:.86,duration:2.6,ease:'power2.inOut'},3.0);
+tl.fromTo(MO,{scale:1.28},{scale:.86,duration:2.6,ease:'power2.inOut',immediateRender:false},3.0);
+tl.set(MO,{scale:1.28},C.s2+.12);
+[bZoe,bMaya,bBen,typing].forEach((b,i)=>tl.to(b,{autoAlpha:1,y:0,scale:1,duration:.7,ease:'back.out(1.6)'},3.62+i*.22));
+// Nobody doing: the room goes grey and the line is set in its place
+tl.to([S2,MO],{filter:'blur(9px)',opacity:.16,duration:.35,ease:'power2.out'},w.nobody-.06);
+tl.to(nob,{opacity:1,duration:.01},w.nobody-.06);
+tl.to(nob.querySelector('.w1'),{autoAlpha:1,y:0,filter:'blur(0px)',duration:.45,ease:'expo.out'},w.nobody-.04);
+tl.to(nob.querySelector('.w2'),{autoAlpha:1,y:0,filter:'blur(0px)',duration:.45,ease:'expo.out'},w.doing-.04);
+tl.to(nob,{scale:1.05,duration:1.1,ease:'none'},w.doing);
+// --- S3: the bubble opens into the prompt box
+tl.to([nob],{autoAlpha:0,scale:.92,filter:'blur(10px)',duration:.3,ease:'power2.in'},C.s3);
+tl.to(S2,{autoAlpha:0,duration:.3},C.s3);
+tl.to(moAva,{opacity:0,duration:.15},C.s3);
+tl.to(MO,{...box(960,520,1440,420,40),scale:1,filter:'blur(0px)',opacity:1,duration:.55,ease:'expo.inOut'},C.s3+.05);
+tl.to(moPrompt,{opacity:1,duration:.3},C.s3+.42);
+tl.fromTo(moPrompt.querySelectorAll('.chip'),{y:20,opacity:0},{y:0,opacity:1,duration:.5,stagger:.07,ease:'back.out(2)'},C.s3+.5);
+tl.fromTo(MO,{y:0},{y:-14,duration:2,ease:'sine.inOut'},C.s3+.6);
+tl.fromTo(cur3,{x:1760,y:1000,autoAlpha:0},{x:1630,y:820,autoAlpha:1,duration:.8},7.2).to(cur3,{x:1610,y:668,duration:.55,ease:'power3.inOut'},7.85)
+  .to(cur3,{scale:.8,duration:.08,ease:'none'},C.send-.06).to(cur3,{scale:1,duration:.2},C.send+.02).to(cur3,{autoAlpha:0,y:760,duration:.35},C.send+.3);
+tl.to('#send',{scale:.85,duration:.08,ease:'none'},C.send-.06).to('#send',{scale:1,duration:.25},C.send+.02);
+// --- collapse into "Assigning agents…"
+tl.to(moPrompt,{opacity:0,duration:.12},C.send+.08);
+tl.to(MO,{...box(960,540,560,104,52),y:0,duration:.45,ease:'expo.inOut'},C.send+.1);
+tl.to(moAssign,{opacity:1,duration:.2},C.send+.45);
+tl.to(MO,{top:175-52,duration:.55,ease:'power3.inOut'},C.s4);
+// --- S4: agents fly in around it
+tl.set(S4,{autoAlpha:1},C.s4);
+const lay=[[-540,40,-5],[0,-10,0],[540,40,5]], from=[[-1300,300,-30],[0,700,0],[1300,300,30]];
+agents.forEach((c,i)=>tl.fromTo(c,{x:from[i][0],y:from[i][1],rotation:from[i][2],autoAlpha:1,scale:.8},{x:lay[i][0],y:lay[i][1],rotation:lay[i][2],scale:.9,duration:.9,ease:'expo.out'},C.s4+.08+i*.1));
+tl.fromTo(cur4,{x:1700,y:1100,autoAlpha:0},{x:1350,y:900,autoAlpha:1,duration:.5},9.3).to(cur4,{x:1030,y:720,duration:.55,ease:'power3.inOut'},9.6)
+  .to(cur4,{scale:.8,duration:.08,ease:'none'},C.pickClick-.06).to(cur4,{scale:1,duration:.2},C.pickClick+.02).to(cur4,{autoAlpha:0,duration:.2},C.pickClick+.2);
+tl.to(agents[1],{scale:.95,y:-24,duration:.3,ease:'power2.out'},9.75);
+tl.to([agents[0],agents[2]],{autoAlpha:0,x:i=>i?1400:-1400,rotation:i=>i?24:-24,filter:'blur(10px)',duration:.5,ease:'power3.in'},C.pickClick+.04);
+tl.to(MO,{autoAlpha:0,y:-120,duration:.35,ease:'power3.in'},C.pickClick);
+// the chosen card fills the frame, then rounds itself into the avatar
+tl.to(agents[1],{scale:1.3,y:-60,duration:.4,ease:'power3.out'},C.pickClick+.06);
+tl.to(agents[1].querySelector('.txt'),{autoAlpha:0,duration:.15},C.s5-.08);
+tl.to(agents[1],{width:460,height:460,top:540-230,borderRadius:230,scale:.72,x:-620,y:0,duration:.55,ease:'expo.inOut'},C.s5);
+tl.to(agents[1].querySelector('.art'),{left:0,top:0,right:0,height:460,borderRadius:230,duration:.55,ease:'expo.inOut'},C.s5);
+// --- S5: chips arrive on each verb, the stack rides up
+tl.set(S5,{autoAlpha:1},C.s5);
+const chipT=[w.read,w.flag,w.push];
+chips.forEach((c,i)=>{tl.fromTo(c,{autoAlpha:0,x:-140,scale:.6},{autoAlpha:1,x:0,scale:1,duration:.6,ease:'back.out(1.7)'},chipT[i]-.08);
+  if(i) tl.to(chips.slice(0,i),{y:`-=128`,duration:.45,ease:'power3.inOut'},chipT[i]-.1);});
+tl.to(chips,{opacity:(i)=>[.45,.7,1][i],duration:.3},w.push);
+tl.fromTo(chips[1].querySelector('.stuck'),{opacity:0,scale:.4},{opacity:1,scale:1,duration:.4,ease:'back.out(2.5)'},w.stuck+.2);
+tl.to([S4,S5],{x:-1700,filter:'blur(26px)',duration:.32,ease:'power3.in'},C.s6-.12);
+tl.set([S4,S5],{autoAlpha:0},C.s6+.25);
+// --- S6 streak: "3 blockers cleared"
+tl.to(bgStreak,{opacity:1,duration:.2},C.s6-.06);
+tl.set(S6,{autoAlpha:1},C.s6);
+tl.fromTo(rl,{x:1400,filter:'blur(24px)',opacity:1},{x:0,filter:'blur(0px)',duration:.45,ease:'expo.out'},C.s6);
+tl.fromTo(rl.querySelectorAll('.ti'),{scale:.3,rotation:-25},{scale:1,rotation:0,duration:.5,stagger:.1,ease:'back.out(2.2)'},w.three-.05);
+tl.fromTo(rl.querySelector('.b1'),{opacity:0,y:30},{opacity:1,y:0,duration:.35},w.blockers-.04);
+tl.fromTo(rl.querySelector('.b2'),{opacity:0,y:30},{opacity:1,y:0,duration:.35},w.cleared-.04);
+gsap.set([rl.querySelector('.b1'),rl.querySelector('.b2')],{display:'inline-block',opacity:0});
+tl.fromTo(S6,{scale:1},{scale:1.08,duration:1.9,ease:'none'},C.s6);
+tl.to(S6,{x:-1500,filter:'blur(24px)',duration:.35,ease:'power3.in'},C.s7-.15);
+tl.set(S6,{autoAlpha:0},C.s7+.25);
+// --- S7 pages slide in as a carousel; Launch Plan lifts
+tl.set(S7,{autoAlpha:1},C.s7-.15);
+const xs=[-900,-480,0,480,900];
+pages.forEach((p,i)=>tl.fromTo(p,{x:xs[i]+1700,scale:.74,y:i==2?0:30,autoAlpha:1},{x:xs[i],duration:.7,ease:'expo.out'},C.s7-.15+i*.03));
+tl.to(pages[2],{scale:1,duration:.7,ease:'back.out(1.4)'},w.launch-.1);
+tl.to([pages[0],pages[1],pages[3],pages[4]],{scale:.68,x:i=>[-1060,-560,560,1060][i],opacity:.5,filter:'blur(3px)',duration:.7,ease:'power3.out'},w.launch-.1);
+pages[2].querySelectorAll('.row').forEach((r,j)=>{const t0=17.0+j*.26;tl.fromTo(r,{opacity:.25,x:20},{opacity:1,x:0,duration:.3},t0);
+  tl.to(r.querySelector('.bx'),{backgroundColor:'#191919',borderColor:'#191919',duration:.12},t0+.15);tl.to(r.querySelector('.tx'),{color:'#9b9a97',duration:.2},t0+.15)});
+tl.fromTo(pages[2].querySelector('.status'),{opacity:0,scale:.4},{opacity:1,scale:1,duration:.45,ease:'back.out(2.5)'},w.drafted);
+tl.fromTo(S7,{scale:1},{scale:1.04,duration:1.8,ease:'none'},C.s7);
+// launch card shrinks to the heart of the orbit while the world goes dark
+tl.to([pages[0],pages[1],pages[3],pages[4]],{autoAlpha:0,duration:.25},C.s8-.2);
+tl.to(pages[2],{scale:.4,duration:.5,ease:'expo.inOut'},C.s8-.2);
+tl.to(S7,{scale:1,duration:.5},C.s8-.2);
+tl.to(bgDark,{opacity:1,duration:.4},C.s8-.1);tl.to(bgStreak,{opacity:0,duration:.1},C.s7+.2);
+tl.set(S7,{autoAlpha:0},C.s8+.3);tl.set(S8,{opacity:1},C.s8+.25);
+tl.fromTo(orbit,{scale:.6,opacity:0},{scale:1,opacity:1,duration:1,ease:'expo.out'},C.s8+.1);
+tl.fromTo(orbit,{rotation:0},{rotation:28,duration:4,ease:'none'},C.s8);
+tasks.forEach((g,i)=>{const a=Math.atan2(g.y-540,g.x-960);
+  tl.fromTo(g.p,{autoAlpha:0,x:-Math.cos(a)*160,y:-Math.sin(a)*160,scale:.7},{autoAlpha:1,x:0,y:0,scale:1,duration:.7,ease:'back.out(1.6)'},w.working-.15+i*.13);
+  tl.fromTo(g.dot,{opacity:0,scale:.5},{opacity:.35,scale:.6,duration:.4},w.working+i*.13);
+  const d=[w.done1,w.done2,w.done3][i];
+  tl.to(g.p.querySelector('.wk'),{opacity:0,duration:.08},d);tl.fromTo(g.p.querySelector('.dn'),{opacity:0,scale:.4},{opacity:1,scale:1,duration:.35,ease:'back.out(2.6)'},d);
+  tl.to(g.p,{scale:1.1,duration:.12,ease:'power2.out'},d).to(g.p,{scale:1,duration:.4,ease:'power2.out'},d+.12);
+  tl.to(g.dot,{opacity:1,scale:1.6,duration:.15},d).to(g.dot,{scale:1,duration:.4},d+.15);});
+// the camera travels to each pill as it flips to Done
+const camTo=(x,y,s)=>({x:(960-x)*s,y:(540-y)*s,scale:s});
+tl.fromTo(S8,{x:0,y:0,scale:1.15},{...camTo(960,540,1),duration:1,ease:'expo.out'},C.s8+.2);
+tl.to(S8,{...camTo(960,250,1.55),duration:.55,ease:'power3.inOut'},w.done1-.45);
+tl.to(S8,{...camTo(560,800,1.55),duration:.55,ease:'power3.inOut'},w.done2-.45);
+tl.to(S8,{...camTo(1360,800,1.55),duration:.55,ease:'power3.inOut'},w.done3-.45);
+tl.to(S8,{...camTo(960,560,1),duration:.6,ease:'power3.inOut'},w.done3+.35);
+tl.fromTo(gAv,{opacity:0,y:80},{opacity:1,y:0,duration:.5,ease:'back.out(1.8)'},w.done3+.5);
+// --- S9: the page leaves the orbit as a blank pill, the world turns to paper, the call appears
+tl.to([tasks.map(g=>g.p),tasks.map(g=>g.dot),gAv,orbit].flat(),{autoAlpha:0,duration:.3},C.s9-.05);
+tl.to(gPage,{autoAlpha:0,duration:.1},C.s9+.05);
+tl.set(MO,{autoAlpha:1,...box(960,540,300,300,26),y:0,x:0,scale:1,filter:'blur(0px)'},C.s9+.05);
+tl.set([moAva,moPrompt,moAssign],{opacity:0},C.s9);
+tl.to(bgDark,{opacity:0,duration:.4},C.s9+.05);tl.set(S8,{opacity:0},C.s9+.3);
+tl.to(MO,{...box(960,540,960,128,64),duration:.5,ease:'expo.inOut'},C.s9+.1);
+tl.to(moCall,{opacity:1,duration:.25},C.s9+.5);
+tl.fromTo(MO,{y:0},{y:-10,duration:1.2,ease:'sine.inOut'},C.s9+.6);
+tl.fromTo(cur3,{x:1700,y:1050,autoAlpha:0,scale:1},{x:1500,y:800,autoAlpha:1,duration:.6},23.0).to(cur3,{x:1390,y:556,duration:.5,ease:'power3.inOut'},23.4)
+  .to(cur3,{scale:.82,duration:.08,ease:'none'},C.drag0-.05).to(cur3,{x:1262,duration:.42,ease:'power2.inOut'},C.drag0+.04).to(cur3,{scale:1,duration:.2},w.cancelled-.04).to(cur3,{autoAlpha:0,x:1340,y:700,duration:.4},w.cancelled+.4);
+tl.to('#knob',{x:-130,duration:.42,ease:'power2.inOut'},C.drag0+.04);
+tl.to(moCall,{opacity:0,duration:.1},w.cancelled-.04);
+tl.to(MO,{...box(960,530,580,128,64),backgroundColor:'#191919',borderColor:'#191919',y:0,duration:.4,ease:'expo.out'},w.cancelled-.04);
+tl.to(moCancel,{opacity:1,duration:.15},w.cancelled+.06);
+tl.to(MO,{scale:1.06,duration:.1},w.cancelled).to(MO,{scale:1,duration:.4,ease:'back.out(3)'},w.cancelled+.1);
+// --- S10: the pill becomes a dot, the dot becomes the mark
+tl.to(moCancel,{opacity:0,duration:.12},C.s10);
+tl.to(MO,{...box(960,540,30,30,15),duration:.4,ease:'expo.inOut'},C.s10);
+tl.to(MO,{y:-26,duration:.18,ease:'power2.out'},C.s10+.38).to(MO,{y:0,duration:.2,ease:'power2.in'},C.s10+.56);
+tl.set(S10,{autoAlpha:1},w.brand-.12);
+tl.to(MO,{autoAlpha:0,scale:3,duration:.12},w.brand-.08);
+const mk=lock.querySelector('.mk'),wd=lock.querySelector('.wd');
+tl.fromTo(mk,{autoAlpha:1,scale:.16,rotation:-14,x:()=>(wd.offsetWidth+36)/2},{scale:1,rotation:0,duration:.75,ease:'back.out(1.8)'},w.brand-.1);
+tl.to(mk,{x:0,duration:.6,ease:'expo.inOut'},w.brand+.35);
+tl.to(wd,{autoAlpha:1,x:0,filter:'blur(0px)',duration:.6,ease:'expo.out'},w.brand+.45);
+tl.to(tagl.querySelector('.l1'),{autoAlpha:1,y:0,filter:'blur(0px)',duration:.5,ease:'expo.out'},w.less-.05);
+tl.to(tagl.querySelector('.l2'),{autoAlpha:1,y:0,filter:'blur(0px)',duration:.5,ease:'expo.out'},w.more-.05);
+tl.to(url,{opacity:1,duration:.5},w.moredone+.3);
+tl.fromTo(S10,{scale:1.04},{scale:1,duration:5,ease:'power1.out'},w.brand-.12);
+tl.to(fade,{opacity:1,duration:C.dur-C.fadeOut,ease:'none'},C.fadeOut);
+tl.set({},{},C.dur);
+
+// ============================================================ continuous layer: typing, counters, idle motion
+const typeOut=(str,t0,cps=30)=>str.slice(0,Math.max(0,Math.min(str.length,Math.floor((t-t0)*cps)))); let t=0;
+const PROMPT=[['Now ','now'],['Notion ','notion'],['gives ','gives'],['your ','your'],['team ','team'],['agents','agents']];
+function render(T){t=T;
+  // S1 counters
+  const u=Math.min(1,Math.max(0,T/2.4)),e=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  document.getElementById('clk').textContent='10:'+String(13+Math.floor(34*e)).padStart(2,'0');
+  document.getElementById('bar').style.width=(30+62*u)+'%';
+  document.getElementById('mins').textContent=47+Math.floor(T*4);
+  document.getElementById('rec').style.opacity=Math.sin(T*7)>0?1:.25;
+  document.getElementById('cd').textContent='0:'+String(Math.max(0,59-Math.floor(T*22))).padStart(2,'0');
+  grid.querySelectorAll('.spk').forEach((s,i)=>s.style.opacity=(Math.floor(T*2.4)%4==i)?1:0);
+  // S2 Ava types on "everyone reporting"
+  document.getElementById('avaTxt').textContent=typeOut('Same as last week.',3.0,20);
+  typing.querySelectorAll('.dt').forEach((d,i)=>d.style.transform=`translateY(${-7*Math.max(0,Math.sin(T*9-i*.8))}px)`);
+  // S3 prompt types word by word with the voice
+  let h='';PROMPT.forEach(([s,k])=>{const part=typeOut(s,w[k]-.02,34);h+=k=='agents'?`<span style="color:var(--accent)">${part}</span>`:part});
+  const done=T>w.agents+.3,caret=(!done||Math.floor(T*2.4)%2==0)?'<span style="display:inline-block;width:5px;height:84px;background:#191919;vertical-align:-12px;margin-left:6px"></span>':'';
+  document.getElementById('ptxt').innerHTML=h+caret;
+  document.getElementById('send').style.background=done?'#191919':'#c9c8c3';
+  // S5 chip text types on its words
+  const ct=[w.every,w.whats,w.it];chips.forEach((c,i)=>{const s=c.querySelector('.ct');s.textContent=typeOut(s.dataset.t,ct[i]-.04,26)});
+  // spinners
+  document.querySelectorAll('.spin').forEach(s=>s.style.transform=`rotate(${T*520}deg)`);
+  tasks.forEach(g=>g.p.querySelector('.wk svg').style.transform=`rotate(${T*420}deg)`);
+  // streak band
+  streaks.forEach((s,i)=>s.style.transform=`translateX(${((T*(900+i*120)+i*330)%1600)-800}px)`);
+}
+async function init(){
+  for(const f of['500 40px UI','600 40px UI','700 40px UI','40px Serif','italic 40px Serif'])await document.fonts.load(f);await document.fonts.ready;
+  await Promise.all([...document.images].map(i=>i.complete?0:new Promise(r=>{i.onload=r;i.onerror=r})));
+  window.seek=async T=>{tl.seek(T,false);render(T)};
+  const q=new URLSearchParams(location.search);await window.seek(q.has('t')?parseFloat(q.get('t')):0);window.READY=true;
+}
+init().catch(e=>{window.INITERR=String(e&&e.stack||e);console.error(e)});
+</script>
+</body>
+</html>
