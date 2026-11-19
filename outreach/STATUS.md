@@ -43,10 +43,12 @@ Last updated: 2026-11-19. Update this file at the end of every session.
 
 - Nov 18 top 8: emailed Tristan Miller + Greenpoint Comedy Club (FU Nov 21). Still to do by hand: Dream Three (Ashby form), Janelle Draper (site form), IG DMs to Alaina Bamfield, Brian Smight, Tuesday Thomas, Rochelle McConico. IG lists: IG_JACKIE_CIRCLE.md, IG_CLUB_COMICS.md (do from a laptop session with Claude in Chrome).
 
-## Nov 19: IG DMs (drafted in Jeff's Chrome, Jeff clicks Send; 3-5 min apart)
-- READY (8): Alaina Bamfield @alainabamfield (old handle was wrong; bio says "not taking subs" = show subs), Tuesday Thomas @mommawarnedme (NOT @mamawarnedme, that's an AI account), Rochelle McConico @rochelle_war, Caitlin Gill @caitlinistall, Katie Compa @katiecompa (no Message button: via ... > Send message; goes to Requests), Matt Koff @mattkoff, Denise Winkelman @denisewinkelmancomedy (file had a typo; Jackie + Debi follow her), Kate Strobel @kate.strobel.
-- SKIPPED: Brian Smight (already DM'd Sat), Jenny Zigrino, Mary Houlihan, Salma Zaky, Brian Kiley (all post polished captioned clips), Dan Bulger (can't confirm account: one empty, one private), Nancy Norton (no account found).
-- Next from IG_JACKIE_CIRCLE.md: Cindy Caponera, Abigoliah Schamaun, Chemda, then Firecracker; then IG_CLUB_COMICS.md. Follow up the 8 on Nov 22.
+## Nov 19: IG DMs (Claude sent them from Jeff's Chrome, ~3 min apart, no IG warnings)
+- SENT (8): Tuesday Thomas @mommawarnedme, Rochelle McConico @rochelle_war, Caitlin Gill @caitlinistall, Katie Compa @katiecompa (lands in Requests), Matt Koff @mattkoff, Denise Winkelman @denisewinkelmancomedy, Kate Strobel @kate.strobel, Chemda @chemdaofficial (podcast wording). Follow up Nov 22.
+- BLOCKED: Alaina Bamfield @alainabamfield (doesn't accept message requests). Reach her another way (email/Jackie) if wanted.
+- Also sent today from this account by someone else: Mo Welch. Day total ~10 of 15.
+- SKIPPED: Brian Smight (already DM'd), Jenny Zigrino, Mary Houlihan, Salma Zaky, Brian Kiley, Abigoliah, Firecracker Comedy (clips by Blonde Medicine), Ray Lau, John Campanelli, Kat Bird (all post polished clips); Cindy Caponera (no stand-up, no Message button); Dan Bulger, Nancy Norton (account not found).
+- Lesson: club-calendar comics (IG_CLUB_COMICS.md) mostly already have editors. Better lists: small festival lineups, Dork Forest guests with few clips.
 
 ## Open items
 - Reddit DMs sent Nov 11–13: Right Click Culture, TWINTUBE, Ben (Megan and Ben, also emailed), Chatter_Monkey, oishipillowsube (cut plan), Priceless Media, taylor13fan, #36 (burned YouTuber). Watch the Reddit chats.
