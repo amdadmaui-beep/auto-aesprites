@@ -50,6 +50,10 @@ Last updated: 2026-11-19. Update this file at the end of every session.
 - SKIPPED: Brian Smight (already DM'd), Jenny Zigrino, Mary Houlihan, Salma Zaky, Brian Kiley, Abigoliah, Firecracker Comedy (clips by Blonde Medicine), Ray Lau, John Campanelli, Kat Bird (all post polished clips); Cindy Caponera (no stand-up, no Message button); Dan Bulger, Nancy Norton (account not found).
 - Lesson: club-calendar comics (IG_CLUB_COMICS.md) mostly already have editors. Better lists: small festival lineups, Dork Forest guests with few clips.
 
+## Nov 21
+- Davidsyn (thedavidsyncompany@gmail.com): said yes to a sample, liked it ("This is good"); has clips ready, open to "reels distributed on other platforms". We asked which platforms and if he wants posting handled. Waiting on reply. WARM.
+- Emailed 8 comedy podcasts/comics picked by YouTube Shorts gap (method: iTunes comedy feeds with email, active, then checked YT subs vs Shorts views): Jared Freid, Quick Question, The Commercial Break, Billy Procida, Steph Tolev, Michelle Collins, Spitballers, Blair Socci (via manager). FU Nov 24.
+
 ## Proof numbers (use in pitches, esp. non-comedy prospects)
 - Jackie Kashian IG: our edited stand-up clips 60.8K, 17.3K, 11.4K, 10.4K, 10K views vs her other posts ~855-1.4K (10-40x).
 - Brenda Pontiff IG: our first 2 edits 3,843 and 1,655 views vs her other posts 173-946 (about 2-20x).
