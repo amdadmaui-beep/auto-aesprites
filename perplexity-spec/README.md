@@ -1,6 +1,12 @@
 # Perplexity spec spot (AVE Studio)
 
-`Perplexity_Spec_AVE_4x3.mp4`: 1440x1080 (4:3, like the reference), 60 fps, 44.5 s. A beat-for-beat remake of a
+`Perplexity_Spec_AVE_4x3.mp4`: 1440x1080 (4:3, like the reference), 60 fps, 48.5 s.
+
+**V2 (current):** rebuilt after review ("too white, looks vector, stiff, flat voice"): Perplexity's dark teal palette
+(offblack #091717, inky #13343B, turquoise #20808D, paper #FBFAF4), real 3D renders (Fish `gpt-image-2`, cut out with
+rembg, `film/img/`), a realistic phone and a hands-holding-phone shot with keyed screens showing Perplexity UI, depth
+of field, aurora light, film grain, dissolves between every scene, and a new emotional VO (`vo/v2/`, two directed
+takes, similarity 0.91). V1 is kept as `film/index_v1.html` / `film/audio_v1.py`. A beat-for-beat remake of a
 reference AI-assistant ad, rebuilt for Perplexity entirely from UI (no footage), framed in an AVE Studio presentation
 with Intro / Problem / Use Case / Call to Action tabs.
 

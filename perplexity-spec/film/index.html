@@ -4,195 +4,210 @@
 @font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
 @font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-SemiBold.otf);font-weight:600}
 @font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Bold.otf);font-weight:700}
-:root{--teal:#20808d;--deep:#13343b;--ink:#091717;--paper:#fbfaf4;--peach:#f3d9c4;--mint:#cfeeea}
+:root{--off:#091717;--inky:#13343b;--teal:#20808d;--glow:#3fd0c9;--paper:#fbfaf4;--peach:#f3d9c4}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:960px;height:720px;overflow:hidden;background:#000}
-#stage{position:absolute;inset:0;overflow:hidden;font-family:"Inter Display",sans-serif;color:var(--deep);
- background:linear-gradient(180deg,#030808 0%,#05191b 9%,#0c4248 26%,#1b7480 46%,#43a7ad 64%,#9fd6d2 82%,#e3f4ef 100%)}
+#stage{position:absolute;inset:0;overflow:hidden;font-family:"Inter Display",sans-serif;color:var(--paper);
+ background:radial-gradient(120% 70% at 50% 118%,#3fd0c9 0%,#20808d 28%,#13343b 55%,#091717 78%,#040a0a 100%)}
 .abs{position:absolute}
-#topLogo{left:480px;top:17px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;color:#fff;font-size:12px;font-weight:600;opacity:.92}
+#topLogo{left:480px;top:17px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;color:#fff;font-size:12px;font-weight:600;opacity:.9}
 #topLogo img{height:10px}
-#card{position:absolute;left:66px;top:56px;width:828px;height:500px;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 20px 60px rgba(0,0,0,.25)}
-#cardTag{left:22px;top:16px;display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:rgba(19,52,59,.35);z-index:50}
+#card{position:absolute;left:66px;top:56px;width:828px;height:500px;border-radius:22px;overflow:hidden;background:var(--off);
+ box-shadow:0 0 0 1px rgba(160,240,232,.18),0 30px 80px rgba(0,0,0,.55),0 0 120px rgba(32,128,141,.25)}
+#cardTag{left:22px;top:16px;display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:rgba(251,250,244,.4);z-index:80}
 .sc{position:absolute;inset:0;visibility:hidden;overflow:hidden}
-.fog{position:absolute;left:-40px;right:-40px;bottom:-60px;height:190px;filter:blur(34px);opacity:.5}
-.fog i{position:absolute;bottom:0;border-radius:50%;background:#7cc7c6;display:block}
+.aur{position:absolute;inset:-80px;filter:blur(50px)}
+.aur i{position:absolute;border-radius:50%;display:block}
+#grain{position:absolute;inset:0;z-index:70;opacity:.07;mix-blend-mode:overlay;pointer-events:none;width:828px;height:500px}
+#vig{position:absolute;inset:0;z-index:69;pointer-events:none;background:radial-gradient(130% 100% at 50% 45%,transparent 55%,rgba(0,0,0,.45) 100%)}
 #tabs{position:absolute;left:66px;top:590px;width:828px;height:42px;display:flex;gap:14px}
-.tab{flex:1;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--ink);position:relative;overflow:hidden}
-.tab .on{position:absolute;inset:0;background:#0a0f10;opacity:0}
-.tab .bar{position:absolute;top:0;bottom:0;width:3px;background:#7ff0e6;box-shadow:0 0 14px 4px rgba(64,230,214,.8);opacity:0}
+.tab{flex:1;border-radius:9px;background:rgba(251,250,244,.94);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--off);position:relative;overflow:hidden}
+.tab .on{position:absolute;inset:0;background:#050b0b;opacity:0}
+.tab .bar{position:absolute;top:0;bottom:0;width:3px;background:#9ffff5;box-shadow:0 0 16px 5px rgba(63,208,201,.85);opacity:0}
 .tab span{position:relative}
-#ruler{position:absolute;left:66px;top:650px;width:828px;height:14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 1px,transparent 1px 8px)}
-.words{position:absolute;left:0;right:0;text-align:center;font-weight:500;letter-spacing:-.02em;white-space:nowrap}
-.words span{display:inline-block;margin:0 .13em}
-.ico{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px}
-.ui{position:absolute;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(19,52,59,.14);overflow:hidden}
-.phone{position:absolute;background:#0b0d0e;border-radius:38px;padding:10px;box-shadow:0 30px 60px rgba(5,30,32,.35)}
-.phone .scr{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:#fff}
-.chip{position:absolute;padding:9px 14px;border-radius:999px;background:#fff;font-size:12px;font-weight:600;color:var(--deep);box-shadow:0 8px 22px rgba(19,52,59,.16);white-space:nowrap;display:flex;align-items:center;gap:7px}
-.chip b{width:8px;height:8px;border-radius:50%;background:var(--teal);display:block}
-.li{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:var(--deep);height:22px}
-.ck{width:14px;height:14px;border-radius:4px;border:1.5px solid #b8cfcf;display:flex;align-items:center;justify-content:center;flex:none}
+#ruler{position:absolute;left:66px;top:650px;width:828px;height:14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.45) 0 1px,transparent 1px 8px)}
+.line{position:absolute;left:0;right:0;text-align:center;font-weight:500;letter-spacing:-.025em;white-space:nowrap}
+.line .wd{display:inline-block;margin:0 .12em}
+.line .ch{display:inline-block}
+.obj{position:absolute;pointer-events:none}
+.glass{position:absolute;border-radius:14px;background:rgba(251,250,244,.08);border:1px solid rgba(251,250,244,.16);backdrop-filter:blur(10px);box-shadow:0 16px 40px rgba(0,0,0,.35);overflow:hidden;color:var(--paper)}
+.paperUI{position:absolute;background:var(--paper);color:var(--inky)}
+.li{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:var(--inky);height:22px}
+.ck{width:14px;height:14px;border-radius:4px;border:1.5px solid #b8cfcf;display:flex;align-items:center;justify-content:center;flex:none;transition:none}
 .ck.done{background:var(--teal);border-color:var(--teal)}
 .ck svg{opacity:0}.ck.done svg{opacity:1}
+.chip{position:absolute;padding:9px 14px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:7px;
+ background:rgba(251,250,244,.1);border:1px solid rgba(251,250,244,.22);backdrop-filter:blur(8px);color:var(--paper);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.chip b{width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px var(--glow);display:block}
 #cursor{position:absolute;width:22px;height:22px;z-index:60;visibility:hidden}
+.phoneF{position:absolute;width:428px;height:919px;transform-origin:50% 50%}
+.phoneF .scr{position:absolute;left:35px;top:16px;width:378px;height:882px;border-radius:56px;overflow:hidden;background:var(--paper)}
+.phoneF .isl{position:absolute;left:152px;top:44px;width:124px;height:36px;border-radius:18px;background:#000;z-index:3}
+.phoneF img.body{position:absolute;inset:0;width:428px;height:919px;z-index:2}
 </style></head>
 <body><div id="stage">
 <div id="topLogo" class="abs"><img src="brand/ave-wordmark-paper.png"><span>studio</span></div>
 
 <div id="card">
-  <div id="cardTag" class="abs"><svg width="10" height="10" viewBox="-1 -1 38 38"><path id="tagMark" fill="none" stroke="rgba(19,52,59,.35)" stroke-width="3"/></svg><span>Perplexity spec</span></div>
+  <div id="cardTag" class="abs"><svg width="10" height="10" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="rgba(251,250,244,.45)" stroke-width="3"/></svg><span>Perplexity spec</span></div>
 
-  <!-- S0 intro: phone, title, floating objects -->
-  <div class="sc" id="s0" style="background:radial-gradient(120% 90% at 30% 20%,#e9fbf7 0%,#b9e6e1 32%,#6fbcbc 62%,#2f8f97 100%)">
-    <div id="s0cam" class="abs" style="inset:0">
-      <svg id="t0word" class="abs" style="left:184px;top:70px;width:460px;height:146px;overflow:visible" viewBox="36 0 114 36"><path id="t0path" fill="#fff"/></svg>
-      <div id="objs" class="abs" style="inset:0"></div>
-      <div id="ph0" class="phone" style="left:300px;top:150px;width:228px;height:440px;transform-origin:50% 40%">
-        <div class="scr" style="background:linear-gradient(160deg,#d9f6f1 0%,#7fd0c9 40%,#20808d 75%,#13343b 100%)">
-          <div class="abs" style="left:0;right:0;top:20px;text-align:center;color:#fff;font-size:11px;font-weight:600">Thursday, November 26</div>
-          <div class="abs" style="left:0;right:0;top:34px;text-align:center;color:#fff;font-size:76px;font-weight:600;letter-spacing:-.03em">9:41</div>
-          <svg class="abs" style="left:84px;top:200px;width:40px;height:40px" viewBox="-1 -1 38 38"><path id="ph0mark" fill="none" stroke="#fff" stroke-width="2"/></svg>
+  <!-- S0 intro -->
+  <div class="sc" id="s0">
+    <div class="aur" id="aur0"></div>
+    <div id="cam0" class="abs" style="inset:0;transform-origin:414px 260px">
+      <svg id="t0word" class="abs" style="left:150px;top:96px;width:528px;height:168px;overflow:visible" viewBox="36 0 114 36"><path class="wordP" fill="#fbfaf4"/></svg>
+      <div id="objsBack" class="abs" style="inset:0"></div>
+      <div class="phoneF" id="ph0" style="left:200px;top:-40px;transform:scale(.42)">
+        <div class="scr" style="background:linear-gradient(165deg,#bff3ec 0%,#3fd0c9 28%,#20808d 58%,#13343b 85%,#091717 100%)">
+          <div class="abs" style="left:0;right:0;top:120px;text-align:center;color:#fff;font-size:30px;font-weight:600">Thursday, November 26</div>
+          <div class="abs" style="left:0;right:0;top:150px;text-align:center;color:#fff;font-size:190px;font-weight:600;letter-spacing:-.04em;line-height:1">9:41</div>
+          <svg class="abs" style="left:139px;top:560px;width:100px;height:100px" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
         </div>
+        <div class="isl"></div><img class="body" src="img/phone_front.png">
       </div>
+      <div id="objsFront" class="abs" style="inset:0"></div>
     </div>
   </div>
 
-  <!-- S1 words: every day / something new / exciting -->
-  <div class="sc" id="s1" style="background:#fff">
-    <div class="fog" id="fog1"></div>
-    <div id="s1cam" class="abs" style="inset:0">
-      <div class="words" id="w1a" style="top:200px;font-size:30px"></div>
-      <div class="words" id="w1b" style="top:244px;font-size:30px"></div>
-      <div class="words" id="w1c" style="top:212px;font-size:40px"></div>
-      <div class="words" id="w1d" style="top:208px;font-size:44px"></div>
-      <div id="icons" class="abs" style="inset:0"></div>
+  <!-- S1 words -->
+  <div class="sc" id="s1">
+    <div class="aur" id="aur1"></div>
+    <div id="cam1" class="abs" style="inset:0;transform-origin:414px 250px">
+      <div id="orbit1" class="abs" style="inset:0"></div>
+      <div class="line" id="l1a" style="top:196px;font-size:34px"></div>
+      <div class="line" id="l1b" style="top:244px;font-size:34px;color:rgba(251,250,244,.72)"></div>
+      <div class="line" id="l1c" style="top:214px;font-size:46px"></div>
+      <div class="line" id="l1d" style="top:208px;font-size:52px;font-weight:600"></div>
     </div>
   </div>
 
-  <!-- S2 you just want the answer / the chaos ring / simple -->
-  <div class="sc" id="s2" style="background:linear-gradient(180deg,#fff 0%,#f4fbf9 60%,#dff1ee 100%)">
-    <div class="fog" id="fog2"></div>
-    <div id="ring" class="abs" style="inset:0"></div>
-    <div class="words" id="w2a" style="top:228px;font-size:22px"></div>
-    <div class="words" id="w2b" style="top:266px;font-size:17px;color:#2f6a72"></div>
+  <!-- S2 answer / ring / simple -->
+  <div class="sc" id="s2">
+    <div class="aur" id="aur2"></div>
+    <div id="cam2" class="abs" style="inset:0;transform-origin:414px 250px">
+      <div id="ring" class="abs" style="inset:0"></div>
+      <div class="line" id="l2a" style="top:222px;font-size:28px"></div>
+      <div class="line" id="l2b" style="top:266px;font-size:20px;color:rgba(251,250,244,.7)"></div>
+    </div>
     <div id="simple" class="abs" style="inset:0;visibility:hidden">
       <div id="guides" class="abs" style="inset:0"></div>
-      <div class="abs" id="simWord" style="left:0;right:0;top:170px;text-align:center;font-size:120px;font-weight:600;letter-spacing:-.03em;color:var(--deep);white-space:nowrap"></div>
+      <div class="abs" id="simWord" style="left:0;right:0;top:158px;text-align:center;font-size:132px;font-weight:600;letter-spacing:-.035em;white-space:nowrap;color:var(--paper)"></div>
     </div>
   </div>
 
-  <!-- S3 logo reveal + monitor + search -->
-  <div class="sc" id="s3" style="background:#fff">
-    <div id="sky" class="abs" style="inset:0;opacity:0;background:linear-gradient(180deg,#bfe7e4 0%,#e9f6f0 45%,#f6e3d2 75%,#e6c7ad 100%)">
-      <div id="skyBlobs" class="abs" style="inset:0;filter:blur(40px)"></div>
+  <!-- S3 logo + monitor -->
+  <div class="sc" id="s3">
+    <div class="aur" id="aur3"></div>
+    <div id="logoC" class="abs" style="inset:0">
+      <div id="dot" class="abs" style="left:404px;top:240px;width:20px;height:20px;border-radius:50%;border:5px solid var(--glow);box-shadow:0 0 30px var(--glow)"></div>
+      <svg id="bigMark" class="abs" style="left:372px;top:206px;width:72px;height:72px;overflow:visible;filter:drop-shadow(0 0 14px rgba(63,208,201,.7))" viewBox="-1 -1 38 38"><path id="bigMarkP" class="markP" fill="none" stroke="#3fd0c9" stroke-width="1.6"/></svg>
+      <div id="bigWordClip" class="abs" style="left:456px;top:203px;width:280px;height:80px;overflow:hidden">
+        <svg id="bigWord" class="abs" style="left:0;top:0;width:258px;height:80px" viewBox="36 0 114 36"><path class="wordP" fill="#fbfaf4"/></svg></div>
+      <div id="tagline" class="abs" style="left:0;right:0;top:300px;text-align:center;font-size:20px;font-weight:500;color:rgba(251,250,244,.75);letter-spacing:-.01em"></div>
     </div>
-    <div class="fog" id="fog3"></div>
-    <div id="logoC" class="abs" style="left:0;right:0;top:0;height:500px">
-      <div id="dot" class="abs" style="left:404px;top:240px;width:20px;height:20px;border-radius:50%;border:5px solid var(--teal)"></div>
-      <svg id="bigMark" class="abs" style="left:384px;top:210px;width:60px;height:60px;overflow:visible" viewBox="-1 -1 38 38"><path id="bigMarkP" fill="none" stroke="#20808d" stroke-width="1.6" stroke-linejoin="miter"/></svg>
-      <div id="bigWordClip" class="abs" style="left:458px;top:206px;width:260px;height:70px;overflow:hidden">
-        <svg id="bigWord" class="abs" style="left:0;top:0;width:224px;height:70px" viewBox="36 0 114 36"><path id="bigWordP" fill="#13343b"/></svg></div>
-    </div>
-    <div id="monitor" class="abs" style="left:184px;top:70px;width:460px;height:360px;transform-origin:50% 40%;visibility:hidden">
-      <div id="mScreen" class="abs" style="left:0;top:0;width:460px;height:288px;border-radius:12px;background:#111;padding:8px">
-        <div id="mUI" class="abs" style="left:8px;top:8px;width:444px;height:272px;border-radius:6px;overflow:hidden;background:var(--paper)">
-          <div id="ui" class="abs" style="left:0;top:0;width:828px;height:500px;transform-origin:0 0;transform:scale(.5362)">
-            <!-- full-size Perplexity home, scaled into the monitor -->
-            <div class="abs" style="left:0;top:0;width:150px;height:500px;background:#f3f1ea;border-right:1px solid #e7e3d8">
+    <div id="monitor" class="abs" style="left:174px;top:80px;width:480px;height:370px;transform-origin:50% 38%;visibility:hidden">
+      <div id="mScreen" class="abs" style="left:0;top:0;width:480px;height:300px;border-radius:14px;padding:9px;background:linear-gradient(145deg,#2b2f30,#0c0e0f 40%,#1d2122);box-shadow:0 0 0 1.5px #555c5e,0 30px 60px rgba(0,0,0,.6)">
+        <div id="mUI" class="abs" style="left:9px;top:9px;width:462px;height:282px;border-radius:6px;overflow:hidden;background:var(--paper)">
+          <div id="ui" class="abs" style="left:0;top:0;width:828px;height:500px;transform-origin:0 0;transform:scale(.558)">
+            <div class="paperUI" style="left:0;top:0;width:150px;height:500px;background:#f3f1ea;border-right:1px solid #e7e3d8">
               <svg class="abs" style="left:20px;top:22px;width:26px;height:26px" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="#20808d" stroke-width="2"/></svg>
               <div class="abs" style="left:20px;top:70px;width:110px;height:30px;border-radius:15px;border:1px solid #d9d4c6;font-size:11px;font-weight:600;display:flex;align-items:center;padding-left:12px;color:#55625f">+ New thread</div>
               <div class="abs" style="left:20px;top:120px;font-size:11px;line-height:28px;color:#6d7774;font-weight:500">Home<br>Discover<br>Spaces<br>Library</div>
             </div>
-            <div class="abs" id="homeTitle" style="left:150px;right:0;top:150px;text-align:center;font-size:34px;font-weight:500;color:var(--deep);letter-spacing:-.02em">What do you want to know?</div>
-            <div class="abs" id="search" style="left:250px;top:212px;width:480px;height:96px;border-radius:16px;background:#fff;border:1px solid #dcd8cc;box-shadow:0 6px 24px rgba(19,52,59,.08)">
-              <div class="abs" id="q" style="left:18px;top:16px;font-size:16px;font-weight:500;color:var(--deep);white-space:nowrap"><span id="qText"></span><span id="qCaret" style="display:inline-block;width:2px;height:18px;background:var(--teal);vertical-align:-3px;margin-left:1px"></span></div>
-              <div class="abs" id="qPh" style="left:18px;top:16px;font-size:16px;color:#9aa5a2">Ask anything…</div>
+            <div class="paperUI" style="left:150px;right:0;top:0;height:500px"></div>
+            <div class="abs" id="homeTitle" style="left:150px;right:0;top:146px;text-align:center;font-size:34px;font-weight:500;color:var(--inky);letter-spacing:-.02em">What do you want to know?</div>
+            <div class="abs" id="search" style="left:250px;top:208px;width:480px;height:96px;border-radius:16px;background:#fff;border:1px solid #dcd8cc;box-shadow:0 6px 24px rgba(19,52,59,.08)">
+              <div class="abs" style="left:18px;top:16px;font-size:17px;font-weight:500;color:var(--inky);white-space:nowrap"><span id="qText"></span><span id="qCaret" style="display:inline-block;width:2px;height:19px;background:var(--teal);vertical-align:-3px;margin-left:1px"></span></div>
+              <div class="abs" id="qPh" style="left:18px;top:16px;font-size:17px;color:#9aa5a2">Ask anything…</div>
               <div class="abs" style="left:16px;bottom:12px;display:flex;gap:8px"><div style="height:26px;padding:0 10px;border-radius:13px;background:#eef6f5;color:var(--teal);font-size:11px;font-weight:600;display:flex;align-items:center">Search</div><div style="height:26px;padding:0 10px;border-radius:13px;background:#f3f1ea;color:#6d7774;font-size:11px;font-weight:600;display:flex;align-items:center">Research</div></div>
               <div class="abs" id="send" style="right:12px;bottom:12px;width:34px;height:34px;border-radius:50%;background:#c9d6d4;display:flex;align-items:center;justify-content:center"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M7 14V2M1 7l6-6 6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
-            <div class="abs" style="left:250px;top:330px;display:flex;gap:10px">
-              <div class="chip" style="position:relative;box-shadow:none;border:1px solid #e3ded2">🍕 Recipes</div><div class="chip" style="position:relative;box-shadow:none;border:1px solid #e3ded2">🔧 How-to</div><div class="chip" style="position:relative;box-shadow:none;border:1px solid #e3ded2">✈️ Travel</div></div>
+          </div>
+          <div id="glare" class="abs" style="inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 45%,transparent 60%);pointer-events:none"></div>
+        </div>
+      </div>
+      <div id="mStand" class="abs" style="left:205px;top:300px;width:70px;height:56px;background:linear-gradient(90deg,#55595a,#9da2a3 45%,#4a4e4f)"></div>
+      <div id="mFoot" class="abs" style="left:165px;top:352px;width:150px;height:10px;border-radius:5px;background:linear-gradient(#a8adae,#5f6465)"></div>
+    </div>
+  </div>
+
+  <!-- S5 hands + pizza answer -->
+  <div class="sc" id="s5">
+    <div id="hands" class="abs" style="left:-33px;top:0;width:894px;height:500px;transform-origin:414px 250px">
+      <div id="hScr" class="paperUI" style="left:173px;top:122px;width:552px;height:226px;border-radius:20px;overflow:hidden">
+        <div class="abs" style="left:10px;top:10px;width:190px;height:206px;border-radius:12px;background:radial-gradient(circle at 40% 35%,#fff6ec,#f1dcc6);overflow:hidden">
+          <img id="pzImg" src="img/pizza.png" class="abs" style="left:28px;top:34px;width:140px">
+          <div class="abs" style="left:8px;top:8px;padding:4px 8px;border-radius:9px;background:rgba(255,255,255,.9);font-size:9px;font-weight:600;color:var(--inky)">Step <span id="pzStep">1</span> of 4</div>
+        </div>
+        <div class="abs" style="left:214px;top:10px;right:12px;color:var(--inky)">
+          <div style="display:flex;align-items:center;gap:6px"><svg width="13" height="13" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="#20808d" stroke-width="3"/></svg><span style="font-size:14px;font-weight:600;letter-spacing:-.02em">Homemade pizza</span></div>
+          <div id="srcs" style="display:flex;gap:5px;margin-top:6px"></div>
+          <div style="display:flex;gap:14px;margin-top:6px">
+            <div style="flex:1"><div style="font-size:8px;font-weight:700;letter-spacing:.08em;color:var(--teal)">INGREDIENTS</div><div id="ingr"></div></div>
+            <div style="flex:1.2"><div style="font-size:8px;font-weight:700;letter-spacing:.08em;color:var(--teal)">PROCESS</div><div id="proc"></div></div>
           </div>
         </div>
+        <div id="doneBadge" class="abs" style="right:12px;bottom:10px;padding:5px 10px;border-radius:12px;background:var(--teal);color:#fff;font-size:9px;font-weight:600;opacity:0">All of it, done ✓</div>
       </div>
-      <div id="mStand" class="abs" style="left:190px;top:288px;width:80px;height:56px;background:linear-gradient(#c9c9c6,#a9a9a5)"></div>
-      <div id="mFoot" class="abs" style="left:150px;top:340px;width:160px;height:10px;border-radius:5px;background:#b9b9b5"></div>
+      <img src="img/hands_phone.png" class="abs" style="left:0;top:0;width:894px;height:500px">
     </div>
+    <div id="dof5" class="abs" style="inset:0;pointer-events:none"></div>
   </div>
 
-  <!-- S4 pizza answer in a landscape phone -->
-  <div class="sc" id="s4" style="background:linear-gradient(180deg,#e9f6f3 0%,#cdebe7 45%,#8fcfcc 100%)">
-    <div class="fog" id="fog4"></div>
-    <div id="phL" class="phone" style="left:104px;top:86px;width:620px;height:320px;border-radius:44px;padding:11px;transform-origin:50% 50%">
-      <div class="scr" style="border-radius:34px;background:var(--paper)">
-        <div class="abs" style="left:18px;top:16px;width:250px;height:266px;border-radius:16px;background:linear-gradient(160deg,#f6e8d6,#ecd2b7);overflow:hidden">
-          <svg id="pizza" class="abs" style="left:25px;top:33px;width:200px;height:200px" viewBox="-100 -100 200 200">
-            <circle id="dough" r="86" fill="#f1d3a0" stroke="#e2b874" stroke-width="7"/>
-            <circle id="sauce" r="72" fill="#d8452f"/>
-            <circle id="cheese" r="66" fill="#f8e7b5" opacity=".9"/>
-            <g id="tops"></g>
-          </svg>
-          <div class="abs" id="pzTag" style="left:12px;top:12px;padding:5px 9px;border-radius:10px;background:rgba(255,255,255,.85);font-size:10px;font-weight:600">Step <span id="pzStep">1</span> of 4</div>
-        </div>
-        <div class="abs" style="left:286px;top:16px;right:16px">
-          <div style="font-size:18px;font-weight:600;letter-spacing:-.02em">Homemade pizza</div>
-          <div id="srcs" style="display:flex;gap:6px;margin-top:8px"></div>
-          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-top:12px">INGREDIENTS</div>
-          <div id="ingr" style="margin-top:4px"></div>
-          <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-top:8px">PROCESS</div>
-          <div id="proc" style="margin-top:4px"></div>
-        </div>
-        <div id="doneBadge" class="abs" style="right:18px;bottom:16px;padding:7px 12px;border-radius:14px;background:var(--teal);color:#fff;font-size:11px;font-weight:600;opacity:0">All of it, done ✓</div>
+  <!-- S6 whatever / guide / new product -->
+  <div class="sc" id="s6">
+    <div class="aur" id="aur6"></div>
+    <div id="cam6" class="abs" style="inset:0;transform-origin:414px 250px">
+      <div class="line" id="l6a" style="top:200px;font-size:40px"></div>
+      <div class="line" id="l6b" style="top:252px;font-size:40px;color:rgba(251,250,244,.72)"></div>
+      <div class="line" id="l6c" style="top:220px;font-size:46px"></div>
+      <div id="prodRow" class="abs" style="left:0;right:0;top:190px;height:120px;visibility:hidden">
+        <div class="abs" id="pNew" style="left:196px;top:34px;font-size:48px;font-weight:500;letter-spacing:-.03em">New</div>
+        <div class="abs" id="pIcon" style="left:330px;top:0;width:150px;height:120px"></div>
+        <div class="abs" id="pProd" style="left:494px;top:34px;font-size:48px;font-weight:500;letter-spacing:-.03em">product</div>
       </div>
     </div>
   </div>
 
-  <!-- S5 whatever you're doing / new product -->
-  <div class="sc" id="s5" style="background:#fff">
-    <div class="fog" id="fog5"></div>
-    <div class="words" id="w5a" style="top:206px;font-size:34px"></div>
-    <div class="words" id="w5b" style="top:252px;font-size:34px"></div>
-    <div class="words" id="w5c" style="top:222px;font-size:40px"></div>
-    <div id="prodRow" class="abs" style="left:0;right:0;top:206px;height:90px;visibility:hidden">
-      <div class="abs" id="pNew" style="left:236px;top:22px;font-size:40px;font-weight:500;letter-spacing:-.02em">New</div>
-      <div class="abs" id="pIcon" style="left:370px;top:0;width:88px;height:88px"></div>
-      <div class="abs" id="pProd" style="left:480px;top:22px;font-size:40px;font-weight:500;letter-spacing:-.02em">product</div>
-    </div>
-  </div>
-
-  <!-- S6 setup guide on a portrait phone + floating tasks -->
-  <div class="sc" id="s6" style="background:radial-gradient(90% 80% at 50% 30%,#f2fbf8 0%,#cdebe6 50%,#7cc0bf 100%)">
-    <div id="bubbles" class="abs" style="inset:0"></div>
-    <div id="ph6" class="phone" style="left:320px;top:40px;width:200px;height:410px;transform-origin:50% 50%">
-      <div class="scr" style="background:var(--paper)">
-        <div class="abs" style="left:14px;right:14px;top:30px;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="#20808d" stroke-width="3"/></svg><span style="font-size:9px;font-weight:600;color:#6d7774">Perplexity</span></div>
-        <div id="q6" class="abs" style="right:12px;top:54px;max-width:150px;padding:8px 10px;border-radius:12px 12px 3px 12px;background:#e6f3f1;font-size:10px;font-weight:600;line-height:1.3">How do I set up my new watch?</div>
-        <div id="prodCard" class="abs" style="left:12px;right:12px;top:100px;height:84px;border-radius:12px;background:#fff;border:1px solid #ebe7dc;display:flex;align-items:center;gap:10px;padding:0 10px">
-          <div id="watchIc" style="width:56px;height:64px;flex:none"></div>
-          <div><div style="font-size:11px;font-weight:700">Smartwatch setup</div><div style="font-size:9px;color:#7b8683;margin-top:3px">4 steps · 5 min</div></div></div>
-        <div id="steps6" class="abs" style="left:14px;right:12px;top:196px"></div>
+  <!-- S8 phone guide + anything -->
+  <div class="sc" id="s8">
+    <div class="aur" id="aur8"></div>
+    <div id="objs8" class="abs" style="inset:0"></div>
+    <div id="chips" class="abs" style="inset:0"></div>
+    <div class="phoneF" id="ph8" style="left:200px;top:-210px;transform:scale(.47)">
+      <div class="scr">
+        <div class="abs" style="left:40px;right:40px;top:110px;display:flex;align-items:center;gap:14px"><svg width="36" height="36" viewBox="-1 -1 38 38"><path class="markP" fill="none" stroke="#20808d" stroke-width="2.4"/></svg><span style="font-size:26px;font-weight:600;color:#6d7774">Perplexity</span></div>
+        <div id="q8" class="abs" style="right:34px;top:180px;max-width:300px;padding:18px 22px;border-radius:26px 26px 6px 26px;background:#e3f1ef;font-size:24px;font-weight:600;line-height:1.3;color:var(--inky)">How do I set up my new watch?</div>
+        <div id="prod8" class="abs" style="left:30px;right:30px;top:300px;height:180px;border-radius:26px;background:#fff;border:2px solid #ece8dd;display:flex;align-items:center;gap:22px;padding:0 22px">
+          <img src="img/watch.png" style="height:150px">
+          <div><div style="font-size:26px;font-weight:700;color:var(--inky)">Smartwatch setup</div><div style="font-size:19px;color:#7b8683;margin-top:6px">4 steps · 5 min</div></div></div>
+        <div id="steps8" class="abs" style="left:34px;right:30px;top:500px"></div>
       </div>
+      <div class="isl"></div><img class="body" src="img/phone_front.png">
     </div>
   </div>
 
-  <!-- S7 learn it / do it / make it done -->
-  <div class="sc" id="s7" style="background:#fff">
-    <div class="fog" id="fog7"></div>
-    <div class="words" id="w7" style="top:214px;font-size:40px"></div>
+  <!-- S10 learn / do / make it done -->
+  <div class="sc" id="s10">
+    <div class="aur" id="aur10"></div>
+    <div id="cam10" class="abs" style="inset:0;transform-origin:414px 250px"><div class="line" id="l10" style="top:196px;font-size:68px;font-weight:600"></div></div>
   </div>
 
-  <!-- S8 end card -->
-  <div class="sc" id="s8" style="background:linear-gradient(180deg,#0f5d66 0%,#2a8f98 40%,#7cc3c0 75%,#d7ebe4 100%)">
-    <div id="endBlobs" class="abs" style="inset:0;filter:blur(36px)"></div>
-    <svg id="endMark" class="abs" style="left:258px;top:196px;width:72px;height:72px;overflow:visible" viewBox="-1 -1 38 38"><path id="endMarkP" fill="none" stroke="#fff" stroke-width="1.8"/></svg>
-    <div class="abs" style="left:344px;top:194px;width:290px;height:80px;overflow:hidden" id="endWordClip">
-      <svg class="abs" style="left:0;top:0;width:258px;height:80px" viewBox="36 0 114 36"><path id="endWordP" fill="#fff"/></svg></div>
-    <div id="endCta" class="abs" style="left:0;right:0;top:300px;display:flex;justify-content:center"><div style="padding:11px 20px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--deep);font-size:15px;font-weight:600">Start free today · perplexity.ai</div></div>
-    <div id="endDark" class="abs" style="inset:0;background:#06191b;opacity:0"></div>
+  <!-- S11 end -->
+  <div class="sc" id="s11">
+    <div class="aur" id="aur11"></div>
+    <div id="cam11" class="abs" style="inset:0;transform-origin:414px 240px">
+      <svg id="endMark" class="abs" style="left:250px;top:190px;width:80px;height:80px;overflow:visible;filter:drop-shadow(0 0 16px rgba(63,208,201,.8))" viewBox="-1 -1 38 38"><path id="endMarkP" class="markP" fill="none" stroke="#fbfaf4" stroke-width="1.7"/></svg>
+      <div class="abs" style="left:346px;top:190px;width:300px;height:86px;overflow:hidden" id="endWordClip">
+        <svg class="abs" style="left:0;top:0;width:276px;height:86px" viewBox="36 0 114 36"><path class="wordP" fill="#fbfaf4"/></svg></div>
+      <div id="endCta" class="abs" style="left:0;right:0;top:304px;display:flex;justify-content:center"><div style="padding:12px 22px;border-radius:999px;background:var(--paper);color:var(--inky);font-size:15px;font-weight:600;box-shadow:0 0 40px rgba(63,208,201,.45)">Start free today · perplexity.ai</div></div>
+    </div>
+    <div id="endDark" class="abs" style="inset:0;background:#040a0a;opacity:0"></div>
   </div>
 
   <svg id="cursor" viewBox="0 0 22 22"><path d="M3 2l15 8-6.5 1.8L8.6 18z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+  <div id="vig"></div>
+  <canvas id="grain" width="414" height="250"></canvas>
 </div>
 
 <div id="tabs">
@@ -209,243 +224,208 @@ html,body{width:960px;height:720px;overflow:hidden;background:#000}
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const w=(word,k=0)=>{ const m=WORDS.filter(x=>x[0]===word); return m[Math.min(k,m.length-1)][1]; };
-const DUR=44.5; window.DUR=DUR;
+const DUR=48.5; window.DUR=DUR;
 const tl=gsap.timeline({paused:true});
-const show=(id,a,b)=>{tl.set(id,{visibility:'visible'},a); if(b!=null) tl.set(id,{visibility:'hidden'},b);};
-const TEAL='#20808d', DEEP='#13343b';
-// logo paths everywhere
-['#tagMark','#ph0mark','#bigMarkP','#endMarkP'].forEach(s=>$(s).setAttribute('d',LOGO.mark));
-$$('.markP').forEach(p=>p.setAttribute('d',LOGO.mark));
-['#t0path','#bigWordP','#endWordP'].forEach(s=>$(s).setAttribute('d',LOGO.word));
-// soft fog at the bottom of white cards (the reference's coloured haze)
-$$('.fog').forEach((f,k)=>{ for(let i=0;i<9;i++){ const e=document.createElement('i'); const s=90+((i*37+k*11)%5)*28;
-  Object.assign(e.style,{left:(i*110-30)+'px',width:s*1.6+'px',height:s+'px',background:['#8fd3cf','#b9e3dc','#6cbdbd','#d7efe8','#f2d7c3'][(i+k)%5]}); f.appendChild(e);} });
+const TEAL='#20808d', GLOW='#3fd0c9', PAPER='#fbfaf4';
+$$('.markP').forEach(p=>p.setAttribute('d',LOGO.mark)); $$('.wordP').forEach(p=>p.setAttribute('d',LOGO.word));
+// scene windows overlap so every hand-off is a dissolve, never a cut
+const SC={s0:[0,2.75],s1:[2.35,10.35],s2:[9.95,15.95],s3:[15.55,24.2],s5:[23.75,28.35],s6:[27.85,34.05],s8:[33.6,41.4],s10:[40.9,44.95],s11:[44.4,DUR+1]};
+for(const [id,[a,b]] of Object.entries(SC)){ tl.set('#'+id,{visibility:'visible'},a); if(b<DUR) tl.set('#'+id,{visibility:'hidden'},b); }
+// in: scale down from 1.12 with blur; out: push through with blur. Both .4 s, overlapping the neighbour.
+const handoff=(a,b)=>{ tl.fromTo('#'+b,{opacity:0,scale:1.12,filter:'blur(14px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.55,ease:'power3.out'},SC[b][0]);
+  tl.to('#'+a,{opacity:0,scale:1.25,filter:'blur(16px)',duration:.45,ease:'power2.in'},SC[a][1]-.45); };
+const ORDER=['s0','s1','s2','s3','s5','s6','s8','s10','s11']; for(let i=0;i<ORDER.length-1;i++) handoff(ORDER[i],ORDER[i+1]);
 
-/* ---------- chrome: tabs ---------- */
-const TABS=[[0,2.75],[2.75,13.5],[13.5,38.5],[38.5,DUR]];
+/* aurora backgrounds: big soft lights in Perplexity teal, drifting */
+const AUR={aur0:['#3fd0c9','#20808d','#13343b','#f3d9c4'],aur1:['#20808d','#13343b','#3fd0c9','#0c2a2e'],aur2:['#13343b','#20808d','#3fd0c9','#091717'],aur3:['#20808d','#3fd0c9','#13343b','#f3d9c4'],
+ aur6:['#13343b','#20808d','#3fd0c9','#0c2a2e'],aur8:['#3fd0c9','#20808d','#13343b','#f3d9c4'],aur10:['#20808d','#13343b','#3fd0c9','#091717'],aur11:['#3fd0c9','#20808d','#f3d9c4','#13343b']};
+const AB=[];
+for(const [id,cols] of Object.entries(AUR)) cols.forEach((c,i)=>{ const e=document.createElement('i'); const s=[520,440,380,300][i];
+  Object.assign(e.style,{width:s+'px',height:s*.8+'px',background:c,opacity:[.55,.5,.38,.22][i]}); $('#'+id).appendChild(e); AB.push([e,i,id.length]); });
+
+/* tabs */
+const TABS=[[0,2.4],[2.4,15.6],[15.6,40.9],[40.9,DUR]];
 TABS.forEach(([a,b],i)=>{ const on=`#tb${i} .on`, bar=`#tb${i} .bar`, sp=`#tb${i} span`;
-  tl.fromTo(on,{opacity:0},{opacity:1,duration:.35,ease:'power2.out'},Math.max(0,a-.05)).to(on,{opacity:0,duration:.35,ease:'power2.in'},b-.15);
-  tl.fromTo(sp,{color:'#091717'},{color:'#ffffff',duration:.3},Math.max(0,a-.05)).to(sp,{color:'#091717',duration:.3},b-.15);
+  tl.fromTo(on,{opacity:0},{opacity:1,duration:.45,ease:'power2.inOut'},Math.max(0,a-.1)).to(on,{opacity:0,duration:.45,ease:'power2.inOut'},b-.2);
+  tl.fromTo(sp,{color:'#091717'},{color:'#fbfaf4',duration:.4},Math.max(0,a-.1)).to(sp,{color:'#091717',duration:.4},b-.2);
   tl.fromTo(bar,{left:'0%',opacity:1},{left:'99%',duration:b-a,ease:'none'},a).set(bar,{opacity:0},b); });
 
-/* ---------- S0 intro 0 - 2.75 ---------- */
-show('#s0',0,2.85);
-tl.fromTo('#ph0',{y:220,rotationY:-35,rotationX:18,rotationZ:-8,scale:.86},{y:0,rotationY:-14,rotationX:6,rotationZ:-3,scale:1,duration:1.3,ease:'expo.out'},0)
-  .to('#ph0',{rotationY:10,rotationZ:2,y:-8,duration:1.4,ease:'sine.inOut'},1.3)
-  .fromTo('#t0word',{clipPath:'inset(0 100% 0 0)',y:30,opacity:0},{clipPath:'inset(0 0% 0 0)',y:0,opacity:1,duration:.9,ease:'expo.out'},.45)
-  .fromTo('#s0cam',{scale:1},{scale:1.12,duration:2.4,ease:'sine.inOut',transformOrigin:'50% 50%'},.2)
-  .to('#s0cam',{scale:2.3,opacity:0,filter:'blur(14px)',duration:.4,ease:'expo.in'},2.42);
-const OB=$('#objs'); const OBJ=[];
-for(let i=0;i<14;i++){ const e=document.createElement('div'); e.className='abs'; const s=[26,34,20,42,30,24,38][i%7];
-  const kind=i%3; Object.assign(e.style,{width:s+'px',height:s+'px',borderRadius:kind===0?'50%':kind===1?'8px':'50% 50% 50% 4px',
-   background:kind===0?'radial-gradient(circle at 32% 30%,#fff 0%,#9ff0e6 25%,#20808d 70%,#0e4a50 100%)':kind===1?'linear-gradient(135deg,#ffe3c9,#f3a97a)':'radial-gradient(circle at 30% 30%,#fff,#c9b6ff 40%,#7b6be0)',
-   boxShadow:'0 8px 18px rgba(8,40,44,.25)'}); OB.appendChild(e);
-  const a=i/14*Math.PI*2+.3, R=200+((i*53)%120); OBJ.push(e);
-  tl.fromTo(e,{left:414,top:300,scale:0,rotation:0},{left:414+Math.cos(a)*R*1.35-s/2,top:280+Math.sin(a)*R*.75-s/2,scale:1,rotation:(i%2?1:-1)*120,duration:1.4,ease:'expo.out'},.55+i*.04); }
+/* kinetic words: per-character blur-rise, the spoken word glows */
+const mkLine=(sel,list)=>{ $(sel).innerHTML=list.map(([t,k])=>`<span class="wd" data-t="${k}">${[...t].map(c=>`<span class="ch">${c}</span>`).join('')}</span>`).join(' '); return $$(sel+' .wd'); };
+const wordsIn=els=>els.forEach(e=>{ const t=+e.dataset.t; const ch=[...e.querySelectorAll('.ch')];
+  tl.fromTo(ch,{opacity:0,y:18,filter:'blur(10px)',rotationX:-60},{opacity:1,y:0,filter:'blur(0px)',rotationX:0,duration:.7,ease:'expo.out',stagger:.022},t-.06);
+  tl.fromTo(e,{textShadow:'0 0 0px rgba(63,208,201,0)',color:PAPER},{textShadow:'0 0 22px rgba(63,208,201,.9)',color:'#bff8f2',duration:.18},t-.04)
+    .to(e,{textShadow:'0 0 0px rgba(63,208,201,0)',color:PAPER,duration:.8,ease:'power2.out'},t+.35); });
+const wordsOut=(els,t)=>tl.to(els.flatMap(e=>[...e.querySelectorAll('.ch')]),{opacity:0,y:-14,filter:'blur(10px)',duration:.45,ease:'power2.in',stagger:.008},t);
 
-/* ---------- S1 words 2.75 - 9.7 ---------- */
-show('#s1',2.6,9.75);
-tl.fromTo('#s1',{opacity:0,scale:1.08},{opacity:1,scale:1,duration:.45,ease:'expo.out'},2.55);
-const mkWords=(sel,list,col)=>{ $(sel).innerHTML=list.map(([t,k])=>`<span data-t="${k}">${t}</span>`).join(' '); return $$(sel+' span'); };
-const wordIn=(els,ease='expo.out')=>els.forEach(e=>{ const t=+e.dataset.t;
-  tl.fromTo(e,{opacity:0,y:14,filter:'blur(8px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.5,ease},t-.04);
-  tl.fromTo(e,{color:DEEP},{color:TEAL,duration:.12},t-.04).to(e,{color:DEEP,duration:.5},t+.3); });
-const A=mkWords('#w1a',[['Every',w('every')],['day,',w('day')],["there's",w("there's")],['something',w('something')]]);
-const Bw=mkWords('#w1b',[["you've",w("you've")],['never',w('never')],['done',w('done')],['before.',w('before')]]);
-wordIn(A); wordIn(Bw);
-// words scatter into little task icons, "something new" takes the centre
-const ICONS=['M4 18l6-6m2-6l6 6-8 8-6-6z','M3 12h18M12 3v18','M5 19c6 0 10-4 10-10V5h4v4c0 8-6 14-14 14z','M12 3l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L3 10l6-1z','M4 6h16v10H4zM8 20h8','M6 18a4 4 0 118 0M12 4v6m-4-2l4 4 4-4','M3 17l6-6 4 4 8-8','M5 5h14v14H5zM5 10h14','M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z','M4 12a8 8 0 1016 0 8 8 0 00-16 0zm8-4v4l3 2'];
-const IC=$('#icons'); const icEls=[];
-for(let i=0;i<16;i++){ const d=document.createElement('div'); d.className='ico';
-  d.innerHTML=`<svg width="26" height="26" viewBox="0 0 24 24"><path d="${ICONS[i%ICONS.length]}" fill="none" stroke="${i%3?DEEP:TEAL}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  IC.appendChild(d); icEls.push(d); }
-const T5=5.45;
-tl.to([...A,...Bw],{opacity:0,y:-10,scale:.6,filter:'blur(6px)',duration:.4,stagger:.03,ease:'power2.in'},T5);
-icEls.forEach((d,i)=>{ const a=i/16*Math.PI*2; const r=150+(i%3)*40;
-  tl.fromTo(d,{left:414+(i%8-4)*40,top:220+(i>7?44:0),scale:0,opacity:0},{left:414+Math.cos(a)*r*1.5,top:228+Math.sin(a)*r*.62,scale:1,opacity:1,duration:.9,ease:'expo.out'},T5+.18+i*.02);
-  tl.to(d,{left:414+Math.cos(a)*r*2.6,top:228+Math.sin(a)*r*1.3,opacity:0,scale:.5,duration:.6,ease:'power2.in'},9.05+i*.01); });
-const C1=mkWords('#w1c',[['Something',w('something',1)],['new.',w('new')]]); wordIn(C1);
-tl.to(C1,{opacity:0,y:-16,filter:'blur(8px)',duration:.35,stagger:.04,ease:'power2.in'},7.55);
-const D1=mkWords('#w1d',[['Something',w('something',2)],['exciting',w('exciting')],['to',w('to')],['figure',w('figure')],['out.',w('out')]]); wordIn(D1);
-tl.fromTo('#w1d',{scale:.9},{scale:1.08,duration:1.9,ease:'sine.inOut',transformOrigin:'50% 50%'},7.8)
-  .to('#s1cam',{scale:1.6,opacity:0,filter:'blur(12px)',duration:.4,ease:'expo.in',transformOrigin:'50% 45%'},9.35);
+/* 3D objects (renders) */
+const OBJ={};['sphere','cube','torus','star','bulb','magnifier','headphones','watch','pizza'].forEach(n=>OBJ[n]='img/'+n+'.png');
+const floaters=[];   // [el, baseX, baseY, size, depth(0 near .. 1 far), spin, phase]
+const addObj=(parent,name,x,y,size,depth,spin=0)=>{ const e=document.createElement('img'); e.src=OBJ[name]; e.className='obj'; e.style.width=size+'px';
+  $(parent).appendChild(e); const f=[e,x,y,size,depth,spin,Math.random()*6]; floaters.push(f); return e; };
 
-/* ---------- S2 answer / chaos ring / simple 9.75 - 14.1 ---------- */
-show('#s2',9.7,14.2);
-tl.fromTo('#s2',{opacity:0},{opacity:1,duration:.3},9.7);
-const W2=mkWords('#w2a',[['You',w('you')],['just',w('just')],['want',w('want')],['the',w('the')],['answer,',w('answer')],['right?',w('right')]]); wordIn(W2);
-tl.to(W2,{opacity:0,y:-10,filter:'blur(6px)',duration:.35,stagger:.02,ease:'power2.in'},12.15);
-const W2b=mkWords('#w2b',[['But',w('but')],['finding',w('finding')],['it',w('it')],["isn't",w("isn't")]]); wordIn(W2b);
-tl.to(W2b,{opacity:0,y:-10,filter:'blur(6px)',duration:.3,stagger:.02,ease:'power2.in'},12.6);
-// the ring of everything you'd otherwise have to read
-const RG=$('#ring'); const ringEls=[];
-const kinds=[['14 tabs open','#f3f1ea'],['Forum thread · 212 replies','#fff'],['Video · 18:42','#13343b'],['Sponsored result','#fff7e8'],['Blog: 10 tips','#fff'],['Recipe (scroll for 9 min)','#fdeee5'],['Map','#e5f3f1'],['PDF manual','#fff'],['Comments','#fff'],['Ad','#f8f0ff'],['Wiki','#fff'],['Q&A','#eef6f5']];
-for(let i=0;i<20;i++){ const k=kinds[i%kinds.length]; const e=document.createElement('div'); e.className='ui';
-  const wv=[118,96,132,104,90,124][i%6], hv=[70,84,64,90,76][i%5];
-  Object.assign(e.style,{width:wv+'px',height:hv+'px',background:k[1],borderRadius:'10px'});
-  const dark=k[1]==='#13343b';
-  e.innerHTML=`<div style="padding:8px 9px;font-size:8.5px;font-weight:600;color:${dark?'#fff':'#40565a'}">${k[0]}</div>`+
-   `<div style="margin:0 9px;height:5px;border-radius:3px;background:${dark?'#2c5a61':'#e5e8e4'};width:70%"></div><div style="margin:5px 9px;height:5px;border-radius:3px;background:${dark?'#2c5a61':'#e5e8e4'};width:50%"></div>`+
-   (dark?`<div style="position:absolute;left:50%;top:55%;width:0;height:0;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;transform:translate(-40%,-50%)"></div>`:'');
-  RG.appendChild(e); ringEls.push([e,wv,hv]); }
-const R0=10.05;
-ringEls.forEach(([e,wv,hv],i)=>{ tl.fromTo(e,{opacity:0,scale:.3},{opacity:1,scale:1,duration:.7,ease:'expo.out'},R0+i*.05);
-  tl.to(e,{opacity:0,scale:.4,duration:.35,ease:'power2.in'},12.85+i*.008); });
-// "simple" pulled apart on guides
-show('#simple',12.9,14.2);
-const SIM=['S','im','pl','e']; $('#simWord').innerHTML=SIM.map(s=>`<span style="display:inline-block">${s}</span>`).join('');
+/* ---------- S0 intro ---------- */
+tl.fromTo('#ph0',{y:420,rotationY:-38,rotationX:22,rotationZ:-10},{y:0,rotationY:-12,rotationX:6,rotationZ:-4,duration:1.6,ease:'expo.out'},0)
+  .to('#ph0',{rotationY:12,rotationZ:3,y:-10,duration:1.6,ease:'sine.inOut'},1.4)
+  .fromTo('#t0word',{clipPath:'inset(0 100% 0 0)',y:40,opacity:0,filter:'blur(12px)'},{clipPath:'inset(0 0% 0 0)',y:0,opacity:.95,filter:'blur(0px)',duration:1.1,ease:'expo.out'},.35)
+  .fromTo('#cam0',{scale:1},{scale:1.14,duration:2.8,ease:'sine.inOut'},0);
+[['sphere',120,330,90,.2,40],['cube',640,110,86,.5,-30],['torus',660,340,110,.1,60],['star',140,120,70,.6,90],['bulb',560,40,58,.8,-20],['magnifier',40,230,80,.75,25],['headphones',700,230,70,.85,-35],['sphere',300,40,40,.95,0]].forEach(([n,x,y,s,d,sp],i)=>{
+  const e=addObj(d<.4?'#objsFront':'#objsBack',n,x,y,s,d,sp);
+  tl.fromTo(e,{scale:0,x:(414-x-s/2)*.9,y:(260-y-s/2)*.9},{scale:1,x:0,y:0,duration:1.5,ease:'expo.out'},.5+i*.06); });
+
+/* ---------- S1 words ---------- */
+const A1=mkLine('#l1a',[['Every',w('every')],['day,',w('day')],["there's",w("there's")],['something',w('something')]]);
+const B1=mkLine('#l1b',[["you've",w("you've")],['never',w('never')],['done',w('done')],['before.',w('before')]]);
+wordsIn(A1); wordsIn(B1); wordsOut([...A1,...B1],6.0);
+tl.fromTo('#cam1',{scale:1},{scale:1.1,duration:8,ease:'sine.inOut'},2.4);
+// the sentence bursts into little everyday things
+const orbit=[['star',58],['bulb',54],['magnifier',60],['headphones',62],['watch',56],['pizza',62],['cube',50],['sphere',44],['torus',56]];
+orbit.forEach(([n,s],i)=>{ const e=addObj('#orbit1',n,0,0,s,.3+((i*37)%60)/100,(i%2?1:-1)*30); e.dataset.orb=i;
+  tl.fromTo(e,{opacity:0,scale:0},{opacity:1,scale:1,duration:1.1,ease:'expo.out'},6.15+i*.05);
+  tl.to(e,{opacity:0,scale:.3,duration:.5,ease:'power2.in'},9.6+i*.02); });
+const C1=mkLine('#l1c',[['Something',w('something',1)],['new.',w('new')]]); wordsIn(C1); wordsOut(C1,7.55);
+const D1=mkLine('#l1d',[['Something',w('something',2)],['exciting',w('exciting')],['to',w('to')],['figure',w('figure')],['out.',w('out')]]); wordsIn(D1);
+tl.fromTo('#l1d',{scale:.92},{scale:1.06,duration:2.4,ease:'sine.inOut'},7.8);
+
+/* ---------- S2 ring of everything ---------- */
+const A2=mkLine('#l2a',[['You',w('you')],['just',w('just')],['want',w('want')],['the',w('the')],['answer,',w('answer')],['right?',w('right')]]); wordsIn(A2); wordsOut(A2,12.45);
+const B2=mkLine('#l2b',[['But',w('but')],['finding',w('finding')],['it',w('it')],["isn't",w("isn't")]]); wordsIn(B2); wordsOut(B2,14.55);
+tl.fromTo('#cam2',{scale:1.05,rotation:-1},{scale:.96,rotation:1,duration:5,ease:'sine.inOut'},10.1);
+const RING=[]; const kinds=['14 tabs open','Forum thread · 212 replies','Video · 18:42','Sponsored','Blog: 10 tips','Recipe · scroll 9 min','Map','PDF manual','Comments (1.2k)','Ad','Wiki','Q&A'];
+for(let i=0;i<22;i++){ let e;
+  if(i%3===2){ const n=['sphere','cube','torus','star','bulb','magnifier','headphones'][i%7]; e=document.createElement('img'); e.src=OBJ[n]; e.className='obj'; e.style.width='64px'; }
+  else { e=document.createElement('div'); e.className='glass'; const wv=[120,100,136,108,96][i%5], hv=[72,86,66,92][i%4]; Object.assign(e.style,{width:wv+'px',height:hv+'px'});
+    const vid=i%7===2; e.innerHTML=`<div style="padding:9px 10px;font-size:9px;font-weight:600;opacity:.85">${kinds[i%kinds.length]}</div><div style="margin:0 10px;height:5px;border-radius:3px;background:rgba(251,250,244,.22);width:70%"></div><div style="margin:6px 10px;height:5px;border-radius:3px;background:rgba(251,250,244,.14);width:48%"></div>`+(vid?`<div style="position:absolute;right:12px;bottom:10px;width:0;height:0;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent"></div>`:''); }
+  $('#ring').appendChild(e); RING.push(e);
+  tl.fromTo(e,{opacity:0},{opacity:1,duration:.8,ease:'power2.out'},10.15+i*.05);
+  tl.to(e,{opacity:0,duration:.5,ease:'power2.in'},14.45+i*.01); }
+// "simple", pulled apart on guides
+tl.set('#simple',{visibility:'visible'},14.6).set('#simple',{visibility:'hidden'},15.95);
+$('#simWord').innerHTML=['S','im','pl','e'].map(s=>`<span style="display:inline-block">${s}</span>`).join('');
 const simEls=$$('#simWord span');
-const GD=$('#guides'); for(let i=0;i<9;i++){ const g=document.createElement('div'); g.className='abs';
-  Object.assign(g.style,i<5?{left:(140+i*140)+'px',top:'0',width:'1px',height:'500px',borderLeft:'1px dashed rgba(32,128,141,.35)'}:{left:'0',top:[150,206,300,356][i-5]+'px',width:'828px',height:'1px',borderTop:'1px dashed rgba(32,128,141,.35)'}); GD.appendChild(g);
-  tl.fromTo(g,{scale:0,transformOrigin:i<5?'50% 0':'0 50%'},{scale:1,duration:.5,ease:'expo.out'},12.95+i*.03); }
-simEls.forEach((e,i)=>{ tl.fromTo(e,{opacity:0,y:40,filter:'blur(10px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.45,ease:'expo.out'},12.95+i*.05);
-  tl.to(e,{x:(i-1.5)*78,duration:.5,ease:'power3.inOut'},13.18);
-  tl.to(e,{x:-(i-1.5)*60,scale:.1,opacity:0,duration:.4,ease:'power3.in'},13.72); });
-tl.to('#guides',{opacity:0,duration:.3},13.75);
+for(let i=0;i<9;i++){ const g=document.createElement('div'); g.className='abs';
+  Object.assign(g.style,i<5?{left:(120+i*147)+'px',top:'0',width:'1px',height:'500px',borderLeft:'1px dashed rgba(63,208,201,.4)'}:{left:'0',top:[140,198,300,358][i-5]+'px',width:'828px',height:'1px',borderTop:'1px dashed rgba(63,208,201,.4)'}); $('#guides').appendChild(g);
+  tl.fromTo(g,{scale:0,transformOrigin:i<5?'50% 0':'0 50%'},{scale:1,duration:.7,ease:'expo.out'},14.65+i*.03); }
+simEls.forEach((e,i)=>{ tl.fromTo(e,{opacity:0,y:50,filter:'blur(14px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.6,ease:'expo.out'},w('simple')-.1+i*.05);
+  tl.to(e,{x:(i-1.5)*80,duration:.6,ease:'power3.inOut'},w('simple')+.2);
+  tl.to(e,{x:-(i-1.5)*70,scale:.05,opacity:0,filter:'blur(8px)',duration:.45,ease:'power3.in'},15.45); });
+tl.to('#guides',{opacity:0,duration:.4},15.45);
 
-/* ---------- S3 logo, sky, monitor, search 14.0 - 22.75 ---------- */
-show('#s3',13.95,22.75);
-tl.fromTo('#dot',{scale:0},{scale:1,duration:.4,ease:'back.out(3)'},13.98)
-  .to('#dot',{scale:2.6,opacity:0,duration:.35,ease:'power2.in'},14.42);
-const ML=$('#bigMarkP').getTotalLength();
-gsap.set(['#bigMarkP','#endMarkP'],{strokeDasharray:ML,strokeDashoffset:ML});
-tl.to('#bigMarkP',{strokeDashoffset:0,duration:.8,ease:'power2.inOut'},14.45)
-  .fromTo('#logoC',{x:150},{x:0,duration:.8,ease:'expo.inOut'},14.75)
-  .fromTo('#bigWord',{x:-230},{x:0,duration:.8,ease:'expo.inOut'},14.82)
-  .to('#sky',{opacity:1,duration:.8,ease:'sine.inOut'},15.7)
-  .to('#fog3',{opacity:0,duration:.6},15.7)
-  .to('#bigMarkP',{stroke:'#ffffff',duration:.6},15.8).to('#bigWordP',{fill:'#ffffff',duration:.6},15.8);
-// sky blobs drift
-const SB=$('#skyBlobs'); for(let i=0;i<6;i++){ const b=document.createElement('div'); b.className='abs skyb';
-  Object.assign(b.style,{left:(i*150-40)+'px',top:(i%2?40:220)+'px',width:'260px',height:'200px',borderRadius:'50%',background:['#7fcfca','#fff3e6','#f3c9a6','#bfe9e4','#ffffff','#e9b993'][i]}); SB.appendChild(b); }
-// monitor rises in, logo lifts away
-tl.to('#logoC',{y:-170,scale:.55,opacity:0,duration:.7,ease:'power3.inOut'},16.2);
-show('#monitor',16.25);
-tl.fromTo('#monitor',{y:420,rotationX:30,scale:.9},{y:0,rotationX:0,scale:1,duration:1.1,ease:'expo.out'},16.3)
-  .to('#monitor',{scale:1.08,duration:2.4,ease:'sine.inOut'},17.4)
-// push into the screen until the UI fills the card
-  .to('#monitor',{scale:1.865,x:0,y:-62,duration:.9,ease:'power3.inOut'},19.45)
-  .to(['#mStand','#mFoot'],{opacity:0,duration:.3},19.6)
-  .to('#mScreen',{background:'#fbfaf4',padding:0,borderRadius:0,duration:.5},19.85)
-  .to('#sky',{opacity:0,duration:.4},19.9);
+/* ---------- S3 logo, tagline, monitor, search ---------- */
+tl.fromTo('#dot',{scale:0},{scale:1,duration:.5,ease:'back.out(3)'},15.6).to('#dot',{scale:2.8,opacity:0,duration:.4,ease:'power2.in'},16.05);
+const ML=$('#bigMarkP').getTotalLength(); gsap.set(['#bigMarkP','#endMarkP'],{strokeDasharray:ML,strokeDashoffset:ML});
+tl.to('#bigMarkP',{strokeDashoffset:0,duration:.9,ease:'power2.inOut'},16.05)
+  .fromTo('#logoC',{x:150},{x:0,duration:.9,ease:'expo.inOut'},w('perplexity')-.05)
+  .fromTo('#bigWord',{x:-260},{x:0,duration:.9,ease:'expo.inOut'},w('perplexity'))
+  .fromTo('#logoC',{scale:1},{scale:1.06,duration:2.4,ease:'sine.inOut',transformOrigin:'414px 240px'},16.4);
+const TAG=mkLine('#tagline',[['Your',w('your')],['answer',w('answer',1)],['engine',w('engine')],['for',w('for')],['everyday',w('everyday')],['tasks.',w('tasks')]]); wordsIn(TAG);
+tl.to('#logoC',{y:-190,scale:.5,opacity:0,filter:'blur(10px)',duration:.8,ease:'power3.inOut'},20.7);
+tl.set('#monitor',{visibility:'visible'},20.75)
+  .fromTo('#monitor',{y:420,rotationX:34,scale:.86},{y:0,rotationX:4,scale:1,duration:1.0,ease:'expo.out'},20.75)
+  .to('#monitor',{rotationX:0,scale:1.04,duration:.9,ease:'sine.inOut'},21.6)
+  .fromTo('#glare',{x:-460},{x:460,duration:1.6,ease:'power2.inOut'},20.9)
+  .to('#monitor',{scale:1.72,y:-49,duration:.85,ease:'power3.inOut'},22.5)
+  .to(['#mStand','#mFoot'],{opacity:0,duration:.3},22.6)
+  .to('#mScreen',{padding:0,borderRadius:0,duration:.5},22.85);
 const Q='How do I make pizza at home?';
-tl.to('#qPh',{opacity:0,duration:.1},w('want',1)-.05);
-tl.to('#send',{background:TEAL,duration:.25},21.6);
-// cursor glides to send and clicks
-show('#cursor',21.2,22.7);
-tl.fromTo('#cursor',{left:560,top:420,scale:1},{left:770,top:318,duration:.8,ease:'power3.inOut'},21.25)
-  .to('#cursor',{scale:.8,duration:.08,yoyo:true,repeat:1},22.12)
-  .to('#search',{scale:.97,duration:.08,yoyo:true,repeat:1,transformOrigin:'50% 50%'},22.12)
-  .to('#monitor',{scale:2.2,opacity:0,filter:'blur(10px)',duration:.45,ease:'expo.in'},22.32);
+tl.to('#qPh',{opacity:0,duration:.1},w('want',1)-.05).to('#send',{background:TEAL,duration:.3},w('pizza')+.4);
+tl.set('#cursor',{visibility:'visible'},22.5).set('#cursor',{visibility:'hidden'},24.2)
+  .fromTo('#cursor',{left:560,top:430},{left:752,top:330,duration:.75,ease:'power3.inOut'},22.55)
+  .to('#cursor',{scale:.8,duration:.09,yoyo:true,repeat:1},23.35).to('#search',{scale:.97,duration:.09,yoyo:true,repeat:1,transformOrigin:'50% 50%'},23.35);
 
-/* ---------- S4 pizza answer 22.6 - 27.15 ---------- */
-show('#s4',22.55,27.2);
-tl.fromTo('#s4',{opacity:0},{opacity:1,duration:.3},22.55)
-  .fromTo('#phL',{scale:1.35,rotationX:0,rotationY:0,y:20},{scale:1,rotationX:14,rotationY:-10,y:0,duration:1.1,ease:'expo.out'},22.6)
-  .to('#phL',{rotationX:6,rotationY:9,y:-6,duration:3.4,ease:'sine.inOut'},23.7)
-  .to('#phL',{scale:1.25,opacity:0,filter:'blur(10px)',duration:.4,ease:'expo.in'},26.85);
-['allrecipes','seriouseats','reddit','bbc food'].forEach((s,i)=>{ const c=document.createElement('div');
-  c.style.cssText='padding:4px 8px;border-radius:9px;background:#eef6f5;font-size:9px;font-weight:600;color:#2a6f77';c.textContent=s; $('#srcs').appendChild(c);
-  tl.fromTo(c,{opacity:0,y:8},{opacity:1,y:0,duration:.4,ease:'expo.out'},w('perplexity',1)+i*.12); });
-const ckSvg='<svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>';
-const ING=['500 g bread flour','7 g dried yeast','Crushed tomatoes','Fresh mozzarella','Basil, olive oil, salt'];
-ING.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.innerHTML=`<div class="ck">${ckSvg}</div><span>${t}</span>`; $('#ingr').appendChild(r);
-  tl.fromTo(r,{opacity:0,x:14},{opacity:1,x:0,duration:.45,ease:'expo.out'},w('breaks')+.2+i*.1);
-  tl.call(()=>{},[],0); r.dataset.ck=w('ingredients')+.1+i*.13; });
-const PRO=['Knead and rest 1 hour','Stretch to 30 cm','Sauce, cheese, toppings','Bake 8 min at 250 °C'];
-PRO.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.innerHTML=`<div class="ck">${ckSvg}</div><span>${i+1}. ${t}</span>`; $('#proc').appendChild(r);
-  tl.fromTo(r,{opacity:0,x:14},{opacity:1,x:0,duration:.45,ease:'expo.out'},w('process')-.1+i*.1); r.dataset.ck=w('all')+i*.12; });
-// the pizza builds with the steps
-tl.fromTo('#dough',{scale:.2,transformOrigin:'0 0'},{scale:1,duration:.8,ease:'elastic.out(1,.6)'},23.0)
-  .fromTo('#sauce',{scale:0,transformOrigin:'0 0'},{scale:1,duration:.7,ease:'expo.out'},w('ingredients')+.2)
-  .fromTo('#cheese',{scale:0,opacity:0,transformOrigin:'0 0'},{scale:1,opacity:.9,duration:.6,ease:'expo.out'},w('process'));
-for(let i=0;i<11;i++){ const a=i*2.4, r=18+((i*29)%42); const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  c.setAttribute('cx',Math.cos(a)*r); c.setAttribute('cy',Math.sin(a)*r); c.setAttribute('r',i%3?7:9); c.setAttribute('fill',i%3?'#b3262a':'#3f8f3a'); $('#tops').appendChild(c);
-  tl.fromTo(c,{scale:0,transformOrigin:'50% 50%'},{scale:1,duration:.4,ease:'back.out(3)'},w('process')+.3+i*.05); }
-tl.to('#doneBadge',{opacity:1,y:-4,duration:.4,ease:'expo.out'},w('all')+.5);
+/* ---------- S5 hands, the pizza answer ---------- */
+tl.fromTo('#hands',{scale:1.22},{scale:1.04,duration:4.6,ease:'power2.out'},23.75);
+const ck='<svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>';
+['allrecipes','seriouseats','reddit','bbc food'].forEach((s,i)=>{ const c=document.createElement('div'); c.style.cssText='padding:3px 7px;border-radius:8px;background:#e7f3f1;font-size:8px;font-weight:600;color:#2a6f77'; c.textContent=s; $('#srcs').appendChild(c);
+  tl.fromTo(c,{opacity:0,y:6},{opacity:1,y:0,duration:.5,ease:'expo.out'},24.0+i*.1); });
+const ING=['Bread flour','Dried yeast','Crushed tomatoes','Mozzarella','Basil & olive oil'];
+ING.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.style.height='18px'; r.style.fontSize='9.5px'; r.innerHTML=`<div class="ck">${ck}</div><span>${t}</span>`; $('#ingr').appendChild(r);
+  tl.fromTo(r,{opacity:0,x:10},{opacity:1,x:0,duration:.5,ease:'expo.out'},24.15+i*.08); r.dataset.ck=w('ingredients')+.05+i*.15; });
+const PRO=['Knead, rest 1 hour','Stretch to 30 cm','Sauce, cheese, toppings','Bake 8 min at 250°C'];
+PRO.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.style.height='18px'; r.style.fontSize='9.5px'; r.innerHTML=`<div class="ck">${ck}</div><span>${i+1}. ${t}</span>`; $('#proc').appendChild(r);
+  tl.fromTo(r,{opacity:0,x:10},{opacity:1,x:0,duration:.5,ease:'expo.out'},24.35+i*.08); r.dataset.ck=w('process')+.05+i*.2; });
+tl.fromTo('#pzImg',{scale:.2,rotation:-40,opacity:0},{scale:1,rotation:0,opacity:1,duration:1.2,ease:'elastic.out(1,.6)'},24.1)
+  .to('#doneBadge',{opacity:1,y:-3,duration:.5,ease:'expo.out'},w('all')+.4);
 
-/* ---------- S5 whatever / new product 27.15 - 31.85 ---------- */
-show('#s5',27.1,31.95);
-tl.fromTo('#s5',{opacity:0,scale:1.06},{opacity:1,scale:1,duration:.4,ease:'expo.out'},27.1);
-const F1=mkWords('#w5a',[['Whatever',w('whatever')],["you're",w("you're")]]); wordIn(F1);
-const F2=mkWords('#w5b',[['doing,',w('doing')]]); wordIn(F2);
-tl.to([...F1,...F2],{opacity:0,y:-12,filter:'blur(6px)',duration:.3,stagger:.03,ease:'power2.in'},w('perplexity',2)-.3);
-const F3=mkWords('#w5c',[['Perplexity',w('perplexity',2)],['can',w('can')],['guide',w('guide')],['you.',w('you',1)]]); wordIn(F3);
-F3[0].style.color=TEAL;
-tl.to(F3,{opacity:0,y:-12,filter:'blur(6px)',duration:.3,stagger:.03,ease:'power2.in'},30.2);
-show('#prodRow',30.35,31.95);
-tl.fromTo('#pNew',{opacity:0,x:30,filter:'blur(8px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.5,ease:'expo.out'},w('new',1)-.05)
-  .fromTo('#pProd',{opacity:0,x:-30,filter:'blur(8px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.5,ease:'expo.out'},w('product'))
-  .to('#prodRow',{scale:1.4,opacity:0,filter:'blur(10px)',duration:.4,ease:'expo.in',transformOrigin:'50% 50%'},31.55);
-const PIC=[ // headphones, watch, speaker — drawn as little 3D-ish badges
- `<svg viewBox="0 0 88 88"><defs><radialGradient id="g1" cx=".35" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfe6e3"/></radialGradient></defs><circle cx="44" cy="44" r="42" fill="url(#g1)"/><path d="M22 52v-8a22 22 0 0144 0v8" fill="none" stroke="#13343b" stroke-width="5" stroke-linecap="round"/><rect x="16" y="48" width="13" height="20" rx="5" fill="#20808d"/><rect x="59" y="48" width="13" height="20" rx="5" fill="#20808d"/></svg>`,
- `<svg viewBox="0 0 88 88"><circle cx="44" cy="44" r="42" fill="url(#g1)"/><rect x="34" y="12" width="20" height="64" rx="7" fill="#13343b"/><rect x="27" y="26" width="34" height="36" rx="10" fill="#0b1414" stroke="#2c4c50" stroke-width="2"/><circle cx="44" cy="44" r="10" fill="none" stroke="#7ff0e6" stroke-width="3"/><path d="M44 38v6l4 3" stroke="#7ff0e6" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`,
- `<svg viewBox="0 0 88 88"><circle cx="44" cy="44" r="42" fill="url(#g1)"/><rect x="28" y="16" width="32" height="56" rx="12" fill="#f3d9c4" stroke="#d9b597" stroke-width="2"/><circle cx="44" cy="50" r="11" fill="#13343b"/><circle cx="44" cy="50" r="4" fill="#20808d"/><circle cx="44" cy="28" r="4" fill="#13343b"/></svg>`];
-$('#pIcon').innerHTML=PIC.map((s,i)=>`<div class="abs pic" style="inset:0">${s}</div>`).join('');
-$$('#pIcon .pic').forEach((e,i)=>{ const t=w('new',1)+.05+i*.4;
-  tl.fromTo(e,{scale:0,rotation:-30,opacity:1},{scale:1,rotation:0,duration:.45,ease:'back.out(2.2)'},t);
-  if(i<2) tl.to(e,{scale:0,rotation:30,duration:.18,ease:'power2.in'},t+.32); });
+/* ---------- S6 whatever / guide / new product ---------- */
+tl.fromTo('#cam6',{scale:1},{scale:1.08,duration:6,ease:'sine.inOut'},27.9);
+const A6=mkLine('#l6a',[['Whatever',w('whatever')],["you're",w("you're")]]); const B6=mkLine('#l6b',[['doing,',w('doing')]]);
+wordsIn(A6); wordsIn(B6); wordsOut([...A6,...B6],w('perplexity',2)-.35);
+const C6=mkLine('#l6c',[['Perplexity',w('perplexity',2)],['can',w('can')],['guide',w('guide')],['you.',w('you',1)]]); wordsIn(C6); wordsOut(C6,31.25);
+tl.set('#prodRow',{visibility:'visible'},31.4);
+tl.fromTo('#pNew',{opacity:0,x:40,filter:'blur(12px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.7,ease:'expo.out'},w('new',1)-.1)
+  .fromTo('#pProd',{opacity:0,x:-40,filter:'blur(12px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.7,ease:'expo.out'},w('product')-.05);
+['headphones','watch','bulb'].forEach((n,i)=>{ const e=document.createElement('img'); e.src=OBJ[n]; e.className='obj'; e.style.cssText='left:15px;top:0;width:120px;height:120px;object-fit:contain'; $('#pIcon').appendChild(e);
+  const t=w('new',1)+i*.45; tl.fromTo(e,{scale:0,rotation:-40,y:30},{scale:1,rotation:0,y:0,duration:.55,ease:'back.out(1.8)'},t);
+  if(i<2) tl.to(e,{scale:0,rotation:40,y:-20,duration:.25,ease:'power2.in'},t+.42); });
 
-/* ---------- S6 setup guide 31.85 - 38.5 ---------- */
-show('#s6',31.8,38.55);
-tl.fromTo('#s6',{opacity:0},{opacity:1,duration:.3},31.8)
-  .fromTo('#ph6',{y:440,rotation:8,scale:.9},{y:0,rotation:-2,scale:1,duration:1.1,ease:'expo.out'},31.85)
-  .to('#ph6',{rotation:2,y:-6,duration:2.6,ease:'sine.inOut'},33.0)
-  .fromTo('#q6',{opacity:0,y:10,scale:.9},{opacity:1,y:0,scale:1,duration:.5,ease:'expo.out'},32.2)
-  .fromTo('#prodCard',{opacity:0,y:16},{opacity:1,y:0,duration:.6,ease:'expo.out'},w('walks'));
-$('#watchIc').innerHTML=PIC[1].replace('<svg ','<svg width="56" height="64" ');
-const ST=['Charge to 50%','Install the companion app','Hold near phone to pair','Update and you\'re set'];
-ST.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.style.height='38px'; r.style.borderBottom='1px solid #eeeae0';
-  r.innerHTML=`<div class="ck">${ckSvg}</div><span style="font-size:10px"><b style="color:${TEAL}">${i+1}</b>&nbsp; ${t}</span>`; $('#steps6').appendChild(r);
-  tl.fromTo(r,{opacity:0,x:18},{opacity:1,x:0,duration:.5,ease:'expo.out'},w('every',1)-.1+i*.16); r.dataset.ck=w('simply')+i*.3; });
-// "for anything you do": tasks float out around the phone
+/* ---------- S8 phone guide, then everything you do ---------- */
+tl.fromTo('#ph8',{y:520,rotationY:-25,rotationZ:6},{y:0,rotationY:-8,rotationZ:-2,duration:1.3,ease:'expo.out'},33.65)
+  .to('#ph8',{rotationY:8,rotationZ:1.5,duration:4.2,ease:'sine.inOut'},34.9)
+  .fromTo('#q8',{opacity:0,y:20,scale:.92},{opacity:1,y:0,scale:1,duration:.7,ease:'expo.out'},33.9)
+  .fromTo('#prod8',{opacity:0,y:30},{opacity:1,y:0,duration:.8,ease:'expo.out'},w('walks'));
+const ST=['Charge to 50%','Install the companion app','Hold near your phone to pair','Update, and you\'re set'];
+ST.forEach((t,i)=>{ const r=document.createElement('div'); r.className='li'; r.style.cssText='height:74px;border-bottom:2px solid #eeeae0;font-size:21px;gap:16px';
+  r.innerHTML=`<div class="ck" style="width:30px;height:30px;border-radius:9px;border-width:3px">${ck.replace('width="9" height="9"','width="18" height="18"')}</div><span><b style="color:${TEAL}">${i+1}</b>&nbsp; ${t}</span>`; $('#steps8').appendChild(r);
+  tl.fromTo(r,{opacity:0,x:30},{opacity:1,x:0,duration:.6,ease:'expo.out'},w('every',1)-.15+i*.18); r.dataset.ck=w('simply')+i*.32; });
+[['watch',60,90,96,.35],['headphones',640,70,90,.5],['bulb',90,330,70,.7],['star',660,320,64,.3],['cube',520,30,50,.9],['sphere',230,380,46,.85]].forEach(([n,x,y,s,d],i)=>{
+  const e=addObj('#objs8',n,x,y,s,d,(i%2?1:-1)*25); tl.fromTo(e,{opacity:0,scale:.4},{opacity:1,scale:1,duration:1.4,ease:'expo.out'},34.2+i*.12); });
 const TASKS=['Fix a flat tire','Plan a weekend trip','Learn guitar chords','Bake sourdough','Set up a router','Start a garden','Train for a 5K','Budget my month'];
-const BB=$('#bubbles');
-TASKS.forEach((t,i)=>{ const c=document.createElement('div'); c.className='chip'; c.innerHTML=`<b></b>${t}`; BB.appendChild(c);
-  const a=i/TASKS.length*Math.PI*2-Math.PI/2, rx=300, ry=175;
-  const t0=w('perplexity',3)+.15+i*.09;
-  tl.fromTo(c,{left:350,top:230,scale:0,opacity:0},{left:350+Math.cos(a)*rx,top:230+Math.sin(a)*ry,scale:1,opacity:1,duration:.9,ease:'expo.out'},t0); });
-tl.to('#ph6',{scale:.86,duration:1.6,ease:'sine.inOut'},w('perplexity',3))
-  .to('#s6',{scale:1.3,opacity:0,filter:'blur(12px)',duration:.4,ease:'expo.in',transformOrigin:'50% 50%'},38.2);
+const CH=[]; TASKS.forEach((t,i)=>{ const c=document.createElement('div'); c.className='chip'; c.innerHTML=`<b></b>${t}`; $('#chips').appendChild(c); CH.push(c);
+  tl.fromTo(c,{opacity:0,scale:.3},{opacity:1,scale:1,duration:1,ease:'expo.out'},w('perplexity',3)+.1+i*.1); });
+tl.to('#ph8',{scale:.4,duration:2.2,ease:'power2.inOut'},w('perplexity',3)-.2);
 
-/* ---------- S7 learn it / do it / make it done 38.5 - 41.3 ---------- */
-show('#s7',38.45,41.35);
-tl.fromTo('#s7',{opacity:0},{opacity:1,duration:.25},38.45);
+/* ---------- S10 learn it / do it / make it done ---------- */
+tl.fromTo('#cam10',{scale:1},{scale:1.12,duration:4,ease:'sine.inOut'},40.95);
 
-/* ---------- S8 end card 41.3 - 44.5 ---------- */
-show('#s8',41.2);
-tl.fromTo('#s8',{opacity:0,scale:1.08},{opacity:1,scale:1,duration:.6,ease:'expo.out'},41.2)
-  .to('#endMarkP',{strokeDashoffset:0,duration:.9,ease:'power2.inOut'},41.4)
-  .fromTo('#endWordClip svg',{x:-260},{x:0,duration:.9,ease:'expo.inOut'},41.75)
-  .fromTo('#endCta',{opacity:0,y:14},{opacity:1,y:0,duration:.6,ease:'expo.out'},w('start'))
-  .to('#endDark',{opacity:.82,duration:.9,ease:'sine.in'},43.55);
-const EB=$('#endBlobs'); for(let i=0;i<6;i++){ const b=document.createElement('div'); b.className='abs endb';
-  Object.assign(b.style,{left:(i*150-40)+'px',top:(i%2?30:240)+'px',width:'280px',height:'200px',borderRadius:'50%',background:['#3aa3a8','#7fcfca','#1d6f78','#a8ddd6','#2b8a92','#5fb9b7'][i]}); EB.appendChild(b); }
+/* ---------- S11 end card ---------- */
+tl.to('#endMarkP',{strokeDashoffset:0,duration:1.1,ease:'power2.inOut'},w('perplexity',4)-.1)
+  .fromTo('#cam11',{x:50},{x:0,duration:1,ease:'expo.inOut'},w('perplexity',4)+.3)
+  .fromTo('#endWordClip svg',{x:-290},{x:0,duration:1,ease:'expo.inOut'},w('perplexity',4)+.35)
+  .fromTo('#endCta',{opacity:0,y:16,filter:'blur(8px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.8,ease:'expo.out'},w('start'))
+  .fromTo('#cam11',{scale:1},{scale:1.06,duration:4,ease:'sine.inOut'},44.5)
+  .to('#endDark',{opacity:.9,duration:1.1,ease:'sine.in'},47.4);
 
-/* ---------- continuous: typing, floats, checks (pure functions of time) ---------- */
+/* ---------- continuous: pure functions of time ---------- */
 const typed=(s,t0,t1,T)=>T<t0?'':s.slice(0,Math.round(Math.min(1,(T-t0)/(t1-t0))*s.length));
+const G=$('#grain').getContext('2d'); const GI=G.createImageData(414,250);
+function grain(T){ let seed=(Math.floor(T*60)*9301+49297)%233280; const d=GI.data;
+  for(let i=0;i<d.length;i+=4){ seed=(seed*9301+49297)%233280; const v=seed/233280*255; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; } G.putImageData(GI,0,0); }
 async function render(T){
-  // search typing synced to "Want to make pizza"
-  $('#qText').textContent=typed(Q,w('want',1),w('pizza')+.45,T);
-  $('#qCaret').style.opacity=T>w('want',1)-.1&&T<22.3?(.5+.5*Math.cos(T*14)):0;
-  // learn it / do it / make it done
-  const L=[['Learn it',w('learn')],['Do it',w('do',1)],['Make it done',w('make',1)]];
-  let s7='', k=-1; L.forEach(([s,t],i)=>{ if(T>=t-.02){ k=i; } });
-  if(k>=0){ const [s,t]=L[k]; s7=typed(s,t-.02,t+(k===2?.55:.3),T); }
-  $('#w7').innerHTML=`<span style="display:inline-block">${s7}</span><span style="display:inline-block;width:3px;height:38px;background:${TEAL};vertical-align:-6px;margin-left:3px;opacity:${(T>38.5&&T<41.3)?(.5+.5*Math.cos(T*12)).toFixed(2):0}"></span>`;
-  // checks tick on the voice
+  grain(T);
+  AB.forEach(([e,i,k],n)=>{ const a=T*(.16+i*.03)+n; e.style.left=(300+Math.cos(a)*260-[520,440,380,300][i]/2+(i-1.5)*120)+'px';
+    e.style.top=(300+Math.sin(a*1.3)*140-[520,440,380,300][i]*.4+(i%2?-60:120))+'px'; });
+  // floating renders: parallax drift + depth of field (far = smaller blur? no: far = blurrier and dimmer)
+  floaters.forEach(([e,x,y,s,d,sp,ph])=>{ if(e.dataset.orb!==undefined) return;
+    e.style.left=x+'px'; e.style.top=y+'px';
+    e.style.translate=`${(10*Math.sin(T*.7+ph)*(1-d*.5)).toFixed(1)}px ${(14*Math.sin(T*.55+ph*1.3)*(1-d*.5)).toFixed(1)}px`;
+    e.style.rotate=`${(sp*Math.sin(T*.4+ph)).toFixed(1)}deg`;
+    e.style.filter=`blur(${(d>.6?(d-.6)*14:d<.25?(.25-d)*22:0).toFixed(1)}px) drop-shadow(0 14px 18px rgba(0,0,0,.35))`; });
+  // the orbit of little things around "something new"
+  $$('#orbit1 .obj').forEach((e,i)=>{ const a=i/9*Math.PI*2+(T-6)*.5, z=Math.sin(a); const s=+e.style.width.replace('px','');
+    e.style.left=(414+Math.cos(a)*330-s/2)+'px'; e.style.top=(250+z*120-s/2)+'px'; e.style.scale=String(.75+.35*(z+1)/2);
+    e.style.zIndex=Math.round(z*10+10); e.style.filter=`blur(${(Math.max(0,-z)*4).toFixed(1)}px) drop-shadow(0 12px 14px rgba(0,0,0,.35))`; });
+  // the ring: a tilted 3D ellipse, near cards sharp, far cards soft
+  RING.forEach((e,i)=>{ const a=i/RING.length*Math.PI*2+(T-10)*.42, z=Math.sin(a); const wv=e.offsetWidth||64, hv=e.offsetHeight||64;
+    e.style.left=(414+Math.cos(a)*340-wv/2)+'px'; e.style.top=(252+z*150-hv/2)+'px'; e.style.scale=String(.72+.4*(z+1)/2);
+    e.style.zIndex=Math.round(z*10+10); e.style.filter=`blur(${(Math.max(0,-z)*5).toFixed(1)}px)`; e.style.rotate=`${(Math.cos(a*2+i)*6).toFixed(1)}deg`; });
+  // chips orbit the shrinking phone
+  CH.forEach((c,i)=>{ const a=i/CH.length*Math.PI*2+(T-38)*.35, z=Math.sin(a);
+    c.style.left=(414+Math.cos(a)*300-70)+'px'; c.style.top=(250+z*160-18)+'px'; c.style.scale=String(.8+.3*(z+1)/2); c.style.zIndex=Math.round(z*10+10);
+    c.style.filter=`blur(${(Math.max(0,-z)*3).toFixed(1)}px)`; });
+  // search typing, steps ticking
+  $('#qText').textContent=typed(Q,w('want',1),w('pizza')+.5,T);
+  $('#qCaret').style.opacity=T>w('want',1)-.1&&T<23.4?(.5+.5*Math.cos(T*12)).toFixed(2):0;
   $$('[data-ck]').forEach(r=>r.querySelector('.ck').classList.toggle('done',T>=+r.dataset.ck));
   $('#pzStep').textContent=T<w('ingredients')?1:T<w('process')?2:T<w('all')?3:4;
-  // things are never still
-  OBJ.forEach((e,i)=>{ e.style.translate=`${(6*Math.sin(T*1.3+i)).toFixed(2)}px ${(9*Math.sin(T*1.1+i*1.7)).toFixed(2)}px`; e.style.rotate=`${(T*(i%2?40:-30)).toFixed(1)}deg`; });
-  icEls.forEach((e,i)=>{ const a=T*.35+i; e.style.translate=`${(10*Math.sin(a)).toFixed(2)}px ${(7*Math.cos(a*1.2)).toFixed(2)}px`; });
-  ringEls.forEach(([e,wv,hv],i)=>{ const a=i/ringEls.length*Math.PI*2+(T-10)*.55; const rx=330+(i%3)*26, ry=158+(i%2)*22;
-    e.style.left=(414+Math.cos(a)*rx-wv/2)+'px'; e.style.top=(250+Math.sin(a)*ry-hv/2)+'px'; e.style.rotate=`${(Math.sin(a*2+i)*8).toFixed(2)}deg`;
-    e.style.zIndex=Math.round(Math.sin(a)*10+10); });
-  $$('#bubbles .chip').forEach((c,i)=>{ c.style.translate=`${(6*Math.sin(T*.9+i)).toFixed(2)}px ${(8*Math.sin(T*1.2+i*2)).toFixed(2)}px`; });
-  $$('.skyb,.endb').forEach((b,i)=>{ b.style.translate=`${(40*Math.sin(T*.25+i)).toFixed(1)}px ${(20*Math.cos(T*.3+i)).toFixed(1)}px`; });
-  $$('.fog i').forEach((f,i)=>{ f.style.translate=`${(30*Math.sin(T*.4+i)).toFixed(1)}px ${(10*Math.cos(T*.5+i)).toFixed(1)}px`; });
+  // handheld wobble on the hands shot
+  $('#hands').style.translate=`${(3*Math.sin(T*1.7)).toFixed(2)}px ${(2.5*Math.sin(T*2.3+1)).toFixed(2)}px`; $('#hands').style.rotate=`${(.5*Math.sin(T*1.3)).toFixed(2)}deg`;
+  // learn it / do it / make it done: one at a time, blur in, caret
+  const L=[['Learn it.',w('learn')],['Do it.',w('do',2)],['Make it done.',w('make',1)]]; let k=-1; L.forEach(([s,t],i)=>{ if(T>=t-.05) k=i; });
+  let html=''; if(k>=0){ const [s,t]=L[k]; const p=Math.min(1,(T-(t-.05))/.35);
+    html=`<span style="display:inline-block;opacity:${p.toFixed(2)};filter:blur(${((1-p)*12).toFixed(1)}px);transform:translateY(${((1-p)*24).toFixed(1)}px) scale(${(1.15-.15*p).toFixed(3)})">${s.replace('done','<span style="color:#3fd0c9;text-shadow:0 0 24px rgba(63,208,201,.8)">done</span>')}</span>`; }
+  $('#l10').innerHTML=html;
 }
 window.seek=async T=>{ tl.seek(T,false); await render(T); };
-window.ready=document.fonts.ready;
+window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));
 </script></body></html>
