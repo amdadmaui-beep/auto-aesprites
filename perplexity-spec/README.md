@@ -1,6 +1,6 @@
 # Perplexity spec spot (AVE Studio)
 
-`Perplexity_Spec_AVE_4x3.mp4`: 1440x1080 (4:3, like the reference), 60 fps, 48.5 s.
+`Perplexity_Spec_AVE_4x3.mp4`: 1440x1080 (4:3, like the reference), 60 fps, 45.3 s (timeline rendered at 1.07x: `--speed=1.07`, audio `atempo=1.07`).
 
 **V2 (current):** rebuilt after review ("too white, looks vector, stiff, flat voice"): Perplexity's dark teal palette
 (offblack #091717, inky #13343B, turquoise #20808D, paper #FBFAF4), real 3D renders (Fish `gpt-image-2`, cut out with
