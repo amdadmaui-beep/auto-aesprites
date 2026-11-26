@@ -52,7 +52,7 @@ html,body{width:1280px;height:720px;overflow:hidden;background:var(--paper)}
 #stack{position:absolute;inset:0;perspective:1100px;perspective-origin:640px 120px}
 .panel{position:absolute;left:213px;width:862px;height:720px;transform-origin:50% 0;overflow:hidden}
 .panel img{position:absolute;left:0;width:100%;height:auto}
-.ph{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-around;color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em}
+.ph{position:absolute;z-index:2;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-around;color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em}
 .side{position:absolute;font-family:"Mono";font-size:16px;color:#111;letter-spacing:.02em}
 .vcount{position:absolute;font-family:"Mono";font-size:34px;line-height:1.12;text-align:center;color:#111}
 /* S6 */
@@ -159,8 +159,8 @@ html,body{width:1280px;height:720px;overflow:hidden;background:var(--paper)}
       <div class="abs" style="left:0;right:0;top:34px;text-align:center;font-family:Unb;font-weight:900;font-size:94px;letter-spacing:-.02em;color:#0e0e0e">AVE STUDIO</div>
       <img id="catClip" src="clips/cat/001.jpg" style="top:150px"></div>
     <div class="panel" id="pP" style="background:linear-gradient(#ff0a5c,#ff3fa0)">
-      <div class="ph" style="height:90px"><span>2026</span><span>CURSOR</span><span>SPEC AD</span><span><i>BUILT IN CODE</i></span></div>
-      <img id="curClip" src="clips/cursor/001.jpg" style="top:142px"></div>
+      <div class="ph" style="height:40px;font-size:11px;background:linear-gradient(90deg,#ff0a5c,#ff3fa0)"><span>2026</span><span>CURSOR</span><span>SPEC AD</span><span><i>BUILT IN CODE</i></span></div>
+      <img id="curClip" src="clips/cursor/001.jpg" style="top:-60px"></div>
     <div class="panel" id="pB" style="background:#fff">
       <div class="ph" style="height:88px;background:#000;font-family:Mono;font-size:14px;letter-spacing:.42em">NOTION — AI AGENTS SPOT</div>
       <img id="notClip" src="clips/notion/001.jpg" style="top:88px"></div>
@@ -264,7 +264,7 @@ tl.to('#orRing',{rotation:360,duration:3.2,ease:'none',transformOrigin:'50% 50%'
 tl.to('#dg1',{y:-10,rotation:-8,duration:.12,yoyo:true,repeat:1},7.4).to('#dg2',{y:12,rotation:6,duration:.12,yoyo:true,repeat:1},7.48).to('#dg3',{y:-8,rotation:-6,duration:.12,yoyo:true,repeat:1},7.56);
 tl.to('#e_label',{x:-12,duration:.1,yoyo:true,repeat:1},7.86);
 // exits
-const ex=[['#e_blue',9.08],['#e_pie',9.1],['#e_orange',9.18],['#e_puzzle',9.1],['#e_ball',9.12],['#e_snow',9.24],['#e_knot',9.2],['#e_globe',9.28],['#e_inv',9.3],['#e_star',9.34],['#e_smile',9.16],['#e_amp',9.3],['#e_c',9.22],['#e_label',9.12],['#e_least',9.2],['#rays',9.18],['#e_wtf',9.36],['#e_mpill',9.46],['#e_cat',9.42],['#ibox',9.48]];
+const ex=[['#e_blue',9.08],['#e_pie',9.1],['#e_orange',9.18],['#e_puzzle',9.1],['#e_ball',9.12],['#e_snow',9.24],['#e_knot',9.2],['#e_globe',9.28],['#e_inv',9.3],['#e_star',9.34],['#e_smile',9.16],['#e_amp',9.3],['#e_c',9.22],['#e_label',9.12],['#e_least',9.2],['#rays',9.18],['#e_wtf',9.36],['#e_mpill',9.46],['#e_cat',9.22],['#ibox',9.48]];
 ex.forEach(([e,t])=>out(e,t));
 tl.to('#e_blue',{y:300,duration:.16,ease:'power2.in'},9.08);
 
