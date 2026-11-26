@@ -200,19 +200,19 @@ const sc=blobW/2462;
 ['#b0','#b1','#b2'].forEach(id=>gsap.set(id,{left:bx,top:by,width:blobW,height:964*sc}));
 gsap.set('#cam1',{scale:.42,x:250,y:20});
 tl.fromTo('#pill',{width:0,opacity:1,scaleY:.35},{width:80,scaleY:1,duration:.1,ease:'power2.out'},1.04)
-  .to('#pill',{width:390,duration:.32,ease:'expo.out'},1.14)
+  .to('#pill',{width:390,duration:.55,ease:'expo.out'},1.14)
   .fromTo('#pill',{color:'rgba(255,255,255,0)'},{color:'rgba(255,255,255,1)',duration:.12},1.2);
 gsap.set('#pill',{opacity:0});
 tl.set('#pill',{opacity:1},1.04);
-tl.fromTo('#b0',{scale:.05,rotation:-25,opacity:0},{scale:1,rotation:0,opacity:1,duration:.42,ease:'back.out(1.7)'},1.28)
-  .fromTo('#b1',{scale:.05,rotation:20,opacity:0},{scale:1,rotation:0,opacity:1,duration:.42,ease:'back.out(1.7)'},1.38)
-  .fromTo('#b2',{scale:.05,rotation:-15,opacity:0},{scale:1,rotation:0,opacity:1,duration:.42,ease:'back.out(1.7)'},1.5);
+tl.fromTo('#b0',{scale:.05,rotation:-25,opacity:0},{scale:1,rotation:0,opacity:1,duration:.7,ease:'back.out(1.4)'},1.28)
+  .fromTo('#b1',{scale:.05,rotation:20,opacity:0},{scale:1,rotation:0,opacity:1,duration:.7,ease:'back.out(1.4)'},1.38)
+  .fromTo('#b2',{scale:.05,rotation:-15,opacity:0},{scale:1,rotation:0,opacity:1,duration:.7,ease:'back.out(1.4)'},1.5);
 pop('#kPurple',1.33,{r:-60}); pop('#kPink',1.58,{r:40}); pop('#kBlack',1.7,{r:-30}); pop('#kGrey',1.86,{r:45});
 pop('#o1',1.62); pop('#o2',1.8); pop('#chL',1.7); pop('#chR',1.66);
 tl.fromTo('#tg1',{opacity:0,x:-20},{opacity:1,x:0,duration:.3},1.78).fromTo('#tg2',{opacity:0,x:20},{opacity:1,x:0,duration:.3},1.84);
-tl.to('#cam1',{scale:.6,x:150,y:10,duration:.5,ease:'power1.inOut'},1.2)
-  .to('#cam1',{scale:1,x:0,y:0,duration:.16,ease:'power3.inOut'},1.7)
-  .to('#cam1',{scale:1.13,duration:1.05,ease:'none'},1.86)
+tl.to('#cam1',{scale:.5,x:200,y:14,duration:.3,ease:'sine.inOut'},1.2)
+  .to('#cam1',{scale:1.06,x:0,y:0,duration:1.0,ease:'power3.inOut'},1.48)
+  .to('#cam1',{scale:1.13,duration:.32,ease:'sine.in'},2.48)
   .fromTo('#ring',{scale:.25,opacity:0},{scale:1,opacity:1,duration:.38,ease:'expo.out'},2.04)
   .fromTo('#ring2',{scale:.2,opacity:0},{scale:1,opacity:1,duration:.38,ease:'expo.out'},2.1);
 gsap.set(['#ring','#ring2','#tg1','#tg2'],{opacity:0});
@@ -274,27 +274,22 @@ tl.to('#e_blue',{y:300,duration:.2,ease:'back.in(1.6)'},9.08);
 
 /* ---------- S4  9.95 - 12.0  our work card ---------- */
 show('#s4',9.95,12.0);
-tl.fromTo('#card',{scale:.12,rotationZ:38,rotationY:70,x:-20,y:-110},{scale:.75,rotationZ:12,rotationY:30,x:0,y:-20,duration:.12,ease:'none'},9.98)
-  .to('#card',{scale:.75,rotationZ:-2,rotationY:0,y:0,duration:.12,ease:'power2.out'},10.1)
-  .to('#card',{rotationZ:0,duration:.4},10.22)
-  .to('#card',{scale:1.02,duration:1.3,ease:'power1.inOut'},10.55)
-  .to('#card',{scale:.42,rotationZ:2,duration:.2,ease:'power2.in'},11.72)
-  .to('#card',{scale:0,duration:.08,ease:'power2.in'},11.9);
+tl.fromTo('#card',{scale:.1,rotationZ:40,rotationY:75,x:-40,y:-130},{scale:.75,rotationZ:0,rotationY:0,x:0,y:0,duration:.65,ease:'expo.out'},9.95)
+  .to('#card',{scale:1.02,duration:1.0,ease:'sine.inOut'},10.5)
+  .to('#card',{scale:0,rotationZ:-14,rotationY:-40,y:24,duration:.44,ease:'power3.in'},11.52);
 
 /* ---------- S5  12.02 - 14.98  the stack ---------- */
 show('#s5',12.02,14.98);
 const R=17; // panel tilt
 gsap.set('#pB',{top:350,rotationX:R}); gsap.set('#pP',{top:208,rotationX:R,width:820,left:233}); gsap.set('#pY',{top:65,rotationX:R,width:760,left:258});
-tl.fromTo('#pB',{top:-560},{top:60,duration:.12,ease:'power2.out'},12.04)
-  .fromTo('#pP',{top:-760},{top:-60,duration:.1,ease:'power2.out'},12.22)
-  .to('#pB',{top:200,duration:.1,ease:'power2.out'},12.22)
-  .fromTo('#pY',{top:-900},{top:-80,duration:.1,ease:'power2.out'},12.42)
-  .to('#pP',{top:110,duration:.1,ease:'power2.out'},12.42).to('#pB',{top:270,duration:.1,ease:'power2.out'},12.42)
-  .to('#pY',{top:65,duration:.2,ease:'power3.out'},12.56).to('#pP',{top:208,duration:.2,ease:'power3.out'},12.56).to('#pB',{top:350,duration:.2,ease:'power3.out'},12.56)
-  .to('#stack',{scale:.86,transformOrigin:'640px 120px',y:28,duration:1.6,ease:'power1.inOut'},12.85);
-['#sdL','#sdR','#vcL','#vcR'].forEach((e,i)=>tl.fromTo(e,{opacity:0},{opacity:1,duration:.04},12.88+i*.08));
-tl.to('#pY',{top:-900,duration:.14,ease:'power2.in'},14.5).to('#pP',{top:-900,duration:.14,ease:'power2.in'},14.68)
-  .to('#pB',{top:-900,duration:.14,ease:'power2.in'},14.84).to(['#sdL','#sdR','#vcL','#vcR'],{opacity:0,duration:.05},14.6);
+tl.fromTo('#pB',{top:-560},{top:60,duration:.55,ease:'expo.out'},12.02)
+  .fromTo('#pP',{top:-760},{top:-60,duration:.55,ease:'expo.out'},12.3).to('#pB',{top:200,duration:.55,ease:'expo.out'},12.3)
+  .fromTo('#pY',{top:-900},{top:-80,duration:.55,ease:'expo.out'},12.58).to('#pP',{top:110,duration:.55,ease:'expo.out'},12.58).to('#pB',{top:270,duration:.55,ease:'expo.out'},12.58)
+  .to('#pY',{top:65,duration:.75,ease:'power3.inOut'},12.95).to('#pP',{top:208,duration:.75,ease:'power3.inOut'},12.95).to('#pB',{top:350,duration:.75,ease:'power3.inOut'},12.95)
+  .to('#stack',{scale:.88,transformOrigin:'640px 120px',y:24,duration:1.5,ease:'sine.inOut'},13.05);
+['#sdL','#sdR','#vcL','#vcR'].forEach((e,i)=>tl.fromTo(e,{opacity:0,y:8},{opacity:1,y:0,duration:.4,ease:'power2.out'},12.9+i*.1));
+tl.to('#pY',{top:-900,duration:.5,ease:'power3.in'},14.0).to('#pP',{top:-900,duration:.5,ease:'power3.in'},14.16)
+  .to('#pB',{top:-900,duration:.5,ease:'power3.in'},14.32).to(['#sdL','#sdR','#vcL','#vcR'],{opacity:0,duration:.3},14.2);
 
 /* ---------- S6  16.8 - 19.5 ---------- */
 show('#s6',16.75);
@@ -323,7 +318,7 @@ const LIFE=[ // selector, ampX, ampY, rot, freq, phase, from, to
  ['#e_mpill',3,4,1,.42,5,6.2,9.5],['#e_inv',4,3,0,.8,6,6.6,9.3],['#e_star',3,3,0,.9,7,6.6,9.3],['#e_snow',3,4,0,.5,8,6.3,9.2],['#e_amp',4,5,6,.55,9,6.4,9.3],
  ['#e_c',3,4,10,.65,10,6.5,9.2],['#e_globe',3,3,0,.6,11,6.55,9.3],['#e_knot',3,3,0,.6,12,6.6,9.2],['#e_cat',2,4,2,.5,13,6.6,9.2],['#e_label',2,3,1.5,.5,14,6.95,9.1],
  ['#e_blue',3,6,1.2,.38,15,6.8,9.1],['#e_least',2,2,0,.6,16,6.5,9.2],['#e_wtf',2,2,0,.7,17,6.6,9.3],['#rays',0,0,6,.8,18,6.4,9.2],
- ['#card',0,6,2,.6,0,10.25,11.7]];
+ ['#card',0,6,2,.5,0,10.5,11.5]];
 const easeOB=x=>{const c=2.2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
 const stepRot=(T,t0,every,deg,d=.22)=>{ if(T<t0) return 0; const k=Math.floor((T-t0)/every), f=Math.min(1,((T-t0)-k*every)/d); return deg*(k+easeOB(f)); };
 const INV=['M2 0h1v1H2zM8 0h1v1H8zM3 1h5v1H3zM2 2h7v1H2zM1 3h2v1H1zM4 3h3v1H4zM8 3h2v1H8zM0 4h11v1H0zM0 5h1v1H0zM2 5h7v1H2zM10 5h1v1h-1zM0 6h1v1H0zM2 6h1v1H2zM8 6h1v1H8zM10 6h1v1h-1zM3 7h2v1H3zM6 7h2v1H6z',
