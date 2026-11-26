@@ -5,19 +5,19 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').split('=')[1];
-const FPS = +(arg("fps") || 60), SUB = +(arg('sub') || 2);
+const FPS = +(arg("fps") || 60), SUB = +(arg('sub') || 2), SPEED = +(arg('speed') || 1);  // speed > 1 plays the timeline faster
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 960, height: 720 }, deviceScaleFactor: 1.5 });
 await page.goto('file://' + path.resolve('index.html'));
 await page.evaluate(() => window.ready);
-const shot = async t => { await page.evaluate(t => window.seek(t), t); return page.screenshot({ type: 'jpeg', quality: 92 }); };
+const shot = async t => { await page.evaluate(t => window.seek(t), t * (arg('times') ? 1 : SPEED)); return page.screenshot({ type: 'jpeg', quality: 92 }); };
 if (arg('times')) {
   fs.mkdirSync('build/stills', { recursive: true });
   for (const t of arg('times').split(',')) fs.writeFileSync(`build/stills/t${(+t).toFixed(2)}.jpg`, await shot(+t));
 } else {
   const out = arg('video') || 'build/video.mp4';
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  const dur = await page.evaluate(() => window.DUR), N = Math.round(dur * FPS);
+  const dur = await page.evaluate(() => window.DUR), N = Math.round(dur / SPEED * FPS);
   // each output frame = average of SUB samples spread over a 180-degree shutter
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(FPS * SUB), '-i', '-',
     '-vf', `tmix=frames=${SUB}:weights=${Array(SUB).fill(1).join(' ')},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N/${FPS}/TB`,

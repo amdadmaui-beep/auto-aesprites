@@ -100,10 +100,10 @@ html,body{width:960px;height:720px;overflow:hidden;background:#000}
     <div class="aur" id="aur3"></div>
     <div id="logoC" class="abs" style="inset:0">
       <div id="dot" class="abs" style="left:404px;top:240px;width:20px;height:20px;border-radius:50%;border:5px solid var(--glow);box-shadow:0 0 30px var(--glow)"></div>
-      <svg id="bigMark" class="abs" style="left:372px;top:206px;width:72px;height:72px;overflow:visible;filter:drop-shadow(0 0 14px rgba(63,208,201,.7))" viewBox="-1 -1 38 38"><path id="bigMarkP" class="markP" fill="none" stroke="#3fd0c9" stroke-width="1.6"/></svg>
-      <div id="bigWordClip" class="abs" style="left:456px;top:203px;width:280px;height:80px;overflow:hidden">
+      <svg id="bigMark" class="abs" style="left:243px;top:206px;width:72px;height:72px;overflow:visible;filter:drop-shadow(0 0 14px rgba(63,208,201,.7))" viewBox="-1 -1 38 38"><path id="bigMarkP" class="markP" fill="none" stroke="#3fd0c9" stroke-width="1.6"/></svg>
+      <div id="bigWordClip" class="abs" style="left:327px;top:203px;width:280px;height:80px;overflow:hidden">
         <svg id="bigWord" class="abs" style="left:0;top:0;width:258px;height:80px" viewBox="36 0 114 36"><path class="wordP" fill="#fbfaf4"/></svg></div>
-      <div id="tagline" class="abs" style="left:0;right:0;top:300px;text-align:center;font-size:20px;font-weight:500;color:rgba(251,250,244,.75);letter-spacing:-.01em"></div>
+      <div id="tagline" class="abs" style="left:0;right:0;top:300px;text-align:center;font-size:22px;font-weight:500;color:rgba(251,250,244,.75);letter-spacing:-.01em"></div>
     </div>
     <div id="monitor" class="abs" style="left:174px;top:80px;width:480px;height:370px;transform-origin:50% 38%;visibility:hidden">
       <div id="mScreen" class="abs" style="left:0;top:0;width:480px;height:300px;border-radius:14px;padding:9px;background:linear-gradient(145deg,#2b2f30,#0c0e0f 40%,#1d2122);box-shadow:0 0 0 1.5px #555c5e,0 30px 60px rgba(0,0,0,.6)">
@@ -315,10 +315,14 @@ tl.to('#guides',{opacity:0,duration:.4},15.45);
 tl.fromTo('#dot',{scale:0},{scale:1,duration:.5,ease:'back.out(3)'},15.6).to('#dot',{scale:2.8,opacity:0,duration:.4,ease:'power2.in'},16.05);
 const ML=$('#bigMarkP').getTotalLength(); gsap.set(['#bigMarkP','#endMarkP'],{strokeDasharray:ML,strokeDashoffset:ML});
 tl.to('#bigMarkP',{strokeDashoffset:0,duration:.9,ease:'power2.inOut'},16.05)
-  .fromTo('#logoC',{x:150},{x:0,duration:.9,ease:'expo.inOut'},w('perplexity')-.05)
+  .fromTo('#logoC',{x:135},{x:0,duration:.9,ease:'expo.inOut'},w('perplexity')-.05)
   .fromTo('#bigWord',{x:-260},{x:0,duration:.9,ease:'expo.inOut'},w('perplexity'))
   .fromTo('#logoC',{scale:1},{scale:1.06,duration:2.4,ease:'sine.inOut',transformOrigin:'414px 240px'},16.4);
-const TAG=mkLine('#tagline',[['Your',w('your')],['answer',w('answer',1)],['engine',w('engine')],['for',w('for')],['everyday',w('everyday')],['tasks.',w('tasks')]]); wordsIn(TAG);
+const TAG=mkLine('#tagline',[['Your',w('your')],['answer',w('answer',1)],['engine',w('engine')],['for',w('for')],['everyday',w('everyday')],['tasks.',w('tasks')]]);
+// the whole line fades in centred under the logo; each word lights up as it is spoken
+tl.fromTo('#tagline',{opacity:0,y:14,filter:'blur(10px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.7,ease:'expo.out'},w('your')-.15);
+TAG.forEach(e=>{ const t=+e.dataset.t; tl.fromTo(e,{color:'rgba(251,250,244,.55)',textShadow:'0 0 0px rgba(63,208,201,0)'},{color:'#bff8f2',textShadow:'0 0 18px rgba(63,208,201,.9)',duration:.18},t-.04)
+  .to(e,{color:'rgba(251,250,244,.85)',textShadow:'0 0 0px rgba(63,208,201,0)',duration:.7},t+.3); });
 tl.to('#logoC',{y:-190,scale:.5,opacity:0,filter:'blur(10px)',duration:.8,ease:'power3.inOut'},20.7);
 tl.set('#monitor',{visibility:'visible'},20.75)
   .fromTo('#monitor',{y:420,rotationX:34,scale:.86},{y:0,rotationX:4,scale:1,duration:1.0,ease:'expo.out'},20.75)
