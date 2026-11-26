@@ -15,3 +15,5 @@ src/
 build/
 *.txt
 sfx_library/**/*.wav
+node_modules/
+.reanimate/
