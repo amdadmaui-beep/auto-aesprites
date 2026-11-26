@@ -5,7 +5,7 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 const arg = k => (process.argv.find(a => a.startsWith(`--${k}=`)) || '').split('=')[1];
-const FPS = 30, SUB = +(arg('sub') || 2);
+const FPS = +(arg("fps") || 60), SUB = +(arg('sub') || 2);
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1.5 });
 await page.goto('file://' + path.resolve('index.html'));

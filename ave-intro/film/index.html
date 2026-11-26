@@ -182,8 +182,8 @@ html,body{width:1280px;height:720px;overflow:hidden;background:var(--paper)}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const tl=gsap.timeline({paused:true});
 const show=(id,a,b)=>{tl.set(id,{visibility:'visible'},a); if(b!=null) tl.set(id,{visibility:'hidden'},b);};
-const pop=(el,t,o={})=>tl.fromTo(el,{scale:0,rotation:o.r||0},{scale:1,rotation:0,duration:o.d||.32,ease:o.e||'back.out(2.2)'},t);
-const out=(el,t,d=.14)=>tl.to(el,{scale:0,duration:d,ease:'power2.in'},t);
+const pop=(el,t,o={})=>tl.fromTo(el,{scale:0,rotation:o.r||0,y:o.y||0},{scale:1,rotation:0,y:0,duration:o.d||.6,ease:o.e||'elastic.out(1,0.55)'},t);
+const out=(el,t,d=.16)=>{tl.to(el,{scale:1.14,duration:.07,ease:'power2.out'},t-.07); tl.to(el,{scale:0,duration:d,ease:'back.in(2.2)'},t);};
 
 /* ---------- S1  0.00 - 2.93 ---------- */
 show('#s1',0,2.95);
@@ -222,7 +222,7 @@ const role='Motion Studio.';
 $('#role').innerHTML=[...role].map(ch=>`<span>${ch===' '?'&nbsp;':ch}</span>`).join('');
 $$('#role span').forEach((s,i)=>{ gsap.set(s,{opacity:0}); tl.to(s,{opacity:1,duration:.05},1.88+i*.034); });
 // flash out
-tl.to('#cam1',{scale:1.32,opacity:0,duration:.08,ease:'power2.in'},2.86);
+tl.to('#cam1',{scale:1.45,opacity:0,filter:'blur(10px)',duration:.16,ease:'expo.in'},2.78);
 
 /* ---------- S2  3.00 - 5.45 ---------- */
 show('#s2',2.98,5.5);
@@ -250,13 +250,17 @@ tl.set('#cam2',{x:-12},4.88).set('#cam2',{x:8},4.92).set('#cam2',{opacity:0},5.1
 /* ---------- S3  5.45 - 9.58 ---------- */
 show('#s3',5.45,9.6);
 gsap.set('#ibox',{y:24,scaleX:.96});
-tl.fromTo('#ibox',{opacity:0,borderStyle:'dashed'},{opacity:1,duration:.05},5.62).set('#ibox',{borderStyle:'solid'},5.86)
+tl.fromTo('#ibox',{opacity:0,borderStyle:'dashed',scale:.86},{opacity:1,scale:.96,duration:.3,ease:'expo.out'},5.6).set('#ibox',{borderStyle:'solid'},5.86)
   .to('#ibox',{y:0,scaleX:1,duration:.4,ease:'expo.out'},5.95);
-const p3=[['#e_pie',6.08,-30],['#e_smile',6.1],['#e_ball',6.1,90],['#e_puzzle',6.15,45],['#e_orange',6.2,-20],['#e_snow',6.3,90],['#e_amp',6.4],['#e_c',6.5],['#e_globe',6.55],['#e_knot',6.6,90],['#e_inv',6.62],['#e_star',6.62,120],['#e_label',6.95]];
-p3.forEach(([e,t,r])=>pop(e,t,{r}));
+const p3=[['#e_pie',6.06,-40,30],['#e_smile',6.1,0,10],['#e_ball',6.1,120,20],['#e_puzzle',6.15,90,0],['#e_snow',6.3,180,0],['#e_amp',6.4,-30,20],['#e_c',6.5,40,10],['#e_globe',6.55,0,0],['#e_knot',6.6,90,0],['#e_star',6.62,200,0],['#e_label',6.95,0,0]];
+p3.forEach(([e,t,r,y])=>pop(e,t,{r,y}));
+tl.fromTo('#e_orange',{x:-140,rotation:-28,scale:.7},{x:0,rotation:0,scale:1,duration:.8,ease:'elastic.out(1,0.6)'},6.18);
+tl.fromTo('#e_inv',{clipPath:'inset(100% 0 0 0)'},{clipPath:'inset(0% 0 0 0)',duration:.3,ease:'steps(8)'},6.6);
+tl.fromTo('#s3',{scale:1.0},{scale:1.055,duration:3.2,ease:'sine.inOut',transformOrigin:'50% 50%'},5.95);
+tl.fromTo('#ibox',{scale:1},{scale:1.07,duration:.1,ease:'power2.out'},8.1).to('#ibox',{scale:1,duration:.6,ease:'elastic.out(1,0.4)'},8.2);
 tl.fromTo('#e_mpill',{width:0,opacity:1},{width:60,duration:.1},6.18).to('#e_mpill',{width:201,duration:.3,ease:'expo.out'},6.36).fromTo('#mptxt',{opacity:0},{opacity:1,duration:.1},6.46);
 gsap.set('#e_mpill',{opacity:0});
-tl.fromTo('#e_blue',{y:260},{y:0,duration:.4,ease:'expo.out'},6.38);
+tl.fromTo('#e_blue',{y:280,rotation:6},{y:0,rotation:0,duration:.9,ease:'elastic.out(1,0.7)'},6.36);
 tl.fromTo('#e_cat',{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:.35,ease:'steps(7)'},6.6);
 tl.fromTo('#rays',{scale:.2,opacity:0},{scale:1,opacity:1,duration:.18,ease:'back.out(2)'},6.28).to('#rays',{scale:1.25,duration:.3,ease:'power2.out'},8.0).to('#rays',{scale:1,duration:.2},8.3);
 ['#e_least','#e_wtf'].forEach((e,i)=>tl.fromTo(e,{opacity:0},{opacity:1,duration:.05},6.5+i*.1));
@@ -266,7 +270,7 @@ tl.to('#e_label',{x:-12,duration:.1,yoyo:true,repeat:1},7.86);
 // exits
 const ex=[['#e_blue',9.08],['#e_pie',9.1],['#e_orange',9.18],['#e_puzzle',9.1],['#e_ball',9.12],['#e_snow',9.24],['#e_knot',9.2],['#e_globe',9.28],['#e_inv',9.3],['#e_star',9.34],['#e_smile',9.16],['#e_amp',9.3],['#e_c',9.22],['#e_label',9.12],['#e_least',9.2],['#rays',9.18],['#e_wtf',9.36],['#e_mpill',9.46],['#e_cat',9.22],['#ibox',9.48]];
 ex.forEach(([e,t])=>out(e,t));
-tl.to('#e_blue',{y:300,duration:.16,ease:'power2.in'},9.08);
+tl.to('#e_blue',{y:300,duration:.2,ease:'back.in(1.6)'},9.08);
 
 /* ---------- S4  9.95 - 12.0  our work card ---------- */
 show('#s4',9.95,12.0);
@@ -310,11 +314,51 @@ const pie=p=>{ const a0=-Math.PI/2+p*2*Math.PI*.18, a1=a0+Math.PI*2*(.72+.1*Math
   return `M0 0 L${r*Math.cos(a0)} ${r*Math.sin(a0)} A${r} ${r} 0 1 1 ${r*Math.cos(a1)} ${r*Math.sin(a1)} Z`; };
 const frameSrc=(dir,t0,t,n)=>{ const i=Math.max(0,Math.min(n-1,Math.floor((t-t0)*30))); return `clips/${dir}/${String(i+1).padStart(3,'0')}.jpg`; };
 const imgs={heat:['#heatImg',9.95,78],notion:['#notClip',12.0,96],cursor:['#curClip',12.0,96],cat:['#catClip',12.0,96]};
+const fx=(T,a,b)=>Math.max(0,Math.min(1,(T-a)/b));
+const LIFE=[ // selector, ampX, ampY, rot, freq, phase, from, to
+ ['#kBlack',4,6,6,.55,0,1.7,2.9],['#kPink',5,4,8,.5,1,1.6,2.9],['#kPurple',4,5,10,.62,2,1.35,2.9],['#kGrey',5,4,12,.45,3,1.9,2.9],
+ ['#o1',3,3,0,.7,1,1.6,2.9],['#o2',4,3,0,.6,2,1.8,2.9],['#chL',5,0,0,.9,0,1.7,2.9],['#chR',5,0,0,.9,1.5,1.7,2.9],['#tg1',3,4,2,.4,0,1.8,2.9],['#tg2',3,4,-2,.4,2,1.8,2.9],
+ ['#qmark',3,4,4,.7,0,3.3,4.55],['#dots2',2,2,0,.9,1,3.1,4.9],
+ ['#e_pie',3,5,3,.45,0,6.1,9.1],['#e_smile',4,4,8,.6,1,6.1,9.2],['#e_ball',3,4,0,.5,2,6.1,9.1],['#e_puzzle',3,3,0,.55,3,6.2,9.1],['#e_orange',4,5,3,.4,4,6.2,9.2],
+ ['#e_mpill',3,4,1,.42,5,6.2,9.5],['#e_inv',4,3,0,.8,6,6.6,9.3],['#e_star',3,3,0,.9,7,6.6,9.3],['#e_snow',3,4,0,.5,8,6.3,9.2],['#e_amp',4,5,6,.55,9,6.4,9.3],
+ ['#e_c',3,4,10,.65,10,6.5,9.2],['#e_globe',3,3,0,.6,11,6.55,9.3],['#e_knot',3,3,0,.6,12,6.6,9.2],['#e_cat',2,4,2,.5,13,6.6,9.2],['#e_label',2,3,1.5,.5,14,6.95,9.1],
+ ['#e_blue',3,6,1.2,.38,15,6.8,9.1],['#e_least',2,2,0,.6,16,6.5,9.2],['#e_wtf',2,2,0,.7,17,6.6,9.3],['#rays',0,0,6,.8,18,6.4,9.2],
+ ['#card',0,6,2,.6,0,10.25,11.7]];
+const easeOB=x=>{const c=2.2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const stepRot=(T,t0,every,deg,d=.22)=>{ if(T<t0) return 0; const k=Math.floor((T-t0)/every), f=Math.min(1,((T-t0)-k*every)/d); return deg*(k+easeOB(f)); };
+const INV=['M2 0h1v1H2zM8 0h1v1H8zM3 1h5v1H3zM2 2h7v1H2zM1 3h2v1H1zM4 3h3v1H4zM8 3h2v1H8zM0 4h11v1H0zM0 5h1v1H0zM2 5h7v1H2zM10 5h1v1h-1zM0 6h1v1H0zM2 6h1v1H2zM8 6h1v1H8zM10 6h1v1h-1zM3 7h2v1H3zM6 7h2v1H6z',
+ 'M2 0h1v1H2zM8 0h1v1H8zM0 1h1v1H0zM3 1h5v1H3zM10 1h1v1h-1zM0 2h1v1H0zM2 2h7v1H2zM10 2h1v1h-1zM0 3h3v1H0zM4 3h3v1H4zM8 3h3v1H8zM0 4h11v1H0zM1 5h9v1H1zM2 6h1v1H2zM8 6h1v1H8zM1 7h1v1H1zM9 7h1v1H9z'];
+function life(T){
+  for(const [sel,ax,ay,rot,f,ph,a,b] of LIFE){ const el=$(sel); if(!el) continue;
+    const k=fx(T,a,.5)*(1-fx(T,b-.15,.15)), w=2*Math.PI*f*T+ph;
+    el.style.translate=`${(ax*Math.sin(w)*k).toFixed(2)}px ${(ay*Math.sin(w*1.31+ph)*k).toFixed(2)}px`;
+    el.style.rotate=`${(rot*Math.sin(w*.83+ph*2)*k).toFixed(2)}deg`; }
+  // stepped, toy-like secondary motion in the prompt scene
+  $('#e_puzzle svg').style.rotate=stepRot(T,6.6,.55,90)+'deg';
+  $('#e_snow').style.scale=String(1+.08*Math.sin(T*7));
+  $('#e_snow svg') && ($('#e_snow').style.rotate=stepRot(T,6.5,.5,45)+'deg');
+  $('#e_ball').style.rotate=(stepRot(T,6.4,.32,45,.12))+'deg';
+  $('#e_star svg').style.rotate=(T*220)+'deg'; $('#e_star').style.scale=String(1+.12*Math.max(0,Math.sin(T*9)));
+  $('#e_globe').style.rotate=(T*90)+'deg'; $('#e_knot').style.rotate=stepRot(T,6.8,.7,90,.3)+'deg';
+  $('#invPath').setAttribute('d',INV[Math.floor(T/.18)%2]);
+  const blink=((T%1.4)>1.32)?.15:1; $('#e_smile').style.scale=`1 ${blink}`;
+  $('#e_mpill i').style.scale=String(1+.18*Math.max(0,Math.sin(T*5)));
+  ['#dg1','#dg2','#dg3'].forEach((d,i)=>{ const e=$(d); const on=fx(T,6.5+i*.1,.12);
+    e.style.clipPath=`inset(${(100-on*100).toFixed(1)}% 0 0 0)`; e.style.rotate=`${(4*Math.sin(T*5+i*2)).toFixed(2)}deg`; e.style.translate=`0 ${(4*Math.sin(T*6+i)).toFixed(2)}px`; });
+  const orc=$('#orRing circle'); orc.setAttribute('stroke-dasharray',`${(150+60*Math.sin(T*2.4)).toFixed(1)} 90`); $('#orRing').style.rotate=(T*140)+'deg';
+  $('#e_label div').style.scale=String(1+.1*Math.max(0,Math.sin(T*6)));
+  // blobs breathe, "make" kicks on every colour change
+  ['#b0','#b1','#b2'].forEach((b,i)=>{$(b).style.scale=String(1+.018*Math.sin(T*3.2+i*1.7));});
+  const st=(T-3.12)%.1, kick=T>3.12&&T<4.8?.07*Math.exp(-st/.035):0, kk=Math.floor((T-3.12)/.1);
+  $('#make').style.scale=String(1+kick); $('#make').style.rotate=(T>3.3&&T<4.25?[-3,2,-1,3,-2,1][((kk%6)+6)%6]:0)+'deg';
+  $('#card').style.rotate=`y ${(9*Math.sin(T*2.6)*fx(T,10.3,.4)).toFixed(2)}deg`;
+}
 async function render(T){
+  life(T);
   const k=Math.max(0,Math.floor((T-3.12)/.1))%MAKEC.length, [c1,c2]=MAKEC[k];
   const mk=$('#make'); mk.style.color=c1; mk.style.textShadow=`-5px 6px 0 ${c2}, -8px 10px 14px rgba(0,0,0,.12)`;
   $('#itxt').textContent=typeTxt(T);
-  $('#caret').style.opacity=(T>5.7&&T<9.4&&Math.floor(T*3)%2===0)?1:0;
+  $('#caret').style.opacity=(T>5.7&&T<9.4)?(.5+.5*Math.cos(T*Math.PI*2.4)).toFixed(2):0;
   $('#lbl').textContent=lblTxt(T);
   $('#piePath').setAttribute('d',pie(Math.max(0,T-6.1)));
   const waits=[];

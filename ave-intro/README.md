@@ -1,6 +1,6 @@
 # AVE Studio intro
 
-`AVE_Studio_Intro_16x9.mp4`: 1920x1080, 30 fps, 20.6 s. A remake of a reference motion-designer intro, beat for
+`AVE_Studio_Intro_16x9.mp4`: 1920x1080, 60 fps, 20.6 s. A remake of a reference motion-designer intro, beat for
 beat, with AVE Studio's name, an inflated 3D AVE logo, and our own work in place of the reference's
 "my work was deleted, I forgot to backup" gag. The audio is the reference's music track.
 
