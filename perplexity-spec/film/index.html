@@ -75,7 +75,7 @@ html,body{width:960px;height:720px;overflow:hidden;background:#000}
     <div class="fog" id="fog2"></div>
     <div id="ring" class="abs" style="inset:0"></div>
     <div class="words" id="w2a" style="top:228px;font-size:22px"></div>
-    <div class="words" id="w2b" style="top:232px;font-size:17px;color:#2f6a72"></div>
+    <div class="words" id="w2b" style="top:266px;font-size:17px;color:#2f6a72"></div>
     <div id="simple" class="abs" style="inset:0;visibility:hidden">
       <div id="guides" class="abs" style="inset:0"></div>
       <div class="abs" id="simWord" style="left:0;right:0;top:170px;text-align:center;font-size:120px;font-weight:600;letter-spacing:-.03em;color:var(--deep);white-space:nowrap"></div>
@@ -274,8 +274,9 @@ tl.fromTo('#w1d',{scale:.9},{scale:1.08,duration:1.9,ease:'sine.inOut',transform
 show('#s2',9.7,14.2);
 tl.fromTo('#s2',{opacity:0},{opacity:1,duration:.3},9.7);
 const W2=mkWords('#w2a',[['You',w('you')],['just',w('just')],['want',w('want')],['the',w('the')],['answer,',w('answer')],['right?',w('right')]]); wordIn(W2);
-tl.to(W2,{opacity:0,y:-10,filter:'blur(6px)',duration:.3,stagger:.02,ease:'power2.in'},11.38);
+tl.to(W2,{opacity:0,y:-10,filter:'blur(6px)',duration:.35,stagger:.02,ease:'power2.in'},12.15);
 const W2b=mkWords('#w2b',[['But',w('but')],['finding',w('finding')],['it',w('it')],["isn't",w("isn't")]]); wordIn(W2b);
+tl.to(W2b,{opacity:0,y:-10,filter:'blur(6px)',duration:.3,stagger:.02,ease:'power2.in'},12.6);
 // the ring of everything you'd otherwise have to read
 const RG=$('#ring'); const ringEls=[];
 const kinds=[['14 tabs open','#f3f1ea'],['Forum thread · 212 replies','#fff'],['Video · 18:42','#13343b'],['Sponsored result','#fff7e8'],['Blog: 10 tips','#fff'],['Recipe (scroll for 9 min)','#fdeee5'],['Map','#e5f3f1'],['PDF manual','#fff'],['Comments','#fff'],['Ad','#f8f0ff'],['Wiki','#fff'],['Q&A','#eef6f5']];
