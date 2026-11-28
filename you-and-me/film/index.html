@@ -50,7 +50,8 @@ html,body{width:960px;height:720px;overflow:hidden;background:#000}
   <div class="abs" style="left:866px;top:68px;width:32px;height:58px;border-radius:16px;background:#050505"></div>
   <div id="tagRing" class="abs" style="left:480px;top:360px;width:370px;height:370px;margin:-185px 0 0 -185px;border-radius:50%;background:rgba(255,255,255,.3)"></div>
   <div id="tagWrap" class="abs" style="left:480px;top:360px;width:220px;height:220px;margin:-110px 0 0 -110px;perspective:700px">
-    <div id="tag" class="abs" style="inset:0;transform-style:preserve-3d">
+    <div id="tagEdgeWrap" class="abs" style="inset:0"><div id="tagEdge" class="abs" style="top:0;height:220px;border-radius:110px;background:linear-gradient(90deg,#9a9a96,#f2f2ef 35%,#c9c9c4 60%,#8d8d89)"></div></div>
+    <div id="tag" class="abs" style="inset:0">
       <div id="tagFace" class="abs" style="inset:0;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,0)"></div>
       <div id="tagBack" class="abs" style="inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 40% 35%,#f4f4f2 0%,#d9d9d6 52%,#b7b7b3 70%,#f7f7f5 74%,#c9c9c5 86%,#ffffff 100%);box-shadow:0 18px 40px rgba(0,0,0,.35)">
         <img src="img/ave-wordmark-black.png" class="abs" style="left:58px;top:92px;width:104px;opacity:.38;filter:blur(.3px)">
@@ -193,26 +194,27 @@ tl.to('#s1bg',{background:'#0a0a0a',duration:.14,ease:'power2.in'},1.02)
   .to('#cam1',{filter:'blur(14px)',opacity:.0,duration:.14,ease:'power2.in'},1.48);
 
 /* ---------- S2: finding ---------- */
+const SPIN={a:0};
 tl.fromTo('#s2',{filter:'blur(18px)',opacity:0},{filter:'blur(0px)',opacity:1,duration:.3,ease:'power2.out'},1.55);
-tl.fromTo('#tagRing',{scale:1.25},{scale:.66,duration:1.2,ease:'power1.inOut'},1.6)
-  .to('#tagRing',{scale:.35,opacity:0,duration:.25,ease:'power2.in'},2.62)
-  .to('#tagFace',{boxShadow:'0 0 60px 26px rgba(255,255,255,.75)',duration:.18},2.66)
-  .to('#tag',{rotationY:90,duration:.18,ease:'power2.in'},2.82)
-  .set('#tagFace',{opacity:0},3.0).set('#tagBack',{opacity:1},3.0)
-  .fromTo('#tag',{rotationY:-90},{rotationY:0,duration:.5,ease:'power3.out',immediateRender:false},3.0)
-  .fromTo('#tagWrap',{scale:1.15},{scale:1.03,duration:.6,ease:'power2.out',immediateRender:false},3.0)
+tl.fromTo('#tagRing',{scale:1.25},{scale:.64,duration:.95,ease:'power1.inOut'},1.6)
+  .to('#tagRing',{scale:.6,opacity:0,duration:.16,ease:'power2.in'},2.55)
+  .to('#tagFace',{boxShadow:'0 0 70px 30px rgba(255,255,255,.8)',duration:.2,ease:'power2.out'},2.62)
+  .to('#tagFace',{boxShadow:'0 0 10px 2px rgba(255,255,255,.3)',duration:.35,ease:'power2.inOut'},2.95)
+  .to(SPIN,{a:180,duration:.7,ease:'power2.inOut'},2.8)
+  .fromTo('#tagWrap',{scale:1},{scale:.96,duration:.7,ease:'power2.inOut'},2.8)
   .to(['#dist','#where'],{opacity:0,duration:.08},2.98).to('#here',{opacity:1,duration:.1},2.98)
   .fromTo('#where span',{opacity:0,y:10,filter:'blur(6px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.25,stagger:.12,ease:'power2.out'},1.7)
   .fromTo('#dist',{filter:'blur(8px)',opacity:0},{filter:'blur(0px)',opacity:1,duration:.25},1.66);
 
 /* ---------- S3: photo flashes ---------- */
-const FL=[['img/phone_front.png',3.58,'contain','#1b1e22',[480,250,70]],['img/headphones.png',3.78,'contain','#2a1f1a',[480,360,150]],['img/watch.png',3.88,'contain','#3a2a26',[480,360,120]],['img/work_still2.jpg',4.03,'cover','#111',[520,340,90]]];
-FL.forEach(([src,t,fit,bg,[cx,cy,r]],i)=>{ const d=document.createElement('div'); d.className='abs'; d.style.cssText=`inset:0;background:${bg};opacity:0`;
-  d.innerHTML=`<img src="${src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${fit};${fit==='contain'?'transform:scale(1.35)':''}">`; $('#flash').appendChild(d);
-  tl.set(d,{opacity:1},t).set(d,{opacity:0},FL[i+1]?FL[i+1][1]:4.2).fromTo(d.firstChild,{scale:fit==='contain'?1.5:1.15},{scale:fit==='contain'?1.35:1.05,duration:.25,ease:'power2.out'},t);
+const FL=[['img/hands_phone.png',3.58,'cover','#0b2a2e',[520,300,110],'center 40%',1.5],['img/headphones.png',3.76,'cover','#2a1f1a',[330,440,120],'center',1.25],['img/watch.png',3.88,'cover','#3a2a26',[430,330,130],'center',1.2],['img/work_still.jpg',4.02,'cover','#111',[640,330,110],'70% 50%',1.6]];
+FL.forEach(([src,t,fit,bg,[cx,cy,r],pos,z],i)=>{ const d=document.createElement('div'); d.className='abs'; d.style.cssText=`inset:0;background:${bg};opacity:0`;
+  d.innerHTML=`<img src="${src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${fit};object-position:${pos}">`; $('#flash').appendChild(d);
+  const t1=FL[i+1]?FL[i+1][1]:4.2;
+  tl.set(d,{opacity:1},t).set(d,{opacity:0},t1).fromTo(d.firstChild,{scale:z*1.08},{scale:z,duration:t1-t+.05,ease:'none'},t);
   tl.set('#traceC',{attr:{cx,cy,r}},t); });
 const TC=2*Math.PI*150; gsap.set('#traceC',{strokeDasharray:TC,strokeDashoffset:TC});
-[3.62,3.82,3.92,4.06].forEach(t=>tl.fromTo('#traceC',{strokeDashoffset:TC,opacity:1},{strokeDashoffset:0,duration:.12,ease:'power2.out'},t).to('#traceC',{opacity:0,duration:.04},t+.14));
+[3.63,3.79,3.91,4.05].forEach((t,i)=>tl.fromTo('#traceC',{strokeDashoffset:TC,opacity:1,rotation:-90,svgOrigin:'480 360'},{strokeDashoffset:0,duration:.11,ease:'power2.out'},t).to('#traceC',{opacity:0,duration:.03},[3.755,3.875,4.015,4.18][i]));
 
 /* ---------- S4: circle, square, in the end ---------- */
 const C4=2*Math.PI*250; gsap.set('#c4',{strokeDasharray:C4,strokeDashoffset:C4}); gsap.set('#sq4r',{strokeDasharray:640,strokeDashoffset:640});
@@ -252,22 +254,37 @@ tl.fromTo('#photoWin',{x:-120,y:300,rotationX:40,rotationZ:-22,scale:1.4},{x:-40
   .to('#cur6',{left:520,top:430,duration:.4,ease:'power3.inOut'},8.05)
   .to('#photoWin',{scale:1.15,x:-160,y:-40,rotationX:0,rotationZ:-4,duration:.35,ease:'power3.inOut'},8.42)
   .fromTo('#infoWin',{x:300,y:200,rotationY:-35,rotationZ:12,opacity:0},{x:0,y:0,rotationY:-22,rotationZ:-8,opacity:1,duration:.4,ease:'expo.out'},8.48)
-  .to('#cam6',{scale:2.6,x:-260,y:-120,duration:.35,ease:'power3.in'},8.72)
-  .to('#cam6',{scale:.62,x:0,y:-20,duration:.4,ease:'expo.out'},9.0)
+  .to('#cam6',{scale:3.3,x:-200,y:96,rotation:-4,duration:.2,ease:'power3.in'},8.7)
+  .to('#cam6',{scale:3.6,duration:.04,ease:'none'},8.9)
+  .set('#cam6',{scale:.3,x:0,y:0,rotation:-6},8.94)
+  .to('#cam6',{scale:.82,rotation:0,duration:1.6,ease:'power3.out'},8.94)
   .to('#cur6',{opacity:0,duration:.1},8.7)
-  .to('#dim6',{opacity:.97,duration:1.0,ease:'power1.in'},9.5);
+  .to('#dim6',{opacity:.97,duration:1.0,ease:'power1.in'},9.45);
+// a dense collage around the two windows (it is all there when the camera pulls out)
+let sd=7; const rnd=()=>{ sd=(sd*16807)%2147483647; return sd/2147483647; };
 const SCAT=$('#scatter'), scat=[];
 const icons=['sphere','cube','torus','star','bulb','magnifier','headphones','watch'];
-for(let i=0;i<46;i++){ const big=i<10; const e=document.createElement(big?'img':'div'); e.className='abs';
-  if(big){ e.src='img/'+icons[i%8]+'.png'; e.style.width=(54+(i*13)%40)+'px'; }
-  else Object.assign(e.style,{width:'7px',height:'7px',background:['#5b4fd8','#3a3a8a','#8a2b2b'][i%3]});
-  const a=i*2.39, r=120+((i*71)%330); e.style.left=(480+Math.cos(a)*r*1.3)+'px'; e.style.top=(360+Math.sin(a)*r*.8)+'px'; SCAT.appendChild(e); scat.push(e);
-  tl.fromTo(e,{opacity:0,scale:0},{opacity:big?.75:1,scale:1,duration:.4,ease:'back.out(2)'},9.0+i*.008); }
-// rotation gizmos on a few items
-for(let i=0;i<7;i++){ const g=document.createElementNS('http://www.w3.org/2000/svg','svg'); g.setAttribute('width',120); g.setAttribute('height',120); g.setAttribute('class','abs');
-  g.innerHTML='<circle cx="60" cy="60" r="44" fill="none" stroke="#2f6fe0" stroke-width="1.6" stroke-dasharray="140 300"/><circle cx="60" cy="60" r="44" fill="none" stroke="#3cb04a" stroke-width="1.6" stroke-dasharray="90 300" transform="rotate(130 60 60)"/><path d="M60 60L110 50M60 60L40 8" stroke="#c0392b" stroke-width="1.6"/>';
-  const a=i*.9+.5; g.style.left=(420+Math.cos(a)*260)+'px'; g.style.top=(300+Math.sin(a)*170)+'px'; SCAT.appendChild(g); scat.push(g);
-  tl.fromTo(g,{opacity:0,scale:.3},{opacity:1,scale:1,duration:.35,ease:'expo.out'},9.05+i*.03); }
+const at=(e,x,y,t,o=1,ease='back.out(1.8)')=>{ e.style.left=x+'px'; e.style.top=y+'px'; SCAT.appendChild(e); scat.push(e);
+  tl.fromTo(e,{opacity:0,scale:0},{opacity:o,scale:1,duration:.45,ease},t); };
+const pos=()=>{ const a=rnd()*6.283, r=Math.sqrt(rnd()); return [480+Math.cos(a)*r*820, 360+Math.sin(a)*r*520]; };
+// big soft grey shapes behind
+for(let i=0;i<5;i++){ const e=document.createElement('div'); e.className='abs'; const w=280+rnd()*380, h=w*(1.1+rnd()*.5);
+  Object.assign(e.style,{width:w+'px',height:h+'px',marginLeft:-w/2+'px',marginTop:-h/2+'px',borderRadius:`${w/2}px ${w/2}px 40px 40px`,background:'rgba(120,124,120,.28)',zIndex:0});
+  const [x,y]=pos(); at(e,x*.7+144,y*.7+108,9.15+i*.05,1,'expo.out'); }
+for(let i=0;i<150;i++){ const e=document.createElement('div'); e.className='abs'; const sz=5+rnd()*5;
+  Object.assign(e.style,{width:sz+'px',height:sz+'px',background:['#5b4fd8','#3a3a8a','#8a2b2b','#2f6fe0'][i%4]}); const [x,y]=pos(); at(e,x,y,8.93+rnd()*.3); }
+for(let i=0;i<26;i++){ const e=document.createElement('img'); e.className='abs'; e.src='img/'+icons[i%8]+'.png'; const w=60+rnd()*90; e.style.width=w+'px'; e.style.marginLeft=-w/2+'px';
+  const [x,y]=pos(); at(e,x,y,8.93+rnd()*.35,.9); }
+for(let i=0;i<14;i++){ const e=document.createElement('div'); e.className='abs';
+  Object.assign(e.style,{width:'64px',height:'52px',borderRadius:'8px',background:'linear-gradient(#7cc4f5,#3c94e0)',boxShadow:'0 6px 14px rgba(0,0,0,.15)'}); const [x,y]=pos(); at(e,x,y,8.93+rnd()*.35); }
+for(let i=0;i<10;i++){ const e=document.createElement('div'); e.className='abs'; const k=i%3;
+  Object.assign(e.style,{width:k?'150px':'120px',height:k?'110px':'120px',borderRadius:'26px',background:k===1?'#2b2b2b':'rgba(130,134,130,.75)',boxShadow:'0 10px 24px rgba(0,0,0,.18)',transform:`rotate(${(rnd()-.5)*40}deg)`});
+  e.innerHTML=k===1?'<img src="img/work_still2.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:22px;opacity:.9">':'<div style="margin:22px auto;width:46px;height:46px;border-radius:12px;border:4px solid rgba(255,255,255,.7)"></div>';
+  const [x,y]=pos(); at(e,x,y,8.93+rnd()*.35); }
+for(let i=0;i<16;i++){ const g=document.createElementNS('http://www.w3.org/2000/svg','svg'); const sz=110+rnd()*90; g.setAttribute('width',sz); g.setAttribute('height',sz); g.setAttribute('viewBox','0 0 120 120'); g.setAttribute('class','abs');
+  g.innerHTML='<circle cx="60" cy="60" r="44" fill="none" stroke="#2f6fe0" stroke-width="1.6" stroke-dasharray="140 300"/><circle cx="60" cy="60" r="44" fill="none" stroke="#3cb04a" stroke-width="1.6" stroke-dasharray="90 300" transform="rotate(130 60 60)"/><path d="M60 60L118 50M60 60L40 2M60 60L60 118" stroke="#c0392b" stroke-width="1.4"/><rect x="56" y="56" width="8" height="8" fill="#fff" stroke="#2f6fe0"/>';
+  const [x,y]=pos(); at(g,x-sz/2,y-sz/2,8.95+rnd()*.4,1,'expo.out'); }
+const sun=document.createElement('div'); sun.className='abs'; Object.assign(sun.style,{width:'40px',height:'40px',borderRadius:'50%',background:'#e6b21b',boxShadow:'0 0 0 8px rgba(230,178,27,.25)'}); at(sun,380,520,9.2);
 
 /* ---------- S7: never ---------- */
 tl.fromTo('#never',{xPercent:-50,yPercent:-50,rotationY:-38,rotationZ:14,skewX:-8,scale:.7,opacity:0},{rotationY:-24,rotationZ:12,skewX:-10,scale:1.18,opacity:1,duration:.3,ease:'expo.out'},10.55)
@@ -338,6 +355,16 @@ async function render(T){
   $('#inSelBg').style.display=sel?'block':'none'; $('#car9').style.opacity=T>14.05&&T<16.1?(Math.floor(T*5)%2?1:.2):0;
   if(T>16.05&&T<16.35) glitch(T);
   $('#spin').style.rotate=(T*360)+'deg';
+  // the tag spin: a real flip with a silver edge
+  const ang=SPIN.a*Math.PI/180, cs=Math.cos(ang), sn=Math.abs(Math.sin(ang));
+  $('#tag').style.transform=`scaleX(${Math.max(.03,Math.abs(cs)).toFixed(3)})`;
+  $('#tagFace').style.opacity=SPIN.a<90?1:0; $('#tagBack').style.opacity=SPIN.a>=90?1:0;
+  const ew=220*Math.abs(cs)+22*sn; $('#tagEdge').style.width=ew+'px'; $('#tagEdge').style.left=(110-ew/2+(SPIN.a<90?-1:1)*9*sn)+'px'; $('#tagEdge').style.opacity=sn>.02?1:0;
+  // gentle camera drift per scene
+  $('#s2').style.translate=`${(4*Math.sin(T*1.1)).toFixed(1)}px ${(3*Math.sin(T*.9)).toFixed(1)}px`;
+  $('#card4').style.rotate=`${(1.2*Math.sin(T*1.4)).toFixed(2)}deg`;
+  $('#s8').style.scale=String((1+.02*Math.sin((T-11)*1.2)).toFixed(4)); $('#s8').style.rotate=`${(.6*Math.sin(T*1.1)).toFixed(2)}deg`;
+  $('#cam9').style.translate=`${(3*Math.sin(T*1.3)).toFixed(1)}px ${(2*Math.sin(T*1.1)).toFixed(1)}px`;
   // caption
   const c=CAP.find(([a,b])=>T>=a&&T<b); $('#cap').textContent=c?c[2]:''; $('#cap').style.color=(T>1.05&&T<1.62)||(T>3.55&&T<4.18)||(T>5.6&&T<7.88)||(T>10.5&&T<11.08)||T>16.2?'#bbb':'#333';
 }
