@@ -103,7 +103,7 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
       <div class="lyr" id="them" style="left:458px;top:76px;font-size:221px;color:#4a4e54"></div>
       <div class="lyr" id="dragon" style="left:523px;top:284px;font-size:164px;color:#4a4e54"></div>
     </div>
-    <div class="lyr" id="balls" style="left:120px;top:540px;font-size:230px;color:#40444a;opacity:0">Dragon Balls</div>
+    <div class="lyr" id="balls" style="left:45px;top:580px;font-size:120px;white-space:nowrap;color:#40444a;opacity:0">Dragon Balls</div>
     <div id="g3b" class="abs p3" style="left:360px;top:640px;opacity:0">
       <div class="lyr" id="bitch" style="left:-320px;top:-230px;font-size:200px;color:#4a4e54"></div>
       <div class="lyr" id="ifeel" style="left:-240px;top:-10px;font-size:200px;color:#4a4e54"></div>
@@ -197,10 +197,8 @@ tl.set('#s2',{visibility:'visible'},4.28).fromTo('#s2',{opacity:0},{opacity:1,du
 
 /* ---------- S3: spotlight lyrics ---------- */
 tl.fromTo('#g3',{rotationY:40,rotationX:-14,rotationZ:-58,scale:.55,x:150,y:40},{rotationY:22,rotationX:-8,rotationZ:-12,scale:1,x:-20,y:0,duration:.6,ease:'power2.out'},6.45)
-  .to('#g3',{x:-200,y:-50,scale:1.04,duration:.25,ease:'power2.inOut'},7.27)
-  .to('#g3',{x:-430,y:-90,rotationY:6,rotationZ:-5,duration:.35,ease:'power2.inOut'},7.5)
-  .to('#g3',{x:-520,y:-110,duration:.2,ease:'none'},7.85)
-  .to('#g3',{x:-860,y:-150,duration:.08,ease:'power2.in'},8.05)
+  .to('#g3',{rotationY:6,rotationZ:-5,duration:.2,ease:'power2.inOut'},7.5)
+  .to('#g3',{x:'-=340',y:'-=40',duration:.08,ease:'power2.in'},8.05)
   .fromTo('#sheBox',{scaleX:.05,opacity:0},{scaleX:1,opacity:1,duration:.14,ease:'power2.out'},6.93)
   .fromTo('#suck',{x:320,opacity:0,filter:'blur(14px)'},{x:0,opacity:1,filter:'blur(0px)',duration:.16,ease:'power2.out'},7.333)
   .fromTo('#them',{opacity:1,x:60},{x:0,duration:.2,ease:'power2.out'},7.6)
@@ -208,7 +206,7 @@ tl.fromTo('#g3',{rotationY:40,rotationX:-14,rotationZ:-58,scale:.55,x:150,y:40},
   // black frame with the bulging oval: "Dragon Balls"
   .to('#spot',{opacity:0,duration:.04},8.11).set('#oval',{opacity:1},8.133).set('#g3',{opacity:0},8.133)
   .fromTo('#oval',{scaleY:.6},{scaleY:1,duration:.12,ease:'power2.out'},8.133)
-  .fromTo('#balls',{opacity:1,x:200},{x:-120,duration:.15,ease:'power2.out',immediateRender:false},8.133).to('#balls',{x:-330,duration:.32,ease:'none'},8.283)
+  .fromTo('#balls',{opacity:1,x:240,scale:1.2},{x:15,scale:1.02,duration:.14,ease:'power2.out',immediateRender:false},8.133).to('#balls',{x:-5,scale:1,duration:.32,ease:'none'},8.273)
   .to('#oval',{scaleY:.3,opacity:0,duration:.06},8.58).set('#balls',{opacity:0},8.62)
   .to('#spot',{opacity:1,duration:.05},8.58).set('#g3b',{opacity:1},8.6)
   .fromTo('#g3b',{rotationY:-40,rotationX:10,rotationZ:6,scale:.85,x:160},{rotationY:-18,rotationX:6,rotationZ:2,scale:1,x:0,duration:.45,ease:'power2.out'},8.6)
@@ -221,16 +219,18 @@ tl.fromTo('#g4',{rotationY:-40,rotationX:10,scale:1.3},{rotationY:-18,rotationX:
   .to('#cell',{opacity:0,filter:'blur(8px)',duration:.2},9.733)
   .to('#g4',{rotationY:-6,rotationX:2,x:-20,duration:1.2,ease:'sine.inOut'},9.8)
   .to('#g4',{x:-230,y:-60,rotationY:3,duration:.3,ease:'power2.inOut'},11.27).to('#g4',{x:-430,y:-110,rotationY:6,duration:.3,ease:'power2.inOut'},11.6)
-  .to('#g4',{x:-700,y:-160,opacity:0,filter:'blur(10px)',duration:.12,ease:'power2.in'},11.84)
-  .fromTo('#g4b',{opacity:0,scale:.85,rotationY:-20},{opacity:1,scale:1,rotationY:-8,duration:.3,ease:'power2.out'},11.88)
+  .to('#g4',{x:-700,y:-160,opacity:0,filter:'blur(10px)',duration:.1,ease:'power2.in'},11.9)
+  .fromTo('#g4b',{opacity:0,scale:.85,rotationY:-20},{opacity:1,scale:1,rotationY:-8,duration:.3,ease:'power2.out'},11.9)
   .to('#g4b',{rotationY:4,scale:1.04,duration:1.2,ease:'sine.inOut'},12.35)
   .to('#g4b',{opacity:0,filter:'blur(12px)',duration:.12,ease:'power2.in'},13.0)
   .to('#bars',{opacity:0,duration:.16},13.04)
   .fromTo('#logo',{opacity:0,filter:'blur(12px)',scaleY:.12,scaleX:.75},{opacity:1,filter:'blur(0px)',scaleY:1,scaleX:1,duration:.32,ease:'power3.out'},13.05)
   .to('#logo',{scale:1.04,duration:2.1,ease:'sine.inOut'},13.5);
 // prison bars slide across
-[[60,38],[195,46],[355,48],[525,46],[660,36]].forEach(([cx,w],i)=>{ const b=document.createElement('div'); b.className='abs';
-  b.style.cssText=`top:40px;width:${w}px;height:1240px;border-radius:${w}px;left:${cx-w/2}px;background:linear-gradient(90deg,#030405 0%,#121a22 18%,#2a3744 38%,#5d6f80 48%,#2b3846 60%,#10161d 82%,#030405 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%);box-shadow:0 0 30px rgba(0,0,0,.95)`;
+[[60,38,-16],[195,46,-7],[355,48,0],[525,46,7],[660,36,14]].forEach(([cx,w,bow],i)=>{ const b=document.createElement('div'); b.className='abs';
+  b.style.cssText=`left:0;top:40px;width:720px;height:1240px;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%)`;
+  const N=62; for(let k=0;k<N;k++){ const y=k*1240/N, v=(y+20-620)/620, dx=bow*(1-v*v), ww=w*(1-.12*v*v); const sl=document.createElement('div'); sl.className='abs';
+    sl.style.cssText=`left:${(cx-ww/2+dx).toFixed(1)}px;top:${y.toFixed(1)}px;width:${ww.toFixed(1)}px;height:${(1240/N+1).toFixed(1)}px;background:linear-gradient(90deg,#030405 0%,#121a22 18%,#2a3744 38%,#5d6f80 48%,#2b3846 60%,#10161d 82%,#030405 100%)`; b.appendChild(sl); }
   $('#bars').appendChild(b); tl.fromTo(b,{y:-1300,opacity:.2},{y:0,opacity:1,duration:.12,ease:'power2.out'},12.33+[2,1,0,1,2][i]*.015); });
 
 /* ---------- typed lyric words (frame-accurate to the reference) ---------- */
@@ -256,9 +256,9 @@ async function render(T){
   $('#andim').innerHTML=flyT('And I\'m',[9.8,9.667,9.867,9.9,9.933,9.933,10.067],T);
   $('#schizo').innerHTML=fly('schizophrenic',10.067,.011,T);
   $('#might').innerHTML=flyT('might do',[11.2,11.2,11.167,11.167,11.133,11.1,11.1,11.1],T);
-  const D=(T<11.6?'':T<11.8?'DAMA'.replace(/[DM]/g,' '):T<11.867?'DA A':T<11.933?'DAMA':T<12.0?'DAMA E':'DAMAGE'); $('#damage').innerHTML=D?`<span style="display:inline-block;position:relative">${D}<svg style="position:absolute;left:0;top:78%;width:100%;height:60px" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M10 0v${18+10*Math.sin(T)}M52 0v34M96 0v14M150 0v40M200 0v20M262 0v30" stroke="#ff2a2a" stroke-width="9" stroke-linecap="round"/></svg></span>`:'';
+  const D=(T<11.5?'':T<11.533?' A A':T<11.6?'DA A':T<11.667?'DAMA':T<11.767?'DAMA E':'DAMAGE'); $('#damage').innerHTML=D?`<span style="display:inline-block;position:relative">${D}<svg style="position:absolute;left:0;top:78%;width:100%;height:60px" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M10 0v${18+10*Math.sin(T)}M52 0v34M96 0v14M150 0v40M200 0v20M262 0v30" stroke="#ff2a2a" stroke-width="9" stroke-linecap="round"/></svg></span>`:'';
   const L=T<11.9?'':T<12.0?'life':T<12.167?'life is':'life is cell'; $('#lifeis').innerHTML=L.replace('is','<span style="font-size:.85em;vertical-align:.2em">is</span>').replace('cell','<span style="font-size:1.05em">cell</span>');
-  { const [dx,dy,sc]=fixAt(T,FIX); $('#g3fix').style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`; }
+  { const [dx,dy,sc]=window.FIXO||fixAt(T,FIX); $('#g3fix').style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`; }
   { const [dx,dy,sc]=fixAt(T,FIX4); $('#g4fix').style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`; }
   // light flicker and drift
   $('#rim').style.opacity=(.8+.2*Math.sin(T*9)).toFixed(2);
@@ -266,9 +266,9 @@ async function render(T){
   $('#cubeW').style.translate=`0 ${(8*Math.sin(T*2.2)).toFixed(1)}px`;
 }
 const FIX4=window.G4FIX||[[9.2,52.108,48.096,0.963],[9.233,58.479,57.93,0.953],[9.267,61.359,62.116,0.945],[9.3,52.848,44.081,0.958],[9.333,40.788,17.596,0.977],[9.367,34.093,-11.362,1.008],[9.4,32.354,-30.006,1.018],[9.433,27.313,-42.11,0.999],[9.467,15.07,-47.78,0.942],[9.5,3.74,-50.582,0.889],[9.533,-2.976,-52.096,0.849],[9.567,-4.831,-53.181,0.828],[9.6,-3.895,-53.145,0.803],[9.633,-6.227,-50.428,0.787],[9.667,-10.607,-44.889,0.775],[9.7,-18.655,-36.137,0.783],[9.733,-5.835,-22.91,0.847],[9.767,25.573,-5.307,0.982],[9.8,75.91,16.067,1.152],[9.833,103.098,32.469,1.219],[9.867,101.484,41.599,1.156],[9.9,66.109,43.002,0.996],[9.933,28.247,42.682,0.859],[9.967,0.205,42.344,0.777],[10.0,-5.435,42.893,0.755],[10.033,1.561,44.354,0.773],[10.067,16.066,46.875,0.815],[10.1,24.169,48.349,0.834],[10.133,27.254,46.836,0.819],[10.167,19.732,40.152,0.778],[10.2,3.308,29.146,0.755],[10.233,-20.332,15.716,0.756],[10.267,-43.714,3.413,0.775],[10.3,-59.018,-5.964,0.795],[10.333,-66.103,-12.378,0.814],[10.367,-66.687,-17.268,0.83],[10.4,-63.819,-21.016,0.841],[10.433,-60.111,-24.045,0.85],[10.467,-56.656,-26.094,0.856],[10.5,-54.499,-27.865,0.862],[10.533,-52.344,-29.557,0.867],[10.567,-50.42,-31.286,0.872],[10.6,-48.321,-32.958,0.877],[10.633,-47.039,-34.161,0.88],[10.667,-46.327,-35.295,0.882],[10.7,-46.52,-36.438,0.882],[10.733,-47.456,-37.939,0.88],[10.767,-49.047,-39.663,0.879],[10.8,-51.01,-41.599,0.877],[10.833,-52.982,-43.771,0.876],[10.867,-55.277,-46.282,0.874],[10.9,-59.437,-49.396,0.875],[10.933,-67.732,-53.191,0.883],[10.967,-85.672,-56.545,0.901],[11.0,-109.38,-58.329,0.919],[11.033,-132.713,-57.993,0.931],[11.067,-141.408,-57.825,0.927],[11.1,-140.866,-59.601,0.906],[11.133,-136.706,-64.617,0.869],[11.167,-138.272,-72.015,0.822],[11.2,-139.088,-80.483,0.788],[11.233,-137.084,-87.822,0.772],[11.267,-133.379,-92.268,0.774],[11.3,-131.474,-93.159,0.776],[11.333,-130.475,-93.276,0.776],[11.367,-125.838,-92.791,0.776],[11.4,-118.497,-91.401,0.781],[11.433,-112.431,-85.978,0.783],[11.467,-115.646,-79.229,0.773],[11.5,-129.928,-75.367,0.753],[11.533,-153.087,-78.243,0.732],[11.567,-176.229,-85.869,0.722],[11.6,-192.696,-93.896,0.721],[11.633,-198.203,-97.608,0.722],[11.667,-194.884,-97.618,0.722],[11.7,-185.281,-95.964,0.723],[11.733,-174.103,-102.009,0.722],[11.767,-166.038,-118.719,0.722],[11.8,-164.49,-145.508,0.722],[11.833,-168.541,-168.924,0.722],[11.88,0,0,1],[13.2,0,0,1]];
-const FIX=window.G3FIX||[[6.467,30.55,16.624,0.846],[6.5,44.853,19.294,0.854],[6.533,70.454,23.681,0.889],[6.567,102.234,27.8,0.937],[6.6,128.419,36.768,0.956],[6.633,146.026,48.916,0.939],[6.667,162.142,64.769,0.936],[6.7,176.985,79.003,0.94],[6.733,195.756,93.106,0.974],[6.767,220.74,106.181,1.022],[6.8,240.934,118.957,1.068],[6.833,251.482,129.656,1.092],[6.867,248.521,137.861,1.084],[6.9,238.485,135.208,1.044],[6.933,222.738,120.378,0.976],[6.967,197.377,94.572,0.881],[7.0,174.759,76.493,0.821],[7.033,155.725,70.189,0.804],[7.067,144.722,74.306,0.829],[7.1,137.233,77.642,0.857],[7.133,131.883,77.176,0.873],[7.167,128.013,73.097,0.88],[7.2,123.312,65.826,0.879],[7.233,124.91,57.379,0.914],[7.267,139.582,46.508,1.01],[7.3,172.206,31.488,1.183],[7.333,199.922,0.601,1.33],[7.367,204.67,-52.708,1.386],[7.4,172.66,-121.708,1.296],[7.433,124.922,-182.527,1.159],[7.467,71.272,-206.353,1.028],[7.5,22.97,-195.001,0.981],[7.533,-18.123,-161.36,1.002],[7.567,-44.253,-129.847,1.076],[7.6,-50.977,-99.255,1.121],[7.633,-26.908,-67.548,1.106],[7.667,31.061,-31.271,1.052],[7.7,124.36,5.235,1.02],[7.733,211.326,36.808,1.03],[7.767,266.695,59.864,1.045],[7.8,262.609,69.04,1.041],[7.833,223.73,62.382,1.042],[7.867,162.49,43.494,1.071],[7.9,87.697,16.942,1.149],[7.933,1.102,-8.409,1.226],[7.967,-91.567,-29.455,1.288],[8.0,-160.913,-36.11,1.28],[8.033,-204.217,-32.561,1.238],[8.067,-218.681,-21.02,1.18],[8.125,0,0,1],[8.59,0,0,1],[8.6,109.453,-18.062,1.12],[8.633,115.775,28.482,1.12],[8.667,124.706,60.627,1.12],[8.7,136.308,76.194,1.12],[8.733,145.158,80.781,1.12],[8.767,150.301,85.068,1.12],[8.8,141.38,83.497,1.12],[8.833,120.69,67.796,1.12],[8.867,89.266,40.993,1.12],[8.9,49.183,8.517,1.066],[8.933,3.315,-21.845,0.973],[8.967,-45.208,-45.046,0.891],[9.0,-81.846,-58.167,0.847],[9.033,-109.347,-68.68,0.889],[9.067,-128.094,-78.324,1.006],[9.1,-145.642,-84.873,1.12],[9.133,-154.911,-79.315,1.12],[9.167,-158.652,-66.338,1.12]];
+const FIX=window.G3FIX||[[6.45,160,82.5,0.77],[6.75,160,82.5,0.77],[6.9,159.375,98.125,0.77],[7.1,145.625,65,0.89],[7.3,24.375,-62.5,0.57],[7.5,-94.375,-188.75,0.919],[7.6,-285,-189.375,1.002],[7.7,-545.625,-65.625,1.03],[7.9,-533.125,-28.125,0.913],[7.97,-596.25,-111.25,0.913],[8.03,-654.375,-181.25,0.913],[8.1,-654.375,-181.25,0.913],[8.125,0,0,1],[8.59,0,0,1],[8.6,109.453,-18.062,1.12],[8.633,115.775,28.482,1.12],[8.667,124.706,60.627,1.12],[8.7,136.308,76.194,1.12],[8.733,145.158,80.781,1.12],[8.767,150.301,85.068,1.12],[8.8,141.38,83.497,1.12],[8.833,120.69,67.796,1.12],[8.867,89.266,40.993,1.12],[8.9,49.183,8.517,1.066],[8.933,3.315,-21.845,0.973],[8.967,-52.604,-45.046,0.891],[9.0,-70.923,-58.167,0.847],[9.033,-84.67349999999999,-68.68,0.889],[9.067,-94.047,-78.324,0.92],[9.1,-102.821,-84.873,0.92],[9.133,-107.4555,-79.315,0.92],[9.167,-109.326,-66.338,0.92]];
 function fixAt(T,F){ if(!F.length) return [0,0,1]; if(T<=F[0][0]) return F[0].slice(1); if(T>=F[F.length-1][0]) return F[F.length-1].slice(1);
-  const i=F.findIndex((k,j)=>T>=k[0]&&T<=F[j+1][0]), a=F[i], b=F[i+1], u=(T-a[0])/(b[0]-a[0]); return [1,2,3].map(c=>a[c]+(b[c]-a[c])*u); }
+  const i=F.findIndex((k,j)=>T>=k[0]&&T<=F[j+1][0]), a=F[i], b=F[i+1], p=F[Math.max(0,i-1)], q=F[Math.min(F.length-1,i+2)], u=(T-a[0])/(b[0]-a[0]); return [1,2,3].map(c=>cr(p[c],a[c],b[c],q[c],u)); }
 window.seek=async T=>{ tl.seek(T,false); await render(T); };
 // used by the fitter: place the phone exactly (pivot at phone point px,py; that point lands on screen sx,sy)
 window.posePhone=(px,py,sx,sy,sc,rx,ry,rz,persp)=>{ const ph=$('#phone'); if(persp) $('#world').style.perspective=persp+'px'; ph.style.transformOrigin=`${px}px ${py}px`;
