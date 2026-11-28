@@ -1,0 +1,346 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>You and Me</title>
+<style>
+@font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Medium.otf);font-weight:500}
+@font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-SemiBold.otf);font-weight:600}
+@font-face{font-family:"Inter Display";src:url(fonts/InterDisplay-Bold.otf);font-weight:700}
+@font-face{font-family:"Serif I";src:url(fonts/InstrumentSerif-italic-400.woff2)}
+:root{--paper:#ecebe7;--gold:#b47b12;--sel:#ece0bf}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:960px;height:720px;overflow:hidden;background:#000}
+#stage{position:absolute;inset:0;overflow:hidden;font-family:"Inter Display",-apple-system,sans-serif;background:var(--paper)}
+.abs{position:absolute}.sc{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+.emo{font-family:"Noto Color Emoji";font-weight:400}
+#cap{left:0;right:0;top:648px;text-align:center;font:600 9px/1 "DejaVu Sans Mono",monospace;letter-spacing:.02em;z-index:90}
+/* selection handles */
+.hdl{position:absolute;width:5px;background:var(--gold)}
+.hdl i{position:absolute;left:50%;width:46px;height:46px;margin-left:-23px;border-radius:50%;background:var(--gold);display:block}
+.caret{display:inline-block;width:5px;background:#111;vertical-align:-.12em;margin-left:4px}
+.ring{position:absolute;left:480px;top:360px}
+.ring span{position:absolute;left:0;top:0;transform-origin:0 0;white-space:pre}
+.bub{position:absolute;padding:7px 13px;border-radius:18px;font-size:22px;font-weight:600;white-space:nowrap}
+.menu{display:flex;align-items:center;gap:0;font-size:22px;font-weight:600;color:#111}
+.menu span{padding:0 26px;border-left:1.5px solid #cfcfcb}
+</style></head>
+<body><div id="stage">
+
+<!-- S1  i just wanna be  (0 - 1.6) -->
+<div class="sc" id="s1">
+  <div id="s1bg" class="abs" style="inset:0;background:var(--paper)"></div>
+  <div id="cam1" class="abs" style="left:480px;top:360px">
+    <div id="line1" class="abs" style="left:0;top:0;transform:translate(-50%,-50%);white-space:nowrap;font-size:88px;font-weight:600;letter-spacing:-.035em;color:#141414;display:flex;align-items:center">
+      <span id="w_i" style="font-family:'Serif I';font-weight:400;font-size:96px;margin-right:16px">i</span>
+      <span id="selWrap" style="position:relative;display:inline-block">
+        <span id="selBox" class="abs" style="left:-6px;right:-6px;top:6px;bottom:-4px;background:var(--sel)"></span>
+        <span id="w_just" style="position:relative"></span>
+        <div class="hdl" id="hA" style="left:-8px;top:-2px;height:112px"><i style="top:-38px"></i></div>
+        <div class="hdl" id="hB" style="right:-8px;top:-2px;height:112px"><i style="bottom:-40px"></i></div>
+      </span>
+      <span id="w_wanna" style="position:relative;margin-left:22px"></span><span class="caret" id="car1" style="height:84px"></span>
+      <span id="arrowBtn" style="display:inline-block;margin-left:18px;width:70px;height:70px;border-radius:50%;background:#1c49c6;border:4px solid #fff;position:relative;opacity:0">
+        <svg class="abs" style="left:13px;top:13px" width="36" height="36" viewBox="0 0 36 36"><path d="M5 18h24M19 8l10 10-10 10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<!-- S2  finding: where you are / here  (1.55 - 3.6) -->
+<div class="sc" id="s2" style="background:linear-gradient(180deg,#2f7d2c 0%,#256a23 55%,#1b521a 100%)">
+  <div class="abs" style="left:70px;top:58px;color:rgba(255,255,255,.6);font-size:10px;font-weight:600;letter-spacing:.04em">FINDING</div>
+  <div class="abs" style="left:70px;top:72px;color:#fff;font-size:18px;font-weight:600">AVE's Tag</div>
+  <div class="abs" style="left:866px;top:68px;width:32px;height:58px;border-radius:16px;background:#050505"></div>
+  <div id="tagRing" class="abs" style="left:480px;top:360px;width:370px;height:370px;margin:-185px 0 0 -185px;border-radius:50%;background:rgba(255,255,255,.3)"></div>
+  <div id="tagWrap" class="abs" style="left:480px;top:360px;width:220px;height:220px;margin:-110px 0 0 -110px;perspective:700px">
+    <div id="tag" class="abs" style="inset:0;transform-style:preserve-3d">
+      <div id="tagFace" class="abs" style="inset:0;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,0)"></div>
+      <div id="tagBack" class="abs" style="inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 40% 35%,#f4f4f2 0%,#d9d9d6 52%,#b7b7b3 70%,#f7f7f5 74%,#c9c9c5 86%,#ffffff 100%);box-shadow:0 18px 40px rgba(0,0,0,.35)">
+        <img src="img/ave-wordmark-black.png" class="abs" style="left:58px;top:92px;width:104px;opacity:.38;filter:blur(.3px)">
+      </div>
+    </div>
+  </div>
+  <div class="abs" id="dist" style="left:70px;top:552px;color:#fff;font-size:44px;font-weight:500;letter-spacing:-.01em">0.5 m</div>
+  <div class="abs" id="where" style="left:70px;top:604px;color:rgba(255,255,255,.88);font-size:42px;font-weight:500;letter-spacing:-.01em;white-space:nowrap"><span>where</span> <span>you</span> <span>are</span></div>
+  <div class="abs" id="here" style="left:76px;top:604px;color:#fff;font-size:44px;font-weight:600;opacity:0;text-shadow:0 0 18px rgba(255,255,255,.9)">here</div>
+</div>
+
+<!-- S3  photo flashes with traced circles  (3.6 - 4.2) -->
+<div class="sc" id="s3" style="background:#111">
+  <div id="flash" class="abs" style="inset:0"></div>
+  <div class="abs" style="left:900px;top:20px;width:40px;height:480px;display:flex;flex-direction:column;gap:22px;align-items:center;padding-top:6px">
+    <i style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);display:block"></i><i style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);display:block"></i><i style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);display:block"></i></div>
+  <svg id="trace" class="abs" style="left:0;top:0;overflow:visible" width="960" height="720"><circle id="traceC" cx="480" cy="360" r="120" fill="none" stroke="#fff" stroke-width="3"/></svg>
+</div>
+
+<!-- S4  circle, square, "in the end."  (4.15 - 5.75) -->
+<div class="sc" id="s4">
+  <div id="card4" class="abs" style="inset:0;background:var(--paper);transform-origin:480px 360px">
+    <svg class="abs" style="left:0;top:0;overflow:visible" width="960" height="720">
+      <circle id="c4" cx="480" cy="360" r="250" fill="none" stroke="#111" stroke-width="2.4" transform="rotate(100 480 360)"/>
+      <g id="sq4" transform="translate(480 360)"><rect id="sq4r" x="-80" y="-80" width="160" height="160" rx="24" fill="none" stroke="#111" stroke-width="2.4"/></g>
+    </svg>
+    <div class="ring" id="ringA"></div><div class="ring" id="ringB"></div><div class="ring" id="ringC"></div>
+  </div>
+</div>
+
+<!-- S5  camera: you + me  (5.6 - 7.9) -->
+<div class="sc" id="s5" style="background:#000">
+  <div id="topbar5" class="abs" style="left:0;right:0;top:28px;height:30px;color:#fff;opacity:0">
+    <svg class="abs" style="left:268px;top:4px" width="22" height="22" viewBox="0 0 22 22"><path d="M4 4l14 14M18 4L4 18" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <div class="abs" style="left:0;right:0;top:6px;text-align:center;font-size:15px;font-weight:600">New instant</div>
+    <svg class="abs" style="left:670px;top:4px" width="22" height="22" viewBox="0 0 22 22"><g fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="7" height="7" rx="2"/><rect x="13" y="2" width="7" height="7" rx="2"/><rect x="2" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></g></svg>
+  </div>
+  <div id="vf" class="abs" style="left:266px;top:86px;width:430px;height:434px;border-radius:120px;overflow:hidden;background:#1a1a1a">
+    <div id="vfShot" class="abs" style="left:-160px;top:-40px;width:760px;height:425px;transform-origin:380px 260px">
+      <div class="abs" style="left:149px;top:105px;width:470px;height:191px;background:#050505;border-radius:22px;overflow:hidden">
+        <svg id="ink" class="abs" style="left:110px;top:12px" width="250" height="165" viewBox="0 0 250 165">
+          <path id="ink1" d="M18 40 C 22 70, 34 86, 48 84 C 60 82, 66 62, 64 40 M64 40 C 66 80, 64 120, 48 150 M86 60 C 70 62, 70 96, 90 96 C 110 96, 112 62, 92 60 M124 58 C 120 80, 124 98, 140 96 C 154 94, 158 76, 156 58 M156 58 C 156 76, 158 92, 166 98" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="ink2" d="M100 112 L 100 140 M 86 126 L 114 126" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+          <path id="ink3" d="M130 150 C 132 128, 136 118, 142 120 C 148 122, 146 140, 148 150 C 150 128, 156 118, 162 120 C 168 122, 168 140, 168 150 M184 136 C 196 136, 204 128, 198 120 C 190 112, 178 124, 180 138 C 182 152, 200 154, 212 146" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="abs" style="left:150px;bottom:12px;padding:6px 12px;border-radius:14px;background:#2a2a2a;display:flex;gap:9px"><i style="width:8px;height:18px;background:#ddd;border-radius:2px;display:block"></i><i style="width:8px;height:18px;background:#ddd;border-radius:2px;display:block"></i><i style="width:8px;height:18px;background:#ddd;border-radius:2px;display:block"></i><i style="width:10px;height:10px;margin-top:4px;background:#4da3ff;border-radius:50%;display:block"></i><i style="width:10px;height:10px;margin-top:4px;background:#ffd34d;border-radius:50%;display:block"></i></div>
+      </div>
+      <img src="img/hands_phone.png" class="abs" style="left:0;top:0;width:760px;height:425px">
+    </div>
+  </div>
+  <svg class="abs" style="left:338px;top:624px" width="24" height="24" viewBox="0 0 24 24"><path d="M13 2L5 13h6l-2 9 8-11h-6z" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M4 4l16 16" stroke="#fff" stroke-width="1.8"/></svg>
+  <div id="shutter" class="abs" style="left:480px;top:636px;width:112px;height:112px;margin:-56px 0 0 -56px;border-radius:50%;border:6px solid #7d7d7d;display:flex;align-items:center;justify-content:center"><i style="width:84px;height:84px;border-radius:50%;background:#fff;display:block"></i></div>
+  <svg class="abs" style="left:598px;top:624px" width="24" height="24" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0114-5l2-2v6h-6l2-2a5.5 5.5 0 00-9 3M20 12a8 8 0 01-14 5l-2 2v-6h6l-2 2a5.5 5.5 0 009-3" fill="#fff"/></svg>
+</div>
+
+<!-- S6  canvas: the photo and its info  (7.85 - 10.6) -->
+<div class="sc" id="s6" style="background:#efefec">
+  <div class="abs" style="inset:0;background-image:radial-gradient(#cfcfca 1.1px,transparent 1.3px);background-size:22px 22px"></div>
+  <div id="cam6" class="abs" style="inset:0;transform-origin:480px 360px;perspective:1100px">
+    <div id="scatter" class="abs" style="inset:0"></div>
+    <div id="photoWin" class="abs" style="left:150px;top:150px;width:470px;height:330px;border-radius:12px;background:#fafaf8;box-shadow:0 30px 60px rgba(0,0,0,.25);overflow:hidden;transform-origin:50% 50%">
+      <div class="abs" style="left:0;right:0;top:0;height:34px;display:flex;align-items:center;gap:7px;padding-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:block"></i><i style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:block"></i><i style="width:11px;height:11px;border-radius:50%;background:#28c840;display:block"></i><span style="margin-left:10px;font-size:11px;font-weight:600;color:#666">made by AVE</span></div>
+      <img src="img/work_still.jpg" class="abs" style="left:0;top:34px;width:470px;height:296px;object-fit:cover">
+    </div>
+    <div id="infoWin" class="abs" style="left:470px;top:260px;width:390px;height:330px;border-radius:16px;background:#fbfbfa;box-shadow:0 30px 60px rgba(0,0,0,.22);overflow:hidden;transform-origin:30% 30%">
+      <div style="display:flex;align-items:center;gap:7px;padding:14px 16px"><i style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:block"></i><i style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:block"></i><i style="width:11px;height:11px;border-radius:50%;background:#28c840;display:block"></i><span style="margin-left:8px;font-size:13px;font-weight:600;font-style:italic;color:#333">ave_reel Info</span></div>
+      <div class="abs" style="left:24px;top:52px;display:flex;gap:10px;align-items:center"><div style="width:34px;height:28px;border-radius:5px;background:linear-gradient(#7cc4f5,#3c94e0)"></div><div><div style="font-size:15px;font-weight:700;font-style:italic">ave_reel</div><div style="font-size:10px;font-style:italic;color:#888">Modified: Today, 10:08 PM</div></div></div>
+      <div class="abs" style="right:26px;top:58px;font-size:19px;font-weight:600;font-style:italic">417.9 MB</div>
+      <div class="abs" style="left:24px;right:24px;top:110px;height:44px;border:1.5px solid #ddd;border-radius:6px;font-size:10px;color:#aaa;padding:6px;font-style:italic">Add Tags…</div>
+      <div class="abs" style="left:24px;top:172px;font-size:11px;line-height:20px;color:#444;font-style:italic">General:<br>Kind: Folder<br>Size: 417,903,233 bytes<br>Where: Desktop<br>Created: November 5, 2026</div>
+    </div>
+  </div>
+  <div class="abs" style="left:70px;top:30px;font-size:15px;font-weight:700;color:#222">Untitled <span style="color:#999;font-size:11px">⌄</span></div>
+  <div class="abs" style="left:904px;top:28px;width:30px;display:flex;flex-direction:column;gap:12px;align-items:center">
+    <i style="width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid #ddd;display:block"></i><i style="width:26px;height:26px;border-radius:50%;background:#3ea0c8;display:block"></i><i style="width:18px;height:18px;border-radius:5px;border:2px solid #777;display:block"></i><i style="width:18px;height:18px;border-radius:5px;border:2px solid #777;display:block"></i></div>
+  <div id="tools6" class="abs" style="left:30px;top:620px;width:510px;height:70px;border-radius:35px;background:rgba(255,255,255,.92);box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:22px;padding:0 24px">
+    <i style="width:18px;height:18px;border-radius:50%;border:2px solid #555;display:block"></i><i style="width:18px;height:18px;border-radius:50%;border:2px solid #555;display:block"></i>
+    <i style="width:9px;height:44px;border-radius:3px;background:linear-gradient(#222 30%,#ddd 30%);display:block"></i><i style="width:9px;height:44px;border-radius:3px;background:linear-gradient(#111 25%,#eee 25%);display:block"></i><i style="width:9px;height:44px;border-radius:3px;background:linear-gradient(#ccc 30%,#f4f4f4 30%);display:block"></i><i style="width:9px;height:44px;border-radius:3px;background:linear-gradient(#f0c040 30%,#f6f0e0 30%);display:block"></i><i style="width:9px;height:44px;border-radius:3px;background:linear-gradient(#e7a0a0 30%,#f6eeee 30%);display:block"></i>
+    <div style="display:grid;grid-template-columns:repeat(3,14px);gap:5px"><i style="width:14px;height:14px;border-radius:50%;background:#111;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#2f7de1;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#3dbb5a;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#f2c230;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#e04040;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);display:block"></i></div>
+  </div>
+  <svg id="cur6" class="abs" style="left:600px;top:460px" width="22" height="22" viewBox="0 0 22 22"><path d="M3 2l15 8-6.5 1.8L8.6 18z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+  <div id="dim6" class="abs" style="inset:0;background:#050505;opacity:0"></div>
+</div>
+
+<!-- S7  never  (10.5 - 11.1) -->
+<div class="sc" id="s7" style="background:#080808;perspective:900px">
+  <div id="never" class="abs" style="left:480px;top:330px;font-size:300px;font-weight:700;letter-spacing:-.04em;color:#f4f4f2;white-space:nowrap;transform-origin:50% 50%">never</div>
+</div>
+
+<!-- S8  never ( x ) leave / we ( ) both  (11.05 - 13.25) -->
+<div class="sc" id="s8">
+  <div id="l8" class="abs" style="left:480px;top:360px;white-space:nowrap;font-size:100px;font-weight:600;letter-spacing:-.04em;color:#111;display:flex;align-items:center;transform-origin:50% 50%">
+    <span id="w8a">never</span><span style="margin-left:12px">(</span><span id="w8emo" style="display:inline-block;width:96px;text-align:center;position:relative;height:100px"></span><span>)</span><span id="w8b" style="margin-left:10px">leave</span>
+    <svg id="arr8" style="margin-left:20px" width="84" height="70" viewBox="0 0 84 70"><path id="arr8p" d="M78 35H10M36 8L8 35l28 27" fill="none" stroke="#111" stroke-width="10" stroke-linecap="square"/></svg>
+  </div>
+</div>
+
+<!-- S9  messages  (13.05 - 16.4) -->
+<div class="sc" id="s9">
+  <div id="cam9" class="abs" style="left:0;top:0;width:960px;height:720px;transform-origin:0 0">
+    <div id="today" class="abs" style="left:0;right:0;top:118px;text-align:center;font-size:17px;color:#9a9a96;font-weight:600">Today <span style="font-weight:500">9:41PM</span></div>
+    <div id="bBlue" class="bub" style="left:620px;top:148px;background:#1478ef;color:#111;font-size:22px">we(<span class="emo" style="font-size:18px">🤝</span>)both ↗</div>
+    <div id="bGray" class="bub" style="left:104px;top:236px;background:#d8d8d6;color:#111"><span id="grayT"></span></div>
+    <div id="date9" class="abs" style="left:0;right:0;top:332px;text-align:center;font-size:17px;color:#7c7c78;font-weight:500">November 6, 2026 at 12:15AM</div>
+    <div id="input9" class="abs" style="left:100px;top:368px;font-size:32px;font-weight:700;color:#1c1c1c;white-space:nowrap;letter-spacing:-.01em"><span id="inT"></span><span id="inSel" style="position:relative"><span id="inSelBg" class="abs" style="left:-3px;right:-3px;top:2px;bottom:0;background:var(--sel);opacity:0"><i class="abs" style="left:-2px;top:-8px;width:3px;height:44px;background:var(--gold)"></i><i class="abs" style="left:-8px;top:-16px;width:15px;height:15px;border-radius:50%;background:var(--gold)"></i><i class="abs" style="right:-2px;top:-2px;width:3px;height:44px;background:var(--gold)"></i><i class="abs" style="right:-8px;top:38px;width:15px;height:15px;border-radius:50%;background:var(--gold)"></i></span><span id="inSelT" style="position:relative"></span></span><span class="caret" id="car9" style="height:32px;width:3.5px"></span></div>
+    <div id="menu9" class="abs menu" style="left:70px;top:430px;opacity:0"><span style="border:0">Cut</span><span>Copy</span><span>Paste</span><span style="color:#c0262d">Delete</span><span>AutoFill</span></div>
+  </div>
+  <canvas id="glitch" class="abs" style="left:0;top:0;width:960px;height:720px;opacity:0" width="480" height="360"></canvas>
+</div>
+
+<!-- S10 black + spinner -->
+<div class="sc" id="s10" style="background:#050505">
+  <svg id="spin" class="abs" style="left:472px;top:352px" width="16" height="16" viewBox="0 0 16 16"><path d="M8 2a6 6 0 105.6 3.8" fill="none" stroke="#3a3a3a" stroke-width="2" stroke-linecap="round"/></svg>
+</div>
+
+<div id="cap" class="abs"></div>
+</div>
+<script src="vendor/gsap.min.js"></script>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const DUR=18.8; window.DUR=DUR;
+const tl=gsap.timeline({paused:true});
+const SC={s1:[0,1.62],s2:[1.55,3.6],s3:[3.58,4.18],s4:[4.15,5.75],s5:[5.6,7.88],s6:[7.85,10.58],s7:[10.5,11.08],s8:[11.05,13.25],s9:[13.05,16.32],s10:[16.25,DUR+1]};
+for(const [id,[a,b]] of Object.entries(SC)){ tl.set('#'+id,{visibility:'visible'},a); if(b<DUR) tl.set('#'+id,{visibility:'hidden'},b); }
+
+/* ---------- S1: i just wanna be (typed in a selection) ---------- */
+gsap.set('#cam1',{scale:1.55});
+tl.to('#cam1',{scale:1,duration:.95,ease:'power2.out'},.08)
+  .to('#cam1',{scale:.74,duration:.35,ease:'power3.inOut'},1.02)
+  .to('#cam1',{scale:.78,duration:.4,ease:'sine.out'},1.37);
+gsap.set(['#hA','#hB','#selBox'],{opacity:0}); gsap.set('#w_i',{opacity:0,y:8});
+tl.to('#w_i',{opacity:1,y:0,duration:.08},.08)
+  .fromTo('#hA',{opacity:0,scaleY:.2,transformOrigin:'50% 0'},{opacity:1,scaleY:1,duration:.12,ease:'back.out(2)'},.18)
+  .fromTo('#hB',{opacity:0,scaleY:.2,transformOrigin:'50% 100%'},{opacity:1,scaleY:1,duration:.12,ease:'back.out(2)'},.2)
+  .to('#selBox',{opacity:1,duration:.06},.28);
+// dark switch: paper -> black, selection dims, autocorrect
+tl.to('#s1bg',{background:'#0a0a0a',duration:.14,ease:'power2.in'},1.02)
+  .to('#line1',{color:'#ffffff',duration:.14},1.02).to('#selBox',{background:'#2b2414',duration:.14},1.02)
+  .to('#arrowBtn',{opacity:1,duration:.1},1.22).fromTo('#arrowBtn',{scale:.2,rotation:-90},{scale:1,rotation:0,duration:.3,ease:'back.out(2.4)'},1.22)
+  .to('#cam1',{filter:'blur(14px)',opacity:.0,duration:.14,ease:'power2.in'},1.48);
+
+/* ---------- S2: finding ---------- */
+tl.fromTo('#s2',{filter:'blur(18px)',opacity:0},{filter:'blur(0px)',opacity:1,duration:.3,ease:'power2.out'},1.55);
+tl.fromTo('#tagRing',{scale:1.25},{scale:.66,duration:1.2,ease:'power1.inOut'},1.6)
+  .to('#tagRing',{scale:.35,opacity:0,duration:.25,ease:'power2.in'},2.62)
+  .to('#tagFace',{boxShadow:'0 0 60px 26px rgba(255,255,255,.75)',duration:.18},2.66)
+  .to('#tag',{rotationY:90,duration:.18,ease:'power2.in'},2.82)
+  .set('#tagFace',{opacity:0},3.0).set('#tagBack',{opacity:1},3.0)
+  .fromTo('#tag',{rotationY:-90},{rotationY:0,duration:.5,ease:'power3.out',immediateRender:false},3.0)
+  .fromTo('#tagWrap',{scale:1.15},{scale:1.03,duration:.6,ease:'power2.out',immediateRender:false},3.0)
+  .to(['#dist','#where'],{opacity:0,duration:.08},2.98).to('#here',{opacity:1,duration:.1},2.98)
+  .fromTo('#where span',{opacity:0,y:10,filter:'blur(6px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.25,stagger:.12,ease:'power2.out'},1.7)
+  .fromTo('#dist',{filter:'blur(8px)',opacity:0},{filter:'blur(0px)',opacity:1,duration:.25},1.66);
+
+/* ---------- S3: photo flashes ---------- */
+const FL=[['img/phone_front.png',3.58,'contain','#1b1e22',[480,250,70]],['img/headphones.png',3.78,'contain','#2a1f1a',[480,360,150]],['img/watch.png',3.88,'contain','#3a2a26',[480,360,120]],['img/work_still2.jpg',4.03,'cover','#111',[520,340,90]]];
+FL.forEach(([src,t,fit,bg,[cx,cy,r]],i)=>{ const d=document.createElement('div'); d.className='abs'; d.style.cssText=`inset:0;background:${bg};opacity:0`;
+  d.innerHTML=`<img src="${src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${fit};${fit==='contain'?'transform:scale(1.35)':''}">`; $('#flash').appendChild(d);
+  tl.set(d,{opacity:1},t).set(d,{opacity:0},FL[i+1]?FL[i+1][1]:4.2).fromTo(d.firstChild,{scale:fit==='contain'?1.5:1.15},{scale:fit==='contain'?1.35:1.05,duration:.25,ease:'power2.out'},t);
+  tl.set('#traceC',{attr:{cx,cy,r}},t); });
+const TC=2*Math.PI*150; gsap.set('#traceC',{strokeDasharray:TC,strokeDashoffset:TC});
+[3.62,3.82,3.92,4.06].forEach(t=>tl.fromTo('#traceC',{strokeDashoffset:TC,opacity:1},{strokeDashoffset:0,duration:.12,ease:'power2.out'},t).to('#traceC',{opacity:0,duration:.04},t+.14));
+
+/* ---------- S4: circle, square, in the end ---------- */
+const C4=2*Math.PI*250; gsap.set('#c4',{strokeDasharray:C4,strokeDashoffset:C4}); gsap.set('#sq4r',{strokeDasharray:640,strokeDashoffset:640});
+tl.to('#c4',{strokeDashoffset:0,duration:.55,ease:'power2.inOut'},4.18)
+  .to('#sq4r',{strokeDashoffset:0,duration:.4,ease:'power2.out'},4.28)
+  .fromTo('#sq4',{rotation:0,scale:.8,svgOrigin:'0 0'},{rotation:-45,scale:.9,duration:.45,ease:'power2.inOut'},4.45)
+  .to('#c4',{attr:{r:170},duration:.35,ease:'power3.inOut'},4.75)
+  .to('#sq4',{scale:.35,rotation:-140,opacity:0,duration:.45,ease:'power3.in'},4.75);
+const mkRing=(sel,text,R,size,reps,weight)=>{ const el=$(sel); const s=(text+'').repeat(reps); const chars=[...s]; const step=360/chars.length;
+  el.innerHTML=chars.map((c,i)=>`<span style="font-size:${size}px;font-weight:${weight};letter-spacing:-.03em;transform:rotate(${i*step}deg) translate(0,-${R}px)">${c}</span>`).join(''); };
+mkRing('#ringA','in the end.',420,140,3,500); mkRing('#ringB','in the end.',290,82,3,500); mkRing('#ringC','in the end',205,46,2,400);
+$$('#ringC span').forEach(s=>s.style.color='#555');
+tl.fromTo('#ringA',{opacity:0,scale:1.3,rotation:-40},{opacity:1,scale:1,rotation:0,duration:.5,ease:'expo.out'},4.72)
+  .fromTo('#ringB',{opacity:0,scale:.6,rotation:60},{opacity:1,scale:1,rotation:0,duration:.5,ease:'expo.out'},4.78)
+  .fromTo('#ringC',{opacity:0,scale:.5,rotation:-80},{opacity:1,scale:1,rotation:0,duration:.5,ease:'expo.out'},4.84)
+  .to('#ringA',{rotation:-70,duration:1.1,ease:'none'},5.0).to('#ringB',{rotation:90,duration:1.1,ease:'none'},5.0).to('#ringC',{rotation:-120,duration:1.1,ease:'none'},5.0)
+  // the page folds into the camera shutter
+  .to('#card4',{scale:.66,borderRadius:'26px',duration:.3,ease:'power3.inOut'},5.28)
+  .to('#card4',{scale:.13,borderRadius:'50%',duration:.3,ease:'power3.in'},5.5);
+tl.set('#s4',{background:'#000'},5.28);
+
+/* ---------- S5: camera ---------- */
+tl.fromTo('#vf',{scale:0,opacity:0},{scale:1,opacity:1,duration:.4,ease:'expo.out'},5.78)
+  .fromTo('#shutter',{scale:.4,y:-280},{scale:1,y:0,duration:.35,ease:'expo.out'},5.62)
+  .to('#topbar5',{opacity:1,duration:.15},6.25)
+  .fromTo('#vfShot',{x:220,y:160,rotation:28,scale:1.4},{x:0,y:0,rotation:-4,scale:1,duration:.55,ease:'expo.out'},5.95)
+  .to('#vfShot',{rotation:2,x:-14,duration:1.1,ease:'sine.inOut'},6.5)
+  .to('#vfShot',{rotation:-1,x:6,y:-6,scale:1.06,duration:.8,ease:'sine.inOut'},7.1)
+  .to('#vf',{scale:.92,y:10,duration:.25,ease:'power2.inOut'},7.25).to('#vf',{scale:1,y:0,duration:.3,ease:'power2.out'},7.5)
+  .to('#shutter',{scale:.86,duration:.08,yoyo:true,repeat:1},6.45).to('#shutter',{scale:.86,duration:.08,yoyo:true,repeat:1},6.95);
+['#ink1','#ink2','#ink3'].forEach((p,i)=>{ const L=$(p).getTotalLength(); gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});
+  tl.to(p,{strokeDashoffset:0,duration:[.6,.2,.5][i],ease:'power1.inOut'},[6.2,6.85,6.95][i]); });
+
+/* ---------- S6: the canvas ---------- */
+tl.fromTo('#photoWin',{x:-120,y:300,rotationX:40,rotationZ:-22,scale:1.4},{x:-40,y:20,rotationX:25,rotationZ:-14,scale:1,duration:.4,ease:'expo.out'},7.86)
+  .to('#photoWin',{scale:.55,x:60,y:40,duration:.4,ease:'power3.inOut'},8.08)
+  .to('#cur6',{left:520,top:430,duration:.4,ease:'power3.inOut'},8.05)
+  .to('#photoWin',{scale:1.15,x:-160,y:-40,rotationX:0,rotationZ:-4,duration:.35,ease:'power3.inOut'},8.42)
+  .fromTo('#infoWin',{x:300,y:200,rotationY:-35,rotationZ:12,opacity:0},{x:0,y:0,rotationY:-22,rotationZ:-8,opacity:1,duration:.4,ease:'expo.out'},8.48)
+  .to('#cam6',{scale:2.6,x:-260,y:-120,duration:.35,ease:'power3.in'},8.72)
+  .to('#cam6',{scale:.62,x:0,y:-20,duration:.4,ease:'expo.out'},9.0)
+  .to('#cur6',{opacity:0,duration:.1},8.7)
+  .to('#dim6',{opacity:.97,duration:1.0,ease:'power1.in'},9.5);
+const SCAT=$('#scatter'), scat=[];
+const icons=['sphere','cube','torus','star','bulb','magnifier','headphones','watch'];
+for(let i=0;i<46;i++){ const big=i<10; const e=document.createElement(big?'img':'div'); e.className='abs';
+  if(big){ e.src='img/'+icons[i%8]+'.png'; e.style.width=(54+(i*13)%40)+'px'; }
+  else Object.assign(e.style,{width:'7px',height:'7px',background:['#5b4fd8','#3a3a8a','#8a2b2b'][i%3]});
+  const a=i*2.39, r=120+((i*71)%330); e.style.left=(480+Math.cos(a)*r*1.3)+'px'; e.style.top=(360+Math.sin(a)*r*.8)+'px'; SCAT.appendChild(e); scat.push(e);
+  tl.fromTo(e,{opacity:0,scale:0},{opacity:big?.75:1,scale:1,duration:.4,ease:'back.out(2)'},9.0+i*.008); }
+// rotation gizmos on a few items
+for(let i=0;i<7;i++){ const g=document.createElementNS('http://www.w3.org/2000/svg','svg'); g.setAttribute('width',120); g.setAttribute('height',120); g.setAttribute('class','abs');
+  g.innerHTML='<circle cx="60" cy="60" r="44" fill="none" stroke="#2f6fe0" stroke-width="1.6" stroke-dasharray="140 300"/><circle cx="60" cy="60" r="44" fill="none" stroke="#3cb04a" stroke-width="1.6" stroke-dasharray="90 300" transform="rotate(130 60 60)"/><path d="M60 60L110 50M60 60L40 8" stroke="#c0392b" stroke-width="1.6"/>';
+  const a=i*.9+.5; g.style.left=(420+Math.cos(a)*260)+'px'; g.style.top=(300+Math.sin(a)*170)+'px'; SCAT.appendChild(g); scat.push(g);
+  tl.fromTo(g,{opacity:0,scale:.3},{opacity:1,scale:1,duration:.35,ease:'expo.out'},9.05+i*.03); }
+
+/* ---------- S7: never ---------- */
+tl.fromTo('#never',{xPercent:-50,yPercent:-50,rotationY:-38,rotationZ:14,skewX:-8,scale:.7,opacity:0},{rotationY:-24,rotationZ:12,skewX:-10,scale:1.18,opacity:1,duration:.3,ease:'expo.out'},10.55)
+  .to('#never',{rotationY:-30,rotationZ:9,skewX:-14,scale:1.3,x:-40,duration:.3,ease:'sine.inOut'},10.85)
+  .to('#never',{scale:.32,rotationY:0,rotationZ:0,skewX:0,y:30,duration:.18,ease:'power3.in'},10.92);
+
+/* ---------- S8: never ( ) leave -> we ( ) both ---------- */
+tl.fromTo('#l8',{xPercent:-50,yPercent:-50,scale:2.1},{scale:1,duration:.3,ease:'expo.out'},11.06);
+const EMO=$('#w8emo');
+EMO.innerHTML='<span id="eX" class="abs" style="left:0;right:0;top:0;color:#a8121c;font-weight:700">✕</span><span id="eRun" class="abs emo" style="left:0;right:0;top:12px;font-size:68px;opacity:0">🏃</span><span id="eHand" class="abs emo" style="left:0;right:0;top:12px;font-size:68px;opacity:0">🤝</span>';
+tl.to('#eX',{scale:0,duration:.12,ease:'power2.in'},11.5)
+  .fromTo('#eRun',{opacity:1,scale:0},{scale:1,duration:.3,ease:'back.out(2.2)'},11.6)
+  .fromTo('#arr8',{opacity:0,x:-30},{opacity:1,x:0,duration:.25,ease:'expo.out'},11.65)
+  .to('#eRun',{scale:0,duration:.12,ease:'power2.in'},12.45)
+  .fromTo('#eHand',{opacity:1,scale:0},{scale:1,duration:.3,ease:'back.out(2.2)'},12.6)
+  .to('#arr8p',{attr:{d:'M14 62L70 6M24 6h46v46'},duration:.2,ease:'power2.inOut'},12.56)
+  .to('#l8',{scale:.92,duration:.6,ease:'sine.inOut'},12.6)
+  // shrink into the blue message bubble
+  .to('#l8',{scale:.24,x:-160+0,y:-60,opacity:0,duration:.25,ease:'power3.in'},13.05);
+const t8w=(T)=>{ // words in S8 swap with a typing flicker like the reference
+  if(T<11.5) return ['never',['leabn','leavn','leavj','leavg','leavf'][Math.min(4,Math.max(0,Math.floor((T-11.1)/.09)))]];
+  if(T<12.2) return ['never','leave']; if(T<12.58) return ['we','leave']; return ['we','both']; };
+
+/* ---------- S9: messages ---------- */
+tl.fromTo('#bBlue',{scale:2.6,x:-300,y:200,opacity:0},{scale:1,x:0,y:0,opacity:1,duration:.4,ease:'expo.out'},13.08)
+  .fromTo('#today',{opacity:0},{opacity:1,duration:.2},13.5)
+  .fromTo('#bGray',{opacity:0,scale:.6,transformOrigin:'0 100%'},{opacity:1,scale:1,duration:.3,ease:'back.out(1.8)'},13.55)
+  .fromTo(['#date9','#input9'],{opacity:0},{opacity:1,duration:.2},14.0)
+  // camera pushes in on the typing
+  .to('#cam9',{scale:2.35,x:-140,y:-560,duration:.35,ease:'power3.inOut'},14.75)
+  .to('#menu9',{opacity:1,duration:.12},15.1).to('#inSelBg',{opacity:1,duration:.06},15.08)
+  .to('#menu9',{opacity:.35,duration:.2},15.55).to('#menu9',{opacity:0,duration:.15},15.75)
+  .to('#cam9',{x:-120,duration:1.1,ease:'sine.inOut'},15.1);
+const typedIn=T=>{ const s='Coming from a fa'; if(T<14.1) return ['','']; if(T<15.0) return [s.slice(0,Math.ceil((T-14.1)/.9*s.length)),''];
+  if(T<15.08) return ['Coming from a far','']; if(T<15.42) return ['Coming from ','a far']; if(T<15.6) return ['Coming from a',''];
+  const t2='afar'; return ['Coming from '+t2.slice(0,Math.min(4,1+Math.floor((T-15.6)/.1))),'']; };
+const grayText=T=>{ const s='saw this moment..'; return T<13.6?'':s.slice(0,Math.ceil(Math.min(1,(T-13.6)/.5)*s.length)); };
+// glitch out
+tl.to('#glitch',{opacity:1,duration:.02},16.08).to('#cam9',{opacity:0,duration:.02},16.24);
+
+/* ---------- captions (the reference's tiny lyric line) ---------- */
+const CAP=[[0,1.1,'i just wanna'],[1.1,3.55,'be right where you are'],[3.55,4.15,'(oh, my love)'],[4.15,5.6,'in the end,'],[5.6,7.85,"I hope it's you and me (you and me)"],[7.85,10.5,'in the darkness'],[10.5,12.45,'I would never leave'],[12.45,13.1,'we both..'],[13.1,14.8,'saw this moment comin\''],[14.8,16.2,'from afar']];
+
+/* ---------- continuous ---------- */
+const GC=$('#glitch').getContext('2d');
+function glitch(T){ const k=Math.floor(T*60); let s=k*7919%10007; const r=()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+  GC.clearRect(0,0,480,360); const p=Math.min(1,(T-16.08)/.2);
+  for(let i=0;i<34;i++){ const y=r()*360, h=2+r()*10, x=(r()-.5)*160*p, w=60+r()*420; GC.fillStyle=r()<.5?'rgba(255,255,255,.95)':`rgba(${r()<.5?255:30},${r()<.5?60:200},255,.55)`; GC.fillRect(x+r()*200,y,w,h); }
+  if(p>.6){ GC.fillStyle=`rgba(5,5,5,${(p-.6)/.4})`; GC.fillRect(0,0,480,360); } }
+async function render(T){
+  // S1 words
+  const J='just', A=['w','wsn','wsnn','wsnna','wsnnal'];
+  $('#w_just').textContent=T<.28?'':J.slice(0,Math.min(4,1+Math.floor((T-.28)/.06)));
+  let wan=''; if(T>=.56&&T<1.08) wan=A[Math.min(4,Math.floor((T-.56)/.1))]; else if(T>=1.08) wan='wanna be';
+  $('#w_wanna').innerHTML=wan&&T<1.08?`<span style="text-decoration:underline dotted #c8202a;text-decoration-thickness:7px;text-underline-offset:12px">${wan}</span>`:wan;
+  $('#car1').style.opacity=(T>.2&&T<1.45)?(Math.floor(T*6)%2?1:.15):0; $('#car1').style.background=T<1.05?'#111':'#fff';
+  // S2 distance
+  const d=Math.max(0,Math.min(.5,.5-(T-1.68)/1.05*.5)); $('#dist').textContent=d.toFixed(1)+' m';
+  $('#tagWrap').style.translate=`0 ${(T>3&&T<3.6?-6*Math.sin((T-3)*5):0).toFixed(1)}px`;
+  // S5 handheld shake
+  $('#vfShot').style.translate=`${(4*Math.sin(T*9)+2*Math.sin(T*23)).toFixed(1)}px ${(3*Math.sin(T*7+1)+1.5*Math.sin(T*19)).toFixed(1)}px`;
+  // S6 scatter drift
+  scat.forEach((e,i)=>{ e.style.translate=`${(6*Math.sin(T*1.3+i)).toFixed(1)}px ${(6*Math.cos(T*1.1+i)).toFixed(1)}px`; });
+  // S8 words
+  const [a,b]=t8w(T); $('#w8a').textContent=a; $('#w8b').textContent=b;
+  // S9 typing + selection
+  $('#grayT').textContent=grayText(T); const [x,sel]=typedIn(T); $('#inT').textContent=x; $('#inSelT').textContent=sel;
+  $('#inSelBg').style.display=sel?'block':'none'; $('#car9').style.opacity=T>14.05&&T<16.1?(Math.floor(T*5)%2?1:.2):0;
+  if(T>16.05&&T<16.35) glitch(T);
+  $('#spin').style.rotate=(T*360)+'deg';
+  // caption
+  const c=CAP.find(([a,b])=>T>=a&&T<b); $('#cap').textContent=c?c[2]:''; $('#cap').style.color=(T>1.05&&T<1.62)||(T>3.55&&T<4.18)||(T>5.6&&T<7.88)||(T>10.5&&T<11.08)||T>16.2?'#bbb':'#333';
+}
+window.seek=async T=>{ tl.seek(T,false); await render(T); };
+window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));
+</script></body></html>
