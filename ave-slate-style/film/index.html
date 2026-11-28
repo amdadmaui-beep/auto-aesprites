@@ -37,7 +37,7 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
             <div class="row" style="justify-content:space-between;padding:22px 44px 0;font-size:26px;font-weight:600"><span>9:41</span><span>●●● ▮</span></div>
             <div class="row" style="padding:26px 34px 0;gap:14px;font-size:34px;font-weight:700"><span style="font-size:40px">+</span><span style="flex:1;text-align:center">avestudio.production ⌄</span><span>@ ≡</span></div>
             <div class="row" style="padding:30px 34px 0;gap:40px">
-              <div id="avatar" style="position:relative;width:170px;height:170px;border-radius:50%;background:#2b5bff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 5px #000,0 0 0 9px #333"><img src="img/ave-wordmark-paper.png" style="width:112px"></div>
+              <div id="avatar" style="position:relative;width:150px;height:150px;border-radius:50%;background:#2b5bff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 5px #000,0 0 0 9px #333"><img src="img/ave-wordmark-paper.png" style="width:99px"></div>
               <div><div style="font-size:30px;font-weight:600;margin-bottom:12px">AVE Studio</div>
                 <div class="row" style="gap:46px;font-size:26px"><div><b style="font-size:32px">53</b><br>posts</div><div><b style="font-size:32px">1,204</b><br>followers</div><div><b style="font-size:32px">187</b><br>following</div></div></div>
             </div>
@@ -55,11 +55,11 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
         <img src="img/phone_front.png" class="abs" style="left:0;top:0;width:260px;height:558px">
       </div>
           <!-- avatar hologram (sits in the screen plane, around the avatar) -->
-          <div id="holo" class="abs p3" style="left:65px;top:65px;width:0;height:0;opacity:0;transform:translateZ(3px)">
-            <div class="abs" style="left:-48px;top:-48px;width:96px;height:96px;border-radius:50%;border:2px solid #2b5bff;box-shadow:0 0 18px #2b5bff,inset 0 0 18px #2b5bff"></div>
-            <div class="abs" style="left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:1.5px solid rgba(60,120,255,.7);box-shadow:0 0 14px rgba(60,120,255,.8)"></div>
-            <div class="abs" style="left:-72px;top:-72px;width:144px;height:144px;border-radius:50%;border:1px solid rgba(60,120,255,.45)"></div>
-            <div id="icon3d" class="abs p3" style="left:-30px;top:-30px;width:60px;height:60px">
+          <div id="holo" class="abs p3" style="left:57.2px;top:87.4px;width:0;height:0;opacity:0;transform:translateZ(3px)">
+            <div class="abs" style="left:-48px;top:-48px;width:96px;height:96px;transform:translateZ(10px);border-radius:50%;border:2.5px solid #5d8bff;box-shadow:0 0 18px #2b5bff,inset 0 0 18px #2b5bff"></div>
+            <div class="abs" style="left:-56px;top:-56px;width:112px;height:112px;transform:translateZ(5px);border-radius:50%;border:1.5px solid rgba(60,120,255,.7);box-shadow:0 0 14px rgba(60,120,255,.8)"></div>
+            <div class="abs" style="left:-62px;top:-62px;width:124px;height:124px;border-radius:50%;border:1px solid rgba(60,120,255,.45)"></div>
+            <div id="icon3d" class="abs p3" style="left:-30px;top:-30px;width:60px;height:60px;display:none">
               <div class="abs" style="inset:0;border-radius:15px;background:linear-gradient(150deg,#ffffff,#dde4f2);box-shadow:0 0 22px rgba(60,120,255,.8);display:flex;align-items:center;justify-content:center"><img src="img/ave-wordmark-black.png" style="width:42px"></div>
             </div>
           </div>
@@ -78,6 +78,7 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
     </div>
   </div>
   <div id="rim" class="abs" style="inset:0;pointer-events:none;background:radial-gradient(45% 30% at 50% 50%,rgba(40,90,255,.22),transparent 70%)"></div>
+  <div id="iconBB" class="abs" style="left:0;top:0;width:100px;height:100px;border-radius:24px;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(205,220,255,.8));box-shadow:0 0 40px rgba(60,120,255,.85),0 0 90px rgba(60,120,255,.45);display:flex;align-items:center;justify-content:center;opacity:0;transform-origin:50% 100%"><img src="img/ave-wordmark-black.png" style="width:70%"></div>
 </div>
 
 <!-- S2  the void: spinning cube, orbiting "ahhh"  (4.25 - 6.5) -->
@@ -91,30 +92,30 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
 
 <!-- S3  spotlight lyrics  (6.45 - 9.25) -->
 <div class="sc" id="s3">
-  <div id="spot" class="abs" style="inset:0;background:radial-gradient(75% 55% at 50% 48%,#eef0f1 0%,#c7cacd 50%,#7b8085 100%)"></div>
+  <div id="spot" class="abs" style="inset:-20px;background:radial-gradient(circle 700px at 50% 50%,#d0d6da 0%,#c1cbce 20%,#a3b1bc 37%,#899aa4 49%,#3d474e 89%,#353d40 100%)"></div>
   <div id="oval" class="abs" style="left:-240px;top:380px;width:1200px;height:540px;border-radius:50%;background:radial-gradient(70% 70% at 50% 50%,#f1f3f4,#c9cdd0);box-shadow:0 -3px 0 0 rgba(60,120,255,.9),0 0 30px rgba(60,120,255,.35);opacity:0"></div>
-  <div id="w3" class="abs p3" style="inset:0;perspective:620px">
+  <div id="w3" class="abs p3" style="inset:0;perspective:620px"><div id="g3fix" class="abs p3" style="inset:0;transform-origin:360px 640px">
     <div id="g3" class="abs p3" style="left:360px;top:640px">
-      <div class="lyr" id="yeah" style="left:-290px;top:-250px;font-size:170px;color:#4a4e54"></div>
+      <div class="lyr" id="yeah" style="left:-350px;top:-300px;font-size:170px;color:#4a4e54"></div>
       <div class="abs" id="sheBox" style="left:-240px;top:-86px;width:420px;height:146px;opacity:0;background:#141414;transform-origin:0 50%"></div>
       <div class="lyr" id="she" style="left:-200px;top:-104px;font-size:170px;color:#eef0f2"></div>
-      <div class="lyr" id="suck" style="left:-60px;top:70px;font-size:220px;color:#6b3a8f"></div>
-      <div class="lyr" id="them" style="left:430px;top:110px;font-size:180px;color:#4a4e54"></div>
-      <div class="lyr" id="dragon" style="left:380px;top:290px;font-size:190px;color:#4a4e54"></div>
+      <div class="lyr" id="suck" style="left:-228px;top:20px;font-size:313px;color:#6b3a8f"></div>
+      <div class="lyr" id="them" style="left:458px;top:76px;font-size:221px;color:#4a4e54"></div>
+      <div class="lyr" id="dragon" style="left:523px;top:284px;font-size:164px;color:#4a4e54"></div>
     </div>
     <div class="lyr" id="balls" style="left:120px;top:540px;font-size:230px;color:#40444a;opacity:0">Dragon Balls</div>
     <div id="g3b" class="abs p3" style="left:360px;top:640px;opacity:0">
       <div class="lyr" id="bitch" style="left:-320px;top:-230px;font-size:200px;color:#4a4e54"></div>
       <div class="lyr" id="ifeel" style="left:-240px;top:-10px;font-size:200px;color:#4a4e54"></div>
-      <div class="lyr" id="like" style="left:380px;top:-10px;font-size:180px;color:#4a4e54;opacity:0">like</div>
+      <div class="lyr" id="like" style="left:190px;top:-10px;font-size:180px;color:#4a4e54;opacity:0">like</div>
       <div class="lyr glowR" id="redC" style="left:-60px;top:240px;font-size:170px;opacity:0">ce</div>
     </div>
-  </div>
+  </div></div>
 </div>
 
 <!-- S4  glowing words on black  (9.2 - 13.2) -->
 <div class="sc" id="s4" style="background:#020202">
-  <div id="w4" class="abs p3" style="inset:0;perspective:620px">
+  <div id="w4" class="abs p3" style="inset:0;perspective:620px"><div id="g4fix" class="abs p3" style="inset:0;transform-origin:360px 640px">
     <div id="g4" class="abs p3" style="left:360px;top:640px">
       <div class="lyr glowR" id="cell" style="left:-200px;top:-130px;font-size:250px"></div>
       <div class="lyr glowY" id="andim" style="left:-300px;top:-160px;font-size:190px"></div>
@@ -125,7 +126,7 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#000}
     <div id="g4b" class="abs p3" style="left:360px;top:640px">
       <div class="lyr glowR" id="lifeis" style="left:-330px;top:-90px;font-size:150px"></div>
     </div>
-  </div>
+  </div></div>
   <div id="bars" class="abs" style="inset:0;pointer-events:none"></div>
   <div id="logo" class="abs" style="left:0;right:0;top:560px;text-align:center;opacity:0">
     <img src="img/ave-wordmark-paper.png" style="width:440px;filter:drop-shadow(0 0 14px rgba(255,255,255,.65)) drop-shadow(0 0 40px rgba(255,255,255,.3))">
@@ -152,21 +153,32 @@ for(let i=0;i<12;i++){ const t=document.createElement('div'); t.className='tile'
 // ---- the phone is driven by keys measured from the reference (tracked 0-1.2 s, read off 15 fps frames after) ----
 // t, phone point px,py -> screen sx,sy, scale, rotX, rotY, rotZ
 const PK=[[0,130,279,368,640,0.4092,10,0,-56],[0.033,130,279,366,653,0.462,10,39,-50],[0.1,130,279,408,654,0.5148,9,49,-27],[0.133,130,279,380,636,0.6336,8,74,-30],[0.167,130,279,361,645,0.6468,8,100,-31],[0.2,130,279,376,670,0.66,8,140,-32],[0.3,130,279,378,656,0.726,7,180,-18],[0.4,130,279,371,651,0.8316,6,222,-11.5],[0.5,130,279,377,622,0.9504,5,262,-11],[0.567,130,279,352,644,1.0428,5,282,-10],[0.6,130,279,349,663,1.0428,4,294,-10],[0.7,130,279,344,659,1.122,4,310,-8],[0.8,130,279,347,642,1.188,3,321,-7],[0.9,130,279,346,645,1.2276,2,334,-4.4],[1,130,279,349,643,1.2804,1,340,-3.3],[1.1,130,279,350,648,1.3464,0,342,-2.5],[1.17,130,279,350,660,1.4124,4,344,-2],[1.25,130,330,370,760,1.55,22,348,-4],[1.35,130,360,380,840,1.75,42,352,-6],[1.5,140,380,385,860,2.1,50,355,-9],[1.65,150,390,390,820,2.5,52,357,-11],[1.75,150,330,380,720,4.2,56,358,-17],[1.82,140,262,330,760,8.671,58,360,-20],[2.2,140,250,340,760,9.048,58,360,-20],[2.3,120,170,320,700,6.4,52,360,-19],[2.4,65,65,250,560,5.375,46,360,-17],[2.95,65,65,300,600,5.75,44,360,-15],[3.05,65,65,330,600,5.5,40,384,-12],[3.15,65,65,340,610,4.4,52,378,-8],[3.25,65,65,350,600,4.8,64,368,-4],[3.35,65,65,355,600,5,68,361,-2],[3.6,65,65,360,620,5.3,68,360,0],[4.3,65,65,360,640,5.8,66,362,2]];
+const PM=[[0.567,338.12,492.674,0,0.748,0.0,282.0,-9.865],[0.6,332.414,491.591,0,0.781,0.0,294.0,-9.635],[0.633,324.656,490.037,0,0.822,0.0,299.28,-9.224],[0.667,316.638,488.399,0,0.857,0.0,304.72,-8.702],[0.7,309.191,486.905,0,0.886,0.0,310.0,-8.177],[0.733,302.482,485.561,0,0.914,0.0,313.63,-7.707],[0.767,296.496,484.262,0,0.939,0.0,317.37,-7.249],[0.8,291.246,482.926,0,0.958,0.0,321.0,-6.712],[0.833,286.793,481.591,0,0.972,0.0,325.29,-6.055],[0.867,283.033,480.315,0,0.986,0.0,329.71,-5.337],[0.9,279.742,479.029,0,1.0,0.0,334.0,-4.672],[0.933,276.78,477.633,0,1.016,0.0,335.98,-4.129],[0.967,274.094,476.129,0,1.029,0.0,338.02,-3.705],[1.0,271.597,474.562,0,1.036,0.0,340.0,-3.357],[1.033,269.092,472.847,0,1.041,0.0,340.66,-3.053],[1.067,266.318,470.78,0,1.048,0.058,341.34,-2.777],[1.1,263.005,468.205,0,1.058,0.566,342.0,-2.521],[1.133,258.785,464.925,0,1.069,1.983,342.943,-2.281],[1.167,253.11,460.52,0,1.084,4.064,343.914,-2.051],[1.2,245.129,454.462,0,1.106,6.529,345.5,-1.83],[1.233,234.011,446.368,0,1.139,10.985000000000005,347.15,-1.618],[1.267,220.098,436.476,0,1.181,16.151999999999997,348.68,-1.414],[1.3,205.286,425.965,0,1.23,21.587000000000003,350.0,-1.212],[1.333,191.698,416.276,0,1.275,26.656,351.32,-1.01],[1.367,180.36,408.159,0,1.312,30.759,352.34,-0.808],[1.4,171.223,401.639,0,1.343,34.079,353.0,-0.606],[1.433,163.809,396.43,0,1.367,37.04600000000001,353.66,-0.404],[1.467,157.674,392.156,0,1.383,38.97,354.34,-0.163],[1.5,152.524,388.51,0,1.396,39.968,355.0,0.236],[1.533,148.096,385.29,0,1.41,40.919,355.44,0.872],[1.567,144.139,382.382,0,1.429,41.863,355.893,1.667],[1.6,140.509,379.752,0,1.452,42.762,356.333,2.5],[1.633,137.106,377.319,0,1.476,43.302,356.773,3.333],[1.667,133.834,374.946,0,1.501,43.417,357.3,4.239],[1.7,130.52,372.487,0,1.536,43.554,357.882,5.435],[1.733,126.774,369.709,0,1.589,43.799,358.465,7.071],[1.767,122.227,366.371,0,1.664,43.147333333333336,359.065,9.001],[1.8,116.874,362.448,0,1.772,41.48633333333333,359.647,10.979],[1.833,111.08,358.228,0,1.91,39.535333333333334,360.0,12.851],[1.867,105.435,354.208,0,2.062,37.396,360.0,14.52],[1.9,100.518,350.846,0,2.206,35.372,360.0,15.979],[1.933,96.537,348.281,0,2.334,33.681999999999995,360.0,17.332],[1.967,93.275,346.332,0,2.444,32.20066666666666,360.0,18.599],[2.0,90.48,344.841,0,2.538,30.79766666666666,360.0,19.585],[2.033,88.091,343.808,0,2.619,29.404666666666664,360.0,20.153],[2.067,86.091,343.154,0,2.685,28.688,360.0,20.445],[2.1,84.498,342.717,0,2.726,28.931,360.0,20.667],[2.133,83.538,342.73,0,2.746,29.466,360.0,20.889],[2.167,83.454,343.755,0,2.767,29.866,360.0,21.111],[2.2,84.281,346.006,0,2.8,30.114,360.0,21.333],[2.233,86.056,349.444,0,2.842,30.518,360.0,21.555],[2.267,89.119,354.319,0,2.891,31.191,360.0,21.792],[2.3,94.138,361.275,0,2.95,32.095,360.0,22.083],[2.333,102.312,371.506,0,3.033,33.323,360.0,22.458],[2.367,115.8,387.25,0,3.168,35.1,360.0,22.889],[2.4,136.869,411.312,0,3.388,37.513,360.0,23.305],[2.433,165.031,444.2,0,3.69,40.317,360.0,23.581],[2.467,195.756,481.838,0,4.019,43.04,360.0,23.581],[2.5,223.844,518.269,0,4.31,45.329,360.0,23.305],[2.533,247.05,550.075,0,4.534,47.099,360.0,22.889],[2.567,265.7,576.894,0,4.703,48.47,360.0,22.444],[2.6,280.806,599.462,0,4.836,49.639,360.0,21.904],[2.633,293.281,618.525,0,4.945,50.675,360.0,20.969],[2.667,303.85,634.631,0,5.028,51.527,360.0,19.393],[2.7,313.031,648.169,0,5.09,52.224,360.0,17.349],[2.733,321.075,659.456,0,5.138,52.874,360.0,15.245],[2.767,328.081,668.775,0,5.178,53.494,360.0,13.345],[2.8,334.225,676.375,0,5.208,54.036,360.0,11.726],[2.833,339.731,682.444,0,5.23,54.5,360.0,10.414],[2.867,344.769,687.125,0,5.247,54.907,360.0,9.401],[2.9,349.525,690.656,0,5.263,55.261,360.0,8.331],[2.933,354.331,693.394,0,5.278,55.547,360.0,6.14],[2.967,359.631,695.631,0,5.296,55.66,363.344,1.749],[3.0,365.8,697.488,0,5.318,55.463,369.545,-4.503],[3.033,373.056,698.944,0,5.343,54.99,374.915,-10.985],[3.067,381.525,699.825,0,5.374,54.486,379.085,-16.204],[3.1,391.269,699.825,0,5.414,54.23,381.448,-19.404],[3.133,402.263,698.581,0,5.463,54.367,381.943,-20.349],[3.167,414.094,695.6,0,5.518,54.91,380.455,-19.091],[3.2,425.3,690.319,0,5.589,55.789,377.2,-15.804],[3.233,433.369,682.594,0,5.694,56.837,372.447,-10.833],[3.267,436.062,673.3,0,5.856,57.823,366.422,-5.271],[3.3,433.006,664.362,0,6.085,58.606,360.0,-1.138],[3.333,425.987,657.425,0,6.345,58.924,360.0,0.414],[3.367,417.431,652.4,0,6.569,58.157,360.0,0.389],[3.4,408.738,648.481,0,6.738,56.223,360.0,0.33],[3.433,400.406,645.725,0,6.891,54.205,360.0,0.769],[3.467,392.756,644.669,0,7.06,53.22,360.0,1.531],[3.5,385.894,645.637,0,7.236,53.601,360.0,2.34],[3.533,379.637,649.031,0,7.454,55.308,360.0,2.975],[3.567,373.756,655.3,0,7.808,58.215,360.0,3.36],[3.6,368.412,662.65,0,8.255,61.398,360.0,3.63],[3.633,363.95,667.531,0,8.601,63.357,360.0,3.905],[3.667,360.2,669.419,0,8.783,63.9,360.0,4.154],[3.7,357.088,670.238,0,8.904,63.971,360.0,4.224],[3.733,355.138,670.531,0,9.044,63.987,360.0,3.924],[3.767,354.338,670.075,0,9.212,63.876,360.0,3.326],[3.8,353.906,669.338,0,9.379,63.646,360.0,2.746],[3.833,353.462,668.888,0,9.519,63.412,360.0,2.283],[3.867,353.112,668.775,0,9.635,63.222,360.0,1.861],[3.9,352.812,668.856,0,9.736,63.068,360.0,1.535],[3.933,352.375,669.156,0,9.829,62.984,360.0,1.369],[3.967,351.687,669.713,0,9.922,62.983,360.0,1.33],[4.0,350.969,670.488,0,10.026,63.061,360.0,1.386],[4.033,350.644,671.581,0,10.154,63.261,360.0,1.426],[4.067,350.55,673.206,0,10.29,63.61,360.0,1.254],[4.1,350.119,675.306,0,10.415,64.022,360.0,0.9],[4.133,349.069,677.387,0,10.551,64.363,360.0,0.743],[4.167,347.231,679.081,0,10.737,64.592,360.0,1.067],[4.2,344.969,680.994,0,10.975,64.87,360.0,1.602],[4.233,343.425,684.312,0,11.261,65.411,360.0,1.815],[4.267,343.269,688.988,0,11.586,66.135,360.0,1.599],[4.3,343.931,693.1,0,11.865,66.7,360.0,1.285]];
+const AV=[57.2,87.4]; let LENS=window.LENS||700, PK2=null;
 const cr=(p0,p1,p2,p3,u)=>.5*((2*p1)+(-p0+p2)*u+(2*p0-5*p1+4*p2-p3)*u*u+(-p0+3*p1-3*p2+p3)*u*u*u);
+function buildPK2(){ // old spin keys (t<=0.5) re-expressed with the pivot on the avatar, then the measured avatar path
+  const out=[]; for(const k of PK){ if(k[0]>0.5) break; const [t,px,py,sx,sy,sc,rx,ry,rz]=k;
+    const m=new DOMMatrix().translate(230+px,361+py).translate(sx-230-px,sy-361-py).rotate(0,0,rz).rotate(rx,0,0).rotate(0,ry,0).scale(sc).translate(-px,-py);
+    const w=m.transformPoint(new DOMPoint(AV[0],AV[1],1)); out.push([t,w.x,w.y,w.z,sc,rx,ry,rz]); }
+  return out.concat(PM); }
+function phoneAt2(T){ if(!PK2) PK2=buildPK2(); const K=PK2; T=Math.max(0,Math.min(K[K.length-1][0],T)); let i=K.findIndex((k,j)=>j<K.length-1&&T>=k[0]&&T<=K[j+1][0]); if(i<0) i=K.length-2;
+  const k0=K[Math.max(0,i-1)],k1=K[i],k2=K[i+1],k3=K[Math.min(K.length-1,i+2)], u=(T-k1[0])/(k2[0]-k1[0]);
+  return k1.map((_,c)=>c===0?T:cr(k0[c],k1[c],k2[c],k3[c],u)); }
 function phoneAt(T){ T=Math.max(0,Math.min(4.3,T)); let i=PK.findIndex((k,j)=>j<PK.length-1&&T>=k[0]&&T<=PK[j+1][0]); if(i<0) i=PK.length-2;
   const k0=PK[Math.max(0,i-1)],k1=PK[i],k2=PK[i+1],k3=PK[Math.min(PK.length-1,i+2)], u=(T-k1[0])/(k2[0]-k1[0]);
   return k1.map((_,c)=>c===0?T:cr(k0[c],k1[c],k2[c],k3[c],u)); }
-[[3,170,-24,-14],[4,230,30,10],[5,260,-10,16],[2,150,10,-8],[0,120,0,6],[7,210,0,-12],[1,140,0,8],[6,190,0,-6]].forEach(([k,z,rx,rz],i)=>{
+[[0,260,-10,-8],[1,300,6,3],[2,280,10,10],[3,70,0,-4],[4,80,0,4],[5,70,0,6]].forEach(([k,z,rx,rz],i)=>{
   const c=k%3, r=Math.floor(k/3); const f=document.createElement('div'); f.className='abs';
   f.style.cssText=`left:${21+c*77}px;top:${347+r*96}px;width:76px;height:95px;background:url(img/post${k+1}.jpg) center/cover;border-radius:3px;box-shadow:0 8px 20px rgba(0,0,0,.6);opacity:0;transform-origin:50% 100%`;
   $('#fly').appendChild(f);
-  tl.set(f,{opacity:1},1.26+i*.05).fromTo(f,{z:0,rotationX:0,rotationZ:0},{z:z,rotationX:-62+rx,rotationZ:rz,scale:1.35,duration:.4,ease:'power3.out'},1.2+i*.03)
+  tl.set(f,{opacity:1},1.26+i*.05).fromTo(f,{z:0,rotationX:0,rotationZ:0},{z:z*.3,rotationX:-34+rx*.5,rotationZ:rz,scale:1.15,duration:.4,ease:'power3.out'},1.2+i*.03)
     .to(f,{z:0,rotationX:0,rotationZ:0,scale:1,duration:.2,ease:'power2.in'},1.66+i*.01).set(f,{opacity:0},1.9); });
 // hologram on the avatar
 tl.to('#holo',{opacity:1,duration:.2},3.3)
   .fromTo('#holo div:not(#icon3d)',{scale:.3},{scale:1,duration:.5,ease:'expo.out',stagger:.06},3.28)
-  .fromTo('#icon3d',{z:0,rotationX:0,scale:.5},{z:44,rotationX:-82,scale:1,duration:.75,ease:'power3.out'},3.4)
-  .to('#s1',{filter:'blur(14px) brightness(2)',opacity:0,duration:.12,ease:'power2.in'},4.2);
+  .fromTo('#icon3d',{z:0,rotationX:0,scale:.5},{z:30,rotationX:56,scale:.5,duration:.75,ease:'power3.out'},3.4)
+  .fromTo('#screen',{filter:'blur(0px)'},{filter:'blur(.4px)',duration:.6,ease:'power1.in',immediateRender:false},3.4)
+  .to('#s1',{filter:'blur(14px) brightness(2)',opacity:0,duration:.07,ease:'power2.in'},4.25);
 
 /* ---------- S2: the void ---------- */
 const CB=$('#cube'), S=90;
@@ -176,7 +188,7 @@ const CB=$('#cube'), S=90;
   f.innerHTML='<img src="img/ave-wordmark-black.png" style="width:66px">'; CB.appendChild(f); });
 const ORB=$('#orb'); const OT='Ahhhhhh Ahhhhhh '; [...OT].forEach((c,i)=>{ const s=document.createElement('span'); s.className='abs'; s.textContent=c;
   s.style.cssText=`left:0;top:-20px;font-size:34px;font-weight:600;color:rgba(190,210,255,.9);text-shadow:0 0 10px rgba(60,120,255,.7);transform:rotateY(${i*360/OT.length}deg) translateZ(110px)`; ORB.appendChild(s); });
-tl.set('#s2',{visibility:'visible'},4.22).fromTo('#s2',{opacity:0},{opacity:1,duration:.12},4.22)
+tl.set('#s2',{visibility:'visible'},4.28).fromTo('#s2',{opacity:0},{opacity:1,duration:.06},4.28)
   .fromTo('#cube',{scale:.05,rotationX:-30,rotationY:0},{scale:1.15,rotationX:20,rotationY:300,duration:1.7,ease:'power2.out'},4.3)
   .to('#cube',{scale:.2,rotationX:160,rotationY:540,duration:.45,ease:'power2.in'},6.0)
   .fromTo('#orb',{scale:.2,rotationX:14,rotationY:0},{scale:1.1,rotationY:-420,duration:2.0,ease:'power1.out'},4.45)
@@ -209,17 +221,17 @@ tl.fromTo('#g4',{rotationY:-40,rotationX:10,scale:1.3},{rotationY:-18,rotationX:
   .to('#cell',{opacity:0,filter:'blur(8px)',duration:.2},9.733)
   .to('#g4',{rotationY:-6,rotationX:2,x:-20,duration:1.2,ease:'sine.inOut'},9.8)
   .to('#g4',{x:-230,y:-60,rotationY:3,duration:.3,ease:'power2.inOut'},11.27).to('#g4',{x:-430,y:-110,rotationY:6,duration:.3,ease:'power2.inOut'},11.6)
-  .to('#g4',{x:-700,y:-160,opacity:0,filter:'blur(10px)',duration:.15,ease:'power2.in'},12.03)
-  .fromTo('#g4b',{opacity:0,scale:.85,rotationY:-20},{opacity:1,scale:1,rotationY:-8,duration:.35,ease:'power2.out'},12.05)
+  .to('#g4',{x:-700,y:-160,opacity:0,filter:'blur(10px)',duration:.12,ease:'power2.in'},11.84)
+  .fromTo('#g4b',{opacity:0,scale:.85,rotationY:-20},{opacity:1,scale:1,rotationY:-8,duration:.3,ease:'power2.out'},11.88)
   .to('#g4b',{rotationY:4,scale:1.04,duration:1.2,ease:'sine.inOut'},12.35)
-  .to('#g4b',{opacity:0,filter:'blur(16px)',duration:.15,ease:'power2.in'},13.12)
-  .to('#bars',{opacity:0,duration:.15},13.12)
-  .fromTo('#logo',{opacity:0,filter:'blur(18px)',scale:.92},{opacity:1,filter:'blur(0px)',scale:1,duration:.3,ease:'power2.out'},13.2)
+  .to('#g4b',{opacity:0,filter:'blur(12px)',duration:.12,ease:'power2.in'},13.0)
+  .to('#bars',{opacity:0,duration:.16},13.04)
+  .fromTo('#logo',{opacity:0,filter:'blur(12px)',scaleY:.12,scaleX:.75},{opacity:1,filter:'blur(0px)',scaleY:1,scaleX:1,duration:.32,ease:'power3.out'},13.05)
   .to('#logo',{scale:1.04,duration:2.1,ease:'sine.inOut'},13.5);
 // prison bars slide across
-for(let i=0;i<6;i++){ const b=document.createElement('div'); b.className='abs';
-  const cx=70+i*116, off=(cx-360)/360; b.style.cssText=`top:-60px;width:${60-Math.abs(off)*22}px;height:1400px;border-radius:40px;left:${cx-30}px;background:linear-gradient(90deg,#020304 0%,#141a20 16%,#3b4550 36%,#8796a3 47%,#3a444f 58%,#11161b 80%,#020304 100%);box-shadow:0 0 40px rgba(0,0,0,.95);filter:blur(.6px)`;
-  $('#bars').appendChild(b); tl.fromTo(b,{y:-1400},{y:0,duration:.1,ease:'power2.out'},12.46+i*.01); }
+[[60,38],[195,46],[355,48],[525,46],[660,36]].forEach(([cx,w],i)=>{ const b=document.createElement('div'); b.className='abs';
+  b.style.cssText=`top:40px;width:${w}px;height:1240px;border-radius:${w}px;left:${cx-w/2}px;background:linear-gradient(90deg,#030405 0%,#121a22 18%,#2a3744 38%,#5d6f80 48%,#2b3846 60%,#10161d 82%,#030405 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%);box-shadow:0 0 30px rgba(0,0,0,.95)`;
+  $('#bars').appendChild(b); tl.fromTo(b,{y:-1300,opacity:.2},{y:0,opacity:1,duration:.12,ease:'power2.out'},12.33+[2,1,0,1,2][i]*.015); });
 
 /* ---------- typed lyric words (frame-accurate to the reference) ---------- */
 const typ=(s,t0,step,T)=>T<t0?'':s.slice(0,Math.min(s.length,1+Math.floor((T-t0)/step)));
@@ -229,9 +241,13 @@ const flyT=(s,ts,T)=>{ let h=''; [...s].forEach((c,i)=>{ const ta=ts[Math.min(i,
 const fly=(s,t0,step,T)=>{ if(T<t0) return ''; let h=''; [...s].forEach((c,i)=>{ const ta=t0+i*step; if(T<ta) return; const p=Math.min(1,(T-ta)/.22), e=1-Math.pow(1-p,3);
   h+=`<span style="display:inline-block;white-space:pre;transform:translateZ(${(-500*(1-e)).toFixed(0)}px) rotateY(${(-40*(1-e)).toFixed(1)}deg);filter:blur(${(10*(1-e)).toFixed(1)}px);opacity:${Math.min(1,p*2.5).toFixed(2)}">${c}</span>`; }); return h; };
 async function render(T){
-  if(T<4.35){ const [,px,py,sx,sy,sc,rx,ry,rz]=phoneAt(T); const ph=$('#phone');
-    ph.style.transformOrigin=`${px.toFixed(2)}px ${py.toFixed(2)}px`;
-    ph.style.transform=`translate(${(sx-230-px).toFixed(2)}px,${(sy-361-py).toFixed(2)}px) rotateZ(${rz.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+  if(T<4.35){ const [,sx,sy,tz,sc,rx,ry,rz]=phoneAt2(T); const ph=$('#phone');
+    $('#world').style.perspective=(T<0.45?1500:T<1.1?1500+(LENS-1500)*((T-.45)/.65)**2*(3-2*(T-.45)/.65):LENS)+'px';
+    ph.style.transformOrigin=`${AV[0]}px ${AV[1]}px`;
+    { const ib=$('#iconBB'), u=Math.min(1,Math.max(0,(T-3.4)/.3)), e=1-Math.pow(1-u,3), v=Math.min(1,Math.max(0,(T-3.4)/.85));
+      const size=(190+70*v)*(.6+.4*e), off=110*e-size/2; ib.style.opacity=(.9*e).toFixed(3);
+      ib.style.transform=`translate(${(sx-50).toFixed(1)}px,${(sy-off-100).toFixed(1)}px) scale(${(size/100).toFixed(3)})`; }
+    ph.style.transform=`translate3d(${(sx-230-AV[0]).toFixed(2)}px,${(sy-361-AV[1]).toFixed(2)}px,${tz.toFixed(2)}px) rotateZ(${rz.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
     const back=((ry%360)+360)%360>90&&((ry%360)+360)%360<270; $('#backFace').style.filter=back?'brightness(1.3)':'none'; $('#rim').style.background=back?'radial-gradient(35% 22% at 50% 50%,rgba(255,255,255,.28),transparent 70%)':'radial-gradient(45% 30% at 50% 50%,rgba(40,90,255,.22),transparent 70%)'; }
   $('#yeah').innerHTML=flyT('yeah',[6.467,6.6,6.667,6.8],T); $('#she').innerHTML=flyT('she',[7.067,7.09,7.11],T);
   $('#suck').textContent=T>=7.333?'suck':''; $('#them').innerHTML=flyT('them',[7.6,7.6,7.633,7.633],T); $('#dragon').innerHTML=flyT('Dragon',[7.733,7.733,7.767,7.767,7.8,7.8],T);
@@ -241,12 +257,23 @@ async function render(T){
   $('#schizo').innerHTML=fly('schizophrenic',10.067,.011,T);
   $('#might').innerHTML=flyT('might do',[11.2,11.2,11.167,11.167,11.133,11.1,11.1,11.1],T);
   const D=(T<11.6?'':T<11.8?'DAMA'.replace(/[DM]/g,' '):T<11.867?'DA A':T<11.933?'DAMA':T<12.0?'DAMA E':'DAMAGE'); $('#damage').innerHTML=D?`<span style="display:inline-block;position:relative">${D}<svg style="position:absolute;left:0;top:78%;width:100%;height:60px" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M10 0v${18+10*Math.sin(T)}M52 0v34M96 0v14M150 0v40M200 0v20M262 0v30" stroke="#ff2a2a" stroke-width="9" stroke-linecap="round"/></svg></span>`:'';
-  const L=T<12.067?'':T<12.267?'life':T<12.4?'life is':'life is cell'; $('#lifeis').innerHTML=L.replace('is','<span style="font-size:.85em;vertical-align:.2em">is</span>').replace('cell','<span style="font-size:1.05em">cell</span>');
+  const L=T<11.9?'':T<12.0?'life':T<12.167?'life is':'life is cell'; $('#lifeis').innerHTML=L.replace('is','<span style="font-size:.85em;vertical-align:.2em">is</span>').replace('cell','<span style="font-size:1.05em">cell</span>');
+  { const [dx,dy,sc]=fixAt(T,FIX); $('#g3fix').style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`; }
+  { const [dx,dy,sc]=fixAt(T,FIX4); $('#g4fix').style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`; }
   // light flicker and drift
   $('#rim').style.opacity=(.8+.2*Math.sin(T*9)).toFixed(2);
   $('#spot').style.backgroundPosition=`${(10*Math.sin(T*1.3)).toFixed(1)}px ${(8*Math.cos(T)).toFixed(1)}px`;
   $('#cubeW').style.translate=`0 ${(8*Math.sin(T*2.2)).toFixed(1)}px`;
 }
+const FIX4=window.G4FIX||[[9.2,52.108,48.096,0.963],[9.233,58.479,57.93,0.953],[9.267,61.359,62.116,0.945],[9.3,52.848,44.081,0.958],[9.333,40.788,17.596,0.977],[9.367,34.093,-11.362,1.008],[9.4,32.354,-30.006,1.018],[9.433,27.313,-42.11,0.999],[9.467,15.07,-47.78,0.942],[9.5,3.74,-50.582,0.889],[9.533,-2.976,-52.096,0.849],[9.567,-4.831,-53.181,0.828],[9.6,-3.895,-53.145,0.803],[9.633,-6.227,-50.428,0.787],[9.667,-10.607,-44.889,0.775],[9.7,-18.655,-36.137,0.783],[9.733,-5.835,-22.91,0.847],[9.767,25.573,-5.307,0.982],[9.8,75.91,16.067,1.152],[9.833,103.098,32.469,1.219],[9.867,101.484,41.599,1.156],[9.9,66.109,43.002,0.996],[9.933,28.247,42.682,0.859],[9.967,0.205,42.344,0.777],[10.0,-5.435,42.893,0.755],[10.033,1.561,44.354,0.773],[10.067,16.066,46.875,0.815],[10.1,24.169,48.349,0.834],[10.133,27.254,46.836,0.819],[10.167,19.732,40.152,0.778],[10.2,3.308,29.146,0.755],[10.233,-20.332,15.716,0.756],[10.267,-43.714,3.413,0.775],[10.3,-59.018,-5.964,0.795],[10.333,-66.103,-12.378,0.814],[10.367,-66.687,-17.268,0.83],[10.4,-63.819,-21.016,0.841],[10.433,-60.111,-24.045,0.85],[10.467,-56.656,-26.094,0.856],[10.5,-54.499,-27.865,0.862],[10.533,-52.344,-29.557,0.867],[10.567,-50.42,-31.286,0.872],[10.6,-48.321,-32.958,0.877],[10.633,-47.039,-34.161,0.88],[10.667,-46.327,-35.295,0.882],[10.7,-46.52,-36.438,0.882],[10.733,-47.456,-37.939,0.88],[10.767,-49.047,-39.663,0.879],[10.8,-51.01,-41.599,0.877],[10.833,-52.982,-43.771,0.876],[10.867,-55.277,-46.282,0.874],[10.9,-59.437,-49.396,0.875],[10.933,-67.732,-53.191,0.883],[10.967,-85.672,-56.545,0.901],[11.0,-109.38,-58.329,0.919],[11.033,-132.713,-57.993,0.931],[11.067,-141.408,-57.825,0.927],[11.1,-140.866,-59.601,0.906],[11.133,-136.706,-64.617,0.869],[11.167,-138.272,-72.015,0.822],[11.2,-139.088,-80.483,0.788],[11.233,-137.084,-87.822,0.772],[11.267,-133.379,-92.268,0.774],[11.3,-131.474,-93.159,0.776],[11.333,-130.475,-93.276,0.776],[11.367,-125.838,-92.791,0.776],[11.4,-118.497,-91.401,0.781],[11.433,-112.431,-85.978,0.783],[11.467,-115.646,-79.229,0.773],[11.5,-129.928,-75.367,0.753],[11.533,-153.087,-78.243,0.732],[11.567,-176.229,-85.869,0.722],[11.6,-192.696,-93.896,0.721],[11.633,-198.203,-97.608,0.722],[11.667,-194.884,-97.618,0.722],[11.7,-185.281,-95.964,0.723],[11.733,-174.103,-102.009,0.722],[11.767,-166.038,-118.719,0.722],[11.8,-164.49,-145.508,0.722],[11.833,-168.541,-168.924,0.722],[11.88,0,0,1],[13.2,0,0,1]];
+const FIX=window.G3FIX||[[6.467,30.55,16.624,0.846],[6.5,44.853,19.294,0.854],[6.533,70.454,23.681,0.889],[6.567,102.234,27.8,0.937],[6.6,128.419,36.768,0.956],[6.633,146.026,48.916,0.939],[6.667,162.142,64.769,0.936],[6.7,176.985,79.003,0.94],[6.733,195.756,93.106,0.974],[6.767,220.74,106.181,1.022],[6.8,240.934,118.957,1.068],[6.833,251.482,129.656,1.092],[6.867,248.521,137.861,1.084],[6.9,238.485,135.208,1.044],[6.933,222.738,120.378,0.976],[6.967,197.377,94.572,0.881],[7.0,174.759,76.493,0.821],[7.033,155.725,70.189,0.804],[7.067,144.722,74.306,0.829],[7.1,137.233,77.642,0.857],[7.133,131.883,77.176,0.873],[7.167,128.013,73.097,0.88],[7.2,123.312,65.826,0.879],[7.233,124.91,57.379,0.914],[7.267,139.582,46.508,1.01],[7.3,172.206,31.488,1.183],[7.333,199.922,0.601,1.33],[7.367,204.67,-52.708,1.386],[7.4,172.66,-121.708,1.296],[7.433,124.922,-182.527,1.159],[7.467,71.272,-206.353,1.028],[7.5,22.97,-195.001,0.981],[7.533,-18.123,-161.36,1.002],[7.567,-44.253,-129.847,1.076],[7.6,-50.977,-99.255,1.121],[7.633,-26.908,-67.548,1.106],[7.667,31.061,-31.271,1.052],[7.7,124.36,5.235,1.02],[7.733,211.326,36.808,1.03],[7.767,266.695,59.864,1.045],[7.8,262.609,69.04,1.041],[7.833,223.73,62.382,1.042],[7.867,162.49,43.494,1.071],[7.9,87.697,16.942,1.149],[7.933,1.102,-8.409,1.226],[7.967,-91.567,-29.455,1.288],[8.0,-160.913,-36.11,1.28],[8.033,-204.217,-32.561,1.238],[8.067,-218.681,-21.02,1.18],[8.125,0,0,1],[8.59,0,0,1],[8.6,109.453,-18.062,1.12],[8.633,115.775,28.482,1.12],[8.667,124.706,60.627,1.12],[8.7,136.308,76.194,1.12],[8.733,145.158,80.781,1.12],[8.767,150.301,85.068,1.12],[8.8,141.38,83.497,1.12],[8.833,120.69,67.796,1.12],[8.867,89.266,40.993,1.12],[8.9,49.183,8.517,1.066],[8.933,3.315,-21.845,0.973],[8.967,-45.208,-45.046,0.891],[9.0,-81.846,-58.167,0.847],[9.033,-109.347,-68.68,0.889],[9.067,-128.094,-78.324,1.006],[9.1,-145.642,-84.873,1.12],[9.133,-154.911,-79.315,1.12],[9.167,-158.652,-66.338,1.12]];
+function fixAt(T,F){ if(!F.length) return [0,0,1]; if(T<=F[0][0]) return F[0].slice(1); if(T>=F[F.length-1][0]) return F[F.length-1].slice(1);
+  const i=F.findIndex((k,j)=>T>=k[0]&&T<=F[j+1][0]), a=F[i], b=F[i+1], u=(T-a[0])/(b[0]-a[0]); return [1,2,3].map(c=>a[c]+(b[c]-a[c])*u); }
 window.seek=async T=>{ tl.seek(T,false); await render(T); };
+// used by the fitter: place the phone exactly (pivot at phone point px,py; that point lands on screen sx,sy)
+window.posePhone=(px,py,sx,sy,sc,rx,ry,rz,persp)=>{ const ph=$('#phone'); if(persp) $('#world').style.perspective=persp+'px'; ph.style.transformOrigin=`${px}px ${py}px`;
+  ph.style.transform=`translate(${(sx-230-px).toFixed(2)}px,${(sy-361-py).toFixed(2)}px) rotateZ(${rz}deg) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+  const b=((ry%360)+360)%360; $('#backFace').style.filter=(b>90&&b<270)?'brightness(1.3)':'none'; };
+window.phoneAt=phoneAt;
 window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));
 </script></body></html>
